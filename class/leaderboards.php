@@ -46,7 +46,7 @@ class leaderboards {
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => $this->game, 'name' => $name))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'name' => $name))
             )
         );
         $context  = stream_context_create($options);
@@ -60,7 +60,7 @@ class leaderboards {
     }
     
     public function GetLeaderboardsForGame(){
-        $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardsForGame/v2?key=".$this->key."&appid=".(int)$this->game);
+        $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardsForGame/v2?key=".$this->key."&appid=".(int)$this->game. "&". time());
         $resp = json_decode($req_lb);
         return $resp->response->leaderboards;
     }

@@ -72,7 +72,7 @@ class player {
     *
     * @return void
     */
-    public function set_game($game)
+    private function set_game($game)
     {
         $this->game = $game;
     }
@@ -86,7 +86,7 @@ class player {
     *
     * @return void
     */
-    public function set_steamid($steamid)
+    private function set_steamid($steamid)
     {
         $this->steamid = $steamid;
     }

@@ -114,12 +114,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">1</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">1</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-922300397"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-505750843"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-922300397" class="accordion-body collapse in">
+            <div id="namespace-505750843" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-438302429"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2112327659"></a>
                                 <a href="../namespaces/justinback.html" style="margin-left: 30px; padding-left: 0">justinback</a>
             </div>
-            <div id="namespace-438302429" class="accordion-body collapse ">
+            <div id="namespace-2112327659" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-891039812"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-733491766"></a>
                                 <a href="../namespaces/justinback.steam.html" style="margin-left: 30px; padding-left: 0">steam</a>
             </div>
-            <div id="namespace-891039812" class="accordion-body collapse ">
+            <div id="namespace-733491766" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -176,6 +176,7 @@
                                                     <li class="class"><a href="../classes/justinback.steam.manager.html">manager</a></li>
                                                     <li class="class"><a href="../classes/justinback.steam.player.html">player</a></li>
                                                     <li class="class"><a href="../classes/justinback.steam.steam.html">steam</a></li>
+                                                    <li class="class"><a href="../classes/justinback.steam.ugc.html">ugc</a></li>
                                             </ul>
                 </div>
             </div>
@@ -234,6 +235,7 @@
                                                                     <a href="../classes/justinback.steam.game.html#method_GetNumberOfCurrentPlayers" class="">GetNumberOfCurrentPlayers()</a><br />
                                                                     <a href="../classes/justinback.steam.game.html#method_achievements" class="">achievements()</a><br />
                                                                     <a href="../classes/justinback.steam.game.html#method_leaderboards" class="">leaderboards()</a><br />
+                                                                    <a href="../classes/justinback.steam.game.html#method_ugc" class="">ugc()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -582,6 +584,57 @@
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_ugc" name="method_ugc" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">ugc()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">ugc(string  <span class="argument">$publishedfileid</span>, string  <span class="argument">$apikey = null</span>, string  <span class="argument">$game = null</span>, string  <span class="argument">$steamid = null</span>) : \justinback\steam\ugc</pre>
+                <p><em>ugc object.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$publishedfileid </td>
+                                <td><p>(optional) set a different publishedfileid than the construct</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$apikey </td>
+                                <td><p>(optional) set a different apikey than the construct</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$game </td>
+                                <td><p>(optional) set a different appid than the construct</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$steamid </td>
+                                <td><p>(optional) set a different steamid than the construct</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/justinback.steam.ugc.html">\justinback\steam\ugc</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                                                     <div class="row-fluid">
         <div class="span8 content class">
             <a id="method_set_key" name="method_set_key" class="anchor"></a>
@@ -734,7 +787,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 12th, 2018 at 19:41.
+                    on June 13th, 2018 at 01:50.
                 </section>
             </section>
         </section>

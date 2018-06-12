@@ -8,11 +8,11 @@
 namespace justinback\steam;
 
 /**
- * Steam game managing
+ * Steam manager hub
  *
  * @author Justin Back <jb@justinback.com>
  */
-class game {
+class manager {
     /**
     * Steamworks API Key
     *
@@ -90,52 +90,18 @@ class game {
     {
         $this->steamid = $steamid;
     }
-    
-    
-    
-    /**
-    * Check wether the user owns your game or not
-    *
-    *
-    *
-    * @return bool
-    */
-    public function CheckAppOwnership()
-    {
-        $req_owner = file_get_contents("https://api.steampowered.com/ISteamUser/GetPublisherAppOwnership/v2?key=".$this->key."&steamid=".$this->steamid);
-        $appownership = json_decode($req_owner);
-        
-        foreach ($appownership->appownership->apps as $app)
-            {
-                if($app->appid == $this->game){
-                    return (bool)$app->ownsapp;
-                }
-            }
-    }
+
     
     /**
-    * Get the current number of players of your app
-    *
-    *
-    *
-    * @return int
-    */
-    public function GetNumberOfCurrentPlayers(){
-        $req_players = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1?key=".$this->key."&appid=".(int)$this->game);
-        $GetNumberOfCurrentPlayers = json_decode($req_players);
-        return $GetNumberOfCurrentPlayers->response->player_count;
-    }
-    
-    /**
-    * achievements object.
+    * player object.
     *
     * @param string $apikey (optional) set a different apikey than the construct
     * @param string $game (optional) set a different appid than the construct
     * @param string $steamid (optional) set a different steamid than the construct
     * 
-    * @return achievements
+    * @return player
     */
-    public function achievements($apikey = null, $game = null, $steamid = null)
+    public function player($apikey = null, $game = null, $steamid = null)
     {
         if($apikey === null){
             $apikey = $this->key;
@@ -146,20 +112,20 @@ class game {
         if($steamid === null){
             $steamid = $this->steamid;
         }
-        return new \justinback\steam\achievements($apikey,$game,$steamid);
+        return new \justinback\steam\player($apikey,$game,$steamid);
     }
     
     
     /**
-    * leaderboards object.
+    * Game object.
     *
     * @param string $apikey (optional) set a different apikey than the construct
     * @param string $game (optional) set a different appid than the construct
     * @param string $steamid (optional) set a different steamid than the construct
     * 
-    * @return leaderboards
+    * @return game
     */
-    public function leaderboards($apikey = null, $game = null, $steamid = null)
+    public function game($apikey = null, $game = null, $steamid = null)
     {
         if($apikey === null){
             $apikey = $this->key;
@@ -170,8 +136,8 @@ class game {
         if($steamid === null){
             $steamid = $this->steamid;
         }
-        return new \justinback\steam\leaderboards($apikey,$game,$steamid);
+        return new \justinback\steam\game($apikey,$game,$steamid);
     }
-   
     
 }
+

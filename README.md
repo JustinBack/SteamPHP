@@ -1,7 +1,7 @@
 
 
 # SteamPHP
-===
+
 
 **Why?**
 `Most developers struggle with interacting with the WebAPI, this (yet) unfinished library makes everything easier!`
@@ -10,7 +10,7 @@
 `Making web requests especially multiple can be frustrating such as code quality. This library makes it easy with providing one liners. Examples below`
 
 ## Examples
-===
+
 
 **Deleting Leaderboards**
 `Long`
@@ -46,6 +46,7 @@ $steam->game()->leaderboards()->DeleteLeaderboard("lbname");
 
 
 **Getting Steam Community Name**
+
 `Long`
 ~~~
 
@@ -58,6 +59,7 @@ $steam->game()->leaderboards()->DeleteLeaderboard("lbname");
 
 ~~~
 
+
 `Short`
 ~~~
 
@@ -69,12 +71,14 @@ $steam->player()->GetPersonaName();
 
 
 ## Source / Documentation
-===
+
 
 [Docs](https://steamphp.docs.justinback.com)
+
 [Source](https://github.com/JustinBack/SteamPHP)
 
+
 ## Feature Requests / Bug Reports
-===
+
 
 Feel free to make a [Pull Request](https://github.com/JustinBack/SteamPHP/compare) or [Open an Issue](https://github.com/JustinBack/SteamPHP/issues/new)!

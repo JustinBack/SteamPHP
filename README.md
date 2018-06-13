@@ -4,9 +4,11 @@
 
 
 **Why?**
+
 `Most developers struggle with interacting with the WebAPI, this (yet) unfinished library makes everything easier!`
 
 **How?**
+
 `Making web requests especially multiple can be frustrating such as code quality. This library makes it easy with providing one liners. Examples below`
 
 ## Examples

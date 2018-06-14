@@ -180,14 +180,14 @@ class leaderboards
     *
     *
     * @param string $leaderboardid numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
-    * @param string $steamid steamID to set the score for
     * @param string $score the score to set for this user
     * @param string $scoremethod update method to use. Can be "KeepBest" or "ForceUpdate"
     * @param rawbytes $details (optional) game-specific details for how the score was earned. Up to 256 bytes.
+    * @param string $steamid (optional) steamID to set the score for 
     * 
     * @return object
     */
-    public function SetLeaderboardScore($leaderboardid, $steamid = null, $score, $scoremethod, $details = null){
+    public function SetLeaderboardScore($leaderboardid, $score, $scoremethod, $details = null, $steamid = null){
         if($steamid == null){
             $steamid = $this->steamid;
         }

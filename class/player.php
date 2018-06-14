@@ -261,6 +261,30 @@ class player {
     }
     
     
+    /**
+    * inventory object.
+    *
+    * @param string $apikey (optional) set a different apikey than the construct
+    * @param string $game (optional) set a different appid than the construct
+    * @param string $steamid (optional) set a different steamid than the construct
+    * 
+    * @return inventory
+    */
+    public function inventory($apikey = null, $game = null, $steamid = null)
+    {
+        if($apikey === null){
+            $apikey = $this->key;
+        }
+        if($game === null){
+            $game = $this->game;
+        }
+        if($steamid === null){
+            $steamid = $this->steamid;
+        }
+        return new \justinback\steam\inventory($apikey,$game,$steamid);
+    }
+    
+    
     
     
 }

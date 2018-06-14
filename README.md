@@ -32,7 +32,7 @@ $options = array(
         
         if($response->result->result != 1){
          echo "failure";
-         return   
+         return;
         }
         echo"success";
 

@@ -8,7 +8,8 @@
 namespace justinback\steam;
 
 /**
- * Steam achievement managing
+ * Manage Steam Achievements.
+ * 
  *
  * @author Justin Back <jb@justinback.com>
  */

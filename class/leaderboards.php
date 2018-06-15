@@ -8,7 +8,8 @@
 namespace justinback\steam;
 
 /**
- * Steam leaderboard managing
+ * Steam leaderboard managing. 
+ * Delete, Add, Reset and Set Scores!
  *
  * @author Justin Back <jb@justinback.com>
  */

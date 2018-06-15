@@ -8,7 +8,8 @@
 namespace justinback\steam;
 
 /**
- * Steam Inventory managing
+ * Steam Inventory managing. 
+ * AddItems etc.
  *
  * @author Justin Back <jb@justinback.com>
  */

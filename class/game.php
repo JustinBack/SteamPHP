@@ -8,7 +8,8 @@
 namespace justinback\steam;
 
 /**
- * Steam game managing
+ * Steam game managing.
+ * HUB for interacting with other classes and supplying variables automaticly.
  *
  * @author Justin Back <jb@justinback.com>
  */

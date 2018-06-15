@@ -8,7 +8,8 @@
 namespace justinback\steam;
 
 /**
- * Steam Anti Cheat (VAC & Game ban) managing
+ * Steam Anti Cheat (VAC & Game ban) managing. 
+ * Ban, unban and report players.
  *
  * @author Justin Back <jb@justinback.com>
  */

@@ -148,7 +148,7 @@ class manager {
     * @param string $game (optional) set a different appid than the construct
     * @param string $steamid (optional) set a different steamid than the construct
     * 
-    * @return game
+    * @return ugc
     */
     public function ugc($publishedfileid, $apikey = null, $game = null, $steamid = null)
     {

@@ -8,7 +8,8 @@
 namespace justinback\steam;
 
 /**
- * Steam player managing
+ * Steam player managing.
+ * Get Player name, avatar and report cheating!
  *
  * @author Justin Back <jb@justinback.com>
  */

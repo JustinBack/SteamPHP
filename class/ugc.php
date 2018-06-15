@@ -8,7 +8,7 @@
 namespace justinback\steam;
 
 /**
- * Steam User Generated Content (UGC) managing
+ * Steam User Generated Content (UGC / Workshop) managing
  *
  * @author Justin Back <jb@justinback.com>
  */

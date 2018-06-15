@@ -8,8 +8,10 @@
 namespace justinback\steam;
 
 /**
- * Steam Inventory managing
- *
+ * Steam Item managing. 
+ * Cannot be called manually.
+ * See \justinback\steam\inventory
+ * 
  * @author Justin Back <jb@justinback.com>
  */
 class item {

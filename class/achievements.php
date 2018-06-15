@@ -10,6 +10,8 @@ namespace justinback\steam;
 /**
  * Manage Steam Achievements.
  * 
+ * @todo UnlockAchievement();
+ * @todo LockAchievement();
  *
  * @author Justin Back <jb@justinback.com>
  */
@@ -40,6 +42,11 @@ class achievements {
     * @param string $apikey Steamworks Developer API Key
     * @param string $game Your Appid
     * @param string $steamid The SteamID of the user 
+    * 
+    * @example
+    * <code>
+    * $achievements = $steam->game()->achievements();
+    * </code>
     *
     * @return void
     */
@@ -97,6 +104,13 @@ class achievements {
     * Retrieve unlocked achievements by the player
     *
     *
+    * 
+    * 
+    * @example
+    * <code>
+    * $achievements = $steam->game()->achievements();
+    * $array = $achievements->GetPlayerAchievements();
+    * </code> 
     *
     * @return array
     */
@@ -119,7 +133,11 @@ class achievements {
     /**
     * Return only locked achievements by the player
     *
-    *
+    * @example
+    * <code>
+    * $achievements = $steam->game()->achievements();
+    * $array = $achievements->GetPlayerAchievementsLocked();
+    * </code> 
     *
     * @return array
     */
@@ -145,6 +163,13 @@ class achievements {
     *
     * @param string $apiname APIName of the achievement (not visible name)
     *
+    * 
+    * @example
+    * <code>
+    * $achievements = $steam->game()->achievements();
+    * $object = $achievements->GetAchievementDetails();
+    * </code> 
+    * 
     * @return object
     */
     public function GetAchievementDetails($apiname){
@@ -173,6 +198,13 @@ class achievements {
     *
     * @param string $apiname APIName of the achievement (not visible name)
     *
+    * @example
+    * <code>
+    * $achievements = $steam->game()->achievements();
+    * $bool = $achievements->HasPlayerUnlockedAchievement();
+    * </code> 
+    * 
+    * 
     * @return bool
     */
     public function HasPlayerUnlockedAchievement($apiname){

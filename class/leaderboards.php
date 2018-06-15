@@ -220,6 +220,31 @@ class leaderboards
         return $resp->response->leaderboards;
     }
     
+    
+    
+    /**
+    * Get all leaderboard entries from your App
+    *
+    *
+    * @param int $leaderboardid ID of the leaderboard to view
+    * @param string $datarequest type of request: RequestGlobal, RequestAroundUser, RequestFriends
+    * @param int $rangestart range start or 0
+    * @param int $rangend range end or max LB entries
+    * @param bool $steamid Use SteamID to lookup or not
+    * 
+    * 
+    * @return array
+    */
+    public function GetLeaderboardEntries($leaderboardid, $datarequest, $rangestart, $rangend, $steamid = true){
+        $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=".$this->key."&appid=".(int)$this->game. "&". time(). "&leaderboardid=".$leaderboardid. "&datarequest=". $datarequest. "&rangestart=". $rangestart. "&rangeend=". $rangend);
+        if($steamid){
+        $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=".$this->key."&appid=".(int)$this->game. "&". time(). "&leaderboardid=".$leaderboardid. "&datarequest=". $datarequest. "&rangestart=". $rangestart. "&rangeend=". $rangend. "&steamid=". $this->steamid);
+        }
+        $resp = json_decode($req_lb);
+        return $resp->leaderboardEntryInformation->leaderboardEntries;
+    }
+    
+    
     /**
     * Game object.
     *

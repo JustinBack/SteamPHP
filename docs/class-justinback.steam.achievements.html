@@ -124,7 +124,11 @@
 
 				<b>Author:</b>
 				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.achievements.html#10-211" title="Go to source code">class/achievements.php</a>
+				<b>Todo:</b>
+				UnlockAchievement();<br>
+				<b>Todo:</b>
+				LockAchievement();<br>
+			<b>Located at</b> <a href="source-class-justinback.steam.achievements.html#10-243" title="Go to source code">class/achievements.php</a>
 		<br>
 	</div>
 
@@ -144,7 +148,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-justinback.steam.achievements.html#36-52" title="Go to source code">__construct</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-justinback.steam.achievements.html#38-59" title="Go to source code">__construct</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Construction of the variables steamid, key and game</p>
@@ -166,6 +170,10 @@
 
 
 
+				<h4>Example</h4>
+				<div class="list">
+						<span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();<br>
+				</div>
 
 
 		</div>
@@ -183,7 +191,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_GetPlayerAchievements">#</a>
-		<code><a href="source-class-justinback.steam.achievements.html#96-116" title="Go to source code">GetPlayerAchievements</a>( )</code>
+		<code><a href="source-class-justinback.steam.achievements.html#103-130" title="Go to source code">GetPlayerAchievements</a>( )</code>
 
 		<div class="description short">
 			<p>Retrieve unlocked achievements by the player</p>
@@ -200,6 +208,11 @@
 				</div>
 
 
+				<h4>Example</h4>
+				<div class="list">
+						<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
+<span class="php-var">$array</span> = <span class="php-var">$achievements</span>-&gt;GetPlayerAchievements();</pre><br>
+				</div>
 
 
 		</div>
@@ -217,7 +230,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_GetPlayerAchievementsLocked">#</a>
-		<code><a href="source-class-justinback.steam.achievements.html#119-139" title="Go to source code">GetPlayerAchievementsLocked</a>( )</code>
+		<code><a href="source-class-justinback.steam.achievements.html#133-157" title="Go to source code">GetPlayerAchievementsLocked</a>( )</code>
 
 		<div class="description short">
 			<p>Return only locked achievements by the player</p>
@@ -234,6 +247,11 @@
 				</div>
 
 
+				<h4>Example</h4>
+				<div class="list">
+						<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
+<span class="php-var">$array</span> = <span class="php-var">$achievements</span>-&gt;GetPlayerAchievementsLocked();</pre><br>
+				</div>
 
 
 		</div>
@@ -251,7 +269,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_GetAchievementDetails">#</a>
-		<code><a href="source-class-justinback.steam.achievements.html#142-158" title="Go to source code">GetAchievementDetails</a>( <span>string <var>$apiname</var></span> )</code>
+		<code><a href="source-class-justinback.steam.achievements.html#160-183" title="Go to source code">GetAchievementDetails</a>( <span>string <var>$apiname</var></span> )</code>
 
 		<div class="description short">
 			<p>Setting SteamID from the construct</p>
@@ -273,6 +291,11 @@
 				</div>
 
 
+				<h4>Example</h4>
+				<div class="list">
+						<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
+<span class="php-var">$object</span> = <span class="php-var">$achievements</span>-&gt;GetAchievementDetails();</pre><br>
+				</div>
 
 
 		</div>
@@ -290,7 +313,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_HasPlayerUnlockedAchievement">#</a>
-		<code><a href="source-class-justinback.steam.achievements.html#170-185" title="Go to source code">HasPlayerUnlockedAchievement</a>( <span>string <var>$apiname</var></span> )</code>
+		<code><a href="source-class-justinback.steam.achievements.html#195-217" title="Go to source code">HasPlayerUnlockedAchievement</a>( <span>string <var>$apiname</var></span> )</code>
 
 		<div class="description short">
 			<p>Check if player has unlocked the specified achievement</p>
@@ -312,6 +335,11 @@
 				</div>
 
 
+				<h4>Example</h4>
+				<div class="list">
+						<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
+<span class="php-var">$bool</span> = <span class="php-var">$achievements</span>-&gt;HasPlayerUnlockedAchievement();</pre><br>
+				</div>
 
 
 		</div>
@@ -329,7 +357,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_game">#</a>
-		<code><a href="source-class-justinback.steam.achievements.html#189-210" title="Go to source code">game</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-justinback.steam.achievements.html#221-242" title="Go to source code">game</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>game object.</p>

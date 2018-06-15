@@ -36,7 +36,7 @@ class anticheat {
     * ID of report
     *
     */
-    private $reportid = null;
+    public $reportid = null;
     
     /**
     * Construction of the variables steamid, key and game

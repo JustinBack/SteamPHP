@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class justinback\steam\item | SteamPHP</title>
+
+	<link rel="stylesheet" href="resources/style.css?c2f33731c1948fbed7c333554678bfa68d4817da">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-justinback.html">
+						justinback<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-justinback.steam.html">
+						steam					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
+				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
+				<li><a href="class-justinback.steam.game.html">game</a></li>
+				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
+				<li class="active"><a href="class-justinback.steam.item.html">item</a></li>
+				<li><a href="class-justinback.steam.leaderboards.html">leaderboards</a></li>
+				<li><a href="class-justinback.steam.manager.html">manager</a></li>
+				<li><a href="class-justinback.steam.player.html">player</a></li>
+				<li><a href="class-justinback.steam.steam.html">steam</a></li>
+				<li><a href="class-justinback.steam.transactions.html">transactions</a></li>
+				<li><a href="class-justinback.steam.ugc.html">ugc</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-justinback.steam.html" title="Summary of justinback\steam"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+				<li>
+					<a href="annotation-group-deprecated.html" title="List of elements with deprecated annotation">
+						<span>Deprecated</span>
+					</a>
+				</li>
+				<li>
+					<a href="annotation-group-todo.html" title="List of elements with todo annotation">
+						<span>Todo</span>
+					</a>
+				</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class item</h1>
+
+
+	<div class="description">
+	<p>Steam Inventory managing</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-justinback.html">justinback</a>\<a href="namespace-justinback.steam.html">steam</a><br>
+		
+
+				<b>Author:</b>
+				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
+			<b>Located at</b> <a href="source-class-justinback.steam.item.html#10-279" title="Go to source code">class/item.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-justinback.steam.item.html#85-114" title="Go to source code">__construct</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$itemid</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$quantity</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$itemdefid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$acquired</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$state</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$origin</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$state_changed_timestamp</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>Construction of the variables</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Construction of the variables</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$apikey</var></dt>
+					<dd>Steamworks Developer API Key</dd>
+					<dt><var>$game</var></dt>
+					<dd>Your Appid</dd>
+					<dt><var>$steamid</var></dt>
+					<dd>The SteamID of the user</dd>
+					<dt><var>$itemid</var></dt>
+					<dd>The Item ID</dd>
+					<dt><var>$quantity</var></dt>
+					<dd>Item Quantity</dd>
+					<dt><var>$itemdefid</var></dt>
+					<dd>Item Definition</dd>
+					<dt><var>$acquired</var></dt>
+					<dd>Timestamp of item creation date</dd>
+					<dt><var>$state</var></dt>
+					<dd>Item State</dd>
+					<dt><var>$origin</var></dt>
+					<dd>Item Origin, e.g external</dd>
+					<dt><var>$state_changed_timestamp</var></dt>
+					<dd>Timestamp since latest change</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="ConsumeItem" id="_ConsumeItem">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_ConsumeItem">#</a>
+		<code><a href="source-class-justinback.steam.item.html#255-275" title="Go to source code">ConsumeItem</a>( <span>string <var>$quantity</var></span>, <span>string <var>$requestid</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>Marks an item as wholly or partially consumed. This action cannot be reversed.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Marks an item as wholly or partially consumed. This action cannot be reversed.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$quantity</var></dt>
+					<dd>Quantity of the item</dd>
+					<dt><var>$requestid</var></dt>
+					<dd>Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="game" id="$game">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-justinback.steam.item.html#22-26" title="Go to source code"><var>$game</var></a>
+
+			<div class="description short">
+				<p>Steamworks App ID</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Steamworks App ID</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$game" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="itemid" id="$itemid">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-justinback.steam.item.html#35-39" title="Go to source code"><var>$itemid</var></a>
+
+			<div class="description short">
+				<p>ItemID of the acquired item</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>ItemID of the acquired item</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$itemid" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="quantity" id="$quantity">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-justinback.steam.item.html#42-46" title="Go to source code"><var>$quantity</var></a>
+
+			<div class="description short">
+				<p>Quantity of the acquired item</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Quantity of the acquired item</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$quantity" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="itemdefid" id="$itemdefid">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-justinback.steam.item.html#49-53" title="Go to source code"><var>$itemdefid</var></a>
+
+			<div class="description short">
+				<p>itemdefid of the acquired item</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>itemdefid of the acquired item</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$itemdefid" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="acquired" id="$acquired">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-justinback.steam.item.html#56-60" title="Go to source code"><var>$acquired</var></a>
+
+			<div class="description short">
+				<p>date of the acquired item</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>date of the acquired item</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$acquired" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="state" id="$state">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-justinback.steam.item.html#63-67" title="Go to source code"><var>$state</var></a>
+
+			<div class="description short">
+				<p>state of the acquired item</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>state of the acquired item</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$state" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="origin" id="$origin">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-justinback.steam.item.html#70-74" title="Go to source code"><var>$origin</var></a>
+
+			<div class="description short">
+				<p>origin of the acquired item</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>origin of the acquired item</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$origin" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="state_changed_timestamp" id="$state_changed_timestamp">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-justinback.steam.item.html#77-81" title="Go to source code"><var>$state_changed_timestamp</var></a>
+
+			<div class="description short">
+				<p>timestamp of latest change of the acquired item</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>timestamp of latest change of the acquired item</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$state_changed_timestamp" class="anchor">#</a>
+				<code><span class="php-keyword1">null</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		SteamPHP API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

@@ -13,3 +13,13 @@ php:
   - 5.6
   # aliased to a recent 7.x version
   - 7.0
+  
+  - hhvm
+  
+script: phpunit
+
+  
+# Customize when the notification emails are sent.
+notifications:
+    on_success: never
+    on_failure: always

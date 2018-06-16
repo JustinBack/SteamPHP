@@ -2,7 +2,7 @@
 
 # SteamPHP
 
-[![VERSION](https://img.shields.io/badge/Version-pb1.0.0a-green.svg)](VERSION.md)
+[![VERSION](https://img.shields.io/badge/Version-pb1.0.0b-yellow.svg)](VERSION.md)
 
 [![GitHub issues](https://img.shields.io/github/issues/JustinBack/SteamPHP.svg)](https://github.com/JustinBack/SteamPHP/issues)
 

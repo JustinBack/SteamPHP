@@ -10,7 +10,7 @@ namespace justinback\steam;
 /**
  * Steam Microtransaction managing
  *
- * 
+ * @since pb1.0.0a
  * @todo Basically Everything
  * @author Justin Back <jb@justinback.com>
  */

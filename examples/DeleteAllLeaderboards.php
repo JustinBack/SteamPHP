@@ -3,7 +3,7 @@
  * @package DoNotDocument
  */
 
-require_once("../steam.php");
+require_once("steam.php");
 
 
 $apikey = "00000"; // STEAMWORKS WEB API KEY

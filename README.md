@@ -2,6 +2,8 @@
 
 # SteamPHP
 
+[![VERSION](https://img.shields.io/badge/Version-pb1.0.0a-green.svg)](VERSION.md)
+
 [![GitHub issues](https://img.shields.io/github/issues/JustinBack/SteamPHP.svg)](https://github.com/JustinBack/SteamPHP/issues)
 
 [![GitHub license](https://img.shields.io/github/license/JustinBack/SteamPHP.svg)](https://github.com/JustinBack/SteamPHP/blob/master/LICENSE)

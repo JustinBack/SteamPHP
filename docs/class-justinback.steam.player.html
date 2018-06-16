@@ -125,7 +125,7 @@ Get Player name, avatar and report cheating!</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.player.html#10-291" title="Go to source code">class/player.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.player.html#10-314" title="Go to source code">class/player.php</a>
 		<br>
 	</div>
 
@@ -206,7 +206,7 @@ Get Player name, avatar and report cheating!</p>
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="GetAvatarSmall" id="_GetAvatarSmall">
+	<tr data-order="GetAvatarSmall" id="_GetAvatarSmall" class="deprecated">
 
 		<td class="attributes"><code>
 			 public 
@@ -227,6 +227,10 @@ Get Player name, avatar and report cheating!</p>
 		<div class="description detailed hidden">
 			<p>Get the Avatar in small</p>
 
+				<h4>Deprecated</h4>
+				<div class="list">
+						Use GetAvatar() instead<br>
+				</div>
 
 
 				<h4>Returns</h4>
@@ -240,7 +244,7 @@ Get Player name, avatar and report cheating!</p>
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="GetAvatarMedium" id="_GetAvatarMedium">
+	<tr data-order="GetAvatarMedium" id="_GetAvatarMedium" class="deprecated">
 
 		<td class="attributes"><code>
 			 public 
@@ -261,11 +265,49 @@ Get Player name, avatar and report cheating!</p>
 		<div class="description detailed hidden">
 			<p>Get the Avatar in medium</p>
 
+				<h4>Deprecated</h4>
+				<div class="list">
+						Use GetAvatar() instead<br>
+				</div>
 
 
 				<h4>Returns</h4>
 				<div class="list">
 					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetAvatar" id="_GetAvatar">
+
+		<td class="attributes"><code>
+			 public 
+
+			object
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetAvatar">#</a>
+		<code><a href="source-class-justinback.steam.player.html#144-162" title="Go to source code">GetAvatar</a>( )</code>
+
+		<div class="description short">
+			<p>Get the Avatar in an object (small, medium, full)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Get the Avatar in an object (small, medium, full)</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					object
 				</div>
 
 
@@ -286,7 +328,7 @@ Get Player name, avatar and report cheating!</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_GetRealName">#</a>
-		<code><a href="source-class-justinback.steam.player.html#143-157" title="Go to source code">GetRealName</a>( )</code>
+		<code><a href="source-class-justinback.steam.player.html#166-180" title="Go to source code">GetRealName</a>( )</code>
 
 		<div class="description short">
 			<p>Get the Realname from the user</p>
@@ -308,7 +350,7 @@ Get Player name, avatar and report cheating!</p>
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="GetAvatarFull" id="_GetAvatarFull">
+	<tr data-order="GetAvatarFull" id="_GetAvatarFull" class="deprecated">
 
 		<td class="attributes"><code>
 			 public 
@@ -320,7 +362,7 @@ Get Player name, avatar and report cheating!</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_GetAvatarFull">#</a>
-		<code><a href="source-class-justinback.steam.player.html#160-174" title="Go to source code">GetAvatarFull</a>( )</code>
+		<code><a href="source-class-justinback.steam.player.html#183-197" title="Go to source code">GetAvatarFull</a>( )</code>
 
 		<div class="description short">
 			<p>Get the Avatar in full</p>
@@ -329,6 +371,10 @@ Get Player name, avatar and report cheating!</p>
 		<div class="description detailed hidden">
 			<p>Get the Avatar in full</p>
 
+				<h4>Deprecated</h4>
+				<div class="list">
+						Use GetAvatar() instead<br>
+				</div>
 
 
 				<h4>Returns</h4>
@@ -354,7 +400,7 @@ Get Player name, avatar and report cheating!</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_ReportPlayerCheating">#</a>
-		<code><a href="source-class-justinback.steam.player.html#177-209" title="Go to source code">ReportPlayerCheating</a>( <span>string <var>$steamidreporter</var> = <span class="php-num">0</span></span>, <span>string <var>$appdata</var> = <span class="php-num">0</span></span>, <span>boolean <var>$heuristic</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$detection</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$playerreport</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$noreportid</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$gamemode</var> = <span class="php-num">0</span></span>, <span>integer <var>$suspicionstarttime</var> = <span class="php-num">0</span></span>, <span>integer <var>$severity</var> = <span class="php-num">0</span></span> )</code>
+		<code><a href="source-class-justinback.steam.player.html#200-232" title="Go to source code">ReportPlayerCheating</a>( <span>string <var>$steamidreporter</var> = <span class="php-num">0</span></span>, <span>string <var>$appdata</var> = <span class="php-num">0</span></span>, <span>boolean <var>$heuristic</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$detection</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$playerreport</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$noreportid</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$gamemode</var> = <span class="php-num">0</span></span>, <span>integer <var>$suspicionstarttime</var> = <span class="php-num">0</span></span>, <span>integer <var>$severity</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			<p>ReportPlayerCheating is designed to gather community reports of cheating, where one player reports another player within the game.</p>
@@ -411,7 +457,7 @@ Get Player name, avatar and report cheating!</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_RemovePlayerGameBan">#</a>
-		<code><a href="source-class-justinback.steam.player.html#213-238" title="Go to source code">RemovePlayerGameBan</a>( )</code>
+		<code><a href="source-class-justinback.steam.player.html#236-261" title="Go to source code">RemovePlayerGameBan</a>( )</code>
 
 		<div class="description short">
 			<p>Remove a game ban on a player.</p>
@@ -447,7 +493,7 @@ Get Player name, avatar and report cheating!</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_achievements">#</a>
-		<code><a href="source-class-justinback.steam.player.html#241-262" title="Go to source code">achievements</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-justinback.steam.player.html#264-285" title="Go to source code">achievements</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>achievements object.</p>
@@ -490,7 +536,7 @@ Get Player name, avatar and report cheating!</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_inventory">#</a>
-		<code><a href="source-class-justinback.steam.player.html#265-286" title="Go to source code">inventory</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-justinback.steam.player.html#288-309" title="Go to source code">inventory</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>inventory object.</p>

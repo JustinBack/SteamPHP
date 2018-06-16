@@ -111,7 +111,7 @@ class player {
     /**
     * Get the Avatar in small
     *
-    *
+    * @deprecated Use GetAvatar() instead
     *
     * @return string
     */
@@ -127,7 +127,7 @@ class player {
     /**
     * Get the Avatar in medium
     *
-    *
+    * @deprecated Use GetAvatar() instead
     *
     * @return string
     */
@@ -139,6 +139,29 @@ class player {
             return $player->avatarmedium;
         }
     }
+    
+    
+    /**
+    * Get the Avatar in an object (small, medium, full)
+    *
+    *
+    *
+    * @return object
+    */
+    public function GetAvatar(){
+        $object = new \stdClass();
+        $req_players = file_get_contents("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2?key=".$this->key."&steamids=".$this->steamid);
+        $GetNumberOfCurrentPlayers = json_decode($req_players);
+        
+        foreach($GetNumberOfCurrentPlayers->response->players as $player){
+            $object->small = $player->avatar;
+            $object->medium = $player->avatarmedium;
+            $object->full = $player->avatarfull;
+            return $object;
+        }
+    }
+    
+    
     
     /**
     * Get the Realname from the user
@@ -160,7 +183,7 @@ class player {
     /**
     * Get the Avatar in full
     *
-    *
+    * @deprecated Use GetAvatar() instead
     *
     * @return string
     */

@@ -11,7 +11,7 @@ namespace justinback\steam;
  * Steam Microtransaction managing
  *
  * 
- * @todo Basicly Everything
+ * @todo Basically Everything
  * @author Justin Back <jb@justinback.com>
  */
 class transactions {

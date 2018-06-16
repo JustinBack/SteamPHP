@@ -13,7 +13,7 @@ namespace justinback\steam;
  *
  * @author Justin Back <jb@justinback.com>
  */
-class inventory {
+class inventory extends PHPUnit_Framework_TestCase {
     /**
     * Steamworks API Key
     *

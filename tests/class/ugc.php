@@ -12,7 +12,7 @@ namespace justinback\steam;
  *
  * @author Justin Back <jb@justinback.com>
  */
-class ugc {
+class ugc extends PHPUnit_Framework_TestCase {
     /**
     * Steamworks API Key
     *

@@ -15,7 +15,7 @@ namespace justinback\steam;
  *
  * @author Justin Back <jb@justinback.com>
  */
-class achievements {
+class achievements extends PHPUnit_Framework_TestCase {
     /**
     * Steamworks API Key
     *

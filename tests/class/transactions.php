@@ -14,7 +14,7 @@ namespace justinback\steam;
  * @todo Basically Everything
  * @author Justin Back <jb@justinback.com>
  */
-class transactions {
+class transactions extends PHPUnit_Framework_TestCase {
     /**
     * Steamworks API Key
     *

@@ -13,7 +13,7 @@ namespace justinback\steam;
  *
  * @author Justin Back <jb@justinback.com>
  */
-class leaderboards 
+class leaderboards extends PHPUnit_Framework_TestCase
 {
     
     /**

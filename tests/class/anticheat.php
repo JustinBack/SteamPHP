@@ -13,7 +13,7 @@ namespace justinback\steam;
  *
  * @author Justin Back <jb@justinback.com>
  */
-class anticheat {
+class anticheat extends PHPUnit_Framework_TestCase {
     /**
     * Steamworks API Key
     *

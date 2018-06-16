@@ -1,0 +1,7 @@
+<phpunit bootstrap="steam.php">
+  <testsuites>
+    <testsuite name="steam">
+      <directory>class</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

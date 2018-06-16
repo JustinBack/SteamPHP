@@ -4,6 +4,12 @@
 
 [![VERSION](https://img.shields.io/badge/Version-pb1.0.0b-yellow.svg)](VERSION.md)
 
+![PHP5.4](https://php-eye.com/badge/justinback/steam-php/php54.svg)
+![PHP5.5](https://php-eye.com/badge/justinback/steam-php/php55.svg)
+![PHP5.6](https://php-eye.com/badge/justinback/steam-php/php56.svg)
+![PHP7.0](https://php-eye.com/badge/justinback/steam-php/php70.svg)
+![PHP7.1](https://php-eye.com/badge/justinback/steam-php/php71.svg)
+
 [![GitHub issues](https://img.shields.io/github/issues/JustinBack/SteamPHP.svg)](https://github.com/JustinBack/SteamPHP/issues)
 
 [![GitHub license](https://img.shields.io/github/license/JustinBack/SteamPHP.svg)](https://github.com/JustinBack/SteamPHP/blob/master/LICENSE)
@@ -18,12 +24,26 @@
 
 `Making web requests especially multiple can be frustrating such as code quality. This library makes it easy with providing one liners. Examples below`
 
+## Installation
+
+### Composer
+
+`composer require justinback/steam-php`
+
+
+### By Source
+
+1. Download from GitHub
+2. include `steam.php`
+3. See Usage
+
 ## Examples
 
 
-**Deleting Leaderboards**
+#### Deleting Leaderboards
 
-`Long`
+##### Long
+
 ~~~
 
 $options = array(
@@ -45,7 +65,7 @@ $options = array(
 
 ~~~
 
-`Short`
+#### Short
 ~~~
 
 $steam->game()->leaderboards()->DeleteLeaderboard("lbname");
@@ -55,9 +75,9 @@ $steam->game()->leaderboards()->DeleteLeaderboard("lbname");
 
 
 
-**Getting Steam Community Name**
+#### Getting Steam Community Name
 
-`Long`
+##### Long
 ~~~
 
         $req_players = file_get_contents("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2?key=abcd&steamids=0000");
@@ -70,7 +90,7 @@ $steam->game()->leaderboards()->DeleteLeaderboard("lbname");
 ~~~
 
 
-`Short`
+##### Short
 ~~~
 
 $steam->player()->GetPersonaName();
@@ -80,12 +100,10 @@ $steam->player()->GetPersonaName();
 
 
 
-## Source / Documentation
+## Documentation
 
 
 [Docs](https://steamphp.docs.justinback.com)
-
-[Source](https://github.com/JustinBack/SteamPHP)
 
 
 ## Feature Requests / Bug Reports

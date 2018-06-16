@@ -16,5 +16,5 @@ $steam  = new justinback\steam\manager($apikey, $appid, $steamid);
 
 foreach($steam->game()->leaderboards()->GetLeaderboardsForGame() as $leaderboard){
     var_dump($steam->game()->leaderboards()->DeleteLeaderboard($leaderboard->name));
-    echo "<br>";
+    echo "\n";
 }

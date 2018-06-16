@@ -1,0 +1,7 @@
+{
+    "name": "JustinBack/SteamPHP",
+    "description": "Steamworks PHP Wrapper for easy WebAPI interaction",
+    "require": {
+        "php": "^5.4 || ^7.2"
+    }
+}

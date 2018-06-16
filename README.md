@@ -2,6 +2,9 @@
 
 # SteamPHP
 
+<p align="center">
+  <img src="https://github.com/JustinBack/SteamPHP/blob/dev/docs/resources/steamphp.png?raw=true" alt="Justin Back Logo"/>
+</p>
 
 ###### Version
 

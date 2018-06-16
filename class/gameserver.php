@@ -8,13 +8,13 @@
 namespace justinback\steam;
 
 /**
- * Steam Microtransaction managing
+ * Steam Game Server managing
  *
  * @since pb1.0.0a
- * @todo Basically Everything
+ * @todo Everything, API currently has error. Waiting for fix
  * @author Justin Back <jb@justinback.com>
  */
-class transactions {
+class gameserver {
     /**
     * Steamworks API Key
     *
@@ -91,6 +91,20 @@ class transactions {
         $this->steamid = $steamid;
     }
     
+    
+    /**
+    * Gets a list of game server accounts with their logon tokens
+    *
+    *
+    *
+    * @return array
+    */
+    public function GetAccountList(){
+        $req_players = file_get_contents("https://api.steampowered.com/IGameServersService/GetAccountList/v1?key=".$this->key. "&appid=". $this->game);
+        $GetNumberOfCurrentPlayers = json_decode($req_players);
+        
+        return $GetNumberOfCurrentPlayers->response;
+    }
     
     
 }

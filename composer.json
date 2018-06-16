@@ -2,6 +2,11 @@
     "name": "justinback/steam-php",
     "description": "Steamworks PHP Wrapper for easy WebAPI interaction",
     "require": {
-        "php": "^5.4 || ^7.2"
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "justinback\\steam\\": "class/"
+        }
     }
 }

@@ -37,30 +37,30 @@ class gameserver {
     * Construction of the variables steamid, key and game
     *
     * 
-    * @param string $apikey Steamworks Developer API Key
-    * @param string $game Your Appid
-    * @param string $steamid The SteamID of the user 
+    * @param string $sApiKey Steamworks Developer API Key
+    * @param string $iGame Your Appid
+    * @param string $sSteamid The SteamID of the user 
     *
     * @return void
     */
-    public function __construct($apikey = null, $game = null, $steamid = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        $this->set_key($apikey);
-        $this->set_game((int)$game);
-        $this->set_steamid($steamid);
+        $this->set_key($sApiKey);
+        $this->set_game((int)$iGame);
+        $this->set_steamid($sSteamid);
     }
     
     /**
     * Setting API Key from the construct
     *
     *
-    * @param string $apikey Steamworks Developer API Key
+    * @param string $sApiKey Steamworks Developer API Key
     *
     * @return void
     */
-    private function set_key($apikey)
+    private function set_key($sApiKey)
     {
-        $this->key = $apikey;
+        $this->key = $sApiKey;
     }
     
     
@@ -68,13 +68,13 @@ class gameserver {
     * Setting AppID from the construct
     *
     *
-    * @param string $game Your AppID
+    * @param string $iGame Your AppID
     *
     * @return void
     */
-    private function set_game($game)
+    private function set_game($iGame)
     {
-        $this->game = $game;
+        $this->game = $iGame;
     }
     
     
@@ -82,13 +82,13 @@ class gameserver {
     * Setting SteamID from the construct
     *
     *
-    * @param string $steamid The Players SteamID
+    * @param string $sSteamid The Players SteamID
     *
     * @return void
     */
-    private function set_steamid($steamid)
+    private function set_steamid($sSteamid)
     {
-        $this->steamid = $steamid;
+        $this->steamid = $sSteamid;
     }
     
     
@@ -100,6 +100,9 @@ class gameserver {
     * @return array
     */
     public function GetAccountList(){
+        
+        
+        //Valve Please have a look here. Everytime this is called, the result is a 500 Server error
         $req_players = file_get_contents("https://api.steampowered.com/IGameServersService/GetAccountList/v1?key=".$this->key. "&appid=". $this->game);
         $GetNumberOfCurrentPlayers = json_decode($req_players);
         

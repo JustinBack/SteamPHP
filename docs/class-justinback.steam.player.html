@@ -82,6 +82,7 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
+				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
 				<li><a href="class-justinback.steam.leaderboards.html">leaderboards</a></li>
@@ -149,7 +150,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.player.html#36-52" title="Go to source code">__construct</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#36-52" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -161,11 +162,11 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>Steamworks Developer API Key</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>Your Appid</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>The SteamID of the user</dd>
 					</dl></div>
 
@@ -397,7 +398,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ReportPlayerCheating">#</a>
-			<code><a href="source-class-justinback.steam.player.html#200-232" title="Go to source code">ReportPlayerCheating</a>( <span>string <var>$steamidreporter</var> = <span class="php-num">0</span></span>, <span>string <var>$appdata</var> = <span class="php-num">0</span></span>, <span>boolean <var>$heuristic</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$detection</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$playerreport</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$noreportid</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$gamemode</var> = <span class="php-num">0</span></span>, <span>integer <var>$suspicionstarttime</var> = <span class="php-num">0</span></span>, <span>integer <var>$severity</var> = <span class="php-num">0</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#200-232" title="Go to source code">ReportPlayerCheating</a>( <span>string <var>$sSteamidreporter</var> = <span class="php-num">0</span></span>, <span>string <var>$appdata</var> = <span class="php-num">0</span></span>, <span>boolean <var>$heuristic</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$detection</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$playerreport</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$noreportid</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$iGamemode</var> = <span class="php-num">0</span></span>, <span>integer <var>$suspicionstarttime</var> = <span class="php-num">0</span></span>, <span>integer <var>$severity</var> = <span class="php-num">0</span></span> )</code>
 
 			<div class="description short">
 				<p>ReportPlayerCheating is designed to gather community reports of cheating, where one player reports another player within the game.</p>
@@ -411,7 +412,7 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$steamidreporter</var></dt>
+						<dt><var>$sSteamidreporter</var></dt>
 						<dd>(Optional) The Steam ID of the user or game server who is reporting the cheating.</dd>
 						<dt><var>$appdata</var></dt>
 						<dd>(Optional) App specific data about the type of cheating set by developer. (ex 1 = Aimbot, 2 = Wallhack, 3 = Griefing)</dd>
@@ -423,7 +424,7 @@ Get Player name, avatar and report cheating!</p>
 						<dd>(Optional) Extra information about the source of the cheating - was it a player report.</dd>
 						<dt><var>$noreportid</var></dt>
 						<dd>(Optional) Don't return reportid. This should only be passed if you don't intend to issue a ban based on this report.</dd>
-						<dt><var>$gamemode</var></dt>
+						<dt><var>$iGamemode</var></dt>
 						<dd>(Optional) Extra information about state of game - was it a specific type of game play or game mode. (0 = generic)</dd>
 						<dt><var>$suspicionstarttime</var></dt>
 						<dd>(Optional) Extra information indicating how far back the game thinks is interesting for this user. Unix epoch time (time since Jan 1st, 1970).</dd>
@@ -488,7 +489,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_achievements">#</a>
-			<code><a href="source-class-justinback.steam.player.html#264-285" title="Go to source code">achievements</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#264-285" title="Go to source code">achievements</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>achievements object.</p>
@@ -500,11 +501,11 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>(optional) set a different apikey than the construct</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>(optional) set a different appid than the construct</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) set a different steamid than the construct</dd>
 					</dl></div>
 
@@ -530,7 +531,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_inventory">#</a>
-			<code><a href="source-class-justinback.steam.player.html#288-309" title="Go to source code">inventory</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#288-309" title="Go to source code">inventory</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>inventory object.</p>
@@ -542,11 +543,11 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>(optional) set a different apikey than the construct</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>(optional) set a different appid than the construct</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) set a different steamid than the construct</dd>
 					</dl></div>
 

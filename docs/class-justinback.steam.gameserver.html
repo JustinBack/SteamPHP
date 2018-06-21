@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class justinback\steam\transactions | SteamPHP</title>
+	<title>Class justinback\steam\gameserver | SteamPHP</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
 	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
@@ -82,14 +82,14 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
-				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
+				<li class="active"><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
 				<li><a href="class-justinback.steam.leaderboards.html">leaderboards</a></li>
 				<li><a href="class-justinback.steam.manager.html">manager</a></li>
 				<li><a href="class-justinback.steam.player.html">player</a></li>
 				<li><a href="class-justinback.steam.steam.html">steam</a></li>
-				<li class="active"><a href="class-justinback.steam.transactions.html">transactions</a></li>
+				<li><a href="class-justinback.steam.transactions.html">transactions</a></li>
 				<li><a href="class-justinback.steam.ugc.html">ugc</a></li>
 			</ul>
 
@@ -106,11 +106,11 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Class transactions</h1>
+	<h1>Class gameserver</h1>
 
 
 	<div class="description">
-	<p>Steam Microtransaction managing</p>
+	<p>Steam Game Server managing</p>
 	</div>
 
 
@@ -132,8 +132,8 @@
 				<b>Since:</b>
 				pb1.0.0a<br>
 				<b>Todo:</b>
-				Basically Everything<br>
-			<b>Located at</b> <a href="source-class-justinback.steam.transactions.html#10-96" title="Go to source code">class/transactions.php</a>
+				Everything, API currently has error. Waiting for fix<br>
+			<b>Located at</b> <a href="source-class-justinback.steam.gameserver.html#10-113" title="Go to source code">class/gameserver.php</a>
 		<br>
 	</div>
 
@@ -153,7 +153,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#36-51" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.gameserver.html#36-51" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -173,6 +173,39 @@
 						<dd>The SteamID of the user</dd>
 					</dl></div>
 
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="GetAccountList" id="_GetAccountList">
+
+			<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_GetAccountList">#</a>
+			<code><a href="source-class-justinback.steam.gameserver.html#95-110" title="Go to source code">GetAccountList</a>( )</code>
+
+			<div class="description short">
+				<p>Gets a list of game server accounts with their logon tokens</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Gets a list of game server accounts with their logon tokens</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						array
+					</div>
 
 
 

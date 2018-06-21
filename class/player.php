@@ -37,17 +37,17 @@ class player {
     * Construction of the variables steamid, key and game
     *
     *
-    * @param string $apikey Steamworks Developer API Key
-    * @param string $game Your Appid
-    * @param string $steamid The SteamID of the user 
+    * @param string $sApiKey Steamworks Developer API Key
+    * @param string $iGame Your Appid
+    * @param string $sSteamid The SteamID of the user 
     *
     * @return void
     */
-    public function __construct($apikey = null, $game = null, $steamid = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        $this->set_key($apikey);
-        $this->set_game((int)$game);
-        $this->set_steamid($steamid);
+        $this->set_key($sApiKey);
+        $this->set_game((int)$iGame);
+        $this->set_steamid($sSteamid);
         
     }
     
@@ -55,13 +55,13 @@ class player {
     * Setting API Key from the construct
     *
     *
-    * @param string $apikey Steamworks Developer API Key
+    * @param string $sApiKey Steamworks Developer API Key
     *
     * @return void
     */
-    private function set_key($apikey)
+    private function set_key($sApiKey)
     {
-        $this->key = $apikey;
+        $this->key = $sApiKey;
     }
     
     
@@ -69,13 +69,13 @@ class player {
     * Setting AppID from the construct
     *
     *
-    * @param string $game Your AppID
+    * @param string $iGame Your AppID
     *
     * @return void
     */
-    private function set_game($game)
+    private function set_game($iGame)
     {
-        $this->game = $game;
+        $this->game = $iGame;
     }
     
     
@@ -83,13 +83,13 @@ class player {
     * Setting SteamID from the construct
     *
     *
-    * @param string $steamid The Players SteamID
+    * @param string $sSteamid The Players SteamID
     *
     * @return void
     */
-    private function set_steamid($steamid)
+    private function set_steamid($sSteamid)
     {
-        $this->steamid = $steamid;
+        $this->steamid = $sSteamid;
     }
     
     /**
@@ -202,25 +202,25 @@ class player {
     *
     * It is intended for unreliable data from peers in the game ( semi-trusted sources ). The back-end that reports the data should ensure that both parties are authenticated, but the data in itself is treated as hearsay. Optional parameters may be used to encode the type of cheating that is suspected or additional evidence ( an identifier pointing to the match/demo for further review )
     *
-    * @param string $steamidreporter (Optional) The Steam ID of the user or game server who is reporting the cheating.
+    * @param string $sSteamidreporter (Optional) The Steam ID of the user or game server who is reporting the cheating.
     * @param string $appdata (Optional) App specific data about the type of cheating set by developer. (ex 1 = Aimbot, 2 = Wallhack, 3 = Griefing)
     * @param bool $heuristic (Optional) Extra information about the source of the cheating - was it a heuristic.
     * @param bool $detection (Optional) Extra information about the source of the cheating - was it a detection.
     * @param bool $playerreport (Optional) Extra information about the source of the cheating - was it a player report.
     * @param bool $noreportid (Optional) Don't return reportid. This should only be passed if you don't intend to issue a ban based on this report.
-    * @param int $gamemode (Optional) Extra information about state of game - was it a specific type of game play or game mode. (0 = generic)
+    * @param int $iGamemode (Optional) Extra information about state of game - was it a specific type of game play or game mode. (0 = generic)
     * @param int $suspicionstarttime (Optional) Extra information indicating how far back the game thinks is interesting for this user. Unix epoch time (time since Jan 1st, 1970).
     * @param int $severity (Optional) Level of severity of bad action being reported. Scale set by developer.
     * 
     * 
     * @return anticheat
     */
-    public function ReportPlayerCheating($steamidreporter = 0, $appdata = 0, $heuristic = false, $detection = false, $playerreport = false, $noreportid = false, $gamemode = 0, $suspicionstarttime = 0, $severity = 0){
+    public function ReportPlayerCheating($sSteamidreporter = 0, $appdata = 0, $heuristic = false, $detection = false, $playerreport = false, $noreportid = false, $iGamemode = 0, $suspicionstarttime = 0, $severity = 0){
         $options = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'steamidreporter' => $steamidreporter, 'appdata' => $appdata, 'heuristic' => $heuristic, 'detection' => $detection, 'playerreport' => $playerreport, 'noreportid' => $noreportid, 'gamemode' => $gamemode, 'suspicionstarttime' => $suspicionstarttime, 'severity' => $severity ))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'steamidreporter' => $sSteamidreporter, 'appdata' => $appdata, 'heuristic' => $heuristic, 'detection' => $detection, 'playerreport' => $playerreport, 'noreportid' => $noreportid, 'gamemode' => $iGamemode, 'suspicionstarttime' => $suspicionstarttime, 'severity' => $severity ))
             )
         );
         $context  = stream_context_create($options);
@@ -264,48 +264,48 @@ class player {
     /**
     * achievements object.
     *
-    * @param string $apikey (optional) set a different apikey than the construct
-    * @param string $game (optional) set a different appid than the construct
-    * @param string $steamid (optional) set a different steamid than the construct
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return achievements
     */
-    public function achievements($apikey = null, $game = null, $steamid = null)
+    public function achievements($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        if($apikey === null){
-            $apikey = $this->key;
+        if($sApiKey === null){
+            $sApiKey = $this->key;
         }
-        if($game === null){
-            $game = $this->game;
+        if($iGame === null){
+            $iGame = $this->game;
         }
-        if($steamid === null){
-            $steamid = $this->steamid;
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\achievements($apikey,$game,$steamid);
+        return new \justinback\steam\achievements($sApiKey,$iGame,$sSteamid);
     }
     
     
     /**
     * inventory object.
     *
-    * @param string $apikey (optional) set a different apikey than the construct
-    * @param string $game (optional) set a different appid than the construct
-    * @param string $steamid (optional) set a different steamid than the construct
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return inventory
     */
-    public function inventory($apikey = null, $game = null, $steamid = null)
+    public function inventory($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        if($apikey === null){
-            $apikey = $this->key;
+        if($sApiKey === null){
+            $sApiKey = $this->key;
         }
-        if($game === null){
-            $game = $this->game;
+        if($iGame === null){
+            $iGame = $this->game;
         }
-        if($steamid === null){
-            $steamid = $this->steamid;
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\inventory($apikey,$game,$steamid);
+        return new \justinback\steam\inventory($sApiKey,$iGame,$sSteamid);
     }
     
     

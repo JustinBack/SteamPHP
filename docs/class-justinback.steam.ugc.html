@@ -82,6 +82,7 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
+				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
 				<li><a href="class-justinback.steam.leaderboards.html">leaderboards</a></li>
@@ -148,7 +149,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#40-58" title="Go to source code">__construct</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#40-58" title="Go to source code">__construct</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -162,11 +163,11 @@
 					<div class="list"><dl>
 						<dt><var>$publishedfileid</var></dt>
 						<dd>UGC File ID</dd>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>Steamworks Developer API Key</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>Your Appid</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>The SteamID of the user</dd>
 					</dl></div>
 
@@ -350,7 +351,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_SubscribePublishedFile">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#238-267" title="Go to source code">SubscribePublishedFile</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#238-267" title="Go to source code">SubscribePublishedFile</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Subscribe to the published file as the user</p>
@@ -364,7 +365,7 @@
 					<div class="list"><dl>
 						<dt><var>$publishedfileid</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) numeric ID of the user.</dd>
 					</dl></div>
 
@@ -390,7 +391,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UnsubscribePublishedFile">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#270-299" title="Go to source code">UnsubscribePublishedFile</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#270-299" title="Go to source code">UnsubscribePublishedFile</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Unsubscribe from the published file as the user</p>
@@ -404,7 +405,7 @@
 					<div class="list"><dl>
 						<dt><var>$publishedfileid</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) numeric ID of the user.</dd>
 					</dl></div>
 

@@ -82,6 +82,7 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li class="active"><a href="class-justinback.steam.game.html">game</a></li>
+				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
 				<li><a href="class-justinback.steam.leaderboards.html">leaderboards</a></li>
@@ -129,7 +130,7 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.game.html#10-203" title="Go to source code">class/game.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.game.html#10-227" title="Go to source code">class/game.php</a>
 		<br>
 	</div>
 
@@ -149,7 +150,7 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.game.html#36-52" title="Go to source code">__construct</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.game.html#36-52" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -161,11 +162,11 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>Steamworks Developer API Key</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>Your Appid</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>The SteamID of the user</dd>
 					</dl></div>
 
@@ -253,7 +254,7 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_achievements">#</a>
-			<code><a href="source-class-justinback.steam.game.html#130-151" title="Go to source code">achievements</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.game.html#130-151" title="Go to source code">achievements</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>achievements object.</p>
@@ -265,11 +266,11 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>(optional) set a different apikey than the construct</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>(optional) set a different appid than the construct</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) set a different steamid than the construct</dd>
 					</dl></div>
 
@@ -295,7 +296,7 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_leaderboards">#</a>
-			<code><a href="source-class-justinback.steam.game.html#154-175" title="Go to source code">leaderboards</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.game.html#154-175" title="Go to source code">leaderboards</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>leaderboards object.</p>
@@ -307,11 +308,11 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>(optional) set a different apikey than the construct</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>(optional) set a different appid than the construct</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) set a different steamid than the construct</dd>
 					</dl></div>
 
@@ -337,7 +338,7 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ugc">#</a>
-			<code><a href="source-class-justinback.steam.game.html#178-200" title="Go to source code">ugc</a>( <span>string <var>$publishedfileid</var></span>, <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.game.html#178-200" title="Go to source code">ugc</a>( <span>string <var>$publishedfileid</var></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>ugc object.</p>
@@ -351,17 +352,59 @@ HUB for interacting with other classes and supplying variables automaticly.</p>
 					<div class="list"><dl>
 						<dt><var>$publishedfileid</var></dt>
 						<dd>(optional) set a different publishedfileid than the construct</dd>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>(optional) set a different apikey than the construct</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>(optional) set a different appid than the construct</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) set a different steamid than the construct</dd>
 					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
 						<code><a href="class-justinback.steam.ugc.html">justinback\steam\ugc</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="gameserver" id="_gameserver">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-justinback.steam.gameserver.html">justinback\steam\gameserver</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_gameserver">#</a>
+			<code><a href="source-class-justinback.steam.game.html#203-224" title="Go to source code">gameserver</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>gameserver object.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>gameserver object.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sApiKey</var></dt>
+						<dd>(optional) set a different apikey than the construct</dd>
+						<dt><var>$iGame</var></dt>
+						<dd>(optional) set a different appid than the construct</dd>
+						<dt><var>$sSteamid</var></dt>
+						<dd>(optional) set a different steamid than the construct</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.gameserver.html">justinback\steam\gameserver</a></code>
 					</div>
 
 

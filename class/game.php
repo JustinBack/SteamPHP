@@ -37,17 +37,17 @@ class game {
     * Construction of the variables steamid, key and game
     *
     *
-    * @param string $apikey Steamworks Developer API Key
-    * @param string $game Your Appid
-    * @param string $steamid The SteamID of the user 
+    * @param string $sApiKey Steamworks Developer API Key
+    * @param string $iGame Your Appid
+    * @param string $sSteamid The SteamID of the user 
     *
     * @return void
     */
-    public function __construct($apikey = null, $game = null, $steamid = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        $this->set_key($apikey);
-        $this->set_game((int)$game);
-        $this->set_steamid($steamid);
+        $this->set_key($sApiKey);
+        $this->set_game((int)$iGame);
+        $this->set_steamid($sSteamid);
         
     }
     
@@ -55,13 +55,13 @@ class game {
     * Setting API Key from the construct
     *
     *
-    * @param string $apikey Steamworks Developer API Key
+    * @param string $sApiKey Steamworks Developer API Key
     *
     * @return void
     */
-    private function set_key($apikey)
+    private function set_key($sApiKey)
     {
-        $this->key = $apikey;
+        $this->key = $sApiKey;
     }
     
     
@@ -69,13 +69,13 @@ class game {
     * Setting AppID from the construct
     *
     *
-    * @param string $game Your AppID
+    * @param string $iGame Your AppID
     *
     * @return void
     */
-    private function set_game($game)
+    private function set_game($iGame)
     {
-        $this->game = $game;
+        $this->game = $iGame;
     }
     
     
@@ -83,13 +83,13 @@ class game {
     * Setting SteamID from the construct
     *
     *
-    * @param string $steamid The Players SteamID
+    * @param string $sSteamid The Players SteamID
     *
     * @return void
     */
-    private function set_steamid($steamid)
+    private function set_steamid($sSteamid)
     {
-        $this->steamid = $steamid;
+        $this->steamid = $sSteamid;
     }
     
     
@@ -130,48 +130,48 @@ class game {
     /**
     * achievements object.
     *
-    * @param string $apikey (optional) set a different apikey than the construct
-    * @param string $game (optional) set a different appid than the construct
-    * @param string $steamid (optional) set a different steamid than the construct
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return achievements
     */
-    public function achievements($apikey = null, $game = null, $steamid = null)
+    public function achievements($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        if($apikey === null){
-            $apikey = $this->key;
+        if($sApiKey === null){
+            $sApiKey = $this->key;
         }
-        if($game === null){
-            $game = $this->game;
+        if($iGame === null){
+            $iGame = $this->game;
         }
-        if($steamid === null){
-            $steamid = $this->steamid;
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\achievements($apikey,$game,$steamid);
+        return new \justinback\steam\achievements($sApiKey,$iGame,$sSteamid);
     }
     
     
     /**
     * leaderboards object.
     *
-    * @param string $apikey (optional) set a different apikey than the construct
-    * @param string $game (optional) set a different appid than the construct
-    * @param string $steamid (optional) set a different steamid than the construct
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return leaderboards
     */
-    public function leaderboards($apikey = null, $game = null, $steamid = null)
+    public function leaderboards($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        if($apikey === null){
-            $apikey = $this->key;
+        if($sApiKey === null){
+            $sApiKey = $this->key;
         }
-        if($game === null){
-            $game = $this->game;
+        if($iGame === null){
+            $iGame = $this->game;
         }
-        if($steamid === null){
-            $steamid = $this->steamid;
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\leaderboards($apikey,$game,$steamid);
+        return new \justinback\steam\leaderboards($sApiKey,$iGame,$sSteamid);
     }
     
     
@@ -179,48 +179,48 @@ class game {
     * ugc object.
     *
     * @param string $publishedfileid (optional) set a different publishedfileid than the construct
-    * @param string $apikey (optional) set a different apikey than the construct
-    * @param string $game (optional) set a different appid than the construct
-    * @param string $steamid (optional) set a different steamid than the construct
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return ugc
     */
-    public function ugc($publishedfileid, $apikey = null, $game = null, $steamid = null)
+    public function ugc($publishedfileid, $sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        if($apikey === null){
-            $apikey = $this->key;
+        if($sApiKey === null){
+            $sApiKey = $this->key;
         }
-        if($game === null){
-            $game = $this->game;
+        if($iGame === null){
+            $iGame = $this->game;
         }
-        if($steamid === null){
-            $steamid = $this->steamid;
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\ugc($publishedfileid, $apikey,$game,$steamid);
+        return new \justinback\steam\ugc($publishedfileid, $sApiKey,$iGame,$sSteamid);
     }
     
     
     /**
     * gameserver object.
     *
-    * @param string $apikey (optional) set a different apikey than the construct
-    * @param string $game (optional) set a different appid than the construct
-    * @param string $steamid (optional) set a different steamid than the construct
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return gameserver
     */
-    public function gameserver($apikey = null, $game = null, $steamid = null)
+    public function gameserver($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        if($apikey === null){
-            $apikey = $this->key;
+        if($sApiKey === null){
+            $sApiKey = $this->key;
         }
-        if($game === null){
-            $game = $this->game;
+        if($iGame === null){
+            $iGame = $this->game;
         }
-        if($steamid === null){
-            $steamid = $this->steamid;
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\gameserver($apikey,$game,$steamid);
+        return new \justinback\steam\gameserver($sApiKey,$iGame,$sSteamid);
     }
    
     

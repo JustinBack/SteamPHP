@@ -6,11 +6,11 @@
 require_once("steam.php");
 
 
-$apikey = getenv("apikey"); // STEAMWORKS WEB API KEY
-$appid = getenv("appid"); // YOUR APP ID
-$steamid = getenv("steamid"); // STEAMID
+$sApiKey = getenv("apikey"); // STEAMWORKS WEB API KEY
+$iAppID = getenv("appid"); // YOUR APP ID
+$sSteamid = getenv("steamid"); // STEAMID
 
 
-$steam  = new justinback\steam\manager($apikey, $appid, $steamid);
+$steam  = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 
 var_dump($steam->game()->leaderboards()->GetLeaderboardsForGame());

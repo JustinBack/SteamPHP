@@ -88,9 +88,9 @@ class item {
     * Construction of the variables
     *
     * 
-    * @param string $apikey Steamworks Developer API Key
-    * @param string $game Your Appid
-    * @param string $steamid The SteamID of the user
+    * @param string $sApiKey Steamworks Developer API Key
+    * @param string $iGame Your Appid
+    * @param string $sSteamid The SteamID of the user
     * @param string $itemid The Item ID
     * @param int $quantity Item Quantity
     * @param string $itemdefid Item Definition
@@ -101,11 +101,11 @@ class item {
     *
     * @return void
     */
-    public function __construct($apikey = null, $game = null, $steamid = null, $itemid = null, $quantity = null, $itemdefid = null, $acquired = null, $state = null, $origin = null, $state_changed_timestamp = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $itemid = null, $quantity = null, $itemdefid = null, $acquired = null, $state = null, $origin = null, $state_changed_timestamp = null)
     {
-        $this->set_key($apikey);
-        $this->set_game((int)$game);
-        $this->set_steamid($steamid);
+        $this->set_key($sApiKey);
+        $this->set_game((int)$iGame);
+        $this->set_steamid($sSteamid);
         $this->set_itemid($itemid);
         $this->set_quantity($quantity);
         $this->set_itemdefid($itemdefid);
@@ -119,13 +119,13 @@ class item {
     * Setting API Key from the construct
     *
     *
-    * @param string $apikey Steamworks Developer API Key
+    * @param string $sApiKey Steamworks Developer API Key
     *
     * @return void
     */
-    private function set_key($apikey)
+    private function set_key($sApiKey)
     {
-        $this->key = $apikey;
+        $this->key = $sApiKey;
     }
     
     
@@ -133,13 +133,13 @@ class item {
     * Setting AppID from the construct
     *
     *
-    * @param string $game Your AppID
+    * @param string $iGame Your AppID
     *
     * @return void
     */
-    private function set_game($game)
+    private function set_game($iGame)
     {
-        $this->game = $game;
+        $this->game = $iGame;
     }
     
     
@@ -147,13 +147,13 @@ class item {
     * Setting SteamID from the construct
     *
     *
-    * @param string $steamid The Players SteamID
+    * @param string $sSteamid The Players SteamID
     *
     * @return void
     */
-    private function set_steamid($steamid)
+    private function set_steamid($sSteamid)
     {
-        $this->steamid = $steamid;
+        $this->steamid = $sSteamid;
     }
     
     

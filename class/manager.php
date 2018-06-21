@@ -163,4 +163,28 @@ class manager {
         }
         return new \justinback\steam\ugc($publishedfileid, $sApiKey,$iGame,$sSteamid);
     }
+    
+    
+    /**
+    * store object.
+    *
+    * @param string $iGame (optional) set a different appid than the construct
+    * 
+    * @return store
+    */
+    public function store($iGame = null)
+    {
+        if($iGame === null){
+            $iGame = $this->game;
+        }
+        
+        $req_players = file_get_contents("https://store.steampowered.com/api/appdetails?appids=".(int)$iGame);
+        $GetNumberOfCurrentPlayers = json_decode($req_players);
+        $store = $GetNumberOfCurrentPlayers->$iGame->data;
+        
+        if($GetNumberOfCurrentPlayers->$iGame->success){
+        return new \justinback\steam\store($iGame, $store->name, $store->type, $store->required_age, $store->is_free, $store->detailed_description, $store->about_the_game, $store->short_description, $store->developers, $store->publishers, $store->dlc);
+        }
+        return false;
+    }
 }

@@ -260,7 +260,7 @@ class item {
     * @param string $quantity Quantity of the item
     * @param string $requestid Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
     * 
-    * @return bool
+    * @return item
     */
     public function ConsumeItem($quantity, $requestid = null){
         $options = array(
@@ -272,8 +272,10 @@ class item {
         );
         $context  = stream_context_create($options);
         $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/ConsumeItem/v1/", false, $context);
-        $response = json_decode($req_players);
-        return $response;
+        $response1 = json_decode(json_decode($req_players)->response->item_json);
+        foreach($response1 as $response){
+            return new \justinback\steam\item($this->key, $this->game, $this->steamid, $response->itemid, $response->quantity, $response->itemdefid, $response->acquired, $response->state, $response->origin, $response->state_changed_timestamp);
+        }
     }
     
     

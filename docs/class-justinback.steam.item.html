@@ -82,6 +82,7 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
+				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li class="active"><a href="class-justinback.steam.item.html">item</a></li>
 				<li><a href="class-justinback.steam.leaderboards.html">leaderboards</a></li>
@@ -130,7 +131,7 @@ See \justinback\steam\inventory</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.item.html#10-281" title="Go to source code">class/item.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.item.html#10-283" title="Go to source code">class/item.php</a>
 		<br>
 	</div>
 
@@ -150,7 +151,7 @@ See \justinback\steam\inventory</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.item.html#87-116" title="Go to source code">__construct</a>( <span>string <var>$apikey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$game</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$steamid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$itemid</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$quantity</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$itemdefid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$acquired</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$state</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$origin</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$state_changed_timestamp</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.item.html#87-116" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$itemid</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$quantity</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$itemdefid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$acquired</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$state</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$origin</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$state_changed_timestamp</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables</p>
@@ -162,11 +163,11 @@ See \justinback\steam\inventory</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$apikey</var></dt>
+						<dt><var>$sApiKey</var></dt>
 						<dd>Steamworks Developer API Key</dd>
-						<dt><var>$game</var></dt>
+						<dt><var>$iGame</var></dt>
 						<dd>Your Appid</dd>
-						<dt><var>$steamid</var></dt>
+						<dt><var>$sSteamid</var></dt>
 						<dd>The SteamID of the user</dd>
 						<dt><var>$itemid</var></dt>
 						<dd>The Item ID</dd>
@@ -195,14 +196,14 @@ See \justinback\steam\inventory</p>
 
 			<td class="attributes"><code>
 				 public 
-				boolean
+				<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ConsumeItem">#</a>
-			<code><a href="source-class-justinback.steam.item.html#257-277" title="Go to source code">ConsumeItem</a>( <span>string <var>$quantity</var></span>, <span>string <var>$requestid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.item.html#257-279" title="Go to source code">ConsumeItem</a>( <span>string <var>$quantity</var></span>, <span>string <var>$requestid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Marks an item as wholly or partially consumed. This action cannot be reversed.</p>
@@ -222,7 +223,7 @@ See \justinback\steam\inventory</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						boolean
+						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
 					</div>
 
 

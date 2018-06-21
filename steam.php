@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Autloading Stuff
+ * Autoloading Stuff
  * 
  * Copyright (c) 2018, Justin Back <jb@justinback.com>
  * All rights reserved.

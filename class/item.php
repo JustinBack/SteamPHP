@@ -88,9 +88,9 @@ class item {
     * Construction of the variables
     *
     * 
-    * @param string $apikey Steamworks Developer API Key
-    * @param string $game Your Appid
-    * @param string $steamid The SteamID of the user
+    * @param string $sApiKey Steamworks Developer API Key
+    * @param string $iGame Your Appid
+    * @param string $sSteamid The SteamID of the user
     * @param string $itemid The Item ID
     * @param int $quantity Item Quantity
     * @param string $itemdefid Item Definition
@@ -101,11 +101,11 @@ class item {
     *
     * @return void
     */
-    public function __construct($apikey = null, $game = null, $steamid = null, $itemid = null, $quantity = null, $itemdefid = null, $acquired = null, $state = null, $origin = null, $state_changed_timestamp = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $itemid = null, $quantity = null, $itemdefid = null, $acquired = null, $state = null, $origin = null, $state_changed_timestamp = null)
     {
-        $this->set_key($apikey);
-        $this->set_game((int)$game);
-        $this->set_steamid($steamid);
+        $this->set_key($sApiKey);
+        $this->set_game((int)$iGame);
+        $this->set_steamid($sSteamid);
         $this->set_itemid($itemid);
         $this->set_quantity($quantity);
         $this->set_itemdefid($itemdefid);
@@ -119,13 +119,13 @@ class item {
     * Setting API Key from the construct
     *
     *
-    * @param string $apikey Steamworks Developer API Key
+    * @param string $sApiKey Steamworks Developer API Key
     *
     * @return void
     */
-    private function set_key($apikey)
+    private function set_key($sApiKey)
     {
-        $this->key = $apikey;
+        $this->key = $sApiKey;
     }
     
     
@@ -133,13 +133,13 @@ class item {
     * Setting AppID from the construct
     *
     *
-    * @param string $game Your AppID
+    * @param string $iGame Your AppID
     *
     * @return void
     */
-    private function set_game($game)
+    private function set_game($iGame)
     {
-        $this->game = $game;
+        $this->game = $iGame;
     }
     
     
@@ -147,13 +147,13 @@ class item {
     * Setting SteamID from the construct
     *
     *
-    * @param string $steamid The Players SteamID
+    * @param string $sSteamid The Players SteamID
     *
     * @return void
     */
-    private function set_steamid($steamid)
+    private function set_steamid($sSteamid)
     {
-        $this->steamid = $steamid;
+        $this->steamid = $sSteamid;
     }
     
     
@@ -260,7 +260,7 @@ class item {
     * @param string $quantity Quantity of the item
     * @param string $requestid Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
     * 
-    * @return bool
+    * @return item
     */
     public function ConsumeItem($quantity, $requestid = null){
         $options = array(
@@ -272,8 +272,10 @@ class item {
         );
         $context  = stream_context_create($options);
         $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/ConsumeItem/v1/", false, $context);
-        $response = json_decode($req_players);
-        return $response;
+        $response1 = json_decode(json_decode($req_players)->response->item_json);
+        foreach($response1 as $response){
+            return new \justinback\steam\item($this->key, $this->game, $this->steamid, $response->itemid, $response->quantity, $response->itemdefid, $response->acquired, $response->state, $response->origin, $response->state_changed_timestamp);
+        }
     }
     
     

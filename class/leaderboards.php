@@ -39,17 +39,17 @@ class leaderboards
     * Construction of the variables steamid, key and game
     *
     *
-    * @param string $apikey Steamworks Developer API Key
-    * @param string $game Your Appid
-    * @param string $steamid The SteamID of the user 
+    * @param string $sApiKey Steamworks Developer API Key
+    * @param string $iGame Your Appid
+    * @param string $sSteamid The SteamID of the user 
     *
     * @return void
     */
-    public function __construct($apikey = null, $game = null, $steamid = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        $this->set_key($apikey);
-        $this->set_game((int)$game);
-        $this->set_steamid($steamid);
+        $this->set_key($sApiKey);
+        $this->set_game((int)$iGame);
+        $this->set_steamid($sSteamid);
         
     }
     
@@ -57,13 +57,13 @@ class leaderboards
     * Setting API Key from the construct
     *
     *
-    * @param string $apikey Steamworks Developer API Key
+    * @param string $sApiKey Steamworks Developer API Key
     *
     * @return void
     */
-    private function set_key($apikey)
+    private function set_key($sApiKey)
     {
-        $this->key = $apikey;
+        $this->key = $sApiKey;
     }
     
     
@@ -71,13 +71,13 @@ class leaderboards
     * Setting AppID from the construct
     *
     *
-    * @param string $game Your AppID
+    * @param string $iGame Your AppID
     *
     * @return void
     */
-    private function set_game($game)
+    private function set_game($iGame)
     {
-        $this->game = $game;
+        $this->game = $iGame;
     }
     
     
@@ -85,13 +85,13 @@ class leaderboards
     * Setting SteamID from the construct
     *
     *
-    * @param string $steamid The Players SteamID
+    * @param string $sSteamid The Players SteamID
     *
     * @return void
     */
-    private function set_steamid($steamid)
+    private function set_steamid($sSteamid)
     {
-        $this->steamid = $steamid;
+        $this->steamid = $sSteamid;
     }
     
     /**
@@ -184,19 +184,19 @@ class leaderboards
     * @param string $score the score to set for this user
     * @param string $scoremethod update method to use. Can be "KeepBest" or "ForceUpdate"
     * @param rawbytes $details (optional) game-specific details for how the score was earned. Up to 256 bytes.
-    * @param string $steamid (optional) steamID to set the score for 
+    * @param string $sSteamid (optional) steamID to set the score for 
     * 
     * @return object
     */
-    public function SetLeaderboardScore($leaderboardid, $score, $scoremethod, $details = null, $steamid = null){
-        if($steamid == null){
-            $steamid = $this->steamid;
+    public function SetLeaderboardScore($leaderboardid, $score, $scoremethod, $details = null, $sSteamid = null){
+        if($sSteamid == null){
+            $sSteamid = $this->steamid;
         }
         $options = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'leaderboardid' => $leaderboardid, 'steamid' => $steamid, 'score' => $score, 'scoremethod' => $scoremethod, 'details' => $details))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'leaderboardid' => $leaderboardid, 'steamid' => $sSteamid, 'score' => $score, 'scoremethod' => $scoremethod, 'details' => $details))
             )
         );
         $context  = stream_context_create($options);
@@ -230,14 +230,14 @@ class leaderboards
     * @param string $datarequest type of request: RequestGlobal, RequestAroundUser, RequestFriends
     * @param int $rangestart range start or 0
     * @param int $rangend range end or max LB entries
-    * @param bool $steamid Use SteamID to lookup or not
+    * @param bool $sSteamid Use SteamID to lookup or not
     * 
     * 
     * @return array
     */
-    public function GetLeaderboardEntries($leaderboardid, $datarequest, $rangestart, $rangend, $steamid = true){
+    public function GetLeaderboardEntries($leaderboardid, $datarequest, $rangestart, $rangend, $sSteamid = true){
         $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=".$this->key."&appid=".(int)$this->game. "&". time(). "&leaderboardid=".$leaderboardid. "&datarequest=". $datarequest. "&rangestart=". $rangestart. "&rangeend=". $rangend);
-        if($steamid){
+        if($sSteamid){
         $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=".$this->key."&appid=".(int)$this->game. "&". time(). "&leaderboardid=".$leaderboardid. "&datarequest=". $datarequest. "&rangestart=". $rangestart. "&rangeend=". $rangend. "&steamid=". $this->steamid);
         }
         $resp = json_decode($req_lb);
@@ -248,24 +248,24 @@ class leaderboards
     /**
     * Game object.
     *
-    * @param string $apikey (optional) set a different apikey than the construct
-    * @param string $game (optional) set a different appid than the construct
-    * @param string $steamid (optional) set a different steamid than the construct
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return game
     */
-    public function game($apikey = null, $game = null, $steamid = null)
+    public function game($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        if($apikey === null){
-            $apikey = $this->key;
+        if($sApiKey === null){
+            $sApiKey = $this->key;
         }
-        if($game === null){
-            $game = $this->game;
+        if($iGame === null){
+            $iGame = $this->game;
         }
-        if($steamid === null){
-            $steamid = $this->steamid;
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\game($apikey,$game,$steamid);
+        return new \justinback\steam\game($sApiKey,$iGame,$sSteamid);
     }
     
 }

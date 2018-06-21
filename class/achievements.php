@@ -39,9 +39,9 @@ class achievements {
     * Construction of the variables steamid, key and game
     *
     *
-    * @param string $apikey Steamworks Developer API Key
-    * @param string $game Your Appid
-    * @param string $steamid The SteamID of the user 
+    * @param string $sApiKey Steamworks Developer API Key
+    * @param string $iGame Your Appid
+    * @param string $sSteamid The SteamID of the user 
     * 
     * @example
     * <code>
@@ -50,11 +50,11 @@ class achievements {
     *
     * @return void
     */
-    public function __construct($apikey = null, $game = null, $steamid = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        $this->set_key($apikey);
-        $this->set_game((int)$game);
-        $this->set_steamid($steamid);
+        $this->set_key($sApiKey);
+        $this->set_game((int)$iGame);
+        $this->set_steamid($sSteamid);
         
     }
     
@@ -62,13 +62,13 @@ class achievements {
     * Setting API Key from the construct
     *
     *
-    * @param string $apikey Steamworks Developer API Key
+    * @param string $sApiKey Steamworks Developer API Key
     *
     * @return void
     */
-    private function set_key($apikey)
+    private function set_key($sApiKey)
     {
-        $this->key = $apikey;
+        $this->key = $sApiKey;
     }
     
     
@@ -76,13 +76,13 @@ class achievements {
     * Setting AppID from the construct
     *
     *
-    * @param string $game Your AppID
+    * @param string $iGame Your AppID
     *
     * @return void
     */
-    private function set_game($game)
+    private function set_game($iGame)
     {
-        $this->game = $game;
+        $this->game = $iGame;
     }
     
     
@@ -90,13 +90,13 @@ class achievements {
     * Setting SteamID from the construct
     *
     *
-    * @param string $steamid The Players SteamID
+    * @param string $sSteamid The Players SteamID
     *
     * @return void
     */
-    private function set_steamid($steamid)
+    private function set_steamid($sSteamid)
     {
-        $this->steamid = $steamid;
+        $this->steamid = $sSteamid;
     }
     
     
@@ -116,15 +116,15 @@ class achievements {
     */
     public function GetPlayerAchievements()
     {
-        $req_achievement = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1?key=".$this->key."&steamid=".$this->steamid."&appid=".(int)$this->game);
-        $playerstats = json_decode($req_achievement);
+        $fgcGetPlayerAchievements = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1?key=".$this->key."&steamid=".$this->steamid."&appid=".(int)$this->game);
+        $jsonGetPlayerAchievements = json_decode($fgcGetPlayerAchievements);
         
         
         if($this->game()->CheckAppOwnership()){
-            $achievements = array_filter($playerstats->playerstats->achievements, function($item) {
-                    return $item->achieved == 1;
+            $aAchievements = array_filter($jsonGetPlayerAchievements->playerstats->achievements, function($oItem) {
+                    return $oItem->achieved == 1;
             });
-            return $achievements;
+            return $aAchievements;
         }
         return false;
     }
@@ -143,15 +143,15 @@ class achievements {
     */
     public function GetPlayerAchievementsLocked()
     {
-        $req_achievement = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1?key=".$this->key."&steamid=".$this->steamid."&appid=".(int)$this->game);
-        $playerstats = json_decode($req_achievement);
+        $fgcGetPlayerAchievementsLocked = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1?key=".$this->key."&steamid=".$this->steamid."&appid=".(int)$this->game);
+        $jsonGetPlayerAchievementsLocked = json_decode($fgcGetPlayerAchievementsLocked);
         
         
-        if($this->game()->ownership()){
-            $achievements = array_filter($playerstats->playerstats->achievements, function($item) {
-                    return $item->achieved == 0;
+        if($this->game()->CheckAppOwnership()){
+            $aAchievements = array_filter($jsonGetPlayerAchievementsLocked->playerstats->achievements, function($oItem) {
+                    return $oItem->achieved == 0;
             });
-            return $achievements;
+            return $aAchievements;
         }
         return false;
     }
@@ -221,23 +221,23 @@ class achievements {
     /**
     * game object.
     *
-    * @param string $apikey (optional) set a different apikey than the construct
-    * @param string $game (optional) set a different appid than the construct
-    * @param string $steamid (optional) set a different steamid than the construct
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return game
     */
-    public function game($apikey = null, $game = null, $steamid = null)
+    public function game($sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        if($apikey === null){
-            $apikey = $this->key;
+        if($sApiKey === null){
+            $sApiKey = $this->key;
         }
-        if($game === null){
-            $game = $this->game;
+        if($iGame === null){
+            $iGame = $this->game;
         }
-        if($steamid === null){
-            $steamid = $this->steamid;
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\game($apikey,$game,$steamid);
+        return new \justinback\steam\game($sApiKey,$iGame,$sSteamid);
     }
 }

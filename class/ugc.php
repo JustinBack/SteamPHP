@@ -42,17 +42,17 @@ class ugc {
     *
     *
     * @param string $publishedfileid UGC File ID
-    * @param string $apikey Steamworks Developer API Key
-    * @param string $game Your Appid
-    * @param string $steamid The SteamID of the user 
+    * @param string $sApiKey Steamworks Developer API Key
+    * @param string $iGame Your Appid
+    * @param string $sSteamid The SteamID of the user 
     *
     * @return void
     */
-    public function __construct($publishedfileid = null, $apikey = null, $game = null, $steamid = null)
+    public function __construct($publishedfileid = null, $sApiKey = null, $iGame = null, $sSteamid = null)
     {
-        $this->set_key($apikey);
-        $this->set_game((int)$game);
-        $this->set_steamid($steamid);
+        $this->set_key($sApiKey);
+        $this->set_game((int)$iGame);
+        $this->set_steamid($sSteamid);
         $this->set_fileid($publishedfileid);
         
     }
@@ -61,13 +61,13 @@ class ugc {
     * Setting API Key from the construct
     *
     *
-    * @param string $apikey Steamworks Developer API Key
+    * @param string $sApiKey Steamworks Developer API Key
     *
     * @return void
     */
-    private function set_key($apikey)
+    private function set_key($sApiKey)
     {
-        $this->key = $apikey;
+        $this->key = $sApiKey;
     }
     
     
@@ -75,13 +75,13 @@ class ugc {
     * Setting AppID from the construct
     *
     *
-    * @param string $game Your AppID
+    * @param string $iGame Your AppID
     *
     * @return void
     */
-    private function set_game($game)
+    private function set_game($iGame)
     {
-        $this->game = $game;
+        $this->game = $iGame;
     }
     
     
@@ -89,13 +89,13 @@ class ugc {
     * Setting SteamID from the construct
     *
     *
-    * @param string $steamid The Players SteamID
+    * @param string $sSteamid The Players SteamID
     *
     * @return void
     */
-    private function set_steamid($steamid)
+    private function set_steamid($sSteamid)
     {
-        $this->steamid = $steamid;
+        $this->steamid = $sSteamid;
     }
     
     
@@ -240,22 +240,22 @@ class ugc {
     *
     *
     * @param string $publishedfileid (optional) numeric ID of the target file.
-    * @param string $steamid (optional) numeric ID of the user.  
+    * @param string $sSteamid (optional) numeric ID of the user.  
     * 
     * @return bool
     */
-    public function SubscribePublishedFile($publishedfileid = null, $steamid = null){
+    public function SubscribePublishedFile($publishedfileid = null, $sSteamid = null){
         if($publishedfileid == null){
             $publishedfileid = $this->fileid;
         }
-        if($steamid == null){
-            $steamid = $this->steamid;
+        if($sSteamid == null){
+            $sSteamid = $this->steamid;
         }
         $options = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, "steamid" => $steamid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, "steamid" => $sSteamid))
             )
         );
         $context  = stream_context_create($options);
@@ -272,22 +272,22 @@ class ugc {
     *
     *
     * @param string $publishedfileid (optional) numeric ID of the target file.
-    * @param string $steamid (optional) numeric ID of the user. 
+    * @param string $sSteamid (optional) numeric ID of the user. 
     * 
     * @return bool
     */
-    public function UnsubscribePublishedFile($publishedfileid = null, $steamid = null){
+    public function UnsubscribePublishedFile($publishedfileid = null, $sSteamid = null){
         if($publishedfileid == null){
             $publishedfileid = $this->fileid;
         }
-        if($steamid == null){
-            $steamid = $this->steamid;
+        if($sSteamid == null){
+            $sSteamid = $this->steamid;
         }
         $options = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, "steamid" => $steamid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, "steamid" => $sSteamid))
             )
         );
         $context  = stream_context_create($options);

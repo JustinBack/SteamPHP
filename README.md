@@ -55,7 +55,7 @@ Making web requests especially multiple can be frustrating such as code quality.
 
 ```php
 
-$steam  = new justinback\steam\manager($apikey, $appid, $steamid);
+$steam  = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 
 ```
 

@@ -187,4 +187,29 @@ class manager {
         }
         return false;
     }
+    
+    
+    /**
+    * Transaction object.
+    *
+    * @param string $bTesting Sandbox or Production environment?
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
+    * 
+    * @return transactions
+    */
+    public function transactions($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null)
+    {
+        if($sApiKey === null){
+            $sApiKey = $this->key;
+        }
+        if($iGame === null){
+            $iGame = $this->game;
+        }
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
+        }
+        return new \justinback\steam\transactions($bTesting, $sApiKey,$iGame,$sSteamid);
+    }
 }

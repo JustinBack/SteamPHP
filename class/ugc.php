@@ -298,6 +298,24 @@ class ugc {
         return true;
     }
     
+    
+    /**
+    * Performs a search query for published files
+    *
+    * @todo Finish this method. Need response from valve
+    * @deprecated
+    * @return object
+    */
+    public function QueryFiles($query_type, $numperpage, $requiredtags, $excludedtags, $match_all_tags)
+    {
+        // I have no idea which parameters should be present... Leaving as is for now
+        $req_files = file_get_contents("https://api.steampowered.com/IPublishedFileService/QueryFiles/v1?key=".$this->key."&steamid=".$this->steamid);
+        $files = json_decode($req_files);
+        
+        return $files->response;
+    }
+    
+    
     /**
     * Get Creator by UGC
     *

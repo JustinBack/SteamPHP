@@ -262,6 +262,35 @@ class player {
     
     
     /**
+    * List all files by user as array (Only IDs)
+    *
+    * 
+    * 
+    * @return array
+    */
+    public function EnumerateUserPublishedFiles(){
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, "steamid" => $this->steamid))
+            )
+        );
+        $context  = stream_context_create($options);
+        $req_players = file_get_contents("https://partner.steam-api.com/ISteamRemoteStorage/EnumerateUserPublishedFiles/v1/", false, $context);
+        $response = json_decode($req_players);
+       
+        $list = array();
+        
+        foreach ($response->response->files as $file) {
+            array_push($list, $file->publishedfileid);
+        }
+        
+        return $list;
+    }
+    
+    
+    /**
     * achievements object.
     *
     * @param string $sApiKey (optional) set a different apikey than the construct
@@ -309,6 +338,28 @@ class player {
     }
     
     
-    
+    /**
+    * Transaction object.
+    *
+    * @param string $bTesting Sandbox or Production environment?
+    * @param string $sApiKey (optional) set a different apikey than the construct
+    * @param string $iGame (optional) set a different appid than the construct
+    * @param string $sSteamid (optional) set a different steamid than the construct
+    * 
+    * @return transactions
+    */
+    public function transactions($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null)
+    {
+        if($sApiKey === null){
+            $sApiKey = $this->key;
+        }
+        if($iGame === null){
+            $iGame = $this->game;
+        }
+        if($sSteamid === null){
+            $sSteamid = $this->steamid;
+        }
+        return new \justinback\steam\transactions($bTesting, $sApiKey,$iGame,$sSteamid);
+    }
     
 }

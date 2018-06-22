@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Travis CI Tests Script
 #
@@ -12,7 +12,7 @@ chmod +x $TRAVIS_BUILD_DIR/tests/DeleteLeaderboards.php
 DeleteLeaderboards=$(php $TRAVIS_BUILD_DIR/tests/DeleteLeaderboards.php)
 if [ $DeleteLeaderboards = false ]
 then
-    Exit 2
+    exit 2
 fi
 
 
@@ -20,6 +20,6 @@ chmod +x $TRAVIS_BUILD_DIR/tests/GetLeaderboards.php
 GetLeaderboards=$(php $TRAVIS_BUILD_DIR/tests/GetLeaderboards.php)
 if [ $GetLeaderboards = false ]
 then
-    Exit 2
+    exit 2
 fi
 read

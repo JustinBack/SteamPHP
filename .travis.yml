@@ -16,8 +16,8 @@ php:
   
   - 7.1
   
-script: bash 
-  - tests/tests.sh
+script: 
+  - bash tests/tests.sh
 
   
 # Customize when the notification emails are sent.

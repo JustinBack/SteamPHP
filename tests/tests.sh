@@ -4,6 +4,7 @@
 #
 # Justin Back <jb@justinback.com>
 
+echo "Running CI Tests..."
 
 chmod +x $TRAVIS_BUILD_DIR/tests/CreateLeaderboards.php
 CreateLeaderboards=$(php $TRAVIS_BUILD_DIR/tests/CreateLeaderboards.php)
@@ -12,7 +13,7 @@ then
     echo $CreateLeaderboards
     exit 2
 fi
-
+echo "Leaderboards created successfully, test passed"
 
 chmod +x $TRAVIS_BUILD_DIR/tests/DeleteLeaderboards.php
 DeleteLeaderboards=$(php $TRAVIS_BUILD_DIR/tests/DeleteLeaderboards.php)
@@ -21,6 +22,7 @@ then
     echo $DeleteLeaderboards
     exit 2
 fi
+echo "Leaderboards deleted successfully, test passed"
 
 
 chmod +x $TRAVIS_BUILD_DIR/tests/GetLeaderboards.php
@@ -30,3 +32,8 @@ then
     echo $GetLeaderboards
     exit 2
 fi
+echo "Leaderboards retrieved successfully, test passed"
+
+
+
+exit 0

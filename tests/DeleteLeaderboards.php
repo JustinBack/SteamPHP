@@ -3,7 +3,7 @@
  * @package DoNotDocument
  */
 
-require_once("steam.php");
+require_once("../steam.php");
 
 
 $sApiKey = getenv("apikey"); // STEAMWORKS WEB API KEY
@@ -14,7 +14,8 @@ $sSteamid = getenv("steamid"); // STEAMID
 $steam  = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 
 
-foreach($steam->game()->leaderboards()->GetLeaderboardsForGame() as $leaderboard){
-    var_dump($steam->game()->leaderboards()->DeleteLeaderboard($leaderboard->name));
-    echo "\n";
+if($steam->game()->leaderboards()->DeleteLeaderboard("1")){
+    echo "true";
+    return;
 }
+echo "false";

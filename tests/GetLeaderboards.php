@@ -3,7 +3,7 @@
  * @package DoNotDocument
  */
 
-require_once("steam.php");
+require_once("../steam.php");
 
 
 $sApiKey = getenv("apikey"); // STEAMWORKS WEB API KEY
@@ -13,4 +13,9 @@ $sSteamid = getenv("steamid"); // STEAMID
 
 $steam  = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 
-var_dump($steam->game()->leaderboards()->GetLeaderboardsForGame());
+if($steam->game()->leaderboards()->GetLeaderboardsForGame() === NULL){
+    echo "false";
+    return;
+}
+echo "true";
+return;

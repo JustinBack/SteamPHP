@@ -10,16 +10,17 @@
 # However, setting chmod first!
 chmod +x $TRAVIS_BUILD_DIR/tests/DeleteLeaderboards.php
 DeleteLeaderboards=$(php $TRAVIS_BUILD_DIR/tests/DeleteLeaderboards.php)
-if [ $DeleteLeaderboards = false ]
+if [ $DeleteLeaderboards != true ]
 then
+    echo "DeleteLeaderboards failed"
     exit 2
 fi
 
 
 chmod +x $TRAVIS_BUILD_DIR/tests/GetLeaderboards.php
 GetLeaderboards=$(php $TRAVIS_BUILD_DIR/tests/GetLeaderboards.php)
-if [ $GetLeaderboards = false ]
+if [ $GetLeaderboards != true ]
 then
+    echo "GetLeaderboards failed"
     exit 2
 fi
-read

@@ -13,8 +13,9 @@ $sSteamid = getenv("steamid"); // STEAMID
 
 $steam  = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 
-if($steam->game()->leaderboards()->DeleteLeaderboard("travisci_test")){
+if($steam->game()->leaderboards()->FindOrCreateLeaderboard("travisci_test")){
     echo "true";
+}else{
+    echo "Leaderboard could not be created!";
     return;
 }
-echo "Leaderboard could not be deleted!";

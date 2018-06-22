@@ -3,7 +3,7 @@
 # Travis CI Tests Script
 #
 # Justin Back <jb@justinback.com>
-
+set -e
 echo "Running CI Tests..."
 
 chmod +x $TRAVIS_BUILD_DIR/tests/CreateLeaderboards.php

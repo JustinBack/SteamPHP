@@ -134,7 +134,7 @@
 				pb1.0.0a<br>
 				<b>Todo:</b>
 				Basically Everything<br>
-			<b>Located at</b> <a href="source-class-justinback.steam.transactions.html#10-96" title="Go to source code">class/transactions.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.transactions.html#10-195" title="Go to source code">class/transactions.php</a>
 		<br>
 	</div>
 
@@ -154,7 +154,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#36-51" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#54-74" title="Go to source code">__construct</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -166,6 +166,8 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
+						<dt><var>$bTesting</var></dt>
+						<dd>Sandbox or Production environment?</dd>
 						<dt><var>$sApiKey</var></dt>
 						<dd>Steamworks Developer API Key</dd>
 						<dt><var>$iGame</var></dt>
@@ -181,6 +183,114 @@
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="AdjustAgreement" id="_AdjustAgreement">
+
+			<td class="attributes"><code>
+				 public 
+				object
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_AdjustAgreement">#</a>
+			<code><a href="source-class-justinback.steam.transactions.html#119-140" title="Go to source code">AdjustAgreement</a>( <span>string <var>$nextprocessdate</var></span> )</code>
+
+			<div class="description short">
+				<p>Add time to the payment schedule of an agreement with billing type "steam".</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Add time to the payment schedule of an agreement with billing type "steam".</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$nextprocessdate</var></dt>
+						<dd>Date that next recurring payment should be initiated. Format is YYYYMMDD. Date can only be adjusted forward indicating you want to add time to the subscription. If the date exceeds the end date of the subscription, the end date will be extended.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						object
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="CancelAgreement" id="_CancelAgreement">
+
+			<td class="attributes"><code>
+				 public 
+				object
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_CancelAgreement">#</a>
+			<code><a href="source-class-justinback.steam.transactions.html#143-164" title="Go to source code">CancelAgreement</a>( )</code>
+
+			<div class="description short">
+				<p>Cancels a recurring billing agreement (subscription).</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Cancels a recurring billing agreement (subscription).</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						object
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="InitTxn" id="_InitTxn">
+
+			<td class="attributes"><code>
+				 public 
+				object
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_InitTxn">#</a>
+			<code><a href="source-class-justinback.steam.transactions.html#167-193" title="Go to source code">InitTxn</a>( )</code>
+
+			<div class="description short">
+				<p>Creates a new purchase. Send the order information along with the Steam ID to seed the transaction on Steam.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Creates a new purchase. Send the order information along with the Steam ID to seed the transaction on Steam.</p>
+
+<p>This command allows you to create a shopping cart of one or more items for a user. The cost and descriptions of these items will be displayed to the user for their approval. The purchase interface can be configured for either the Steam client or a web browser depending on if you are running a purchase in-game or from a web page.
+Note that certain currencies must be charged in specific increments. For example, Ukrainian Hryvnia (UAH) must be charged in increments of 100. So if you attempt to price an item at 1050 UAH, InitTxn will fail with error result k_EMicroTxnResultInvalidParam
+If you do not wish to price each transaction in the local user's currency, Steam can convert any purchase to the local user's wallet currency automatically based on current exchange rate. For example, if you pass <b>currency</b> as "USD" and <b>amount</b> as "999", a user in Russia will be charged in Rubles at the current exchange rate for $9.99, which would be about 614.90 pуб as of this writing.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						object
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 			</table>
 		</div>
 
@@ -188,6 +298,67 @@
 
 
 
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+			<table class="summary table table-bordered table-striped properties" id="properties">
+		<tr data-order="agreementid" id="$agreementid">
+			<td class="attributes"><code>
+				public  
+				
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-justinback.steam.transactions.html#36-40" title="Go to source code"><var>$agreementid</var></a>
+
+				<div class="description short">
+					<p>AgreementID of transaction</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>AgreementID of transaction</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$agreementid" class="anchor">#</a>
+					<code><span class="php-keyword1">null</span></code>
+				</div>
+			</td>
+		</tr>
+		<tr data-order="orderid" id="$orderid">
+			<td class="attributes"><code>
+				public  
+				
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-justinback.steam.transactions.html#42-46" title="Go to source code"><var>$orderid</var></a>
+
+				<div class="description short">
+					<p>OrderID of transaction</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>OrderID of transaction</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$orderid" class="anchor">#</a>
+					<code><span class="php-keyword1">null</span></code>
+				</div>
+			</td>
+		</tr>
+			</table>
+		</div>
 
 
 

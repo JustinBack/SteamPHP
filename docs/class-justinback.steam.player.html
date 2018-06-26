@@ -85,6 +85,7 @@
 				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
+				<li><a href="class-justinback.steam.iteminfo.html">iteminfo</a></li>
 				<li><a href="class-justinback.steam.leaderboards.html">leaderboards</a></li>
 				<li><a href="class-justinback.steam.manager.html">manager</a></li>
 				<li class="active"><a href="class-justinback.steam.player.html">player</a></li>
@@ -131,7 +132,7 @@ Get Player name, avatar and report cheating!</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.player.html#10-314" title="Go to source code">class/player.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.player.html#10-400" title="Go to source code">class/player.php</a>
 		<br>
 	</div>
 
@@ -444,6 +445,52 @@ Get Player name, avatar and report cheating!</p>
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="ReportAbuse" id="_ReportAbuse">
+
+			<td class="attributes"><code>
+				 public 
+				object
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_ReportAbuse">#</a>
+			<code><a href="source-class-justinback.steam.player.html#235-267" title="Go to source code">ReportAbuse</a>( <span>string <var>$sSteamidreporter</var></span>, <span>integer <var>$abuseType</var></span>, <span>integer <var>$contentType</var></span>, <span>string <var>$description</var></span>, <span>string <var>$gid</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Allows publishers to report users who are behaving badly on their community hub.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Allows publishers to report users who are behaving badly on their community hub.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sSteamidreporter</var></dt>
+						<dd>SteamID of user doing the reporting</dd>
+						<dt><var>$abuseType</var></dt>
+						<dd>Abuse type code (see EAbuseReportType enum)</dd>
+						<dt><var>$contentType</var></dt>
+						<dd>Content type code (see ECommunityContentType enum)</dd>
+						<dt><var>$description</var></dt>
+						<dd>Narrative from user</dd>
+						<dt><var>$gid</var></dt>
+						<dd>(optional) GID of related record (depends on content type)</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						object
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="RemovePlayerGameBan" id="_RemovePlayerGameBan">
 
 			<td class="attributes"><code>
@@ -455,7 +502,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_RemovePlayerGameBan">#</a>
-			<code><a href="source-class-justinback.steam.player.html#236-261" title="Go to source code">RemovePlayerGameBan</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#271-296" title="Go to source code">RemovePlayerGameBan</a>( )</code>
 
 			<div class="description short">
 				<p>Remove a game ban on a player.</p>
@@ -479,6 +526,39 @@ Get Player name, avatar and report cheating!</p>
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="EnumerateUserPublishedFiles" id="_EnumerateUserPublishedFiles">
+
+			<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_EnumerateUserPublishedFiles">#</a>
+			<code><a href="source-class-justinback.steam.player.html#299-325" title="Go to source code">EnumerateUserPublishedFiles</a>( )</code>
+
+			<div class="description short">
+				<p>List all files by user as array (Only IDs)</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>List all files by user as array (Only IDs)</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						array
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="achievements" id="_achievements">
 
 			<td class="attributes"><code>
@@ -490,7 +570,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_achievements">#</a>
-			<code><a href="source-class-justinback.steam.player.html#264-285" title="Go to source code">achievements</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#328-349" title="Go to source code">achievements</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>achievements object.</p>
@@ -532,7 +612,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_inventory">#</a>
-			<code><a href="source-class-justinback.steam.player.html#288-309" title="Go to source code">inventory</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#352-373" title="Go to source code">inventory</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>inventory object.</p>
@@ -555,6 +635,50 @@ Get Player name, avatar and report cheating!</p>
 					<h4>Returns</h4>
 					<div class="list">
 						<code><a href="class-justinback.steam.inventory.html">justinback\steam\inventory</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="transactions" id="_transactions">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-justinback.steam.transactions.html">justinback\steam\transactions</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_transactions">#</a>
+			<code><a href="source-class-justinback.steam.player.html#376-398" title="Go to source code">transactions</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Transaction object.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Transaction object.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$bTesting</var></dt>
+						<dd>Sandbox or Production environment?</dd>
+						<dt><var>$sApiKey</var></dt>
+						<dd>(optional) set a different apikey than the construct</dd>
+						<dt><var>$iGame</var></dt>
+						<dd>(optional) set a different appid than the construct</dd>
+						<dt><var>$sSteamid</var></dt>
+						<dd>(optional) set a different steamid than the construct</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.transactions.html">justinback\steam\transactions</a></code>
 					</div>
 
 

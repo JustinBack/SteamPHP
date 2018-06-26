@@ -232,6 +232,41 @@ class player {
     }
     
     
+    /**
+    * Allows publishers to report users who are behaving badly on their community hub.
+    *
+    * 
+    * @param string $sSteamidreporter SteamID of user doing the reporting
+    * @param int $abuseType Abuse type code (see EAbuseReportType enum)
+    * @param int $contentType Content type code (see ECommunityContentType enum)
+    * @param string $description Narrative from user
+    * @param string gid (optional) GID of related record (depends on content type)
+    * 
+    * @return object
+    */
+    public function ReportAbuse($sSteamidreporter, $abuseType, $contentType, $description, $gid = null){
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamidTarget' => $this->steamid, 'steamidActor' => $sSteamidreporter, 'abuseType' => $abuseType, 'contentType' => $contentType, 'description' => $description, 'gid' => $gid))
+            )
+        );
+        $context  = stream_context_create($options);
+        $req_players = file_get_contents("https://partner.steam-api.com/ISteamCommunity/ReportAbuse/v1/", false, $context);
+        $response = json_decode($req_players);
+        $obj = new \stdClass();
+        if($response->result>success == 1){
+            $obj->success = true;
+            $obj->message = null;
+            return $obj;
+        }
+        $obj->success = false;
+        $obj->message = $response->result->message;
+        return $obj;
+    }
+    
+    
     
     /**
     * Remove a game ban on a player.

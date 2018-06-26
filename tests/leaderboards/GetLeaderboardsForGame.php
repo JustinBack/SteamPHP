@@ -3,7 +3,7 @@
  * @package DoNotDocument
  */
 
-require_once(__DIR__."/../steam.php");
+require_once(__DIR__."/../../steam.php");
 
 
 $sApiKey = getenv("apikey"); // STEAMWORKS WEB API KEY
@@ -13,8 +13,9 @@ $sSteamid = getenv("steamid"); // STEAMID
 
 $steam  = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 
-if($steam->game()->leaderboards()->DeleteLeaderboard("travisci_test")){
-    echo "true";
+if($steam->game()->leaderboards()->GetLeaderboardsForGame() === NULL){
+    echo "false";
     return;
 }
-echo "Leaderboard could not be deleted!";
+echo "true";
+return;

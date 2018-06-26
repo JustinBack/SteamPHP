@@ -10,7 +10,7 @@ namespace justinback\steam;
 /**
  * Steam store page info. 
  * Cannot be called manually.
- * See \justinback\steam\inventory
+ * See \justinback\steam\game, \justinback\steam\manager
  * 
  * @author Justin Back <jb@justinback.com>
  */

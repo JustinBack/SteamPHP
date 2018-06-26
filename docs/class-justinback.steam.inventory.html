@@ -85,6 +85,7 @@
 				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li class="active"><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
+				<li><a href="class-justinback.steam.iteminfo.html">iteminfo</a></li>
 				<li><a href="class-justinback.steam.leaderboards.html">leaderboards</a></li>
 				<li><a href="class-justinback.steam.manager.html">manager</a></li>
 				<li><a href="class-justinback.steam.player.html">player</a></li>
@@ -131,7 +132,7 @@ AddItems etc.</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.inventory.html#10-130" title="Go to source code">class/inventory.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.inventory.html#10-196" title="Go to source code">class/inventory.php</a>
 		<br>
 	</div>
 
@@ -226,6 +227,120 @@ If the original request fails on the server, replaying the same request ID will 
 					<h4>Returns</h4>
 					<div class="list">
 						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="AddPromoItem" id="_AddPromoItem">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_AddPromoItem">#</a>
+			<code><a href="source-class-justinback.steam.inventory.html#129-155" title="Go to source code">AddPromoItem</a>( <span>string <var>$itemdefid</var></span>, <span>string <var>$itempropsjson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$notify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$requestid</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>Adds a promo item to a user's inventory</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Adds a promo item to a user's inventory</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$itemdefid</var></dt>
+						<dd>List of the itemdefid's to grant</dd>
+						<dt><var>$itempropsjson</var></dt>
+						<dd>No description provided.</dd>
+						<dt><var>$notify</var></dt>
+						<dd>Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.</dd>
+						<dt><var>$requestid</var></dt>
+						<dd>Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
+					</div>
+
+
+					<h4>Todo</h4>
+					<div class="list">
+							NOT TESTED YET<br>
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="GetInventory" id="_GetInventory">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_GetInventory">#</a>
+			<code><a href="source-class-justinback.steam.inventory.html#159-174" title="Go to source code">GetInventory</a>( )</code>
+
+			<div class="description short">
+				<p>GetInventory is used to retrieve a user's inventory</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>GetInventory is used to retrieve a user's inventory</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>array
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="GetItemDefs" id="_GetItemDefs">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-justinback.steam.iteminfo.html">justinback\steam\iteminfo</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_GetItemDefs">#</a>
+			<code><a href="source-class-justinback.steam.inventory.html#177-193" title="Go to source code">GetItemDefs</a>( )</code>
+
+			<div class="description short">
+				<p>GetItemDefs is used to retrieve the itemdefs for a given application.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>GetItemDefs is used to retrieve the itemdefs for a given application.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.iteminfo.html">justinback\steam\iteminfo</a></code><br>array
 					</div>
 
 

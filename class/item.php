@@ -279,5 +279,26 @@ class item {
     }
     
     
+    /**
+    * Iteminfo object. 
+    *
+    * 
+    * @return iteminfo
+    */
+    public function iteminfo(){
+        $array = array();
+        $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/GetItemDefs/v1?key=".$this->key."&steamid=".$this->steamid. "&appid=". $this->game);
+        $GetInventory = json_decode($req_players);
+        
+
+        foreach (json_decode($GetInventory->response->itemdef_json) as $response){
+            array_push($array, new \justinback\steam\iteminfo($this->key, $this->game, $this->steamid, $response));
+        }
+        $iteminfo = array_filter($array, function($oItem) {
+                    return $oItem->itemdefid == $this->itemdefid;
+            });
+        return $iteminfo;
+    }
+    
     
 }

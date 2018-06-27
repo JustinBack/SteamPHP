@@ -301,7 +301,7 @@ class player {
     *
     * 
     * 
-    * @return array
+    * @return ugc array
     */
     public function EnumerateUserPublishedFiles(){
         $options = array(
@@ -318,7 +318,7 @@ class player {
         $list = array();
         
         foreach ($response->response->files as $file) {
-            array_push($list, $file->publishedfileid);
+            array_push($list, new \justinback\steam\ugc($file->publishedfileid, $this->key, $this->game, $this->steamid));
         }
         
         return $list;

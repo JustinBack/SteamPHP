@@ -91,28 +91,28 @@ class item {
     * @param string $sApiKey Steamworks Developer API Key
     * @param string $iGame Your Appid
     * @param string $sSteamid The SteamID of the user
-    * @param string $itemid The Item ID
-    * @param int $quantity Item Quantity
-    * @param string $itemdefid Item Definition
-    * @param string $acquired Timestamp of item creation date
-    * @param string $state Item State
-    * @param string $origin Item Origin, e.g external
-    * @param string $state_changed_timestamp Timestamp since latest change
+    * @param string $sItemId The Item ID
+    * @param int $iQuantity Item Quantity
+    * @param string $sItemDefId Item Definition
+    * @param string $sAcquired Timestamp of item creation date
+    * @param string $sState Item State
+    * @param string $sOrigin Item Origin, e.g external
+    * @param string $sStateChangedTimestamp Timestamp since latest change
     *
     * @return void
     */
-    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $itemid = null, $quantity = null, $itemdefid = null, $acquired = null, $state = null, $origin = null, $state_changed_timestamp = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sItemId = null, $iQuantity = null, $sItemDefId = null, $sAcquired = null, $sState = null, $sOrigin = null, $sStateChangedTimestamp = null)
     {
         $this->set_key($sApiKey);
         $this->set_game((int)$iGame);
         $this->set_steamid($sSteamid);
-        $this->set_itemid($itemid);
-        $this->set_quantity($quantity);
-        $this->set_itemdefid($itemdefid);
-        $this->set_acquired($acquired);
-        $this->set_state($state);
-        $this->set_origin($origin);
-        $this->set_state_changed_timestamp($state_changed_timestamp);
+        $this->set_itemid($sItemId);
+        $this->set_quantity($iQuantity);
+        $this->set_itemdefid($sItemDefId);
+        $this->set_acquired($sAcquired);
+        $this->set_state($sState);
+        $this->set_origin($sOrigin);
+        $this->set_state_changed_timestamp($sStateChangedTimestamp);
     }
     
     /**
@@ -161,13 +161,13 @@ class item {
     * Setting ItemID from the construct
     *
     *
-    * @param string $itemid The Item ID
+    * @param string $sItemId The Item ID
     *
     * @return void
     */
-    private function set_itemid($itemid)
+    private function set_itemid($sItemId)
     {
-        $this->itemid = $itemid;
+        $this->itemid = $sItemId;
     }
     
     
@@ -175,13 +175,13 @@ class item {
     * Setting Quantity from the construct
     *
     *
-    * @param string $quantity The Item Quantity
+    * @param string $iQuantity The Item Quantity
     *
     * @return void
     */
-    private function set_quantity($quantity)
+    private function set_quantity($iQuantity)
     {
-        $this->quantity = $quantity;
+        $this->quantity = $iQuantity;
     }
     
     
@@ -189,13 +189,13 @@ class item {
     * Setting ItemDefID from the construct
     *
     *
-    * @param string $itemdefid The Item Defintion ID
+    * @param string $sItemDefId The Item Defintion ID
     *
     * @return void
     */
-    private function set_itemdefid($itemdefid)
+    private function set_itemdefid($sItemDefId)
     {
-        $this->itemdefid = $itemdefid;
+        $this->itemdefid = $sItemDefId;
     }
     
     
@@ -203,13 +203,13 @@ class item {
     * Setting acquired from the construct
     *
     *
-    * @param string $acquired The creation date of the item 
+    * @param string $sAcquired The creation date of the item 
     *   
     * @return void
     */
-    private function set_acquired($acquired)
+    private function set_acquired($sAcquired)
     {
-        $this->acquired = $acquired;
+        $this->acquired = $sAcquired;
     }
     
     
@@ -217,26 +217,26 @@ class item {
     * Setting state from the construct
     *
     *
-    * @param string $state The state of the item 
+    * @param string $sState The state of the item 
     *   
     * @return void
     */
-    private function set_state($state)
+    private function set_state($sState)
     {
-        $this->state = $state;
+        $this->state = $sState;
     }
     
     /**
     * Setting origin from the construct
     *
     *
-    * @param string $origin The origin of the item 
+    * @param string $sOrigin The origin of the item 
     *   
     * @return void
     */
-    private function set_origin($origin)
+    private function set_origin($sOrigin)
     {
-        $this->origin = $origin;
+        $this->origin = $sOrigin;
     }
     
     
@@ -244,37 +244,37 @@ class item {
     * Setting state_changed_timestamp from the construct
     *
     *
-    * @param string $state_changed_timestamp The change timestamp of the item 
+    * @param string $sStateChangedTimestamp The change timestamp of the item 
     *   
     * @return void
     */
-    private function set_state_changed_timestamp($state_changed_timestamp)
+    private function set_state_changed_timestamp($sStateChangedTimestamp)
     {
-        $this->state_changed_timestamp = $state_changed_timestamp;
+        $this->state_changed_timestamp = $sStateChangedTimestamp;
     }
     
     
     /**
     * Marks an item as wholly or partially consumed. This action cannot be reversed.
     *
-    * @param string $quantity Quantity of the item
-    * @param string $requestid Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
+    * @param string $iQuantity Quantity of the item
+    * @param string $sRequestId Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
     * 
     * @return item
     */
-    public function ConsumeItem($quantity, $requestid = null){
-        $options = array(
+    public function ConsumeItem($iQuantity, $sRequestId = null){
+        $oOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemid' => $this->itemid, 'quantity' => $quantity, 'requestid' => $requestid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemid' => $this->itemid, 'quantity' => $iQuantity, 'requestid' => $sRequestId))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/ConsumeItem/v1/", false, $context);
-        $response1 = json_decode(json_decode($req_players)->response->item_json);
-        foreach($response1 as $response){
-            return new \justinback\steam\item($this->key, $this->game, $this->steamid, $response->itemid, $response->quantity, $response->itemdefid, $response->acquired, $response->state, $response->origin, $response->state_changed_timestamp);
+        $cContext  = stream_context_create($oOptions);
+        $fgcConsumeItem = file_get_contents("https://partner.steam-api.com/IInventoryService/ConsumeItem/v1/", false, $cContext);
+        $oConsumeItem = json_decode(json_decode($fgcConsumeItem)->response->item_json);
+        foreach($oConsumeItem as $oResponse){
+            return new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
         }
     }
     

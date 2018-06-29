@@ -119,24 +119,24 @@ class transactions {
     /**
     * Add time to the payment schedule of an agreement with billing type "steam".
     *
-    * @param string $nextprocessdate Date that next recurring payment should be initiated. Format is YYYYMMDD. Date can only be adjusted forward indicating you want to add time to the subscription. If the date exceeds the end date of the subscription, the end date will be extended.
+    * @param string $sNextProcessDate Date that next recurring payment should be initiated. Format is YYYYMMDD. Date can only be adjusted forward indicating you want to add time to the subscription. If the date exceeds the end date of the subscription, the end date will be extended.
     * 
     * @return object
     */
-    public function AdjustAgreement($nextprocessdate){
-        $options = array(
+    public function AdjustAgreement($sNextProcessDate){
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'nextprocessdate' => $nextprocessdate, "steamid" => $this->steamid, "agreementid" => $this->agreementid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'nextprocessdate' => $sNextProcessDate, "steamid" => $this->steamid, "agreementid" => $this->agreementid))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/$this->interface/AdjustAgreement/v1/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcAdjustAgreement = file_get_contents("https://partner.steam-api.com/$this->interface/AdjustAgreement/v1/", false, $cContext);
+        $oAdjustAgreement = json_decode($fgcAdjustAgreement);
        
         
-        return $response;
+        return $oAdjustAgreement;
     }
     
     
@@ -148,19 +148,19 @@ class transactions {
     * @return object
     */
     public function CancelAgreement(){
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
                 'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, "steamid" => $this->steamid, "agreementid" => $this->agreementid))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/$this->interface/CancelAgreement/v1/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcCancelAgreement = file_get_contents("https://partner.steam-api.com/$this->interface/CancelAgreement/v1/", false, $cContext);
+        $oCancelAgreement = json_decode($fgcCancelAgreement);
        
         
-        return $response;
+        return $oCancelAgreement;
     }
     
     
@@ -177,19 +177,19 @@ class transactions {
     * @return object
     */
     public function InitTxn(){
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
                 'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, "steamid" => $this->steamid, "agreementid" => $this->agreementid))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/$this->interface/InitTxn/v3/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcInitTxn = file_get_contents("https://partner.steam-api.com/$this->interface/InitTxn/v3/", false, $cContext);
+        $oInitTxn = json_decode($fgcInitTxn);
        
         
-        return $response;
+        return $oInitTxn;
     }
     
 }

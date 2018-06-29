@@ -103,10 +103,10 @@ class gameserver {
         
         
         //Valve Please have a look here. Everytime this is called, the result is a 500 Server error
-        $req_players = file_get_contents("https://api.steampowered.com/IGameServersService/GetAccountList/v1?key=".$this->key. "&appid=". $this->game);
-        $GetNumberOfCurrentPlayers = json_decode($req_players);
+        $fgcGetAccountList = file_get_contents("https://api.steampowered.com/IGameServersService/GetAccountList/v1?key=".$this->key. "&appid=". $this->game);
+        $oGetAccountList = json_decode($fgcGetAccountList);
         
-        return $GetNumberOfCurrentPlayers->response;
+        return $oGetAccountList->response;
     }
     
     

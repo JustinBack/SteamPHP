@@ -101,27 +101,27 @@ class inventory {
     * If the request is replayed, the response will include current state for the items that were affected by the original request, without making new changes.
     * If the original request fails on the server, replaying the same request ID will re-attempt the work rather than reporting the prior error result.
     *
-    * @param string $itemdefid List of the itemdefid's to grant
-    * @param string $itempropsjson No description provided.
-    * @param bool $notify Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.
-    * @param string $requestid Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
+    * @param string $sItemDefId List of the itemdefid's to grant
+    * @param string $sItemPropsJson No description provided.
+    * @param bool $bNotify Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.
+    * @param string $sRequestId Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
     * 
     * @return item
     */
-    public function AddItem($itemdefid, $itempropsjson = null, $notify = false, $requestid = null){
-        $options = array(
+    public function AddItem($sItemDefId, $sItemPropsJson = null, $bNotify = false, $sRequestId = null){
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemdefid[0]' => $itemdefid, 'itempropsjson' => $itempropsjson, 'notify' => $notify, 'requestid' => $requestid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemdefid[0]' => $sItemDefId, 'itempropsjson' => $sItemPropsJson, 'notify' => $bNotify, 'requestid' => $sRequestId))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/AddItem/v1/", false, $context);
-        $response1 = json_decode(json_decode($req_players)->response->item_json);
+        $cContext  = stream_context_create($aOptions);
+        $fgcAddItem = file_get_contents("https://partner.steam-api.com/IInventoryService/AddItem/v1/", false, $cContext);
+        $oAddItem = json_decode(json_decode($fgcAddItem)->response->item_json);
 
-            foreach($response1 as $response){
-            return new \justinback\steam\item($this->key, $this->game, $this->steamid, $response->itemid, $response->quantity, $response->itemdefid, $response->acquired, $response->state, $response->origin, $response->state_changed_timestamp);
+            foreach($oAddItem as $oResponse){
+            return new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
             }
     }
     
@@ -130,27 +130,27 @@ class inventory {
     * Adds a promo item to a user's inventory 
     *
     * @todo NOT TESTED YET
-    * @param string $itemdefid List of the itemdefid's to grant
-    * @param string $itempropsjson No description provided.
-    * @param bool $notify Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.
-    * @param string $requestid Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
+    * @param string $sItemDefId List of the itemdefid's to grant
+    * @param string $sItemPropsJson No description provided.
+    * @param bool $bNotify Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.
+    * @param string $sRequestId Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
     * 
     * @return item
     */
-    public function AddPromoItem($itemdefid, $itempropsjson = null, $notify = false, $requestid = null){
-        $options = array(
+    public function AddPromoItem($sItemDefId, $sItemPropsJson = null, $bNotify = false, $sRequestId = null){
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemdefid[0]' => $itemdefid, 'itempropsjson' => $itempropsjson, 'notify' => $notify, 'requestid' => $requestid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemdefid[0]' => $sItemDefId, 'itempropsjson' => $sItemPropsJson, 'notify' => $bNotify, 'requestid' => $sRequestId))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/AddPromoItem/v1/", false, $context);
-        $response1 = json_decode(json_decode($req_players)->response->item_json);
+        $cContext  = stream_context_create($aOptions);
+        $fgcAddPromoItem = file_get_contents("https://partner.steam-api.com/IInventoryService/AddPromoItem/v1/", false, $cContext);
+        $oAddPromoItem = json_decode(json_decode($fgcAddPromoItem)->response->item_json);
 
-            foreach($response1 as $response){
-            return new \justinback\steam\item($this->key, $this->game, $this->steamid, $response->itemid, $response->quantity, $response->itemdefid, $response->acquired, $response->state, $response->origin, $response->state_changed_timestamp);
+            foreach($oAddPromoItem as $oResponse){
+            return new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
             }
     }
     
@@ -163,14 +163,14 @@ class inventory {
     * @return item array
     */
     public function GetInventory(){
-        $array = array();
-        $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/GetInventory/v1?key=".$this->key."&steamid=".$this->steamid. "&appid=". $this->game);
-        $GetInventory = json_decode($req_players);
+        $aArray = array();
+        $fgcGetInventory = file_get_contents("https://partner.steam-api.com/IInventoryService/GetInventory/v1?key=".$this->key."&steamid=".$this->steamid. "&appid=". $this->game);
+        $oGetInventory = json_decode($fgcGetInventory);
 
-        foreach (json_decode($GetInventory->response->item_json) as $response){
-            array_push($array, new \justinback\steam\item($this->key, $this->game, $this->steamid, $response->itemid, $response->quantity, $response->itemdefid, $response->acquired, $response->state, $response->origin, $response->state_changed_timestamp));
+        foreach (json_decode($oGetInventory->response->item_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp));
         }
-        return $array;
+        return $aArray;
     }
     
     
@@ -181,15 +181,15 @@ class inventory {
     * @return iteminfo array
     */
     public function GetItemDefs(){
-        $array = array();
-        $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/GetItemDefs/v1?key=".$this->key."&steamid=".$this->steamid. "&appid=". $this->game);
-        $GetInventory = json_decode($req_players);
+        $aArray = array();
+        $fgcGetItemDefs = file_get_contents("https://partner.steam-api.com/IInventoryService/GetItemDefs/v1?key=".$this->key."&steamid=".$this->steamid. "&appid=". $this->game);
+        $oGetInventory = json_decode($fgcGetItemDefs);
         
 
-        foreach (json_decode($GetInventory->response->itemdef_json) as $response){
-            array_push($array, new \justinback\steam\iteminfo($this->key, $this->game, $this->steamid, $response));
+        foreach (json_decode($oGetInventory->response->itemdef_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\iteminfo($this->key, $this->game, $this->steamid, $oResponse));
         }
-        return $array;
+        return $aArray;
     }
     
     

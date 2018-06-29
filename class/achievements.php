@@ -117,11 +117,11 @@ class achievements {
     public function GetPlayerAchievements()
     {
         $fgcGetPlayerAchievements = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1?key=".$this->key."&steamid=".$this->steamid."&appid=".(int)$this->game);
-        $jsonGetPlayerAchievements = json_decode($fgcGetPlayerAchievements);
+        $oGetPlayerAchievements = json_decode($fgcGetPlayerAchievements);
         
         
         if($this->game()->CheckAppOwnership()){
-            $aAchievements = array_filter($jsonGetPlayerAchievements->playerstats->achievements, function($oItem) {
+            $aAchievements = array_filter($oGetPlayerAchievements->playerstats->achievements, function($oItem) {
                     return $oItem->achieved == 1;
             });
             return $aAchievements;
@@ -144,11 +144,11 @@ class achievements {
     public function GetPlayerAchievementsLocked()
     {
         $fgcGetPlayerAchievementsLocked = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1?key=".$this->key."&steamid=".$this->steamid."&appid=".(int)$this->game);
-        $jsonGetPlayerAchievementsLocked = json_decode($fgcGetPlayerAchievementsLocked);
+        $oGetPlayerAchievementsLocked = json_decode($fgcGetPlayerAchievementsLocked);
         
         
         if($this->game()->CheckAppOwnership()){
-            $aAchievements = array_filter($jsonGetPlayerAchievementsLocked->playerstats->achievements, function($oItem) {
+            $aAchievements = array_filter($oGetPlayerAchievementsLocked->playerstats->achievements, function($oItem) {
                     return $oItem->achieved == 0;
             });
             return $aAchievements;
@@ -161,7 +161,7 @@ class achievements {
     * Setting SteamID from the construct
     *
     *
-    * @param string $apiname APIName of the achievement (not visible name)
+    * @param string $sApiname APIName of the achievement (not visible name)
     *
     * 
     * @example
@@ -172,12 +172,12 @@ class achievements {
     * 
     * @return object
     */
-    public function GetAchievementDetails($apiname){
-        $req_achievement = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2?key=".$this->key."&appid=".(int)$this->game);
-        $availableGameStats = json_decode($req_achievement);
-        foreach($availableGameStats->game->availableGameStats->achievements as $achievement){
-            if($achievement->name == $apiname){
-                return $achievement;
+    public function GetAchievementDetails($sApiname){
+        $fgcGetAchievementDetails = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2?key=".$this->key."&appid=".(int)$this->game);
+        $oAvailableGameStats = json_decode($fgcGetAchievementDetails);
+        foreach($aAvailableGameStats->game->availableGameStats->achievements as $oAchievement){
+            if($oAchievement->name == $sApiname){
+                return $oAchievement;
             }
         }
     }
@@ -207,9 +207,9 @@ class achievements {
     * 
     * @return bool
     */
-    public function HasPlayerUnlockedAchievement($apiname){
-            foreach($this->GetPlayerAchievements() as $userachievement){
-                if($userachievement->apiname == $apiname){
+    public function HasPlayerUnlockedAchievement($sApiname){
+            foreach($this->GetPlayerAchievements() as $oUserAchievement){
+                if($oUserAchievement->apiname == $sApiname){
                     return true;
                 }
                 return false;

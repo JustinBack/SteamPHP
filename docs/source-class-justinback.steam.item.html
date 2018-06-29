@@ -202,28 +202,28 @@
 </span></span><span id="91" class="l"><span class="php-comment">    * @param string $sApiKey Steamworks Developer API Key
 </span></span><span id="92" class="l"><span class="php-comment">    * @param string $iGame Your Appid
 </span></span><span id="93" class="l"><span class="php-comment">    * @param string $sSteamid The SteamID of the user
-</span></span><span id="94" class="l"><span class="php-comment">    * @param string $itemid The Item ID
-</span></span><span id="95" class="l"><span class="php-comment">    * @param int $quantity Item Quantity
-</span></span><span id="96" class="l"><span class="php-comment">    * @param string $itemdefid Item Definition
-</span></span><span id="97" class="l"><span class="php-comment">    * @param string $acquired Timestamp of item creation date
-</span></span><span id="98" class="l"><span class="php-comment">    * @param string $state Item State
-</span></span><span id="99" class="l"><span class="php-comment">    * @param string $origin Item Origin, e.g external
-</span></span><span id="100" class="l"><span class="php-comment">    * @param string $state_changed_timestamp Timestamp since latest change
+</span></span><span id="94" class="l"><span class="php-comment">    * @param string $sItemId The Item ID
+</span></span><span id="95" class="l"><span class="php-comment">    * @param int $iQuantity Item Quantity
+</span></span><span id="96" class="l"><span class="php-comment">    * @param string $sItemDefId Item Definition
+</span></span><span id="97" class="l"><span class="php-comment">    * @param string $sAcquired Timestamp of item creation date
+</span></span><span id="98" class="l"><span class="php-comment">    * @param string $sState Item State
+</span></span><span id="99" class="l"><span class="php-comment">    * @param string $sOrigin Item Origin, e.g external
+</span></span><span id="100" class="l"><span class="php-comment">    * @param string $sStateChangedTimestamp Timestamp since latest change
 </span></span><span id="101" class="l"><span class="php-comment">    *
 </span></span><span id="102" class="l"><span class="php-comment">    * @return void
 </span></span><span id="103" class="l"><span class="php-comment">    */</span>
-</span><span id="104" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$sApiKey</span> = <span class="php-keyword1">null</span>, <span class="php-var">$iGame</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$itemid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$quantity</span> = <span class="php-keyword1">null</span>, <span class="php-var">$itemdefid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$acquired</span> = <span class="php-keyword1">null</span>, <span class="php-var">$state</span> = <span class="php-keyword1">null</span>, <span class="php-var">$origin</span> = <span class="php-keyword1">null</span>, <span class="php-var">$state_changed_timestamp</span> = <span class="php-keyword1">null</span>)
+</span><span id="104" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$sApiKey</span> = <span class="php-keyword1">null</span>, <span class="php-var">$iGame</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sItemId</span> = <span class="php-keyword1">null</span>, <span class="php-var">$iQuantity</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sItemDefId</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sAcquired</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sState</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sOrigin</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sStateChangedTimestamp</span> = <span class="php-keyword1">null</span>)
 </span><span id="105" class="l">    {
 </span><span id="106" class="l">        <span class="php-var">$this</span>-&gt;set_key(<span class="php-var">$sApiKey</span>);
 </span><span id="107" class="l">        <span class="php-var">$this</span>-&gt;set_game((int)<span class="php-var">$iGame</span>);
 </span><span id="108" class="l">        <span class="php-var">$this</span>-&gt;set_steamid(<span class="php-var">$sSteamid</span>);
-</span><span id="109" class="l">        <span class="php-var">$this</span>-&gt;set_itemid(<span class="php-var">$itemid</span>);
-</span><span id="110" class="l">        <span class="php-var">$this</span>-&gt;set_quantity(<span class="php-var">$quantity</span>);
-</span><span id="111" class="l">        <span class="php-var">$this</span>-&gt;set_itemdefid(<span class="php-var">$itemdefid</span>);
-</span><span id="112" class="l">        <span class="php-var">$this</span>-&gt;set_acquired(<span class="php-var">$acquired</span>);
-</span><span id="113" class="l">        <span class="php-var">$this</span>-&gt;set_state(<span class="php-var">$state</span>);
-</span><span id="114" class="l">        <span class="php-var">$this</span>-&gt;set_origin(<span class="php-var">$origin</span>);
-</span><span id="115" class="l">        <span class="php-var">$this</span>-&gt;set_state_changed_timestamp(<span class="php-var">$state_changed_timestamp</span>);
+</span><span id="109" class="l">        <span class="php-var">$this</span>-&gt;set_itemid(<span class="php-var">$sItemId</span>);
+</span><span id="110" class="l">        <span class="php-var">$this</span>-&gt;set_quantity(<span class="php-var">$iQuantity</span>);
+</span><span id="111" class="l">        <span class="php-var">$this</span>-&gt;set_itemdefid(<span class="php-var">$sItemDefId</span>);
+</span><span id="112" class="l">        <span class="php-var">$this</span>-&gt;set_acquired(<span class="php-var">$sAcquired</span>);
+</span><span id="113" class="l">        <span class="php-var">$this</span>-&gt;set_state(<span class="php-var">$sState</span>);
+</span><span id="114" class="l">        <span class="php-var">$this</span>-&gt;set_origin(<span class="php-var">$sOrigin</span>);
+</span><span id="115" class="l">        <span class="php-var">$this</span>-&gt;set_state_changed_timestamp(<span class="php-var">$sStateChangedTimestamp</span>);
 </span><span id="116" class="l">    }
 </span><span id="117" class="l">    
 </span><span id="118" class="l">    <span class="php-comment">/**
@@ -272,13 +272,13 @@
 </span></span><span id="161" class="l"><span class="php-comment">    * Setting ItemID from the construct
 </span></span><span id="162" class="l"><span class="php-comment">    *
 </span></span><span id="163" class="l"><span class="php-comment">    *
-</span></span><span id="164" class="l"><span class="php-comment">    * @param string $itemid The Item ID
+</span></span><span id="164" class="l"><span class="php-comment">    * @param string $sItemId The Item ID
 </span></span><span id="165" class="l"><span class="php-comment">    *
 </span></span><span id="166" class="l"><span class="php-comment">    * @return void
 </span></span><span id="167" class="l"><span class="php-comment">    */</span>
-</span><span id="168" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_itemid(<span class="php-var">$itemid</span>)
+</span><span id="168" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_itemid(<span class="php-var">$sItemId</span>)
 </span><span id="169" class="l">    {
-</span><span id="170" class="l">        <span class="php-var">$this</span>-&gt;itemid = <span class="php-var">$itemid</span>;
+</span><span id="170" class="l">        <span class="php-var">$this</span>-&gt;itemid = <span class="php-var">$sItemId</span>;
 </span><span id="171" class="l">    }
 </span><span id="172" class="l">    
 </span><span id="173" class="l">    
@@ -286,13 +286,13 @@
 </span></span><span id="175" class="l"><span class="php-comment">    * Setting Quantity from the construct
 </span></span><span id="176" class="l"><span class="php-comment">    *
 </span></span><span id="177" class="l"><span class="php-comment">    *
-</span></span><span id="178" class="l"><span class="php-comment">    * @param string $quantity The Item Quantity
+</span></span><span id="178" class="l"><span class="php-comment">    * @param string $iQuantity The Item Quantity
 </span></span><span id="179" class="l"><span class="php-comment">    *
 </span></span><span id="180" class="l"><span class="php-comment">    * @return void
 </span></span><span id="181" class="l"><span class="php-comment">    */</span>
-</span><span id="182" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_quantity(<span class="php-var">$quantity</span>)
+</span><span id="182" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_quantity(<span class="php-var">$iQuantity</span>)
 </span><span id="183" class="l">    {
-</span><span id="184" class="l">        <span class="php-var">$this</span>-&gt;quantity = <span class="php-var">$quantity</span>;
+</span><span id="184" class="l">        <span class="php-var">$this</span>-&gt;quantity = <span class="php-var">$iQuantity</span>;
 </span><span id="185" class="l">    }
 </span><span id="186" class="l">    
 </span><span id="187" class="l">    
@@ -300,13 +300,13 @@
 </span></span><span id="189" class="l"><span class="php-comment">    * Setting ItemDefID from the construct
 </span></span><span id="190" class="l"><span class="php-comment">    *
 </span></span><span id="191" class="l"><span class="php-comment">    *
-</span></span><span id="192" class="l"><span class="php-comment">    * @param string $itemdefid The Item Defintion ID
+</span></span><span id="192" class="l"><span class="php-comment">    * @param string $sItemDefId The Item Defintion ID
 </span></span><span id="193" class="l"><span class="php-comment">    *
 </span></span><span id="194" class="l"><span class="php-comment">    * @return void
 </span></span><span id="195" class="l"><span class="php-comment">    */</span>
-</span><span id="196" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_itemdefid(<span class="php-var">$itemdefid</span>)
+</span><span id="196" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_itemdefid(<span class="php-var">$sItemDefId</span>)
 </span><span id="197" class="l">    {
-</span><span id="198" class="l">        <span class="php-var">$this</span>-&gt;itemdefid = <span class="php-var">$itemdefid</span>;
+</span><span id="198" class="l">        <span class="php-var">$this</span>-&gt;itemdefid = <span class="php-var">$sItemDefId</span>;
 </span><span id="199" class="l">    }
 </span><span id="200" class="l">    
 </span><span id="201" class="l">    
@@ -314,13 +314,13 @@
 </span></span><span id="203" class="l"><span class="php-comment">    * Setting acquired from the construct
 </span></span><span id="204" class="l"><span class="php-comment">    *
 </span></span><span id="205" class="l"><span class="php-comment">    *
-</span></span><span id="206" class="l"><span class="php-comment">    * @param string $acquired The creation date of the item 
+</span></span><span id="206" class="l"><span class="php-comment">    * @param string $sAcquired The creation date of the item 
 </span></span><span id="207" class="l"><span class="php-comment">    *   
 </span></span><span id="208" class="l"><span class="php-comment">    * @return void
 </span></span><span id="209" class="l"><span class="php-comment">    */</span>
-</span><span id="210" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_acquired(<span class="php-var">$acquired</span>)
+</span><span id="210" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_acquired(<span class="php-var">$sAcquired</span>)
 </span><span id="211" class="l">    {
-</span><span id="212" class="l">        <span class="php-var">$this</span>-&gt;acquired = <span class="php-var">$acquired</span>;
+</span><span id="212" class="l">        <span class="php-var">$this</span>-&gt;acquired = <span class="php-var">$sAcquired</span>;
 </span><span id="213" class="l">    }
 </span><span id="214" class="l">    
 </span><span id="215" class="l">    
@@ -328,26 +328,26 @@
 </span></span><span id="217" class="l"><span class="php-comment">    * Setting state from the construct
 </span></span><span id="218" class="l"><span class="php-comment">    *
 </span></span><span id="219" class="l"><span class="php-comment">    *
-</span></span><span id="220" class="l"><span class="php-comment">    * @param string $state The state of the item 
+</span></span><span id="220" class="l"><span class="php-comment">    * @param string $sState The state of the item 
 </span></span><span id="221" class="l"><span class="php-comment">    *   
 </span></span><span id="222" class="l"><span class="php-comment">    * @return void
 </span></span><span id="223" class="l"><span class="php-comment">    */</span>
-</span><span id="224" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_state(<span class="php-var">$state</span>)
+</span><span id="224" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_state(<span class="php-var">$sState</span>)
 </span><span id="225" class="l">    {
-</span><span id="226" class="l">        <span class="php-var">$this</span>-&gt;state = <span class="php-var">$state</span>;
+</span><span id="226" class="l">        <span class="php-var">$this</span>-&gt;state = <span class="php-var">$sState</span>;
 </span><span id="227" class="l">    }
 </span><span id="228" class="l">    
 </span><span id="229" class="l">    <span class="php-comment">/**
 </span></span><span id="230" class="l"><span class="php-comment">    * Setting origin from the construct
 </span></span><span id="231" class="l"><span class="php-comment">    *
 </span></span><span id="232" class="l"><span class="php-comment">    *
-</span></span><span id="233" class="l"><span class="php-comment">    * @param string $origin The origin of the item 
+</span></span><span id="233" class="l"><span class="php-comment">    * @param string $sOrigin The origin of the item 
 </span></span><span id="234" class="l"><span class="php-comment">    *   
 </span></span><span id="235" class="l"><span class="php-comment">    * @return void
 </span></span><span id="236" class="l"><span class="php-comment">    */</span>
-</span><span id="237" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_origin(<span class="php-var">$origin</span>)
+</span><span id="237" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_origin(<span class="php-var">$sOrigin</span>)
 </span><span id="238" class="l">    {
-</span><span id="239" class="l">        <span class="php-var">$this</span>-&gt;origin = <span class="php-var">$origin</span>;
+</span><span id="239" class="l">        <span class="php-var">$this</span>-&gt;origin = <span class="php-var">$sOrigin</span>;
 </span><span id="240" class="l">    }
 </span><span id="241" class="l">    
 </span><span id="242" class="l">    
@@ -355,37 +355,37 @@
 </span></span><span id="244" class="l"><span class="php-comment">    * Setting state_changed_timestamp from the construct
 </span></span><span id="245" class="l"><span class="php-comment">    *
 </span></span><span id="246" class="l"><span class="php-comment">    *
-</span></span><span id="247" class="l"><span class="php-comment">    * @param string $state_changed_timestamp The change timestamp of the item 
+</span></span><span id="247" class="l"><span class="php-comment">    * @param string $sStateChangedTimestamp The change timestamp of the item 
 </span></span><span id="248" class="l"><span class="php-comment">    *   
 </span></span><span id="249" class="l"><span class="php-comment">    * @return void
 </span></span><span id="250" class="l"><span class="php-comment">    */</span>
-</span><span id="251" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_state_changed_timestamp(<span class="php-var">$state_changed_timestamp</span>)
+</span><span id="251" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_state_changed_timestamp(<span class="php-var">$sStateChangedTimestamp</span>)
 </span><span id="252" class="l">    {
-</span><span id="253" class="l">        <span class="php-var">$this</span>-&gt;state_changed_timestamp = <span class="php-var">$state_changed_timestamp</span>;
+</span><span id="253" class="l">        <span class="php-var">$this</span>-&gt;state_changed_timestamp = <span class="php-var">$sStateChangedTimestamp</span>;
 </span><span id="254" class="l">    }
 </span><span id="255" class="l">    
 </span><span id="256" class="l">    
 </span><span id="257" class="l">    <span class="php-comment">/**
 </span></span><span id="258" class="l"><span class="php-comment">    * Marks an item as wholly or partially consumed. This action cannot be reversed.
 </span></span><span id="259" class="l"><span class="php-comment">    *
-</span></span><span id="260" class="l"><span class="php-comment">    * @param string $quantity Quantity of the item
-</span></span><span id="261" class="l"><span class="php-comment">    * @param string $requestid Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
+</span></span><span id="260" class="l"><span class="php-comment">    * @param string $iQuantity Quantity of the item
+</span></span><span id="261" class="l"><span class="php-comment">    * @param string $sRequestId Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
 </span></span><span id="262" class="l"><span class="php-comment">    * 
 </span></span><span id="263" class="l"><span class="php-comment">    * @return item
 </span></span><span id="264" class="l"><span class="php-comment">    */</span>
-</span><span id="265" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> ConsumeItem(<span class="php-var">$quantity</span>, <span class="php-var">$requestid</span> = <span class="php-keyword1">null</span>){
-</span><span id="266" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="265" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> ConsumeItem(<span class="php-var">$iQuantity</span>, <span class="php-var">$sRequestId</span> = <span class="php-keyword1">null</span>){
+</span><span id="266" class="l">        <span class="php-var">$oOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="267" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="268" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="269" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="270" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'steamid'</span> =&gt; <span class="php-var">$this</span>-&gt;steamid, <span class="php-quote">'itemid'</span> =&gt; <span class="php-var">$this</span>-&gt;itemid, <span class="php-quote">'quantity'</span> =&gt; <span class="php-var">$quantity</span>, <span class="php-quote">'requestid'</span> =&gt; <span class="php-var">$requestid</span>))
+</span><span id="270" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'steamid'</span> =&gt; <span class="php-var">$this</span>-&gt;steamid, <span class="php-quote">'itemid'</span> =&gt; <span class="php-var">$this</span>-&gt;itemid, <span class="php-quote">'quantity'</span> =&gt; <span class="php-var">$iQuantity</span>, <span class="php-quote">'requestid'</span> =&gt; <span class="php-var">$sRequestId</span>))
 </span><span id="271" class="l">            )
 </span><span id="272" class="l">        );
-</span><span id="273" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="274" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IInventoryService/ConsumeItem/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="275" class="l">        <span class="php-var">$response1</span> = <span class="php-keyword2">json_decode</span>(<span class="php-keyword2">json_decode</span>(<span class="php-var">$req_players</span>)-&gt;response-&gt;item_json);
-</span><span id="276" class="l">        <span class="php-keyword1">foreach</span>(<span class="php-var">$response1</span> <span class="php-keyword1">as</span> <span class="php-var">$response</span>){
-</span><span id="277" class="l">            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \justinback\steam\item(<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-var">$this</span>-&gt;game, <span class="php-var">$this</span>-&gt;steamid, <span class="php-var">$response</span>-&gt;itemid, <span class="php-var">$response</span>-&gt;quantity, <span class="php-var">$response</span>-&gt;itemdefid, <span class="php-var">$response</span>-&gt;acquired, <span class="php-var">$response</span>-&gt;state, <span class="php-var">$response</span>-&gt;origin, <span class="php-var">$response</span>-&gt;state_changed_timestamp);
+</span><span id="273" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$oOptions</span>);
+</span><span id="274" class="l">        <span class="php-var">$fgcConsumeItem</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IInventoryService/ConsumeItem/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="275" class="l">        <span class="php-var">$oConsumeItem</span> = <span class="php-keyword2">json_decode</span>(<span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcConsumeItem</span>)-&gt;response-&gt;item_json);
+</span><span id="276" class="l">        <span class="php-keyword1">foreach</span>(<span class="php-var">$oConsumeItem</span> <span class="php-keyword1">as</span> <span class="php-var">$oResponse</span>){
+</span><span id="277" class="l">            <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \justinback\steam\item(<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-var">$this</span>-&gt;game, <span class="php-var">$this</span>-&gt;steamid, <span class="php-var">$oResponse</span>-&gt;itemid, <span class="php-var">$oResponse</span>-&gt;quantity, <span class="php-var">$oResponse</span>-&gt;itemdefid, <span class="php-var">$oResponse</span>-&gt;acquired, <span class="php-var">$oResponse</span>-&gt;state, <span class="php-var">$oResponse</span>-&gt;origin, <span class="php-var">$oResponse</span>-&gt;state_changed_timestamp);
 </span><span id="278" class="l">        }
 </span><span id="279" class="l">    }
 </span><span id="280" class="l">    

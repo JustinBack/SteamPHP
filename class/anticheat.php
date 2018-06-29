@@ -118,27 +118,27 @@ class anticheat {
     *
     * This is designed to be used after the incidents from ReportPlayerCheating have been reviewed and cheating has been confirmed.
     *
-    * @param string $cheatdescription Text describing cheating infraction.
-    * @param int $duration Ban duration requested in seconds. (duration 0 will issue infinite - less than a year is a suspension and not visible on profile)
-    * @param bool $delayban Delay the ban according to default ban delay rules.
+    * @param string $sCheatDescription Text describing cheating infraction.
+    * @param int $iDuration Ban duration requested in seconds. (duration 0 will issue infinite - less than a year is a suspension and not visible on profile)
+    * @param bool $bDelayBan (Optional) Delay the ban according to default ban delay rules.
     * 
     * 
     * @return bool
     */
-    public function RequestPlayerGameBan($cheatdescription, $duration, $delayban = false){
-        $options = array(
+    public function RequestPlayerGameBan($sCheatDescription, $iDuration, $bDelayBan = false){
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'reportid' => $this->reportid, 'cheatdescription' => $cheatdescription, 'duration' => $duration, 'delayban' => $delayban))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'reportid' => $this->reportid, 'cheatdescription' => $sCheatDescription, 'duration' => $iDuration, 'delayban' => $bDelayBan))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/ICheatReportingService/RequestPlayerGameBan/v1/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcRequestPlayerGameBan = file_get_contents("https://partner.steam-api.com/ICheatReportingService/RequestPlayerGameBan/v1/", false, $cContext);
+        $oRequestPlayerGameBan = json_decode($fgcRequestPlayerGameBan);
         
         
-        if(count($response->response) == 0){
+        if(count($oRequestPlayerGameBan->response) == 0){
             return false;
         }
         return true;

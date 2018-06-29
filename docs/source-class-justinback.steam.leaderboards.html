@@ -209,23 +209,23 @@
 </span></span><span id="98" class="l"><span class="php-comment">    * Delete a leaderboard from your App
 </span></span><span id="99" class="l"><span class="php-comment">    *
 </span></span><span id="100" class="l"><span class="php-comment">    *
-</span></span><span id="101" class="l"><span class="php-comment">    * @param string $name name of the leaderboard to delete
+</span></span><span id="101" class="l"><span class="php-comment">    * @param string $sName name of the leaderboard to delete
 </span></span><span id="102" class="l"><span class="php-comment">    *
 </span></span><span id="103" class="l"><span class="php-comment">    * @return bool
 </span></span><span id="104" class="l"><span class="php-comment">    */</span>
-</span><span id="105" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> DeleteLeaderboard(<span class="php-var">$name</span>){
-</span><span id="106" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="105" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> DeleteLeaderboard(<span class="php-var">$sName</span>){
+</span><span id="106" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="107" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="108" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="109" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="110" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'name'</span> =&gt; <span class="php-var">$name</span>))
+</span><span id="110" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'name'</span> =&gt; <span class="php-var">$sName</span>))
 </span><span id="111" class="l">            )
 </span><span id="112" class="l">        );
-</span><span id="113" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="114" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamLeaderboards/DeleteLeaderboard/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="115" class="l">        <span class="php-var">$response</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_players</span>);
+</span><span id="113" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="114" class="l">        <span class="php-var">$fgcDeleteLeaderboard</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamLeaderboards/DeleteLeaderboard/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="115" class="l">        <span class="php-var">$oDeleteLeaderboard</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcDeleteLeaderboard</span>);
 </span><span id="116" class="l">        
-</span><span id="117" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$response</span>-&gt;result-&gt;result != <span class="php-num">1</span>){
+</span><span id="117" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$oDeleteLeaderboard</span>-&gt;result-&gt;result != <span class="php-num">1</span>){
 </span><span id="118" class="l">         <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;   
 </span><span id="119" class="l">        }
 </span><span id="120" class="l">        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
@@ -236,28 +236,28 @@
 </span></span><span id="125" class="l"><span class="php-comment">    * Create a leaderboard for your App
 </span></span><span id="126" class="l"><span class="php-comment">    *
 </span></span><span id="127" class="l"><span class="php-comment">    *
-</span></span><span id="128" class="l"><span class="php-comment">    * @param string $name name of the leaderboard to create
-</span></span><span id="129" class="l"><span class="php-comment">    * @param string $sortmethod sort method to use for this leaderboard (defaults to Ascending)
-</span></span><span id="130" class="l"><span class="php-comment">    * @param string $displaytype display type for this leaderboard (defaults to Numeric)
-</span></span><span id="131" class="l"><span class="php-comment">    * @param bool $createifnotfound if this is true the leaderboard will be created if it doesn't exist. Defaults to true.
-</span></span><span id="132" class="l"><span class="php-comment">    * @param bool $onlytrustedwrites if this is true the leaderboard scores cannot be set by clients, and can only be set by publisher via SetLeaderboardScore WebAPI. Defaults to false.
-</span></span><span id="133" class="l"><span class="php-comment">    * @param bool $onlyfriendsreads if this is true the leaderboard scores can only be read for friends by clients, scores can always be read by publisher. Defaults to false.
+</span></span><span id="128" class="l"><span class="php-comment">    * @param string $sName name of the leaderboard to create
+</span></span><span id="129" class="l"><span class="php-comment">    * @param string $sSortMethod sort method to use for this leaderboard (defaults to Ascending)
+</span></span><span id="130" class="l"><span class="php-comment">    * @param string $sDisplayType display type for this leaderboard (defaults to Numeric)
+</span></span><span id="131" class="l"><span class="php-comment">    * @param bool $bCreateIfNotFound if this is true the leaderboard will be created if it doesn't exist. Defaults to true.
+</span></span><span id="132" class="l"><span class="php-comment">    * @param bool $bOnlyTrustedWrites if this is true the leaderboard scores cannot be set by clients, and can only be set by publisher via SetLeaderboardScore WebAPI. Defaults to false.
+</span></span><span id="133" class="l"><span class="php-comment">    * @param bool $bOnlyFriendsReads if this is true the leaderboard scores can only be read for friends by clients, scores can always be read by publisher. Defaults to false.
 </span></span><span id="134" class="l"><span class="php-comment">    *
 </span></span><span id="135" class="l"><span class="php-comment">    * @return object
 </span></span><span id="136" class="l"><span class="php-comment">    */</span>
-</span><span id="137" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> FindOrCreateLeaderboard(<span class="php-var">$name</span>, <span class="php-var">$sortmethod</span> = <span class="php-quote">&quot;Ascending&quot;</span>, <span class="php-var">$displaytype</span> = <span class="php-quote">&quot;Numeric&quot;</span>, <span class="php-var">$createifnotfound</span> = <span class="php-keyword1">true</span>, <span class="php-var">$onlytrustedwrites</span> = <span class="php-keyword1">false</span>, <span class="php-var">$onlyfriendsreads</span> = <span class="php-keyword1">false</span>){
-</span><span id="138" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="137" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> FindOrCreateLeaderboard(<span class="php-var">$sName</span>, <span class="php-var">$sSortMethod</span> = <span class="php-quote">&quot;Ascending&quot;</span>, <span class="php-var">$sDisplayType</span> = <span class="php-quote">&quot;Numeric&quot;</span>, <span class="php-var">$bCreateIfNotFound</span> = <span class="php-keyword1">true</span>, <span class="php-var">$bOnlyTrustedWrites</span> = <span class="php-keyword1">false</span>, <span class="php-var">$bOnlyFriendsReads</span> = <span class="php-keyword1">false</span>){
+</span><span id="138" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="139" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="140" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="141" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="142" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'name'</span> =&gt; <span class="php-var">$name</span>, <span class="php-quote">'sortmethod'</span> =&gt; <span class="php-var">$sortmethod</span>, <span class="php-quote">'displaytype'</span> =&gt; <span class="php-var">$displaytype</span>, <span class="php-quote">'createifnotfound'</span> =&gt; <span class="php-var">$createifnotfound</span>, <span class="php-quote">'onlytrustedwrites'</span> =&gt; <span class="php-var">$onlytrustedwrites</span>, <span class="php-quote">'onlyfriendsreads'</span> =&gt; <span class="php-var">$onlyfriendsreads</span>))
+</span><span id="142" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'name'</span> =&gt; <span class="php-var">$sName</span>, <span class="php-quote">'sortmethod'</span> =&gt; <span class="php-var">$sSortMethod</span>, <span class="php-quote">'displaytype'</span> =&gt; <span class="php-var">$sDisplayType</span>, <span class="php-quote">'createifnotfound'</span> =&gt; <span class="php-var">$bCreateIfNotFound</span>, <span class="php-quote">'onlytrustedwrites'</span> =&gt; <span class="php-var">$bOnlyTrustedWrites</span>, <span class="php-quote">'onlyfriendsreads'</span> =&gt; <span class="php-var">$bOnlyFriendsReads</span>))
 </span><span id="143" class="l">            )
 </span><span id="144" class="l">        );
-</span><span id="145" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="146" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamLeaderboards/FindOrCreateLeaderboard/v2/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="147" class="l">        <span class="php-var">$response</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_players</span>);
+</span><span id="145" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="146" class="l">        <span class="php-var">$fgcFindOrCreateLeaderboard</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamLeaderboards/FindOrCreateLeaderboard/v2/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="147" class="l">        <span class="php-var">$oFindOrCreateLeaderboard</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcFindOrCreateLeaderboard</span>);
 </span><span id="148" class="l">        
-</span><span id="149" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$response</span>-&gt;result;
+</span><span id="149" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$oFindOrCreateLeaderboard</span>-&gt;result;
 </span><span id="150" class="l">    }
 </span><span id="151" class="l">    
 </span><span id="152" class="l">    
@@ -265,23 +265,23 @@
 </span></span><span id="154" class="l"><span class="php-comment">    * Reset a leaderboard for your App
 </span></span><span id="155" class="l"><span class="php-comment">    *
 </span></span><span id="156" class="l"><span class="php-comment">    *
-</span></span><span id="157" class="l"><span class="php-comment">    * @param string $leaderboardid numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
+</span></span><span id="157" class="l"><span class="php-comment">    * @param string $sLeaderboardId numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
 </span></span><span id="158" class="l"><span class="php-comment">    * 
 </span></span><span id="159" class="l"><span class="php-comment">    * @return bool
 </span></span><span id="160" class="l"><span class="php-comment">    */</span>
-</span><span id="161" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> ResetLeaderboard(<span class="php-var">$leaderboardid</span>){
-</span><span id="162" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="161" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> ResetLeaderboard(<span class="php-var">$sLeaderboardId</span>){
+</span><span id="162" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="163" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="164" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="165" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="166" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'leaderboardid'</span> =&gt; <span class="php-var">$leaderboardid</span>))
+</span><span id="166" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'leaderboardid'</span> =&gt; <span class="php-var">$sLeaderboardId</span>))
 </span><span id="167" class="l">            )
 </span><span id="168" class="l">        );
-</span><span id="169" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="170" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamLeaderboards/ResetLeaderboard/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="171" class="l">        <span class="php-var">$response</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_players</span>);
+</span><span id="169" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="170" class="l">        <span class="php-var">$fgcResetLeaderboard</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamLeaderboards/ResetLeaderboard/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="171" class="l">        <span class="php-var">$oResetLeaderboard</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcResetLeaderboard</span>);
 </span><span id="172" class="l">        
-</span><span id="173" class="l">         <span class="php-keyword1">if</span>(<span class="php-var">$response</span>-&gt;result-&gt;result != <span class="php-num">1</span>){
+</span><span id="173" class="l">         <span class="php-keyword1">if</span>(<span class="php-var">$oResetLeaderboard</span>-&gt;result-&gt;result != <span class="php-num">1</span>){
 </span><span id="174" class="l">         <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;   
 </span><span id="175" class="l">        }
 </span><span id="176" class="l">        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
@@ -291,31 +291,31 @@
 </span></span><span id="180" class="l"><span class="php-comment">    * Set a score for your leaderboard for your App
 </span></span><span id="181" class="l"><span class="php-comment">    *
 </span></span><span id="182" class="l"><span class="php-comment">    *
-</span></span><span id="183" class="l"><span class="php-comment">    * @param string $leaderboardid numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
-</span></span><span id="184" class="l"><span class="php-comment">    * @param string $score the score to set for this user
-</span></span><span id="185" class="l"><span class="php-comment">    * @param string $scoremethod update method to use. Can be &quot;KeepBest&quot; or &quot;ForceUpdate&quot;
-</span></span><span id="186" class="l"><span class="php-comment">    * @param rawbytes $details (optional) game-specific details for how the score was earned. Up to 256 bytes.
+</span></span><span id="183" class="l"><span class="php-comment">    * @param string $sLeaderboardId numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
+</span></span><span id="184" class="l"><span class="php-comment">    * @param string $sScore the score to set for this user
+</span></span><span id="185" class="l"><span class="php-comment">    * @param string $sScoreMethod update method to use. Can be &quot;KeepBest&quot; or &quot;ForceUpdate&quot;
+</span></span><span id="186" class="l"><span class="php-comment">    * @param rawbytes $rDetails (optional) game-specific details for how the score was earned. Up to 256 bytes.
 </span></span><span id="187" class="l"><span class="php-comment">    * @param string $sSteamid (optional) steamID to set the score for 
 </span></span><span id="188" class="l"><span class="php-comment">    * 
 </span></span><span id="189" class="l"><span class="php-comment">    * @return object
 </span></span><span id="190" class="l"><span class="php-comment">    */</span>
-</span><span id="191" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> SetLeaderboardScore(<span class="php-var">$leaderboardid</span>, <span class="php-var">$score</span>, <span class="php-var">$scoremethod</span>, <span class="php-var">$details</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>){
+</span><span id="191" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> SetLeaderboardScore(<span class="php-var">$sLeaderboardId</span>, <span class="php-var">$sScore</span>, <span class="php-var">$sScoreMethod</span>, <span class="php-var">$rDetails</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>){
 </span><span id="192" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sSteamid</span> == <span class="php-keyword1">null</span>){
 </span><span id="193" class="l">            <span class="php-var">$sSteamid</span> = <span class="php-var">$this</span>-&gt;steamid;
 </span><span id="194" class="l">        }
-</span><span id="195" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="195" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="196" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="197" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="198" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="199" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'leaderboardid'</span> =&gt; <span class="php-var">$leaderboardid</span>, <span class="php-quote">'steamid'</span> =&gt; <span class="php-var">$sSteamid</span>, <span class="php-quote">'score'</span> =&gt; <span class="php-var">$score</span>, <span class="php-quote">'scoremethod'</span> =&gt; <span class="php-var">$scoremethod</span>, <span class="php-quote">'details'</span> =&gt; <span class="php-var">$details</span>))
+</span><span id="199" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'leaderboardid'</span> =&gt; <span class="php-var">$sLeaderboardId</span>, <span class="php-quote">'steamid'</span> =&gt; <span class="php-var">$sSteamid</span>, <span class="php-quote">'score'</span> =&gt; <span class="php-var">$sScore</span>, <span class="php-quote">'scoremethod'</span> =&gt; <span class="php-var">$sScoreMethod</span>, <span class="php-quote">'details'</span> =&gt; <span class="php-var">$rDetails</span>))
 </span><span id="200" class="l">            )
 </span><span id="201" class="l">        );
-</span><span id="202" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="203" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamLeaderboards/SetLeaderboardScore/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="204" class="l">        <span class="php-var">$response</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_players</span>);
+</span><span id="202" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="203" class="l">        <span class="php-var">$fgcSetLeaderboardScore</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamLeaderboards/SetLeaderboardScore/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="204" class="l">        <span class="php-var">$oSetLeaderboardScore</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcSetLeaderboardScore</span>);
 </span><span id="205" class="l">       
 </span><span id="206" class="l">        
-</span><span id="207" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$response</span>-&gt;result;
+</span><span id="207" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$oSetLeaderboardScore</span>-&gt;result;
 </span><span id="208" class="l">    }
 </span><span id="209" class="l">    
 </span><span id="210" class="l">    <span class="php-comment">/**
@@ -326,9 +326,9 @@
 </span></span><span id="215" class="l"><span class="php-comment">    * @return object
 </span></span><span id="216" class="l"><span class="php-comment">    */</span>
 </span><span id="217" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> GetLeaderboardsForGame(){
-</span><span id="218" class="l">        <span class="php-var">$req_lb</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardsForGame/v2?key=&quot;</span>.<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>.<span class="php-quote">&quot;&amp;appid=&quot;</span>.(int)<span class="php-var">$this</span>-&gt;game. <span class="php-quote">&quot;&amp;&quot;</span>. <span class="php-keyword2">time</span>());
-</span><span id="219" class="l">        <span class="php-var">$resp</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_lb</span>);
-</span><span id="220" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$resp</span>-&gt;response-&gt;leaderboards;
+</span><span id="218" class="l">        <span class="php-var">$fgcGetLeaderboardsForGame</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardsForGame/v2?key=&quot;</span>.<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>.<span class="php-quote">&quot;&amp;appid=&quot;</span>.(int)<span class="php-var">$this</span>-&gt;game. <span class="php-quote">&quot;&amp;&quot;</span>. <span class="php-keyword2">time</span>());
+</span><span id="219" class="l">        <span class="php-var">$oGetLeaderboardsForGame</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcGetLeaderboardsForGame</span>);
+</span><span id="220" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$oGetLeaderboardsForGame</span>-&gt;response-&gt;leaderboards;
 </span><span id="221" class="l">    }
 </span><span id="222" class="l">    
 </span><span id="223" class="l">    
@@ -337,22 +337,22 @@
 </span></span><span id="226" class="l"><span class="php-comment">    * Get all leaderboard entries from your App
 </span></span><span id="227" class="l"><span class="php-comment">    *
 </span></span><span id="228" class="l"><span class="php-comment">    *
-</span></span><span id="229" class="l"><span class="php-comment">    * @param int $leaderboardid ID of the leaderboard to view
-</span></span><span id="230" class="l"><span class="php-comment">    * @param string $datarequest type of request: RequestGlobal, RequestAroundUser, RequestFriends
-</span></span><span id="231" class="l"><span class="php-comment">    * @param int $rangestart range start or 0
-</span></span><span id="232" class="l"><span class="php-comment">    * @param int $rangend range end or max LB entries
+</span></span><span id="229" class="l"><span class="php-comment">    * @param int $sLeaderboardId ID of the leaderboard to view
+</span></span><span id="230" class="l"><span class="php-comment">    * @param string $sDataRequest type of request: RequestGlobal, RequestAroundUser, RequestFriends
+</span></span><span id="231" class="l"><span class="php-comment">    * @param int $iRangeStart range start or 0
+</span></span><span id="232" class="l"><span class="php-comment">    * @param int $iRangeEnd range end or max LB entries
 </span></span><span id="233" class="l"><span class="php-comment">    * @param bool $sSteamid Use SteamID to lookup or not
 </span></span><span id="234" class="l"><span class="php-comment">    * 
 </span></span><span id="235" class="l"><span class="php-comment">    * 
 </span></span><span id="236" class="l"><span class="php-comment">    * @return array
 </span></span><span id="237" class="l"><span class="php-comment">    */</span>
-</span><span id="238" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> GetLeaderboardEntries(<span class="php-var">$leaderboardid</span>, <span class="php-var">$datarequest</span>, <span class="php-var">$rangestart</span>, <span class="php-var">$rangend</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">true</span>){
-</span><span id="239" class="l">        <span class="php-var">$req_lb</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=&quot;</span>.<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>.<span class="php-quote">&quot;&amp;appid=&quot;</span>.(int)<span class="php-var">$this</span>-&gt;game. <span class="php-quote">&quot;&amp;&quot;</span>. <span class="php-keyword2">time</span>(). <span class="php-quote">&quot;&amp;leaderboardid=&quot;</span>.<span class="php-var">$leaderboardid</span>. <span class="php-quote">&quot;&amp;datarequest=&quot;</span>. <span class="php-var">$datarequest</span>. <span class="php-quote">&quot;&amp;rangestart=&quot;</span>. <span class="php-var">$rangestart</span>. <span class="php-quote">&quot;&amp;rangeend=&quot;</span>. <span class="php-var">$rangend</span>);
+</span><span id="238" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> GetLeaderboardEntries(<span class="php-var">$sLeaderboardId</span>, <span class="php-var">$sDataRequest</span>, <span class="php-var">$iRangeStart</span>, <span class="php-var">$iRangeEnd</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">true</span>){
+</span><span id="239" class="l">        <span class="php-var">$fgcGetLeaderboardEntries</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=&quot;</span>.<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>.<span class="php-quote">&quot;&amp;appid=&quot;</span>.(int)<span class="php-var">$this</span>-&gt;game. <span class="php-quote">&quot;&amp;&quot;</span>. <span class="php-keyword2">time</span>(). <span class="php-quote">&quot;&amp;leaderboardid=&quot;</span>.<span class="php-var">$sLeaderboardId</span>. <span class="php-quote">&quot;&amp;datarequest=&quot;</span>. <span class="php-var">$sDataRequest</span>. <span class="php-quote">&quot;&amp;rangestart=&quot;</span>. <span class="php-var">$iRangeStart</span>. <span class="php-quote">&quot;&amp;rangeend=&quot;</span>. <span class="php-var">$iRangeEnd</span>);
 </span><span id="240" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sSteamid</span>){
-</span><span id="241" class="l">        <span class="php-var">$req_lb</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=&quot;</span>.<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>.<span class="php-quote">&quot;&amp;appid=&quot;</span>.(int)<span class="php-var">$this</span>-&gt;game. <span class="php-quote">&quot;&amp;&quot;</span>. <span class="php-keyword2">time</span>(). <span class="php-quote">&quot;&amp;leaderboardid=&quot;</span>.<span class="php-var">$leaderboardid</span>. <span class="php-quote">&quot;&amp;datarequest=&quot;</span>. <span class="php-var">$datarequest</span>. <span class="php-quote">&quot;&amp;rangestart=&quot;</span>. <span class="php-var">$rangestart</span>. <span class="php-quote">&quot;&amp;rangeend=&quot;</span>. <span class="php-var">$rangend</span>. <span class="php-quote">&quot;&amp;steamid=&quot;</span>. <span class="php-var">$this</span>-&gt;steamid);
+</span><span id="241" class="l">        <span class="php-var">$fgcGetLeaderboardEntries</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=&quot;</span>.<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>.<span class="php-quote">&quot;&amp;appid=&quot;</span>.(int)<span class="php-var">$this</span>-&gt;game. <span class="php-quote">&quot;&amp;&quot;</span>. <span class="php-keyword2">time</span>(). <span class="php-quote">&quot;&amp;leaderboardid=&quot;</span>.<span class="php-var">$sLeaderboardId</span>. <span class="php-quote">&quot;&amp;datarequest=&quot;</span>. <span class="php-var">$sDataRequest</span>. <span class="php-quote">&quot;&amp;rangestart=&quot;</span>. <span class="php-var">$iRangeStart</span>. <span class="php-quote">&quot;&amp;rangeend=&quot;</span>. <span class="php-var">$iRangeEnd</span>. <span class="php-quote">&quot;&amp;steamid=&quot;</span>. <span class="php-var">$this</span>-&gt;steamid);
 </span><span id="242" class="l">        }
-</span><span id="243" class="l">        <span class="php-var">$resp</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_lb</span>);
-</span><span id="244" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$resp</span>-&gt;leaderboardEntryInformation-&gt;leaderboardEntries;
+</span><span id="243" class="l">        <span class="php-var">$oGetLeaderboardEntries</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcGetLeaderboardEntries</span>);
+</span><span id="244" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$oGetLeaderboardEntries</span>-&gt;leaderboardEntryInformation-&gt;leaderboardEntries;
 </span><span id="245" class="l">    }
 </span><span id="246" class="l">    
 </span><span id="247" class="l">    

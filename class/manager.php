@@ -143,14 +143,14 @@ class manager {
     /**
     * UGC object.
     *
-    * @param string $publishedfileid ID of the File
+    * @param string $sPublishedFileId ID of the File
     * @param string $sApiKey (optional) set a different apikey than the construct
     * @param string $iGame (optional) set a different appid than the construct
     * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return ugc
     */
-    public function ugc($publishedfileid, $sApiKey = null, $iGame = null, $sSteamid = null)
+    public function ugc($sPublishedFileId, $sApiKey = null, $iGame = null, $sSteamid = null)
     {
         if($sApiKey === null){
             $sApiKey = $this->key;
@@ -161,7 +161,7 @@ class manager {
         if($sSteamid === null){
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\ugc($publishedfileid, $sApiKey,$iGame,$sSteamid);
+        return new \justinback\steam\ugc($sPublishedFileId, $sApiKey,$iGame,$sSteamid);
     }
     
     
@@ -178,12 +178,12 @@ class manager {
             $iGame = $this->game;
         }
         
-        $req_players = file_get_contents("https://store.steampowered.com/api/appdetails?appids=".(int)$iGame);
-        $GetNumberOfCurrentPlayers = json_decode($req_players);
-        $store = $GetNumberOfCurrentPlayers->$iGame->data;
+        $fgcStore = file_get_contents("https://store.steampowered.com/api/appdetails?appids=".(int)$iGame);
+        $oStore = json_decode($fgcStore);
+        $oStoreInfo = $oStore->$iGame->data;
         
-        if($GetNumberOfCurrentPlayers->$iGame->success){
-        return new \justinback\steam\store($iGame, $store->name, $store->type, $store->required_age, $store->is_free, $store->detailed_description, $store->about_the_game, $store->short_description, $store->developers, $store->publishers, $store->dlc);
+        if($oStore->$iGame->success){
+        return new \justinback\steam\store($iGame, $oStoreInfo->name, $oStoreInfo->type, $oStoreInfo->required_age, $oStoreInfo->is_free, $oStoreInfo->detailed_description, $oStoreInfo->about_the_game, $oStoreInfo->short_description, $oStoreInfo->developers, $oStoreInfo->publishers, $oStoreInfo->dlc);
         }
         return false;
     }

@@ -41,19 +41,19 @@ class ugc {
     * Construction of the variables steamid, key and game
     *
     *
-    * @param string $publishedfileid UGC File ID
+    * @param string $sPublishedFileId UGC File ID
     * @param string $sApiKey Steamworks Developer API Key
     * @param string $iGame Your Appid
     * @param string $sSteamid The SteamID of the user 
     *
     * @return void
     */
-    public function __construct($publishedfileid = null, $sApiKey = null, $iGame = null, $sSteamid = null)
+    public function __construct($sPublishedFileId = null, $sApiKey = null, $iGame = null, $sSteamid = null)
     {
         $this->set_key($sApiKey);
         $this->set_game((int)$iGame);
         $this->set_steamid($sSteamid);
-        $this->set_fileid($publishedfileid);
+        $this->set_fileid($sPublishedFileId);
         
     }
     
@@ -103,13 +103,13 @@ class ugc {
     * Setting File ID from the construct
     *
     *
-    * @param string $publishedfileid The File's ID
+    * @param string $sPublishedFileId The File's ID
     *
     * @return void
     */
-    private function set_fileid($publishedfileid)
+    private function set_fileid($sPublishedFileId)
     {
-        $this->fileid = $publishedfileid;
+        $this->fileid = $sPublishedFileId;
     }
     
    
@@ -117,27 +117,27 @@ class ugc {
     /**
     * Update Ban Status of a UGC
     *
-    * @param bool $banned Is banned or not
-    * @param string $reason Reason why the item was banned. Only visible to admins.
-    * @param string $publishedfileid (optional) numeric ID of the target file. 
+    * @param bool $bBanned Is banned or not
+    * @param string $sReason Reason why the item was banned. Only visible to admins.
+    * @param string $sPublishedFileId (optional) numeric ID of the target file. 
     * 
     * 
     * @return bool
     */
-    public function UpdateBanStatus($banned, $reason, $publishedfileid = null){
-        if($publishedfileid == null){
-            $publishedfileid = $this->fileid;
+    public function UpdateBanStatus($bBanned, $sReason, $sPublishedFileId = null){
+        if($sPublishedFileId == null){
+            $sPublishedFileId = $this->fileid;
         }
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, 'banned' => $banned, 'reason' => $reason))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $sPublishedFileId, 'banned' => $bBanned, 'reason' => $sReason))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/IPublishedFileService/UpdateBanStatus/v1/", false, $context);
-        //$response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcUpdateBanStatus = file_get_contents("https://partner.steam-api.com/IPublishedFileService/UpdateBanStatus/v1/", false, $cContext);
+        //$oUpdateBanStatus = json_decode($fgcUpdateBanStatus);
        
         
         return true;
@@ -148,26 +148,26 @@ class ugc {
     * Updates the incompatible status on the published file. "Incompatible" items are hidden from community hubs and user profiles, but can still be accessed by a direct link.
     *
     *
-    * @param bool $incompatible Is banned or not
-    * @param string $publishedfileid (optional) numeric ID of the target file. 
+    * @param bool $bIncompatible Is banned or not
+    * @param string $sPublishedFileId (optional) numeric ID of the target file. 
     *
     * 
     * @return bool
     */
-    public function UpdateIncompatibleStatus($incompatible, $publishedfileid = null){
-        if($publishedfileid == null){
-            $publishedfileid = $this->fileid;
+    public function UpdateIncompatibleStatus($bIncompatible, $sPublishedFileId = null){
+        if($sPublishedFileId == null){
+            $sPublishedFileId = $this->fileid;
         }
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, 'incompatible' => $incompatible))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $sPublishedFileId, 'incompatible' => $bIncompatible))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/IPublishedFileService/UpdateIncompatibleStatus/v1/", false, $context);
-        //$response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcUpdateIncompatibleStatus = file_get_contents("https://partner.steam-api.com/IPublishedFileService/UpdateIncompatibleStatus/v1/", false, $cContext);
+        //$oUpdateIncompatibleStatus = json_decode($fgcUpdateIncompatibleStatus);
        
         
         return true;
@@ -179,26 +179,26 @@ class ugc {
     *
     *
     * 
-    * @param array $add_tags Tags array("Maps", "Another Tag")
-    * @param array $remove_tags Tags array("Tag", "Another Tag")
-    * @param string $publishedfileid (optional) numeric ID of the target file.  
+    * @param array $aAddTags Tags array("Maps", "Another Tag")
+    * @param array $aRemoveTags Tags array("Tag", "Another Tag")
+    * @param string $sPublishedFileId (optional) numeric ID of the target file.  
     * 
     * @return bool
     */
-    public function UpdateTags($add_tags, $remove_tags, $publishedfileid = null){
-        if($publishedfileid == null){
-            $publishedfileid = $this->fileid;
+    public function UpdateTags($aAddTags, $aRemoveTags, $sPublishedFileId = null){
+        if($sPublishedFileId == null){
+            $sPublishedFileId = $this->fileid;
         }
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, 'add_tags' => $add_tags, 'remove_tags' => $remove_tags))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $sPublishedFileId, 'add_tags' => $aAddTags, 'remove_tags' => $aRemoveTags))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/IPublishedFileService/UpdateTags/v1/", false, $context);
-        //$response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcUpdateTags = file_get_contents("https://partner.steam-api.com/IPublishedFileService/UpdateTags/v1/", false, $cContext);
+        //$oUpdateTags = json_decode($fgcUpdateTags);
        
         
         return true;
@@ -210,27 +210,27 @@ class ugc {
     * Get File Info
     *
     *
-    * @param string $publishedfileids (optional) numeric ID of the target file. 
+    * @param string $sPublishedFileIds (optional) numeric ID of the target file. 
     * 
     * @return object
     */
-    public function GetPublishedFileDetails($publishedfileids = null){
-        if($publishedfileids == null){
-            $publishedfileids = $this->fileid;
+    public function GetPublishedFileDetails($sPublishedFileIds = null){
+        if($sPublishedFileIds == null){
+            $sPublishedFileIds = $this->fileid;
         }
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileids[0]' => $publishedfileids, "itemcount" => 1))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileids[0]' => $sPublishedFileIds, "itemcount" => 1))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcGetPublishedFileDetails = file_get_contents("https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/", false, $cContext);
+        $oGetPublishedFileDetails = json_decode($fgcGetPublishedFileDetails);
        
-        foreach($response->response->publishedfiledetails as $ugc){
-         return $ugc;   
+        foreach($oGetPublishedFileDetails->response->publishedfiledetails as $oUgc){
+         return $oUgc;   
         }
     }
     
@@ -239,28 +239,28 @@ class ugc {
     * Subscribe to the published file as the user
     *
     *
-    * @param string $publishedfileid (optional) numeric ID of the target file.
+    * @param string $sPublishedFileId (optional) numeric ID of the target file.
     * @param string $sSteamid (optional) numeric ID of the user.  
     * 
     * @return bool
     */
-    public function SubscribePublishedFile($publishedfileid = null, $sSteamid = null){
-        if($publishedfileid == null){
-            $publishedfileid = $this->fileid;
+    public function SubscribePublishedFile($sPublishedFileId = null, $sSteamid = null){
+        if($sPublishedFileId == null){
+            $sPublishedFileId = $this->fileid;
         }
         if($sSteamid == null){
             $sSteamid = $this->steamid;
         }
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, "steamid" => $sSteamid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $sPublishedFileId, "steamid" => $sSteamid))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/IPublishedFileService/SubscribePublishedFile/v1/", false, $context);
-        //$response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcSubscribePublishedFile = file_get_contents("https://partner.steam-api.com/IPublishedFileService/SubscribePublishedFile/v1/", false, $cContext);
+        //$oSubscribePublishedFile = json_decode($fgcSubscribePublishedFile);
        
         
         return true;
@@ -271,28 +271,28 @@ class ugc {
     * Unsubscribe from the published file as the user
     *
     *
-    * @param string $publishedfileid (optional) numeric ID of the target file.
+    * @param string $sPublishedFileId (optional) numeric ID of the target file.
     * @param string $sSteamid (optional) numeric ID of the user. 
     * 
     * @return bool
     */
-    public function UnsubscribePublishedFile($publishedfileid = null, $sSteamid = null){
-        if($publishedfileid == null){
-            $publishedfileid = $this->fileid;
+    public function UnsubscribePublishedFile($sPublishedFileId = null, $sSteamid = null){
+        if($sPublishedFileId == null){
+            $sPublishedFileId = $this->fileid;
         }
         if($sSteamid == null){
             $sSteamid = $this->steamid;
         }
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $publishedfileid, "steamid" => $sSteamid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileid' => $sPublishedFileId, "steamid" => $sSteamid))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/IPublishedFileService/UnsubscribePublishedFile/v1/", false, $context);
-        //$response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcUnsubscribePublishedFile = file_get_contents("https://partner.steam-api.com/IPublishedFileService/UnsubscribePublishedFile/v1/", false, $cContext);
+        //$oUnsubscribePublishedFile = json_decode($fgcUnsubscribePublishedFile);
        
         
         return true;
@@ -306,13 +306,13 @@ class ugc {
     * @deprecated
     * @return object
     */
-    public function QueryFiles($query_type, $numperpage, $requiredtags, $excludedtags, $match_all_tags)
+    public function QueryFiles()
     {
         // I have no idea which parameters should be present... Leaving as is for now
-        $req_files = file_get_contents("https://api.steampowered.com/IPublishedFileService/QueryFiles/v1?key=".$this->key."&steamid=".$this->steamid);
-        $files = json_decode($req_files);
+        $fgcQueryFiles = file_get_contents("https://api.steampowered.com/IPublishedFileService/QueryFiles/v1?key=".$this->key."&steamid=".$this->steamid);
+        $oQueryFiles = json_decode($fgcQueryFiles);
         
-        return $files->response;
+        return $oQueryFiles->response;
     }
     
     
@@ -320,27 +320,27 @@ class ugc {
     * Get Creator by UGC
     *
     *
-    * @param string $publishedfileids (optional) numeric ID of the target file. 
+    * @param string $sPublishedFileIds (optional) numeric ID of the target file. 
     * 
     * @return player
     */
-    public function player($publishedfileids = null){
-        if($publishedfileids == null){
-            $publishedfileids = $this->fileid;
+    public function player($sPublishedFileIds = null){
+        if($sPublishedFileIds == null){
+            $sPublishedFileIds = $this->fileid;
         }
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileids[0]' => $publishedfileids, "itemcount" => 1))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'publishedfileids[0]' => $sPublishedFileIds, "itemcount" => 1))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcPlayer = file_get_contents("https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/", false, $cContext);
+        $oPlayer = json_decode($fgcPlayer);
        
-        foreach($response->response->publishedfiledetails as $ugc){
-         return new \justinback\steam\player($this->key, $this->game, $ugc->creator);   
+        foreach($oPlayer->response->publishedfiledetails as $oUgc){
+         return new \justinback\steam\player($this->key, $this->game, $oUgc->creator);   
         }
     }
     

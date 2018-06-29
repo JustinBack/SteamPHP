@@ -152,19 +152,19 @@
 </span></span><span id="41" class="l"><span class="php-comment">    * Construction of the variables steamid, key and game
 </span></span><span id="42" class="l"><span class="php-comment">    *
 </span></span><span id="43" class="l"><span class="php-comment">    *
-</span></span><span id="44" class="l"><span class="php-comment">    * @param string $publishedfileid UGC File ID
+</span></span><span id="44" class="l"><span class="php-comment">    * @param string $sPublishedFileId UGC File ID
 </span></span><span id="45" class="l"><span class="php-comment">    * @param string $sApiKey Steamworks Developer API Key
 </span></span><span id="46" class="l"><span class="php-comment">    * @param string $iGame Your Appid
 </span></span><span id="47" class="l"><span class="php-comment">    * @param string $sSteamid The SteamID of the user 
 </span></span><span id="48" class="l"><span class="php-comment">    *
 </span></span><span id="49" class="l"><span class="php-comment">    * @return void
 </span></span><span id="50" class="l"><span class="php-comment">    */</span>
-</span><span id="51" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$publishedfileid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sApiKey</span> = <span class="php-keyword1">null</span>, <span class="php-var">$iGame</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>)
+</span><span id="51" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$sPublishedFileId</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sApiKey</span> = <span class="php-keyword1">null</span>, <span class="php-var">$iGame</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>)
 </span><span id="52" class="l">    {
 </span><span id="53" class="l">        <span class="php-var">$this</span>-&gt;set_key(<span class="php-var">$sApiKey</span>);
 </span><span id="54" class="l">        <span class="php-var">$this</span>-&gt;set_game((int)<span class="php-var">$iGame</span>);
 </span><span id="55" class="l">        <span class="php-var">$this</span>-&gt;set_steamid(<span class="php-var">$sSteamid</span>);
-</span><span id="56" class="l">        <span class="php-var">$this</span>-&gt;set_fileid(<span class="php-var">$publishedfileid</span>);
+</span><span id="56" class="l">        <span class="php-var">$this</span>-&gt;set_fileid(<span class="php-var">$sPublishedFileId</span>);
 </span><span id="57" class="l">        
 </span><span id="58" class="l">    }
 </span><span id="59" class="l">    
@@ -214,13 +214,13 @@
 </span></span><span id="103" class="l"><span class="php-comment">    * Setting File ID from the construct
 </span></span><span id="104" class="l"><span class="php-comment">    *
 </span></span><span id="105" class="l"><span class="php-comment">    *
-</span></span><span id="106" class="l"><span class="php-comment">    * @param string $publishedfileid The File's ID
+</span></span><span id="106" class="l"><span class="php-comment">    * @param string $sPublishedFileId The File's ID
 </span></span><span id="107" class="l"><span class="php-comment">    *
 </span></span><span id="108" class="l"><span class="php-comment">    * @return void
 </span></span><span id="109" class="l"><span class="php-comment">    */</span>
-</span><span id="110" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_fileid(<span class="php-var">$publishedfileid</span>)
+</span><span id="110" class="l">    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> set_fileid(<span class="php-var">$sPublishedFileId</span>)
 </span><span id="111" class="l">    {
-</span><span id="112" class="l">        <span class="php-var">$this</span>-&gt;fileid = <span class="php-var">$publishedfileid</span>;
+</span><span id="112" class="l">        <span class="php-var">$this</span>-&gt;fileid = <span class="php-var">$sPublishedFileId</span>;
 </span><span id="113" class="l">    }
 </span><span id="114" class="l">    
 </span><span id="115" class="l">   
@@ -228,27 +228,27 @@
 </span><span id="117" class="l">    <span class="php-comment">/**
 </span></span><span id="118" class="l"><span class="php-comment">    * Update Ban Status of a UGC
 </span></span><span id="119" class="l"><span class="php-comment">    *
-</span></span><span id="120" class="l"><span class="php-comment">    * @param bool $banned Is banned or not
-</span></span><span id="121" class="l"><span class="php-comment">    * @param string $reason Reason why the item was banned. Only visible to admins.
-</span></span><span id="122" class="l"><span class="php-comment">    * @param string $publishedfileid (optional) numeric ID of the target file. 
+</span></span><span id="120" class="l"><span class="php-comment">    * @param bool $bBanned Is banned or not
+</span></span><span id="121" class="l"><span class="php-comment">    * @param string $sReason Reason why the item was banned. Only visible to admins.
+</span></span><span id="122" class="l"><span class="php-comment">    * @param string $sPublishedFileId (optional) numeric ID of the target file. 
 </span></span><span id="123" class="l"><span class="php-comment">    * 
 </span></span><span id="124" class="l"><span class="php-comment">    * 
 </span></span><span id="125" class="l"><span class="php-comment">    * @return bool
 </span></span><span id="126" class="l"><span class="php-comment">    */</span>
-</span><span id="127" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> UpdateBanStatus(<span class="php-var">$banned</span>, <span class="php-var">$reason</span>, <span class="php-var">$publishedfileid</span> = <span class="php-keyword1">null</span>){
-</span><span id="128" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$publishedfileid</span> == <span class="php-keyword1">null</span>){
-</span><span id="129" class="l">            <span class="php-var">$publishedfileid</span> = <span class="php-var">$this</span>-&gt;fileid;
+</span><span id="127" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> UpdateBanStatus(<span class="php-var">$bBanned</span>, <span class="php-var">$sReason</span>, <span class="php-var">$sPublishedFileId</span> = <span class="php-keyword1">null</span>){
+</span><span id="128" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sPublishedFileId</span> == <span class="php-keyword1">null</span>){
+</span><span id="129" class="l">            <span class="php-var">$sPublishedFileId</span> = <span class="php-var">$this</span>-&gt;fileid;
 </span><span id="130" class="l">        }
-</span><span id="131" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="131" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="132" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="133" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="134" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="135" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$publishedfileid</span>, <span class="php-quote">'banned'</span> =&gt; <span class="php-var">$banned</span>, <span class="php-quote">'reason'</span> =&gt; <span class="php-var">$reason</span>))
+</span><span id="135" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$sPublishedFileId</span>, <span class="php-quote">'banned'</span> =&gt; <span class="php-var">$bBanned</span>, <span class="php-quote">'reason'</span> =&gt; <span class="php-var">$sReason</span>))
 </span><span id="136" class="l">            )
 </span><span id="137" class="l">        );
-</span><span id="138" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="139" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/UpdateBanStatus/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="140" class="l">        <span class="php-comment">//$response = json_decode($req_players);</span>
+</span><span id="138" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="139" class="l">        <span class="php-var">$fgcUpdateBanStatus</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/UpdateBanStatus/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="140" class="l">        <span class="php-comment">//$oUpdateBanStatus = json_decode($fgcUpdateBanStatus);</span>
 </span><span id="141" class="l">       
 </span><span id="142" class="l">        
 </span><span id="143" class="l">        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
@@ -259,26 +259,26 @@
 </span></span><span id="148" class="l"><span class="php-comment">    * Updates the incompatible status on the published file. &quot;Incompatible&quot; items are hidden from community hubs and user profiles, but can still be accessed by a direct link.
 </span></span><span id="149" class="l"><span class="php-comment">    *
 </span></span><span id="150" class="l"><span class="php-comment">    *
-</span></span><span id="151" class="l"><span class="php-comment">    * @param bool $incompatible Is banned or not
-</span></span><span id="152" class="l"><span class="php-comment">    * @param string $publishedfileid (optional) numeric ID of the target file. 
+</span></span><span id="151" class="l"><span class="php-comment">    * @param bool $bIncompatible Is banned or not
+</span></span><span id="152" class="l"><span class="php-comment">    * @param string $sPublishedFileId (optional) numeric ID of the target file. 
 </span></span><span id="153" class="l"><span class="php-comment">    *
 </span></span><span id="154" class="l"><span class="php-comment">    * 
 </span></span><span id="155" class="l"><span class="php-comment">    * @return bool
 </span></span><span id="156" class="l"><span class="php-comment">    */</span>
-</span><span id="157" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> UpdateIncompatibleStatus(<span class="php-var">$incompatible</span>, <span class="php-var">$publishedfileid</span> = <span class="php-keyword1">null</span>){
-</span><span id="158" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$publishedfileid</span> == <span class="php-keyword1">null</span>){
-</span><span id="159" class="l">            <span class="php-var">$publishedfileid</span> = <span class="php-var">$this</span>-&gt;fileid;
+</span><span id="157" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> UpdateIncompatibleStatus(<span class="php-var">$bIncompatible</span>, <span class="php-var">$sPublishedFileId</span> = <span class="php-keyword1">null</span>){
+</span><span id="158" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sPublishedFileId</span> == <span class="php-keyword1">null</span>){
+</span><span id="159" class="l">            <span class="php-var">$sPublishedFileId</span> = <span class="php-var">$this</span>-&gt;fileid;
 </span><span id="160" class="l">        }
-</span><span id="161" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="161" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="162" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="163" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="164" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="165" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$publishedfileid</span>, <span class="php-quote">'incompatible'</span> =&gt; <span class="php-var">$incompatible</span>))
+</span><span id="165" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$sPublishedFileId</span>, <span class="php-quote">'incompatible'</span> =&gt; <span class="php-var">$bIncompatible</span>))
 </span><span id="166" class="l">            )
 </span><span id="167" class="l">        );
-</span><span id="168" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="169" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/UpdateIncompatibleStatus/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="170" class="l">        <span class="php-comment">//$response = json_decode($req_players);</span>
+</span><span id="168" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="169" class="l">        <span class="php-var">$fgcUpdateIncompatibleStatus</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/UpdateIncompatibleStatus/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="170" class="l">        <span class="php-comment">//$oUpdateIncompatibleStatus = json_decode($fgcUpdateIncompatibleStatus);</span>
 </span><span id="171" class="l">       
 </span><span id="172" class="l">        
 </span><span id="173" class="l">        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
@@ -290,26 +290,26 @@
 </span></span><span id="179" class="l"><span class="php-comment">    *
 </span></span><span id="180" class="l"><span class="php-comment">    *
 </span></span><span id="181" class="l"><span class="php-comment">    * 
-</span></span><span id="182" class="l"><span class="php-comment">    * @param array $add_tags Tags array(&quot;Maps&quot;, &quot;Another Tag&quot;)
-</span></span><span id="183" class="l"><span class="php-comment">    * @param array $remove_tags Tags array(&quot;Tag&quot;, &quot;Another Tag&quot;)
-</span></span><span id="184" class="l"><span class="php-comment">    * @param string $publishedfileid (optional) numeric ID of the target file.  
+</span></span><span id="182" class="l"><span class="php-comment">    * @param array $aAddTags Tags array(&quot;Maps&quot;, &quot;Another Tag&quot;)
+</span></span><span id="183" class="l"><span class="php-comment">    * @param array $aRemoveTags Tags array(&quot;Tag&quot;, &quot;Another Tag&quot;)
+</span></span><span id="184" class="l"><span class="php-comment">    * @param string $sPublishedFileId (optional) numeric ID of the target file.  
 </span></span><span id="185" class="l"><span class="php-comment">    * 
 </span></span><span id="186" class="l"><span class="php-comment">    * @return bool
 </span></span><span id="187" class="l"><span class="php-comment">    */</span>
-</span><span id="188" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> UpdateTags(<span class="php-var">$add_tags</span>, <span class="php-var">$remove_tags</span>, <span class="php-var">$publishedfileid</span> = <span class="php-keyword1">null</span>){
-</span><span id="189" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$publishedfileid</span> == <span class="php-keyword1">null</span>){
-</span><span id="190" class="l">            <span class="php-var">$publishedfileid</span> = <span class="php-var">$this</span>-&gt;fileid;
+</span><span id="188" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> UpdateTags(<span class="php-var">$aAddTags</span>, <span class="php-var">$aRemoveTags</span>, <span class="php-var">$sPublishedFileId</span> = <span class="php-keyword1">null</span>){
+</span><span id="189" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sPublishedFileId</span> == <span class="php-keyword1">null</span>){
+</span><span id="190" class="l">            <span class="php-var">$sPublishedFileId</span> = <span class="php-var">$this</span>-&gt;fileid;
 </span><span id="191" class="l">        }
-</span><span id="192" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="192" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="193" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="194" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="195" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="196" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$publishedfileid</span>, <span class="php-quote">'add_tags'</span> =&gt; <span class="php-var">$add_tags</span>, <span class="php-quote">'remove_tags'</span> =&gt; <span class="php-var">$remove_tags</span>))
+</span><span id="196" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$sPublishedFileId</span>, <span class="php-quote">'add_tags'</span> =&gt; <span class="php-var">$aAddTags</span>, <span class="php-quote">'remove_tags'</span> =&gt; <span class="php-var">$aRemoveTags</span>))
 </span><span id="197" class="l">            )
 </span><span id="198" class="l">        );
-</span><span id="199" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="200" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/UpdateTags/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="201" class="l">        <span class="php-comment">//$response = json_decode($req_players);</span>
+</span><span id="199" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="200" class="l">        <span class="php-var">$fgcUpdateTags</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/UpdateTags/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="201" class="l">        <span class="php-comment">//$oUpdateTags = json_decode($fgcUpdateTags);</span>
 </span><span id="202" class="l">       
 </span><span id="203" class="l">        
 </span><span id="204" class="l">        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
@@ -321,27 +321,27 @@
 </span></span><span id="210" class="l"><span class="php-comment">    * Get File Info
 </span></span><span id="211" class="l"><span class="php-comment">    *
 </span></span><span id="212" class="l"><span class="php-comment">    *
-</span></span><span id="213" class="l"><span class="php-comment">    * @param string $publishedfileids (optional) numeric ID of the target file. 
+</span></span><span id="213" class="l"><span class="php-comment">    * @param string $sPublishedFileIds (optional) numeric ID of the target file. 
 </span></span><span id="214" class="l"><span class="php-comment">    * 
 </span></span><span id="215" class="l"><span class="php-comment">    * @return object
 </span></span><span id="216" class="l"><span class="php-comment">    */</span>
-</span><span id="217" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> GetPublishedFileDetails(<span class="php-var">$publishedfileids</span> = <span class="php-keyword1">null</span>){
-</span><span id="218" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$publishedfileids</span> == <span class="php-keyword1">null</span>){
-</span><span id="219" class="l">            <span class="php-var">$publishedfileids</span> = <span class="php-var">$this</span>-&gt;fileid;
+</span><span id="217" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> GetPublishedFileDetails(<span class="php-var">$sPublishedFileIds</span> = <span class="php-keyword1">null</span>){
+</span><span id="218" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sPublishedFileIds</span> == <span class="php-keyword1">null</span>){
+</span><span id="219" class="l">            <span class="php-var">$sPublishedFileIds</span> = <span class="php-var">$this</span>-&gt;fileid;
 </span><span id="220" class="l">        }
-</span><span id="221" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="221" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="222" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="223" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="224" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="225" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileids[0]'</span> =&gt; <span class="php-var">$publishedfileids</span>, <span class="php-quote">&quot;itemcount&quot;</span> =&gt; <span class="php-num">1</span>))
+</span><span id="225" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileids[0]'</span> =&gt; <span class="php-var">$sPublishedFileIds</span>, <span class="php-quote">&quot;itemcount&quot;</span> =&gt; <span class="php-num">1</span>))
 </span><span id="226" class="l">            )
 </span><span id="227" class="l">        );
-</span><span id="228" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="229" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="230" class="l">        <span class="php-var">$response</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_players</span>);
+</span><span id="228" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="229" class="l">        <span class="php-var">$fgcGetPublishedFileDetails</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="230" class="l">        <span class="php-var">$oGetPublishedFileDetails</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcGetPublishedFileDetails</span>);
 </span><span id="231" class="l">       
-</span><span id="232" class="l">        <span class="php-keyword1">foreach</span>(<span class="php-var">$response</span>-&gt;response-&gt;publishedfiledetails <span class="php-keyword1">as</span> <span class="php-var">$ugc</span>){
-</span><span id="233" class="l">         <span class="php-keyword1">return</span> <span class="php-var">$ugc</span>;   
+</span><span id="232" class="l">        <span class="php-keyword1">foreach</span>(<span class="php-var">$oGetPublishedFileDetails</span>-&gt;response-&gt;publishedfiledetails <span class="php-keyword1">as</span> <span class="php-var">$oUgc</span>){
+</span><span id="233" class="l">         <span class="php-keyword1">return</span> <span class="php-var">$oUgc</span>;   
 </span><span id="234" class="l">        }
 </span><span id="235" class="l">    }
 </span><span id="236" class="l">    
@@ -350,28 +350,28 @@
 </span></span><span id="239" class="l"><span class="php-comment">    * Subscribe to the published file as the user
 </span></span><span id="240" class="l"><span class="php-comment">    *
 </span></span><span id="241" class="l"><span class="php-comment">    *
-</span></span><span id="242" class="l"><span class="php-comment">    * @param string $publishedfileid (optional) numeric ID of the target file.
+</span></span><span id="242" class="l"><span class="php-comment">    * @param string $sPublishedFileId (optional) numeric ID of the target file.
 </span></span><span id="243" class="l"><span class="php-comment">    * @param string $sSteamid (optional) numeric ID of the user.  
 </span></span><span id="244" class="l"><span class="php-comment">    * 
 </span></span><span id="245" class="l"><span class="php-comment">    * @return bool
 </span></span><span id="246" class="l"><span class="php-comment">    */</span>
-</span><span id="247" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> SubscribePublishedFile(<span class="php-var">$publishedfileid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>){
-</span><span id="248" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$publishedfileid</span> == <span class="php-keyword1">null</span>){
-</span><span id="249" class="l">            <span class="php-var">$publishedfileid</span> = <span class="php-var">$this</span>-&gt;fileid;
+</span><span id="247" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> SubscribePublishedFile(<span class="php-var">$sPublishedFileId</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>){
+</span><span id="248" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sPublishedFileId</span> == <span class="php-keyword1">null</span>){
+</span><span id="249" class="l">            <span class="php-var">$sPublishedFileId</span> = <span class="php-var">$this</span>-&gt;fileid;
 </span><span id="250" class="l">        }
 </span><span id="251" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sSteamid</span> == <span class="php-keyword1">null</span>){
 </span><span id="252" class="l">            <span class="php-var">$sSteamid</span> = <span class="php-var">$this</span>-&gt;steamid;
 </span><span id="253" class="l">        }
-</span><span id="254" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="254" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="255" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="256" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="257" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="258" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$publishedfileid</span>, <span class="php-quote">&quot;steamid&quot;</span> =&gt; <span class="php-var">$sSteamid</span>))
+</span><span id="258" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$sPublishedFileId</span>, <span class="php-quote">&quot;steamid&quot;</span> =&gt; <span class="php-var">$sSteamid</span>))
 </span><span id="259" class="l">            )
 </span><span id="260" class="l">        );
-</span><span id="261" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="262" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/SubscribePublishedFile/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="263" class="l">        <span class="php-comment">//$response = json_decode($req_players);</span>
+</span><span id="261" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="262" class="l">        <span class="php-var">$fgcSubscribePublishedFile</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/SubscribePublishedFile/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="263" class="l">        <span class="php-comment">//$oSubscribePublishedFile = json_decode($fgcSubscribePublishedFile);</span>
 </span><span id="264" class="l">       
 </span><span id="265" class="l">        
 </span><span id="266" class="l">        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
@@ -382,28 +382,28 @@
 </span></span><span id="271" class="l"><span class="php-comment">    * Unsubscribe from the published file as the user
 </span></span><span id="272" class="l"><span class="php-comment">    *
 </span></span><span id="273" class="l"><span class="php-comment">    *
-</span></span><span id="274" class="l"><span class="php-comment">    * @param string $publishedfileid (optional) numeric ID of the target file.
+</span></span><span id="274" class="l"><span class="php-comment">    * @param string $sPublishedFileId (optional) numeric ID of the target file.
 </span></span><span id="275" class="l"><span class="php-comment">    * @param string $sSteamid (optional) numeric ID of the user. 
 </span></span><span id="276" class="l"><span class="php-comment">    * 
 </span></span><span id="277" class="l"><span class="php-comment">    * @return bool
 </span></span><span id="278" class="l"><span class="php-comment">    */</span>
-</span><span id="279" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> UnsubscribePublishedFile(<span class="php-var">$publishedfileid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>){
-</span><span id="280" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$publishedfileid</span> == <span class="php-keyword1">null</span>){
-</span><span id="281" class="l">            <span class="php-var">$publishedfileid</span> = <span class="php-var">$this</span>-&gt;fileid;
+</span><span id="279" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> UnsubscribePublishedFile(<span class="php-var">$sPublishedFileId</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>){
+</span><span id="280" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sPublishedFileId</span> == <span class="php-keyword1">null</span>){
+</span><span id="281" class="l">            <span class="php-var">$sPublishedFileId</span> = <span class="php-var">$this</span>-&gt;fileid;
 </span><span id="282" class="l">        }
 </span><span id="283" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sSteamid</span> == <span class="php-keyword1">null</span>){
 </span><span id="284" class="l">            <span class="php-var">$sSteamid</span> = <span class="php-var">$this</span>-&gt;steamid;
 </span><span id="285" class="l">        }
-</span><span id="286" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="286" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="287" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="288" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="289" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="290" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$publishedfileid</span>, <span class="php-quote">&quot;steamid&quot;</span> =&gt; <span class="php-var">$sSteamid</span>))
+</span><span id="290" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileid'</span> =&gt; <span class="php-var">$sPublishedFileId</span>, <span class="php-quote">&quot;steamid&quot;</span> =&gt; <span class="php-var">$sSteamid</span>))
 </span><span id="291" class="l">            )
 </span><span id="292" class="l">        );
-</span><span id="293" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="294" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/UnsubscribePublishedFile/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="295" class="l">        <span class="php-comment">//$response = json_decode($req_players);</span>
+</span><span id="293" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="294" class="l">        <span class="php-var">$fgcUnsubscribePublishedFile</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/IPublishedFileService/UnsubscribePublishedFile/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="295" class="l">        <span class="php-comment">//$oUnsubscribePublishedFile = json_decode($fgcUnsubscribePublishedFile);</span>
 </span><span id="296" class="l">       
 </span><span id="297" class="l">        
 </span><span id="298" class="l">        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
@@ -417,13 +417,13 @@
 </span></span><span id="306" class="l"><span class="php-comment">    * @deprecated
 </span></span><span id="307" class="l"><span class="php-comment">    * @return object
 </span></span><span id="308" class="l"><span class="php-comment">    */</span>
-</span><span id="309" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> QueryFiles(<span class="php-var">$query_type</span>, <span class="php-var">$numperpage</span>, <span class="php-var">$requiredtags</span>, <span class="php-var">$excludedtags</span>, <span class="php-var">$match_all_tags</span>)
+</span><span id="309" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> QueryFiles()
 </span><span id="310" class="l">    {
 </span><span id="311" class="l">        <span class="php-comment">// I have no idea which parameters should be present... Leaving as is for now</span>
-</span><span id="312" class="l">        <span class="php-var">$req_files</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://api.steampowered.com/IPublishedFileService/QueryFiles/v1?key=&quot;</span>.<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>.<span class="php-quote">&quot;&amp;steamid=&quot;</span>.<span class="php-var">$this</span>-&gt;steamid);
-</span><span id="313" class="l">        <span class="php-var">$files</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_files</span>);
+</span><span id="312" class="l">        <span class="php-var">$fgcQueryFiles</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://api.steampowered.com/IPublishedFileService/QueryFiles/v1?key=&quot;</span>.<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>.<span class="php-quote">&quot;&amp;steamid=&quot;</span>.<span class="php-var">$this</span>-&gt;steamid);
+</span><span id="313" class="l">        <span class="php-var">$oQueryFiles</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcQueryFiles</span>);
 </span><span id="314" class="l">        
-</span><span id="315" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$files</span>-&gt;response;
+</span><span id="315" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$oQueryFiles</span>-&gt;response;
 </span><span id="316" class="l">    }
 </span><span id="317" class="l">    
 </span><span id="318" class="l">    
@@ -431,27 +431,27 @@
 </span></span><span id="320" class="l"><span class="php-comment">    * Get Creator by UGC
 </span></span><span id="321" class="l"><span class="php-comment">    *
 </span></span><span id="322" class="l"><span class="php-comment">    *
-</span></span><span id="323" class="l"><span class="php-comment">    * @param string $publishedfileids (optional) numeric ID of the target file. 
+</span></span><span id="323" class="l"><span class="php-comment">    * @param string $sPublishedFileIds (optional) numeric ID of the target file. 
 </span></span><span id="324" class="l"><span class="php-comment">    * 
 </span></span><span id="325" class="l"><span class="php-comment">    * @return player
 </span></span><span id="326" class="l"><span class="php-comment">    */</span>
-</span><span id="327" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> player(<span class="php-var">$publishedfileids</span> = <span class="php-keyword1">null</span>){
-</span><span id="328" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$publishedfileids</span> == <span class="php-keyword1">null</span>){
-</span><span id="329" class="l">            <span class="php-var">$publishedfileids</span> = <span class="php-var">$this</span>-&gt;fileid;
+</span><span id="327" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> player(<span class="php-var">$sPublishedFileIds</span> = <span class="php-keyword1">null</span>){
+</span><span id="328" class="l">        <span class="php-keyword1">if</span>(<span class="php-var">$sPublishedFileIds</span> == <span class="php-keyword1">null</span>){
+</span><span id="329" class="l">            <span class="php-var">$sPublishedFileIds</span> = <span class="php-var">$this</span>-&gt;fileid;
 </span><span id="330" class="l">        }
-</span><span id="331" class="l">        <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
+</span><span id="331" class="l">        <span class="php-var">$aOptions</span> = <span class="php-keyword1">array</span>(
 </span><span id="332" class="l">            <span class="php-quote">'http'</span> =&gt; <span class="php-keyword1">array</span>(
 </span><span id="333" class="l">                <span class="php-quote">'header'</span>  =&gt; <span class="php-quote">&quot;Content-type: application/x-www-form-urlencoded\r\n&quot;</span>,
 </span><span id="334" class="l">                <span class="php-quote">'method'</span>  =&gt; <span class="php-quote">'POST'</span>,
-</span><span id="335" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileids[0]'</span> =&gt; <span class="php-var">$publishedfileids</span>, <span class="php-quote">&quot;itemcount&quot;</span> =&gt; <span class="php-num">1</span>))
+</span><span id="335" class="l">                <span class="php-quote">'content'</span> =&gt; <span class="php-keyword2">http_build_query</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'key'</span> =&gt; <span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-quote">'appid'</span> =&gt; (int)<span class="php-var">$this</span>-&gt;game, <span class="php-quote">'publishedfileids[0]'</span> =&gt; <span class="php-var">$sPublishedFileIds</span>, <span class="php-quote">&quot;itemcount&quot;</span> =&gt; <span class="php-num">1</span>))
 </span><span id="336" class="l">            )
 </span><span id="337" class="l">        );
-</span><span id="338" class="l">        <span class="php-var">$context</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$options</span>);
-</span><span id="339" class="l">        <span class="php-var">$req_players</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$context</span>);
-</span><span id="340" class="l">        <span class="php-var">$response</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$req_players</span>);
+</span><span id="338" class="l">        <span class="php-var">$cContext</span>  = <span class="php-keyword2">stream_context_create</span>(<span class="php-var">$aOptions</span>);
+</span><span id="339" class="l">        <span class="php-var">$fgcPlayer</span> = <span class="php-keyword2">file_get_contents</span>(<span class="php-quote">&quot;https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/&quot;</span>, <span class="php-keyword1">false</span>, <span class="php-var">$cContext</span>);
+</span><span id="340" class="l">        <span class="php-var">$oPlayer</span> = <span class="php-keyword2">json_decode</span>(<span class="php-var">$fgcPlayer</span>);
 </span><span id="341" class="l">       
-</span><span id="342" class="l">        <span class="php-keyword1">foreach</span>(<span class="php-var">$response</span>-&gt;response-&gt;publishedfiledetails <span class="php-keyword1">as</span> <span class="php-var">$ugc</span>){
-</span><span id="343" class="l">         <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \justinback\steam\player(<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-var">$this</span>-&gt;game, <span class="php-var">$ugc</span>-&gt;creator);   
+</span><span id="342" class="l">        <span class="php-keyword1">foreach</span>(<span class="php-var">$oPlayer</span>-&gt;response-&gt;publishedfiledetails <span class="php-keyword1">as</span> <span class="php-var">$oUgc</span>){
+</span><span id="343" class="l">         <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> \justinback\steam\player(<span class="php-var">$this</span>-&gt;<span class="php-keyword2">key</span>, <span class="php-var">$this</span>-&gt;game, <span class="php-var">$oUgc</span>-&gt;creator);   
 </span><span id="344" class="l">        }
 </span><span id="345" class="l">    }
 </span><span id="346" class="l">    

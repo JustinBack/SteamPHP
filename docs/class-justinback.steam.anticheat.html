@@ -192,7 +192,7 @@ Ban, unban and report players.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_RequestPlayerGameBan">#</a>
-			<code><a href="source-class-justinback.steam.anticheat.html#116-145" title="Go to source code">RequestPlayerGameBan</a>( <span>string <var>$cheatdescription</var></span>, <span>integer <var>$duration</var></span>, <span>boolean <var>$delayban</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-justinback.steam.anticheat.html#116-145" title="Go to source code">RequestPlayerGameBan</a>( <span>string <var>$sCheatDescription</var></span>, <span>integer <var>$iDuration</var></span>, <span>boolean <var>$bDelayBan</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Requests a game ban on a specific player.</p>
@@ -206,12 +206,12 @@ Ban, unban and report players.</p>
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$cheatdescription</var></dt>
+						<dt><var>$sCheatDescription</var></dt>
 						<dd>Text describing cheating infraction.</dd>
-						<dt><var>$duration</var></dt>
+						<dt><var>$iDuration</var></dt>
 						<dd>Ban duration requested in seconds. (duration 0 will issue infinite - less than a year is a suspension and not visible on profile)</dd>
-						<dt><var>$delayban</var></dt>
-						<dd>Delay the ban according to default ban delay rules.</dd>
+						<dt><var>$bDelayBan</var></dt>
+						<dd>(Optional) Delay the ban according to default ban delay rules.</dd>
 					</dl></div>
 
 					<h4>Returns</h4>

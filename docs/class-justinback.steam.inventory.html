@@ -190,7 +190,7 @@ AddItems etc.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_AddItem">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#95-126" title="Go to source code">AddItem</a>( <span>string <var>$itemdefid</var></span>, <span>string <var>$itempropsjson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$notify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$requestid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#95-126" title="Go to source code">AddItem</a>( <span>string <var>$sItemDefId</var></span>, <span>string <var>$sItemPropsJson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$bNotify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>AddItem is used to add new items directly in a user's inventory. For each itemdef, an instance of that type is created and added to the target account.
@@ -214,13 +214,13 @@ If the original request fails on the server, replaying the same request ID will 
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$itemdefid</var></dt>
+						<dt><var>$sItemDefId</var></dt>
 						<dd>List of the itemdefid's to grant</dd>
-						<dt><var>$itempropsjson</var></dt>
+						<dt><var>$sItemPropsJson</var></dt>
 						<dd>No description provided.</dd>
-						<dt><var>$notify</var></dt>
+						<dt><var>$bNotify</var></dt>
 						<dd>Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.</dd>
-						<dt><var>$requestid</var></dt>
+						<dt><var>$sRequestId</var></dt>
 						<dd>Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.</dd>
 					</dl></div>
 
@@ -246,7 +246,7 @@ If the original request fails on the server, replaying the same request ID will 
 
 			<td class="name"><div>
 			<a class="anchor" href="#_AddPromoItem">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#129-155" title="Go to source code">AddPromoItem</a>( <span>string <var>$itemdefid</var></span>, <span>string <var>$itempropsjson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$notify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$requestid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#129-155" title="Go to source code">AddPromoItem</a>( <span>string <var>$sItemDefId</var></span>, <span>string <var>$sItemPropsJson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$bNotify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Adds a promo item to a user's inventory</p>
@@ -258,13 +258,13 @@ If the original request fails on the server, replaying the same request ID will 
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$itemdefid</var></dt>
+						<dt><var>$sItemDefId</var></dt>
 						<dd>List of the itemdefid's to grant</dd>
-						<dt><var>$itempropsjson</var></dt>
+						<dt><var>$sItemPropsJson</var></dt>
 						<dd>No description provided.</dd>
-						<dt><var>$notify</var></dt>
+						<dt><var>$bNotify</var></dt>
 						<dd>Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.</dd>
-						<dt><var>$requestid</var></dt>
+						<dt><var>$sRequestId</var></dt>
 						<dd>Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.</dd>
 					</dl></div>
 

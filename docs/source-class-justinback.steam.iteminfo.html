@@ -342,42 +342,42 @@
 </span></span><span id="231" class="l"><span class="php-comment">    * @param string $sApiKey Steamworks Developer API Key
 </span></span><span id="232" class="l"><span class="php-comment">    * @param string $iGame Your Appid
 </span></span><span id="233" class="l"><span class="php-comment">    * @param string $sSteamid The SteamID of the user
-</span></span><span id="234" class="l"><span class="php-comment">    * @param string $itemobject To make it easier, the object will be passed so parameters wont be flooded.
+</span></span><span id="234" class="l"><span class="php-comment">    * @param string $oItemobject To make it easier, the object will be passed so parameters wont be flooded.
 </span></span><span id="235" class="l"><span class="php-comment">    *
 </span></span><span id="236" class="l"><span class="php-comment">    * @return void
 </span></span><span id="237" class="l"><span class="php-comment">    */</span>
-</span><span id="238" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$sApiKey</span> = <span class="php-keyword1">null</span>, <span class="php-var">$iGame</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$itemobject</span> = <span class="php-keyword1">null</span>)
+</span><span id="238" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$sApiKey</span> = <span class="php-keyword1">null</span>, <span class="php-var">$iGame</span> = <span class="php-keyword1">null</span>, <span class="php-var">$sSteamid</span> = <span class="php-keyword1">null</span>, <span class="php-var">$oItemobject</span> = <span class="php-keyword1">null</span>)
 </span><span id="239" class="l">    {
 </span><span id="240" class="l">        <span class="php-var">$this</span>-&gt;set_key(<span class="php-var">$sApiKey</span>);
 </span><span id="241" class="l">        <span class="php-var">$this</span>-&gt;set_game((int)<span class="php-var">$iGame</span>);
 </span><span id="242" class="l">        <span class="php-var">$this</span>-&gt;set_steamid(<span class="php-var">$sSteamid</span>);
-</span><span id="243" class="l">        <span class="php-var">$this</span>-&gt;commodity = <span class="php-var">$itemobject</span>-&gt;commodity;
-</span><span id="244" class="l">        <span class="php-var">$this</span>-&gt;date_created = <span class="php-var">$itemobject</span>-&gt;date_created;
-</span><span id="245" class="l">        <span class="php-var">$this</span>-&gt;description = <span class="php-var">$itemobject</span>-&gt;description;
-</span><span id="246" class="l">        <span class="php-var">$this</span>-&gt;display_type = <span class="php-var">$itemobject</span>-&gt;display_type;
-</span><span id="247" class="l">        <span class="php-var">$this</span>-&gt;drop_interval = <span class="php-var">$itemobject</span>-&gt;drop_interval;
-</span><span id="248" class="l">        <span class="php-var">$this</span>-&gt;drop_max_per_window = <span class="php-var">$itemobject</span>-&gt;drop_max_per_window;
-</span><span id="249" class="l">        <span class="php-var">$this</span>-&gt;<span class="php-keyword2">hash</span> = <span class="php-var">$itemobject</span>-&gt;<span class="php-keyword2">hash</span>;
-</span><span id="250" class="l">        <span class="php-var">$this</span>-&gt;icon_url = <span class="php-var">$itemobject</span>-&gt;icon_url;
-</span><span id="251" class="l">        <span class="php-var">$this</span>-&gt;icon_url_hash = <span class="php-var">$itemobject</span>-&gt;icon_url_hash;
-</span><span id="252" class="l">        <span class="php-var">$this</span>-&gt;icon_url_hash_large = <span class="php-var">$itemobject</span>-&gt;icon_url_large_hash;
-</span><span id="253" class="l">        <span class="php-var">$this</span>-&gt;icon_url_large = <span class="php-var">$itemobject</span>-&gt;icon_url_large;
-</span><span id="254" class="l">        <span class="php-var">$this</span>-&gt;item_quality = <span class="php-var">$itemobject</span>-&gt;item_quality;
-</span><span id="255" class="l">        <span class="php-var">$this</span>-&gt;item_slot = <span class="php-var">$itemobject</span>-&gt;item_slot;
-</span><span id="256" class="l">        <span class="php-var">$this</span>-&gt;itemdefid = <span class="php-var">$itemobject</span>-&gt;itemdefid;
-</span><span id="257" class="l">        <span class="php-var">$this</span>-&gt;marketable = <span class="php-var">$itemobject</span>-&gt;marketable;
-</span><span id="258" class="l">        <span class="php-var">$this</span>-&gt;modified = <span class="php-var">$itemobject</span>-&gt;modified;
-</span><span id="259" class="l">        <span class="php-var">$this</span>-&gt;name = <span class="php-var">$itemobject</span>-&gt;name;
-</span><span id="260" class="l">        <span class="php-var">$this</span>-&gt;name_color = <span class="php-var">$itemobject</span>-&gt;name_color;
-</span><span id="261" class="l">        <span class="php-var">$this</span>-&gt;price = <span class="php-var">$itemobject</span>-&gt;price;
-</span><span id="262" class="l">        <span class="php-var">$this</span>-&gt;promo = <span class="php-var">$itemobject</span>-&gt;promo;
-</span><span id="263" class="l">        <span class="php-var">$this</span>-&gt;quantity = <span class="php-var">$itemobject</span>-&gt;quantity;
-</span><span id="264" class="l">        <span class="php-var">$this</span>-&gt;store_hidden = <span class="php-var">$itemobject</span>-&gt;store_hidden;
-</span><span id="265" class="l">        <span class="php-var">$this</span>-&gt;tags = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;;&quot;</span>, <span class="php-var">$itemobject</span>-&gt;tags);
-</span><span id="266" class="l">        <span class="php-var">$this</span>-&gt;timestamp = <span class="php-var">$itemobject</span>-&gt;Timestamp;
-</span><span id="267" class="l">        <span class="php-var">$this</span>-&gt;tradable = <span class="php-var">$itemobject</span>-&gt;tradable;
-</span><span id="268" class="l">        <span class="php-var">$this</span>-&gt;type = <span class="php-var">$itemobject</span>-&gt;type;
-</span><span id="269" class="l">        <span class="php-var">$this</span>-&gt;workshopid = <span class="php-var">$itemobject</span>-&gt;workshopid;
+</span><span id="243" class="l">        <span class="php-var">$this</span>-&gt;commodity = <span class="php-var">$oItemobject</span>-&gt;commodity;
+</span><span id="244" class="l">        <span class="php-var">$this</span>-&gt;date_created = <span class="php-var">$oItemobject</span>-&gt;date_created;
+</span><span id="245" class="l">        <span class="php-var">$this</span>-&gt;description = <span class="php-var">$oItemobject</span>-&gt;description;
+</span><span id="246" class="l">        <span class="php-var">$this</span>-&gt;display_type = <span class="php-var">$oItemobject</span>-&gt;display_type;
+</span><span id="247" class="l">        <span class="php-var">$this</span>-&gt;drop_interval = <span class="php-var">$oItemobject</span>-&gt;drop_interval;
+</span><span id="248" class="l">        <span class="php-var">$this</span>-&gt;drop_max_per_window = <span class="php-var">$oItemobject</span>-&gt;drop_max_per_window;
+</span><span id="249" class="l">        <span class="php-var">$this</span>-&gt;<span class="php-keyword2">hash</span> = <span class="php-var">$oItemobject</span>-&gt;<span class="php-keyword2">hash</span>;
+</span><span id="250" class="l">        <span class="php-var">$this</span>-&gt;icon_url = <span class="php-var">$oItemobject</span>-&gt;icon_url;
+</span><span id="251" class="l">        <span class="php-var">$this</span>-&gt;icon_url_hash = <span class="php-var">$oItemobject</span>-&gt;icon_url_hash;
+</span><span id="252" class="l">        <span class="php-var">$this</span>-&gt;icon_url_hash_large = <span class="php-var">$oItemobject</span>-&gt;icon_url_large_hash;
+</span><span id="253" class="l">        <span class="php-var">$this</span>-&gt;icon_url_large = <span class="php-var">$oItemobject</span>-&gt;icon_url_large;
+</span><span id="254" class="l">        <span class="php-var">$this</span>-&gt;item_quality = <span class="php-var">$oItemobject</span>-&gt;item_quality;
+</span><span id="255" class="l">        <span class="php-var">$this</span>-&gt;item_slot = <span class="php-var">$oItemobject</span>-&gt;item_slot;
+</span><span id="256" class="l">        <span class="php-var">$this</span>-&gt;itemdefid = <span class="php-var">$oItemobject</span>-&gt;itemdefid;
+</span><span id="257" class="l">        <span class="php-var">$this</span>-&gt;marketable = <span class="php-var">$oItemobject</span>-&gt;marketable;
+</span><span id="258" class="l">        <span class="php-var">$this</span>-&gt;modified = <span class="php-var">$oItemobject</span>-&gt;modified;
+</span><span id="259" class="l">        <span class="php-var">$this</span>-&gt;name = <span class="php-var">$oItemobject</span>-&gt;name;
+</span><span id="260" class="l">        <span class="php-var">$this</span>-&gt;name_color = <span class="php-var">$oItemobject</span>-&gt;name_color;
+</span><span id="261" class="l">        <span class="php-var">$this</span>-&gt;price = <span class="php-var">$oItemobject</span>-&gt;price;
+</span><span id="262" class="l">        <span class="php-var">$this</span>-&gt;promo = <span class="php-var">$oItemobject</span>-&gt;promo;
+</span><span id="263" class="l">        <span class="php-var">$this</span>-&gt;quantity = <span class="php-var">$oItemobject</span>-&gt;quantity;
+</span><span id="264" class="l">        <span class="php-var">$this</span>-&gt;store_hidden = <span class="php-var">$oItemobject</span>-&gt;store_hidden;
+</span><span id="265" class="l">        <span class="php-var">$this</span>-&gt;tags = <span class="php-keyword2">explode</span>(<span class="php-quote">&quot;;&quot;</span>, <span class="php-var">$oItemobject</span>-&gt;tags);
+</span><span id="266" class="l">        <span class="php-var">$this</span>-&gt;timestamp = <span class="php-var">$oItemobject</span>-&gt;Timestamp;
+</span><span id="267" class="l">        <span class="php-var">$this</span>-&gt;tradable = <span class="php-var">$oItemobject</span>-&gt;tradable;
+</span><span id="268" class="l">        <span class="php-var">$this</span>-&gt;type = <span class="php-var">$oItemobject</span>-&gt;type;
+</span><span id="269" class="l">        <span class="php-var">$this</span>-&gt;workshopid = <span class="php-var">$oItemobject</span>-&gt;workshopid;
 </span><span id="270" class="l">    }
 </span><span id="271" class="l">    
 </span><span id="272" class="l">    <span class="php-comment">/**

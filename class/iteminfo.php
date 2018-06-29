@@ -231,42 +231,42 @@ class iteminfo {
     * @param string $sApiKey Steamworks Developer API Key
     * @param string $iGame Your Appid
     * @param string $sSteamid The SteamID of the user
-    * @param string $itemobject To make it easier, the object will be passed so parameters wont be flooded.
+    * @param string $oItemobject To make it easier, the object will be passed so parameters wont be flooded.
     *
     * @return void
     */
-    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $itemobject = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $oItemobject = null)
     {
         $this->set_key($sApiKey);
         $this->set_game((int)$iGame);
         $this->set_steamid($sSteamid);
-        $this->commodity = $itemobject->commodity;
-        $this->date_created = $itemobject->date_created;
-        $this->description = $itemobject->description;
-        $this->display_type = $itemobject->display_type;
-        $this->drop_interval = $itemobject->drop_interval;
-        $this->drop_max_per_window = $itemobject->drop_max_per_window;
-        $this->hash = $itemobject->hash;
-        $this->icon_url = $itemobject->icon_url;
-        $this->icon_url_hash = $itemobject->icon_url_hash;
-        $this->icon_url_hash_large = $itemobject->icon_url_large_hash;
-        $this->icon_url_large = $itemobject->icon_url_large;
-        $this->item_quality = $itemobject->item_quality;
-        $this->item_slot = $itemobject->item_slot;
-        $this->itemdefid = $itemobject->itemdefid;
-        $this->marketable = $itemobject->marketable;
-        $this->modified = $itemobject->modified;
-        $this->name = $itemobject->name;
-        $this->name_color = $itemobject->name_color;
-        $this->price = $itemobject->price;
-        $this->promo = $itemobject->promo;
-        $this->quantity = $itemobject->quantity;
-        $this->store_hidden = $itemobject->store_hidden;
-        $this->tags = explode(";", $itemobject->tags);
-        $this->timestamp = $itemobject->Timestamp;
-        $this->tradable = $itemobject->tradable;
-        $this->type = $itemobject->type;
-        $this->workshopid = $itemobject->workshopid;
+        $this->commodity = $oItemobject->commodity;
+        $this->date_created = $oItemobject->date_created;
+        $this->description = $oItemobject->description;
+        $this->display_type = $oItemobject->display_type;
+        $this->drop_interval = $oItemobject->drop_interval;
+        $this->drop_max_per_window = $oItemobject->drop_max_per_window;
+        $this->hash = $oItemobject->hash;
+        $this->icon_url = $oItemobject->icon_url;
+        $this->icon_url_hash = $oItemobject->icon_url_hash;
+        $this->icon_url_hash_large = $oItemobject->icon_url_large_hash;
+        $this->icon_url_large = $oItemobject->icon_url_large;
+        $this->item_quality = $oItemobject->item_quality;
+        $this->item_slot = $oItemobject->item_slot;
+        $this->itemdefid = $oItemobject->itemdefid;
+        $this->marketable = $oItemobject->marketable;
+        $this->modified = $oItemobject->modified;
+        $this->name = $oItemobject->name;
+        $this->name_color = $oItemobject->name_color;
+        $this->price = $oItemobject->price;
+        $this->promo = $oItemobject->promo;
+        $this->quantity = $oItemobject->quantity;
+        $this->store_hidden = $oItemobject->store_hidden;
+        $this->tags = explode(";", $oItemobject->tags);
+        $this->timestamp = $oItemobject->Timestamp;
+        $this->tradable = $oItemobject->tradable;
+        $this->type = $oItemobject->type;
+        $this->workshopid = $oItemobject->workshopid;
     }
     
     /**

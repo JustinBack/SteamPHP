@@ -151,7 +151,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#40-58" title="Go to source code">__construct</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#40-58" title="Go to source code">__construct</a>( <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -163,7 +163,7 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$publishedfileid</var></dt>
+						<dt><var>$sPublishedFileId</var></dt>
 						<dd>UGC File ID</dd>
 						<dt><var>$sApiKey</var></dt>
 						<dd>Steamworks Developer API Key</dd>
@@ -191,7 +191,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UpdateBanStatus">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#117-144" title="Go to source code">UpdateBanStatus</a>( <span>boolean <var>$banned</var></span>, <span>string <var>$reason</var></span>, <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#117-144" title="Go to source code">UpdateBanStatus</a>( <span>boolean <var>$bBanned</var></span>, <span>string <var>$sReason</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Update Ban Status of a UGC</p>
@@ -203,11 +203,11 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$banned</var></dt>
+						<dt><var>$bBanned</var></dt>
 						<dd>Is banned or not</dd>
-						<dt><var>$reason</var></dt>
+						<dt><var>$sReason</var></dt>
 						<dd>Reason why the item was banned. Only visible to admins.</dd>
-						<dt><var>$publishedfileid</var></dt>
+						<dt><var>$sPublishedFileId</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
 					</dl></div>
 
@@ -233,7 +233,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UpdateIncompatibleStatus">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#147-174" title="Go to source code">UpdateIncompatibleStatus</a>( <span>boolean <var>$incompatible</var></span>, <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#147-174" title="Go to source code">UpdateIncompatibleStatus</a>( <span>boolean <var>$bIncompatible</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Updates the incompatible status on the published file. "Incompatible" items are hidden from community hubs and user profiles, but can still be accessed by a direct link.</p>
@@ -245,9 +245,9 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$incompatible</var></dt>
+						<dt><var>$bIncompatible</var></dt>
 						<dd>Is banned or not</dd>
-						<dt><var>$publishedfileid</var></dt>
+						<dt><var>$sPublishedFileId</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
 					</dl></div>
 
@@ -273,7 +273,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UpdateTags">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#177-205" title="Go to source code">UpdateTags</a>( <span>array <var>$add_tags</var></span>, <span>array <var>$remove_tags</var></span>, <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#177-205" title="Go to source code">UpdateTags</a>( <span>array <var>$aAddTags</var></span>, <span>array <var>$aRemoveTags</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Updates tags on the published file</p>
@@ -285,11 +285,11 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$add_tags</var></dt>
+						<dt><var>$aAddTags</var></dt>
 						<dd>Tags array("Maps", "Another Tag")</dd>
-						<dt><var>$remove_tags</var></dt>
+						<dt><var>$aRemoveTags</var></dt>
 						<dd>Tags array("Tag", "Another Tag")</dd>
-						<dt><var>$publishedfileid</var></dt>
+						<dt><var>$sPublishedFileId</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
 					</dl></div>
 
@@ -315,7 +315,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetPublishedFileDetails">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#209-235" title="Go to source code">GetPublishedFileDetails</a>( <span>string <var>$publishedfileids</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#209-235" title="Go to source code">GetPublishedFileDetails</a>( <span>string <var>$sPublishedFileIds</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Get File Info</p>
@@ -327,7 +327,7 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$publishedfileids</var></dt>
+						<dt><var>$sPublishedFileIds</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
 					</dl></div>
 
@@ -353,7 +353,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_SubscribePublishedFile">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#238-267" title="Go to source code">SubscribePublishedFile</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#238-267" title="Go to source code">SubscribePublishedFile</a>( <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Subscribe to the published file as the user</p>
@@ -365,7 +365,7 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$publishedfileid</var></dt>
+						<dt><var>$sPublishedFileId</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
 						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) numeric ID of the user.</dd>
@@ -393,7 +393,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UnsubscribePublishedFile">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#270-299" title="Go to source code">UnsubscribePublishedFile</a>( <span>string <var>$publishedfileid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#270-299" title="Go to source code">UnsubscribePublishedFile</a>( <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Unsubscribe from the published file as the user</p>
@@ -405,7 +405,7 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$publishedfileid</var></dt>
+						<dt><var>$sPublishedFileId</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
 						<dt><var>$sSteamid</var></dt>
 						<dd>(optional) numeric ID of the user.</dd>
@@ -433,7 +433,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_QueryFiles">#</a>
-			<code class="deprecated"><a href="source-class-justinback.steam.ugc.html#302-316" title="Go to source code">QueryFiles</a>( <span> <var>$query_type</var></span>, <span> <var>$numperpage</var></span>, <span> <var>$requiredtags</var></span>, <span> <var>$excludedtags</var></span>, <span> <var>$match_all_tags</var></span> )</code>
+			<code class="deprecated"><a href="source-class-justinback.steam.ugc.html#302-316" title="Go to source code">QueryFiles</a>( )</code>
 
 			<div class="description short">
 				<p>Performs a search query for published files</p>
@@ -473,7 +473,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_player">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#319-345" title="Go to source code">player</a>( <span>string <var>$publishedfileids</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#319-345" title="Go to source code">player</a>( <span>string <var>$sPublishedFileIds</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Get Creator by UGC</p>
@@ -485,7 +485,7 @@
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$publishedfileids</var></dt>
+						<dt><var>$sPublishedFileIds</var></dt>
 						<dd>(optional) numeric ID of the target file.</dd>
 					</dl></div>
 

@@ -98,23 +98,23 @@ class leaderboards
     * Delete a leaderboard from your App
     *
     *
-    * @param string $name name of the leaderboard to delete
+    * @param string $sName name of the leaderboard to delete
     *
     * @return bool
     */
-    public function DeleteLeaderboard($name){
-        $options = array(
+    public function DeleteLeaderboard($sName){
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'name' => $name))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'name' => $sName))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/DeleteLeaderboard/v1/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcDeleteLeaderboard = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/DeleteLeaderboard/v1/", false, $cContext);
+        $oDeleteLeaderboard = json_decode($fgcDeleteLeaderboard);
         
-        if($response->result->result != 1){
+        if($oDeleteLeaderboard->result->result != 1){
          return false;   
         }
         return true;
@@ -125,28 +125,28 @@ class leaderboards
     * Create a leaderboard for your App
     *
     *
-    * @param string $name name of the leaderboard to create
-    * @param string $sortmethod sort method to use for this leaderboard (defaults to Ascending)
-    * @param string $displaytype display type for this leaderboard (defaults to Numeric)
-    * @param bool $createifnotfound if this is true the leaderboard will be created if it doesn't exist. Defaults to true.
-    * @param bool $onlytrustedwrites if this is true the leaderboard scores cannot be set by clients, and can only be set by publisher via SetLeaderboardScore WebAPI. Defaults to false.
-    * @param bool $onlyfriendsreads if this is true the leaderboard scores can only be read for friends by clients, scores can always be read by publisher. Defaults to false.
+    * @param string $sName name of the leaderboard to create
+    * @param string $sSortMethod sort method to use for this leaderboard (defaults to Ascending)
+    * @param string $sDisplayType display type for this leaderboard (defaults to Numeric)
+    * @param bool $bCreateIfNotFound if this is true the leaderboard will be created if it doesn't exist. Defaults to true.
+    * @param bool $bOnlyTrustedWrites if this is true the leaderboard scores cannot be set by clients, and can only be set by publisher via SetLeaderboardScore WebAPI. Defaults to false.
+    * @param bool $bOnlyFriendsReads if this is true the leaderboard scores can only be read for friends by clients, scores can always be read by publisher. Defaults to false.
     *
     * @return object
     */
-    public function FindOrCreateLeaderboard($name, $sortmethod = "Ascending", $displaytype = "Numeric", $createifnotfound = true, $onlytrustedwrites = false, $onlyfriendsreads = false){
-        $options = array(
+    public function FindOrCreateLeaderboard($sName, $sSortMethod = "Ascending", $sDisplayType = "Numeric", $bCreateIfNotFound = true, $bOnlyTrustedWrites = false, $bOnlyFriendsReads = false){
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'name' => $name, 'sortmethod' => $sortmethod, 'displaytype' => $displaytype, 'createifnotfound' => $createifnotfound, 'onlytrustedwrites' => $onlytrustedwrites, 'onlyfriendsreads' => $onlyfriendsreads))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'name' => $sName, 'sortmethod' => $sSortMethod, 'displaytype' => $sDisplayType, 'createifnotfound' => $bCreateIfNotFound, 'onlytrustedwrites' => $bOnlyTrustedWrites, 'onlyfriendsreads' => $bOnlyFriendsReads))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/FindOrCreateLeaderboard/v2/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcFindOrCreateLeaderboard = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/FindOrCreateLeaderboard/v2/", false, $cContext);
+        $oFindOrCreateLeaderboard = json_decode($fgcFindOrCreateLeaderboard);
         
-        return $response->result;
+        return $oFindOrCreateLeaderboard->result;
     }
     
     
@@ -154,23 +154,23 @@ class leaderboards
     * Reset a leaderboard for your App
     *
     *
-    * @param string $leaderboardid numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
+    * @param string $sLeaderboardId numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
     * 
     * @return bool
     */
-    public function ResetLeaderboard($leaderboardid){
-        $options = array(
+    public function ResetLeaderboard($sLeaderboardId){
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'leaderboardid' => $leaderboardid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'leaderboardid' => $sLeaderboardId))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/ResetLeaderboard/v1/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcResetLeaderboard = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/ResetLeaderboard/v1/", false, $cContext);
+        $oResetLeaderboard = json_decode($fgcResetLeaderboard);
         
-         if($response->result->result != 1){
+         if($oResetLeaderboard->result->result != 1){
          return false;   
         }
         return true;
@@ -180,31 +180,31 @@ class leaderboards
     * Set a score for your leaderboard for your App
     *
     *
-    * @param string $leaderboardid numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
-    * @param string $score the score to set for this user
-    * @param string $scoremethod update method to use. Can be "KeepBest" or "ForceUpdate"
-    * @param rawbytes $details (optional) game-specific details for how the score was earned. Up to 256 bytes.
+    * @param string $sLeaderboardId numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
+    * @param string $sScore the score to set for this user
+    * @param string $sScoreMethod update method to use. Can be "KeepBest" or "ForceUpdate"
+    * @param rawbytes $rDetails (optional) game-specific details for how the score was earned. Up to 256 bytes.
     * @param string $sSteamid (optional) steamID to set the score for 
     * 
     * @return object
     */
-    public function SetLeaderboardScore($leaderboardid, $score, $scoremethod, $details = null, $sSteamid = null){
+    public function SetLeaderboardScore($sLeaderboardId, $sScore, $sScoreMethod, $rDetails = null, $sSteamid = null){
         if($sSteamid == null){
             $sSteamid = $this->steamid;
         }
-        $options = array(
+        $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'leaderboardid' => $leaderboardid, 'steamid' => $sSteamid, 'score' => $score, 'scoremethod' => $scoremethod, 'details' => $details))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'leaderboardid' => $sLeaderboardId, 'steamid' => $sSteamid, 'score' => $sScore, 'scoremethod' => $sScoreMethod, 'details' => $rDetails))
             )
         );
-        $context  = stream_context_create($options);
-        $req_players = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/SetLeaderboardScore/v1/", false, $context);
-        $response = json_decode($req_players);
+        $cContext  = stream_context_create($aOptions);
+        $fgcSetLeaderboardScore = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/SetLeaderboardScore/v1/", false, $cContext);
+        $oSetLeaderboardScore = json_decode($fgcSetLeaderboardScore);
        
         
-        return $response->result;
+        return $oSetLeaderboardScore->result;
     }
     
     /**
@@ -215,9 +215,9 @@ class leaderboards
     * @return object
     */
     public function GetLeaderboardsForGame(){
-        $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardsForGame/v2?key=".$this->key."&appid=".(int)$this->game. "&". time());
-        $resp = json_decode($req_lb);
-        return $resp->response->leaderboards;
+        $fgcGetLeaderboardsForGame = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardsForGame/v2?key=".$this->key."&appid=".(int)$this->game. "&". time());
+        $oGetLeaderboardsForGame = json_decode($fgcGetLeaderboardsForGame);
+        return $oGetLeaderboardsForGame->response->leaderboards;
     }
     
     
@@ -226,22 +226,22 @@ class leaderboards
     * Get all leaderboard entries from your App
     *
     *
-    * @param int $leaderboardid ID of the leaderboard to view
-    * @param string $datarequest type of request: RequestGlobal, RequestAroundUser, RequestFriends
-    * @param int $rangestart range start or 0
-    * @param int $rangend range end or max LB entries
+    * @param int $sLeaderboardId ID of the leaderboard to view
+    * @param string $sDataRequest type of request: RequestGlobal, RequestAroundUser, RequestFriends
+    * @param int $iRangeStart range start or 0
+    * @param int $iRangeEnd range end or max LB entries
     * @param bool $sSteamid Use SteamID to lookup or not
     * 
     * 
     * @return array
     */
-    public function GetLeaderboardEntries($leaderboardid, $datarequest, $rangestart, $rangend, $sSteamid = true){
-        $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=".$this->key."&appid=".(int)$this->game. "&". time(). "&leaderboardid=".$leaderboardid. "&datarequest=". $datarequest. "&rangestart=". $rangestart. "&rangeend=". $rangend);
+    public function GetLeaderboardEntries($sLeaderboardId, $sDataRequest, $iRangeStart, $iRangeEnd, $sSteamid = true){
+        $fgcGetLeaderboardEntries = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=".$this->key."&appid=".(int)$this->game. "&". time(). "&leaderboardid=".$sLeaderboardId. "&datarequest=". $sDataRequest. "&rangestart=". $iRangeStart. "&rangeend=". $iRangeEnd);
         if($sSteamid){
-        $req_lb = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=".$this->key."&appid=".(int)$this->game. "&". time(). "&leaderboardid=".$leaderboardid. "&datarequest=". $datarequest. "&rangestart=". $rangestart. "&rangeend=". $rangend. "&steamid=". $this->steamid);
+        $fgcGetLeaderboardEntries = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=".$this->key."&appid=".(int)$this->game. "&". time(). "&leaderboardid=".$sLeaderboardId. "&datarequest=". $sDataRequest. "&rangestart=". $iRangeStart. "&rangeend=". $iRangeEnd. "&steamid=". $this->steamid);
         }
-        $resp = json_decode($req_lb);
-        return $resp->leaderboardEntryInformation->leaderboardEntries;
+        $oGetLeaderboardEntries = json_decode($fgcGetLeaderboardEntries);
+        return $oGetLeaderboardEntries->leaderboardEntryInformation->leaderboardEntries;
     }
     
     

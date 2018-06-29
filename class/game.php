@@ -103,13 +103,13 @@ class game {
     */
     public function CheckAppOwnership()
     {
-        $req_owner = file_get_contents("https://api.steampowered.com/ISteamUser/GetPublisherAppOwnership/v2?key=".$this->key."&steamid=".$this->steamid);
-        $appownership = json_decode($req_owner);
+        $fgcCheckAppOwnership = file_get_contents("https://api.steampowered.com/ISteamUser/GetPublisherAppOwnership/v2?key=".$this->key."&steamid=".$this->steamid);
+        $oCheckAppOwnership = json_decode($fgcCheckAppOwnership);
         
-        foreach ($appownership->appownership->apps as $app)
+        foreach ($oCheckAppOwnership->appownership->apps as $oApp)
             {
-                if($app->appid == $this->game){
-                    return (bool)$app->ownsapp;
+                if($oApp->appid == $this->game){
+                    return (bool)$oApp->ownsapp;
                 }
             }
     }
@@ -122,9 +122,9 @@ class game {
     * @return int
     */
     public function GetNumberOfCurrentPlayers(){
-        $req_players = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1?key=".$this->key."&appid=".(int)$this->game);
-        $GetNumberOfCurrentPlayers = json_decode($req_players);
-        return $GetNumberOfCurrentPlayers->response->player_count;
+        $fgcGetNumberOfCurrentPlayers = file_get_contents("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1?key=".$this->key."&appid=".(int)$this->game);
+        $oGetNumberOfCurrentPlayers = json_decode($fgcGetNumberOfCurrentPlayers);
+        return $oGetNumberOfCurrentPlayers->response->player_count;
     }
     
     /**
@@ -178,14 +178,14 @@ class game {
     /**
     * ugc object.
     *
-    * @param string $publishedfileid (optional) set a different publishedfileid than the construct
+    * @param string $sPublishedFileId The ID of the File
     * @param string $sApiKey (optional) set a different apikey than the construct
     * @param string $iGame (optional) set a different appid than the construct
     * @param string $sSteamid (optional) set a different steamid than the construct
     * 
     * @return ugc
     */
-    public function ugc($publishedfileid, $sApiKey = null, $iGame = null, $sSteamid = null)
+    public function ugc($sPublishedFileId, $sApiKey = null, $iGame = null, $sSteamid = null)
     {
         if($sApiKey === null){
             $sApiKey = $this->key;
@@ -196,7 +196,7 @@ class game {
         if($sSteamid === null){
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\ugc($publishedfileid, $sApiKey,$iGame,$sSteamid);
+        return new \justinback\steam\ugc($sPublishedFileId, $sApiKey,$iGame,$sSteamid);
     }
     
     
@@ -237,12 +237,12 @@ class game {
             $iGame = $this->game;
         }
         
-        $req_players = file_get_contents("https://store.steampowered.com/api/appdetails?appids=".(int)$iGame);
-        $GetNumberOfCurrentPlayers = json_decode($req_players);
-        $store = $GetNumberOfCurrentPlayers->$iGame->data;
+        $fgcStore = file_get_contents("https://store.steampowered.com/api/appdetails?appids=".(int)$iGame);
+        $oStore = json_decode($fgcStore);
+        $oStore = $oStore->$iGame->data;
         
-        if($GetNumberOfCurrentPlayers->$iGame->success){
-        return new \justinback\steam\store($iGame, $store->name, $store->type, $store->required_age, $store->is_free, $store->detailed_description, $store->about_the_game, $store->short_description, $store->developers, $store->publishers, $store->dlc);
+        if($oStore->$iGame->success){
+        return new \justinback\steam\store($iGame, $oStore->name, $oStore->type, $oStore->required_age, $oStore->is_free, $oStore->detailed_description, $oStore->about_the_game, $oStore->short_description, $oStore->developers, $oStore->publishers, $oStore->dlc);
         }
         return false;
     }

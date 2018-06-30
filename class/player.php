@@ -32,6 +32,20 @@ class player {
     */
     private $steamid = null;
     
+    /**
+    * The Community Name of the User
+    * @since 1.0.6
+    * Added because why not heh?
+    */
+    public $personaname = null;
+    
+    /**
+    * The Real Name of the User
+    * @since 1.0.6
+    * Added because why not heh?
+    */
+    public $realname = null;
+    
     
     /**
     * Construction of the variables steamid, key and game
@@ -49,6 +63,8 @@ class player {
         $this->set_game((int)$iGame);
         $this->set_steamid($sSteamid);
         
+        $this->personaname = $this->GetPersonaName();
+        $this->realname = $this->GetRealName();
     }
     
     /**

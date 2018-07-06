@@ -246,7 +246,7 @@
 </span></span><span id="135" class="l"><span class="php-comment">    */</span>
 </span><span id="136" class="l">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> GetSteamIDs(){
 </span><span id="137" class="l">        
-</span><span id="138" class="l">        <span class="php-var">$iUniverse</span> = <span class="php-num">1</span>;
+</span><span id="138" class="l">        <span class="php-var">$iUniverse</span> = (<span class="php-var">$this</span>-&gt;steamid &gt;&gt; <span class="php-num">56</span>) &amp; <span class="php-num">0xFF</span>;
 </span><span id="139" class="l">        <span class="php-var">$iBAccountID</span> = <span class="php-num">0</span>;
 </span><span id="140" class="l">        <span class="php-var">$iHAccountID</span> = <span class="php-num">0</span>;
 </span><span id="141" class="l">        
@@ -257,7 +257,7 @@
 </span><span id="146" class="l">        <span class="php-var">$oSteamIDs</span>-&gt;steamID = <span class="php-quote">&quot;STEAM_</span><span class="php-var">$iUniverse</span><span class="php-quote">:</span><span class="php-var">$iBAccountID</span><span class="php-quote">:</span><span class="php-var">$iHAccountID</span><span class="php-quote">&quot;</span>;
 </span><span id="147" class="l">                <span class="php-var">$oSteamIDs</span>-&gt;steamID64 = <span class="php-var">$this</span>-&gt;steamid;
 </span><span id="148" class="l">                <span class="php-var">$oSteamIDs</span>-&gt;steamAccountID = (<span class="php-keyword2">substr</span>(<span class="php-var">$oSteamIDs</span>-&gt;steamID64, <span class="php-num">7</span>) - <span class="php-num">7960265728</span>);
-</span><span id="149" class="l">                <span class="php-var">$oSteamIDs</span>-&gt;steamID32 = <span class="php-quote">&quot;[U:</span><span class="php-var">$iUniverse</span><span class="php-quote">:</span><span class="php-var">$oSteamIDs</span><span class="php-quote">-&gt;steamAccountID]&quot;</span>;
+</span><span id="149" class="l">                <span class="php-var">$oSteamIDs</span>-&gt;steamID32 = <span class="php-quote">&quot;[U:1:</span><span class="php-var">$oSteamIDs</span><span class="php-quote">-&gt;steamAccountID]&quot;</span>;
 </span><span id="150" class="l">                
 </span><span id="151" class="l">                
 </span><span id="152" class="l">        <span class="php-keyword1">return</span> <span class="php-var">$oSteamIDs</span>;

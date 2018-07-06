@@ -135,7 +135,7 @@ class player {
     */
     public function GetSteamIDs(){
         
-        $iUniverse = 1;
+        $iUniverse = ($this->steamid >> 56) & 0xFF;
         $iBAccountID = 0;
         $iHAccountID = 0;
         
@@ -146,7 +146,7 @@ class player {
 		$oSteamIDs->steamID = "STEAM_$iUniverse:$iBAccountID:$iHAccountID";
                 $oSteamIDs->steamID64 = $this->steamid;
                 $oSteamIDs->steamAccountID = (substr($oSteamIDs->steamID64, 7) - 7960265728);
-                $oSteamIDs->steamID32 = "[U:$iUniverse:$oSteamIDs->steamAccountID]";
+                $oSteamIDs->steamID32 = "[U:1:$oSteamIDs->steamAccountID]";
                 
                 
         return $oSteamIDs;

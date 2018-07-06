@@ -126,6 +126,34 @@ class player {
     
     
     /**
+    * Get the SteamID's in an object (steamID, steamID64, steamID32, steamAccountID)
+    *
+    * @link https://secure.php.net/manual/en/bc.setup.php Requires BCMath!
+    * @see <a href="https://developer.valvesoftware.com/wiki/SteamID">SteamID Valve Wiki</a>
+    * 
+    * @return object
+    */
+    public function GetSteamIDs(){
+        
+        $iUniverse = 1;
+        $iBAccountID = 0;
+        $iHAccountID = 0;
+        
+        $oSteamIDs = new \stdClass();
+        
+        
+        if (((substr($this->steamid, 7) - 7960265728) % 2) == 0) { $iHAccountID = ((substr($this->steamid, 7) - 7960265728) / 2); } else { $iBAccountID = 1; $iHAccountID = (((substr($this->steamid, 7) - 7960265728) - 1) / 2); }
+		$oSteamIDs->steamID = "STEAM_$iUniverse:$iBAccountID:$iHAccountID";
+                $oSteamIDs->steamID64 = $this->steamid;
+                $oSteamIDs->steamAccountID = (substr($oSteamIDs->steamID64, 7) - 7960265728);
+                $oSteamIDs->steamID32 = "[U:$iUniverse:$oSteamIDs->steamAccountID]";
+                
+                
+        return $oSteamIDs;
+    }
+    
+    
+    /**
     * Get the Avatar in an object (small, medium, full)
     *
     *

@@ -157,6 +157,30 @@ class inventory {
     
     
     /**
+    * Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call. 
+    *
+    * @todo This Method is broken as of 7/13/2018
+    * @param string $sInputJson No description provided
+    * @param int $iTimestamp Unix timestamp of the request. An error will be returned if the items have been modified since this request time. Must be specified in the input_json parameter.
+    * @param message $mUpdates The list of items and properties being modified. Must be specified in the input_json parameter.
+    *
+    * @return nothing
+    */
+    public function ModifyItems($sInputJson, $iTimestamp, $mUpdates){
+        $aOptions = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid))
+            )
+        );
+        $cContext  = stream_context_create($aOptions);
+        $fgcModifyItems = file_get_contents("https://partner.steam-api.com/IInventoryService/ModifyItems/v1/", false, $cContext);
+        $oModifyItems = json_decode(json_decode($fgcModifyItems)->response->item_json);
+    }
+    
+    
+    /**
     * GetInventory is used to retrieve a user's inventory 
     *
     * 

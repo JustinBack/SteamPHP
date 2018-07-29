@@ -157,6 +157,33 @@ class inventory {
     
     
     /**
+    * Consolidate items of the given type within an user's inventory.
+    * Whenever items are combined into a stack, the resulting stack takes the market and trade restriction values of the most-restricted item. The Consolidate action ignores any item with an active market or trade restriction, unless 'force' is set to true. 
+    *
+    * @param array $aItemDefId No description provided
+    * @param bool $bForce Unix timestamp of the request. An error will be returned if the items have been modified since this request time. Must be specified in the input_json parameter.
+    *
+    * @return item array
+    */
+    public function Consolidate($aItemDefId, $bForce = false){
+        $aArray = array();
+        $aOptions = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemdefid' => $aItemDefId, 'force' => $bForce))
+            )
+        );
+        $cContext  = stream_context_create($aOptions);
+        $fgcConsolidate = file_get_contents("https://partner.steam-api.com/IInventoryService/Consolidate/v1/", false, $cContext);
+        
+        foreach (json_decode(json_decode($fgcConsolidate)->response->item_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp));
+        }
+        return $aArray;
+    }
+    
+    /**
     * Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call. 
     *
     * @todo This Method is broken as of 7/13/2018

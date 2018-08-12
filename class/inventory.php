@@ -204,6 +204,7 @@ class inventory {
     * @return array
     */
     public function ModifyItems($sInputJson, $iTimestamp = 0){
+        $aArray = array();
         $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -214,7 +215,11 @@ class inventory {
         $cContext  = stream_context_create($aOptions);
         $fgcModifyItems = file_get_contents("https://partner.steam-api.com/IInventoryService/ModifyItems/v1/", false, $cContext);
         $oModifyItems = json_decode($fgcModifyItems);
-        return $oModifyItems->response;
+        
+        foreach (json_decode($oModifyItems->response->item_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
+        }
+        return $aArray;
     }
     
     

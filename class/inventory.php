@@ -188,22 +188,33 @@ class inventory {
     *
     * @todo This Method is broken as of 7/13/2018
     * @param string $sInputJson No description provided
-    * @param int $iTimestamp Unix timestamp of the request. An error will be returned if the items have been modified since this request time. Must be specified in the input_json parameter.
-    * @param message $mUpdates The list of items and properties being modified. Must be specified in the input_json parameter.
+    * @param int $iTimestamp Unix timestamp of the request. An error will be returned if the items have been modified since this request time.
     *
-    * @return nothing
+    * 
+    * Example InputJson
+    * 
+    * array(
+    *		array(
+    *			'itemid' => "1955010841396664607",
+    *			'property_name' => "My_Property_Name",
+    *			'property_value_string' => "Hello test test!"
+    *		)
+    *	)
+    * 
+    * @return array
     */
-    public function ModifyItems($sInputJson, $iTimestamp, $mUpdates){
+    public function ModifyItems($sInputJson, $iTimestamp = 0){
         $aOptions = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'input_json' => json_encode(array("steamid" => $this->steamid, "timestamp" => $iTimestamp, "updates" => $sInputJson))))
             )
         );
         $cContext  = stream_context_create($aOptions);
         $fgcModifyItems = file_get_contents("https://partner.steam-api.com/IInventoryService/ModifyItems/v1/", false, $cContext);
-        $oModifyItems = json_decode(json_decode($fgcModifyItems)->response->item_json);
+        $oModifyItems = json_decode($fgcModifyItems);
+        return $oModifyItems->response;
     }
     
     
@@ -219,7 +230,7 @@ class inventory {
         $oGetInventory = json_decode($fgcGetInventory);
 
         foreach (json_decode($oGetInventory->response->item_json) as $oResponse){
-            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp));
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
         }
         return $aArray;
     }

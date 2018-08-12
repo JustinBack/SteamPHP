@@ -82,6 +82,13 @@ class item {
     */
     public $state_changed_timestamp = null;
     
+    /**
+     * The dynamic properties of the item
+     * 
+     * 
+     */
+    public $dynamic_props = null;
+    
     
     
     /**
@@ -101,7 +108,7 @@ class item {
     *
     * @return void
     */
-    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sItemId = null, $iQuantity = null, $sItemDefId = null, $sAcquired = null, $sState = null, $sOrigin = null, $sStateChangedTimestamp = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sItemId = null, $iQuantity = null, $sItemDefId = null, $sAcquired = null, $sState = null, $sOrigin = null, $sStateChangedTimestamp = null, $aDynamicProps = array())
     {
         $this->set_key($sApiKey);
         $this->set_game((int)$iGame);
@@ -113,6 +120,7 @@ class item {
         $this->set_state($sState);
         $this->set_origin($sOrigin);
         $this->set_state_changed_timestamp($sStateChangedTimestamp);
+        $this->set_dynamic_props($aDynamicProps);
     }
     
     /**
@@ -141,7 +149,18 @@ class item {
     {
         $this->game = $iGame;
     }
-    
+    /**
+    * Setting Dynamic Props from the construct
+    *
+    *
+    * @param string $aDynamicProps The Dynamic props as an array
+    *
+    * @return void
+    */
+    private function set_dynamic_props($aDynamicProps)
+    {
+        $this->dynamic_props = $aDynamicProps;
+    }
     
     /**
     * Setting SteamID from the construct

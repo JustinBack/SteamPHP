@@ -133,7 +133,7 @@ See \justinback\steam\inventory</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.item.html#10-304" title="Go to source code">class/item.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.item.html#10-360" title="Go to source code">class/item.php</a>
 		<br>
 	</div>
 
@@ -153,7 +153,7 @@ See \justinback\steam\inventory</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.item.html#87-116" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sItemId</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$iQuantity</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sItemDefId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sAcquired</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sState</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sOrigin</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sStateChangedTimestamp</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.item.html#94-124" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sItemId</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$iQuantity</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sItemDefId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sAcquired</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sState</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sOrigin</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sStateChangedTimestamp</var> = <span class="php-keyword1">null</span></span>, <span> <var>$aDynamicProps</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables</p>
@@ -185,6 +185,8 @@ See \justinback\steam\inventory</p>
 						<dd>Item Origin, e.g external</dd>
 						<dt><var>$sStateChangedTimestamp</var></dt>
 						<dd>Timestamp since latest change</dd>
+						<dt><var>$aDynamicProps</var></dt>
+						<dd></dd>
 					</dl></div>
 
 
@@ -205,7 +207,7 @@ See \justinback\steam\inventory</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ConsumeItem">#</a>
-			<code><a href="source-class-justinback.steam.item.html#257-279" title="Go to source code">ConsumeItem</a>( <span>string <var>$iQuantity</var></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.item.html#276-298" title="Go to source code">ConsumeItem</a>( <span>string <var>$iQuantity</var></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Marks an item as wholly or partially consumed. This action cannot be reversed.</p>
@@ -234,6 +236,56 @@ See \justinback\steam\inventory</p>
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="ModifyItem" id="_ModifyItem">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_ModifyItem">#</a>
+			<code><a href="source-class-justinback.steam.item.html#301-335" title="Go to source code">ModifyItem</a>( <span>string <var>$sPropertyName</var></span>, <span>string <var>$sPropertyValue</var></span>, <span>boolean <var>$bRemoveProperty</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sPropertyValueType</var> = <span class="php-quote">&quot;property_value_string&quot;</span></span>, <span>integer <var>$iTimestamp</var> = <span class="php-num">0</span></span> )</code>
+
+			<div class="description short">
+				<p>Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sPropertyName</var></dt>
+						<dd>Name of the dynamic property</dd>
+						<dt><var>$sPropertyValue</var></dt>
+						<dd>The value of the property</dd>
+						<dt><var>$bRemoveProperty</var></dt>
+						<dd>Remove the property? Default false</dd>
+						<dt><var>$sPropertyValueType</var></dt>
+						<dd>Type of the property, see Steamworks docs. Default property_value_string</dd>
+						<dt><var>$iTimestamp</var></dt>
+						<dd>Unix timestamp of the request. An error will be returned if the items have been modified since this request time.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>array
+					</div>
+
+
+					<h4>Todo</h4>
+					<div class="list">
+							This Method is broken as of 7/13/2018<br>
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="iteminfo" id="_iteminfo">
 
 			<td class="attributes"><code>
@@ -245,7 +297,7 @@ See \justinback\steam\inventory</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_iteminfo">#</a>
-			<code><a href="source-class-justinback.steam.item.html#282-301" title="Go to source code">iteminfo</a>( )</code>
+			<code><a href="source-class-justinback.steam.item.html#338-357" title="Go to source code">iteminfo</a>( )</code>
 
 			<div class="description short">
 				<p>Iteminfo object.</p>
@@ -479,6 +531,31 @@ See \justinback\steam\inventory</p>
 			<td class="value">
 				<div>
 					<a href="#$state_changed_timestamp" class="anchor">#</a>
+					<code><span class="php-keyword1">null</span></code>
+				</div>
+			</td>
+		</tr>
+		<tr data-order="dynamic_props" id="$dynamic_props">
+			<td class="attributes"><code>
+				public  
+				
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-justinback.steam.item.html#85-90" title="Go to source code"><var>$dynamic_props</var></a>
+
+				<div class="description short">
+					<p>The dynamic properties of the item</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>The dynamic properties of the item</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$dynamic_props" class="anchor">#</a>
 					<code><span class="php-keyword1">null</span></code>
 				</div>
 			</td>

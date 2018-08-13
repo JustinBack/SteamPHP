@@ -82,6 +82,13 @@ class item {
     */
     public $state_changed_timestamp = null;
     
+    /**
+     * The dynamic properties of the item
+     * 
+     * 
+     */
+    public $dynamic_props = null;
+    
     
     
     /**
@@ -101,7 +108,7 @@ class item {
     *
     * @return void
     */
-    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sItemId = null, $iQuantity = null, $sItemDefId = null, $sAcquired = null, $sState = null, $sOrigin = null, $sStateChangedTimestamp = null)
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sItemId = null, $iQuantity = null, $sItemDefId = null, $sAcquired = null, $sState = null, $sOrigin = null, $sStateChangedTimestamp = null, $aDynamicProps = array())
     {
         $this->set_key($sApiKey);
         $this->set_game((int)$iGame);
@@ -113,6 +120,7 @@ class item {
         $this->set_state($sState);
         $this->set_origin($sOrigin);
         $this->set_state_changed_timestamp($sStateChangedTimestamp);
+        $this->set_dynamic_props($aDynamicProps);
     }
     
     /**
@@ -141,7 +149,18 @@ class item {
     {
         $this->game = $iGame;
     }
-    
+    /**
+    * Setting Dynamic Props from the construct
+    *
+    *
+    * @param string $aDynamicProps The Dynamic props as an array
+    *
+    * @return void
+    */
+    private function set_dynamic_props($aDynamicProps)
+    {
+        $this->dynamic_props = $aDynamicProps;
+    }
     
     /**
     * Setting SteamID from the construct
@@ -276,6 +295,43 @@ class item {
         foreach($oConsumeItem as $oResponse){
             return new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
         }
+    }
+    
+    
+    /**
+    * Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call. 
+    *
+    * @todo This Method is broken as of 7/13/2018
+    * @param string $sPropertyName Name of the dynamic property
+    * @param string $sPropertyValue The value of the property
+    * @param bool $bRemoveProperty Remove the property? Default false
+    * @param string $sPropertyValueType Type of the property, see Steamworks docs. Default property_value_string
+    * @param int $iTimestamp Unix timestamp of the request. An error will be returned if the items have been modified since this request time.
+    *
+    * 
+    * 
+    * @return item array
+    */
+    public function ModifyItem($sPropertyName, $sPropertyValue, $bRemoveProperty = false, $sPropertyValueType = "property_value_string",  $iTimestamp = 0){
+        if($iTimestamp == 0){
+            $iTimestamp = time();
+        }
+        $aArray = array();
+        $aOptions = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'input_json' => json_encode(array("steamid" => $this->steamid, "timestamp" => $iTimestamp, "updates" => array(array('itemid' => $this->itemid,'property_name' => $sPropertyName, $sPropertyValueType => $sPropertyValue,"remove_property" => $bRemoveProperty))))))
+            )
+        );
+        $cContext  = stream_context_create($aOptions);
+        $fgcModifyItems = file_get_contents("https://partner.steam-api.com/IInventoryService/ModifyItems/v1/", false, $cContext);
+        $oModifyItems = json_decode($fgcModifyItems);
+        
+        foreach (json_decode($oModifyItems->response->item_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
+        }
+        return $aArray;
     }
     
     

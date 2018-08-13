@@ -1,5 +1,3 @@
-
-
 # SteamPHP
 
 <p align="center">
@@ -8,7 +6,7 @@
 
 ###### Version
 
-[![VERSION](https://img.shields.io/badge/Version-pb1.0.6-green.svg)](VERSION.md)
+[![VERSION](https://img.shields.io/badge/Version-pb1.0.7-green.svg)](VERSION.md)
 
 ###### Compability
 
@@ -18,6 +16,10 @@
 ![PHP7.0](https://php-eye.com/badge/justinback/steam-php/php70.svg)
 ![PHP7.1](https://php-eye.com/badge/justinback/steam-php/php71.svg)
 
+
+###### Support
+
+Use this site for questions, code requests or support in general: https://qa.justinback.com/ask?cat=5
 
 ###### Info
 

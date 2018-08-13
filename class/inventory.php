@@ -157,6 +157,112 @@ class inventory {
     
     
     /**
+    * Consolidate items of the given type within an user's inventory.
+    * Whenever items are combined into a stack, the resulting stack takes the market and trade restriction values of the most-restricted item. The Consolidate action ignores any item with an active market or trade restriction, unless 'force' is set to true. 
+    *
+    * @param array $aItemDefId No description provided
+    * @param bool $bForce Unix timestamp of the request. An error will be returned if the items have been modified since this request time. Must be specified in the input_json parameter.
+    *
+    * @return item array
+    */
+    public function Consolidate($aItemDefId, $bForce = false){
+        $aArray = array();
+        $aOptions = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemdefid' => $aItemDefId, 'force' => $bForce))
+            )
+        );
+        $cContext  = stream_context_create($aOptions);
+        $fgcConsolidate = file_get_contents("https://partner.steam-api.com/IInventoryService/Consolidate/v1/", false, $cContext);
+        
+        foreach (json_decode(json_decode($fgcConsolidate)->response->item_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp));
+        }
+        return $aArray;
+    }
+    
+    /**
+    * Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call. 
+    *
+    * @todo This Method is broken as of 7/13/2018
+    * @param string $sInputJson No description provided
+    * @param int $iTimestamp Unix timestamp of the request. An error will be returned if the items have been modified since this request time.
+    *
+    * 
+    * Example InputJson
+    * 
+    * array(
+    *		array(
+    *			'itemid' => "1955010841396664607",
+    *			'property_name' => "My_Property_Name",
+    *			'property_value_string' => "Hello test test!"
+    *		)
+    *	)
+    * 
+    * @return array
+    */
+    public function ModifyItems($sInputJson, $iTimestamp = 0){
+        $aArray = array();
+        $aOptions = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'input_json' => json_encode(array("steamid" => $this->steamid, "timestamp" => $iTimestamp, "updates" => $sInputJson))))
+            )
+        );
+        $cContext  = stream_context_create($aOptions);
+        $fgcModifyItems = file_get_contents("https://partner.steam-api.com/IInventoryService/ModifyItems/v1/", false, $cContext);
+        $oModifyItems = json_decode($fgcModifyItems);
+        
+        foreach (json_decode($oModifyItems->response->item_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
+        }
+        return $aArray;
+    }
+    
+    /**
+    * ExchangeItem is used for crafting - converting items using a predefined recipe. A successful exchange destroys the set of items required by the crafting recipe, and adds a new instance of the target itemdef to the player's inventory.
+    *
+    * The target item definition must have one or more crafting recipes declared in the exchange attribute. Recipes declare the number and type of items required to create the target item. If the set of items provided in the ExchangeItems call does not satisfy any recipe, the call fails and no changes are made to the inventory.
+    * 
+    * See the Inventory Service Schema documentation for more detail on crafting recipes.
+    *
+    * The crafting operation will take trade and market restrictions into account; the created item will have the latest trade restriction of any item used to create it.
+    *
+    * If successful, this call returns an encoded JSON blob that lists the items that were changed by this call - the consumed items and the newly created one.
+    *
+    *
+    * @param array $aMaterialsItemId The unique ID an item in the player's inventory to be converted to the target item type
+    * @param array $aMaterialsQuantity The quantity of the matching item that should be used in this recipe. This array must be the same length as $aMaterialsItemId.
+    * @param string $sOutputItemDefId The ItemDef of the item to be created.
+    * 
+    * 
+    * @return item array
+    */
+    public function ExchangeItem($aMaterialsItemId, $aMaterialsQuantity, $sOutputItemDefId){
+        $aArray = array();
+        $aOptions = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'materialsitemid' => $aMaterialsItemId, "materialsquantity" => $aMaterialsQuantity, "outputitemdefid" => $sOutputItemDefId))
+            )
+        );
+        $cContext  = stream_context_create($aOptions);
+        $fgcExchangeItem = file_get_contents("https://partner.steam-api.com/IInventoryService/ExchangeItem/v1/", false, $cContext);
+        $oExchangeItem = json_decode($fgcExchangeItem);
+        
+        foreach (json_decode($oExchangeItem->response->item_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
+        }
+        return $aArray;
+    }
+    
+    
+    
+    /**
     * GetInventory is used to retrieve a user's inventory 
     *
     * 
@@ -168,7 +274,7 @@ class inventory {
         $oGetInventory = json_decode($fgcGetInventory);
 
         foreach (json_decode($oGetInventory->response->item_json) as $oResponse){
-            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp));
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
         }
         return $aArray;
     }

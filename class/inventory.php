@@ -222,6 +222,45 @@ class inventory {
         return $aArray;
     }
     
+    /**
+    * ExchangeItem is used for crafting - converting items using a predefined recipe. A successful exchange destroys the set of items required by the crafting recipe, and adds a new instance of the target itemdef to the player's inventory.
+    *
+    * The target item definition must have one or more crafting recipes declared in the exchange attribute. Recipes declare the number and type of items required to create the target item. If the set of items provided in the ExchangeItems call does not satisfy any recipe, the call fails and no changes are made to the inventory.
+    * 
+    * See the Inventory Service Schema documentation for more detail on crafting recipes.
+    *
+    * The crafting operation will take trade and market restrictions into account; the created item will have the latest trade restriction of any item used to create it.
+    *
+    * If successful, this call returns an encoded JSON blob that lists the items that were changed by this call - the consumed items and the newly created one.
+    *
+    *
+    * @param array $aMaterialsItemId The unique ID an item in the player's inventory to be converted to the target item type
+    * @param array $aMaterialsQuantity The quantity of the matching item that should be used in this recipe. This array must be the same length as $aMaterialsItemId.
+    * @param string $sOutputItemDefId The ItemDef of the item to be created.
+    * 
+    * 
+    * @return item array
+    */
+    public function ExchangeItem($aMaterialsItemId, $aMaterialsQuantity, $sOutputItemDefId){
+        $aArray = array();
+        $aOptions = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'materialsitemid' => $aMaterialsItemId, "materialsquantity" => $aMaterialsQuantity, "outputitemdefid" => $sOutputItemDefId))
+            )
+        );
+        $cContext  = stream_context_create($aOptions);
+        $fgcExchangeItem = file_get_contents("https://partner.steam-api.com/IInventoryService/ExchangeItem/v1/", false, $cContext);
+        $oExchangeItem = json_decode($fgcExchangeItem);
+        
+        foreach (json_decode($oExchangeItem->response->item_json) as $oResponse){
+            array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
+        }
+        return $aArray;
+    }
+    
+    
     
     /**
     * GetInventory is used to retrieve a user's inventory 

@@ -1,8 +1,8 @@
 <?php
+
 /**
  * @package DoNotDocument
  */
-
 require_once("steam.php");
 
 
@@ -12,7 +12,7 @@ $sSteamid = null; // STEAMID
 
 
 
-$steam  = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
+$steam = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 
 $item = $steam->player()->inventory()->AddItem("10", null, true);
 

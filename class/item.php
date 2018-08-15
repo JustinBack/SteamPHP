@@ -15,103 +15,94 @@ namespace justinback\steam;
  * @author Justin Back <jb@justinback.com>
  */
 class item {
+
     /**
-    * Steamworks API Key
-    *
-    */
+     * Steamworks API Key
+     *
+     */
     private $key = null;
-    
+
     /**
-    * Steamworks App ID
-    *
-    */
+     * Steamworks App ID
+     *
+     */
     public $game = null;
-    
+
     /**
-    * SteamID of user
-    *
-    */
+     * SteamID of user
+     *
+     */
     private $steamid = null;
-    
-    
+
     /**
-    * ItemID of the acquired item
-    *
-    */
+     * ItemID of the acquired item
+     *
+     */
     public $itemid = null;
-    
-    
+
     /**
-    * Quantity of the acquired item
-    *
-    */
+     * Quantity of the acquired item
+     *
+     */
     public $quantity = null;
-    
-    
+
     /**
-    * itemdefid of the acquired item
-    *
-    */
+     * itemdefid of the acquired item
+     *
+     */
     public $itemdefid = null;
-    
-    
+
     /**
-    * date of the acquired item
-    *
-    */
+     * date of the acquired item
+     *
+     */
     public $acquired = null;
-    
-    
+
     /**
-    * state of the acquired item
-    *
-    */
+     * state of the acquired item
+     *
+     */
     public $state = null;
-    
-    
+
     /**
-    * origin of the acquired item
-    *
-    */
+     * origin of the acquired item
+     *
+     */
     public $origin = null;
-    
-    
+
     /**
-    * timestamp of latest change of the acquired item
-    *
-    */
+     * timestamp of latest change of the acquired item
+     *
+     */
     public $state_changed_timestamp = null;
-    
+
     /**
      * The dynamic properties of the item
      * 
      * 
      */
     public $dynamic_props = null;
-    
-    
-    
+
     /**
-    * Construction of the variables
-    *
-    * 
-    * @param string $sApiKey Steamworks Developer API Key
-    * @param string $iGame Your Appid
-    * @param string $sSteamid The SteamID of the user
-    * @param string $sItemId The Item ID
-    * @param int $iQuantity Item Quantity
-    * @param string $sItemDefId Item Definition
-    * @param string $sAcquired Timestamp of item creation date
-    * @param string $sState Item State
-    * @param string $sOrigin Item Origin, e.g external
-    * @param string $sStateChangedTimestamp Timestamp since latest change
-    *
-    * @return void
-    */
-    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sItemId = null, $iQuantity = null, $sItemDefId = null, $sAcquired = null, $sState = null, $sOrigin = null, $sStateChangedTimestamp = null, $aDynamicProps = array())
-    {
+     * Construction of the variables
+     *
+     * 
+     * @param string $sApiKey Steamworks Developer API Key
+     * @param string $iGame Your Appid
+     * @param string $sSteamid The SteamID of the user
+     * @param string $sItemId The Item ID
+     * @param int $iQuantity Item Quantity
+     * @param string $sItemDefId Item Definition
+     * @param string $sAcquired Timestamp of item creation date
+     * @param string $sState Item State
+     * @param string $sOrigin Item Origin, e.g external
+     * @param string $sStateChangedTimestamp Timestamp since latest change
+     *
+     * @return void
+     */
+    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sItemId = null, $iQuantity = null, $sItemDefId = null, $sAcquired = null, $sState = null, $sOrigin = null, $sStateChangedTimestamp = null, $aDynamicProps = array()) {
         $this->set_key($sApiKey);
-        $this->set_game((int)$iGame);
+        $this->set_game((int) $iGame);
         $this->set_steamid($sSteamid);
         $this->set_itemid($sItemId);
         $this->set_quantity($iQuantity);
@@ -122,239 +113,218 @@ class item {
         $this->set_state_changed_timestamp($sStateChangedTimestamp);
         $this->set_dynamic_props($aDynamicProps);
     }
-    
+
     /**
-    * Setting API Key from the construct
-    *
-    *
-    * @param string $sApiKey Steamworks Developer API Key
-    *
-    * @return void
-    */
-    private function set_key($sApiKey)
-    {
+     * Setting API Key from the construct
+     *
+     *
+     * @param string $sApiKey Steamworks Developer API Key
+     *
+     * @return void
+     */
+    private function set_key($sApiKey) {
         $this->key = $sApiKey;
     }
-    
-    
+
     /**
-    * Setting AppID from the construct
-    *
-    *
-    * @param string $iGame Your AppID
-    *
-    * @return void
-    */
-    private function set_game($iGame)
-    {
+     * Setting AppID from the construct
+     *
+     *
+     * @param string $iGame Your AppID
+     *
+     * @return void
+     */
+    private function set_game($iGame) {
         $this->game = $iGame;
     }
+
     /**
-    * Setting Dynamic Props from the construct
-    *
-    *
-    * @param string $aDynamicProps The Dynamic props as an array
-    *
-    * @return void
-    */
-    private function set_dynamic_props($aDynamicProps)
-    {
+     * Setting Dynamic Props from the construct
+     *
+     *
+     * @param string $aDynamicProps The Dynamic props as an array
+     *
+     * @return void
+     */
+    private function set_dynamic_props($aDynamicProps) {
         $this->dynamic_props = $aDynamicProps;
     }
-    
+
     /**
-    * Setting SteamID from the construct
-    *
-    *
-    * @param string $sSteamid The Players SteamID
-    *
-    * @return void
-    */
-    private function set_steamid($sSteamid)
-    {
+     * Setting SteamID from the construct
+     *
+     *
+     * @param string $sSteamid The Players SteamID
+     *
+     * @return void
+     */
+    private function set_steamid($sSteamid) {
         $this->steamid = $sSteamid;
     }
-    
-    
+
     /**
-    * Setting ItemID from the construct
-    *
-    *
-    * @param string $sItemId The Item ID
-    *
-    * @return void
-    */
-    private function set_itemid($sItemId)
-    {
+     * Setting ItemID from the construct
+     *
+     *
+     * @param string $sItemId The Item ID
+     *
+     * @return void
+     */
+    private function set_itemid($sItemId) {
         $this->itemid = $sItemId;
     }
-    
-    
+
     /**
-    * Setting Quantity from the construct
-    *
-    *
-    * @param string $iQuantity The Item Quantity
-    *
-    * @return void
-    */
-    private function set_quantity($iQuantity)
-    {
+     * Setting Quantity from the construct
+     *
+     *
+     * @param string $iQuantity The Item Quantity
+     *
+     * @return void
+     */
+    private function set_quantity($iQuantity) {
         $this->quantity = $iQuantity;
     }
-    
-    
+
     /**
-    * Setting ItemDefID from the construct
-    *
-    *
-    * @param string $sItemDefId The Item Defintion ID
-    *
-    * @return void
-    */
-    private function set_itemdefid($sItemDefId)
-    {
+     * Setting ItemDefID from the construct
+     *
+     *
+     * @param string $sItemDefId The Item Defintion ID
+     *
+     * @return void
+     */
+    private function set_itemdefid($sItemDefId) {
         $this->itemdefid = $sItemDefId;
     }
-    
-    
+
     /**
-    * Setting acquired from the construct
-    *
-    *
-    * @param string $sAcquired The creation date of the item 
-    *   
-    * @return void
-    */
-    private function set_acquired($sAcquired)
-    {
+     * Setting acquired from the construct
+     *
+     *
+     * @param string $sAcquired The creation date of the item 
+     *   
+     * @return void
+     */
+    private function set_acquired($sAcquired) {
         $this->acquired = $sAcquired;
     }
-    
-    
+
     /**
-    * Setting state from the construct
-    *
-    *
-    * @param string $sState The state of the item 
-    *   
-    * @return void
-    */
-    private function set_state($sState)
-    {
+     * Setting state from the construct
+     *
+     *
+     * @param string $sState The state of the item 
+     *   
+     * @return void
+     */
+    private function set_state($sState) {
         $this->state = $sState;
     }
-    
+
     /**
-    * Setting origin from the construct
-    *
-    *
-    * @param string $sOrigin The origin of the item 
-    *   
-    * @return void
-    */
-    private function set_origin($sOrigin)
-    {
+     * Setting origin from the construct
+     *
+     *
+     * @param string $sOrigin The origin of the item 
+     *   
+     * @return void
+     */
+    private function set_origin($sOrigin) {
         $this->origin = $sOrigin;
     }
-    
-    
+
     /**
-    * Setting state_changed_timestamp from the construct
-    *
-    *
-    * @param string $sStateChangedTimestamp The change timestamp of the item 
-    *   
-    * @return void
-    */
-    private function set_state_changed_timestamp($sStateChangedTimestamp)
-    {
+     * Setting state_changed_timestamp from the construct
+     *
+     *
+     * @param string $sStateChangedTimestamp The change timestamp of the item 
+     *   
+     * @return void
+     */
+    private function set_state_changed_timestamp($sStateChangedTimestamp) {
         $this->state_changed_timestamp = $sStateChangedTimestamp;
     }
-    
-    
+
     /**
-    * Marks an item as wholly or partially consumed. This action cannot be reversed.
-    *
-    * @param string $iQuantity Quantity of the item
-    * @param string $sRequestId Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
-    * 
-    * @return item
-    */
-    public function ConsumeItem($iQuantity, $sRequestId = null){
+     * Marks an item as wholly or partially consumed. This action cannot be reversed.
+     *
+     * @param string $iQuantity Quantity of the item
+     * @param string $sRequestId Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
+     * 
+     * @return item
+     */
+    public function ConsumeItem($iQuantity, $sRequestId = null) {
         $oOptions = array(
             'http' => array(
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'steamid' => $this->steamid, 'itemid' => $this->itemid, 'quantity' => $iQuantity, 'requestid' => $sRequestId))
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'steamid' => $this->steamid, 'itemid' => $this->itemid, 'quantity' => $iQuantity, 'requestid' => $sRequestId))
             )
         );
-        $cContext  = stream_context_create($oOptions);
+        $cContext = stream_context_create($oOptions);
         $fgcConsumeItem = file_get_contents("https://partner.steam-api.com/IInventoryService/ConsumeItem/v1/", false, $cContext);
         $oConsumeItem = json_decode(json_decode($fgcConsumeItem)->response->item_json);
-        foreach($oConsumeItem as $oResponse){
+        foreach ($oConsumeItem as $oResponse) {
             return new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
         }
     }
-    
-    
+
     /**
-    * Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call. 
-    *
-    * @todo This Method is broken as of 7/13/2018
-    * @param string $sPropertyName Name of the dynamic property
-    * @param string $sPropertyValue The value of the property
-    * @param bool $bRemoveProperty Remove the property? Default false
-    * @param string $sPropertyValueType Type of the property, see Steamworks docs. Default property_value_string
-    * @param int $iTimestamp Unix timestamp of the request. An error will be returned if the items have been modified since this request time.
-    *
-    * 
-    * 
-    * @return item array
-    */
-    public function ModifyItem($sPropertyName, $sPropertyValue, $bRemoveProperty = false, $sPropertyValueType = "property_value_string",  $iTimestamp = 0){
-        if($iTimestamp == 0){
+     * Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call. 
+     *
+     * @todo This Method is broken as of 7/13/2018
+     * @param string $sPropertyName Name of the dynamic property
+     * @param string $sPropertyValue The value of the property
+     * @param bool $bRemoveProperty Remove the property? Default false
+     * @param string $sPropertyValueType Type of the property, see Steamworks docs. Default property_value_string
+     * @param int $iTimestamp Unix timestamp of the request. An error will be returned if the items have been modified since this request time.
+     *
+     * 
+     * 
+     * @return item array
+     */
+    public function ModifyItem($sPropertyName, $sPropertyValue, $bRemoveProperty = false, $sPropertyValueType = "property_value_string", $iTimestamp = 0) {
+        if ($iTimestamp == 0) {
             $iTimestamp = time();
         }
         $aArray = array();
         $aOptions = array(
             'http' => array(
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method'  => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int)$this->game, 'input_json' => json_encode(array("steamid" => $this->steamid, "timestamp" => $iTimestamp, "updates" => array(array('itemid' => $this->itemid,'property_name' => $sPropertyName, $sPropertyValueType => $sPropertyValue,"remove_property" => $bRemoveProperty))))))
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'input_json' => json_encode(array("steamid" => $this->steamid, "timestamp" => $iTimestamp, "updates" => array(array('itemid' => $this->itemid, 'property_name' => $sPropertyName, $sPropertyValueType => $sPropertyValue, "remove_property" => $bRemoveProperty))))))
             )
         );
-        $cContext  = stream_context_create($aOptions);
+        $cContext = stream_context_create($aOptions);
         $fgcModifyItems = file_get_contents("https://partner.steam-api.com/IInventoryService/ModifyItems/v1/", false, $cContext);
         $oModifyItems = json_decode($fgcModifyItems);
-        
-        foreach (json_decode($oModifyItems->response->item_json) as $oResponse){
+
+        foreach (json_decode($oModifyItems->response->item_json) as $oResponse) {
             array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
         }
         return $aArray;
     }
-    
-    
-    /**
-    * Iteminfo object. 
-    *
-    * 
-    * @return iteminfo
-    */
-    public function iteminfo(){
-        $array = array();
-        $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/GetItemDefs/v1?key=".$this->key."&steamid=".$this->steamid. "&appid=". $this->game);
-        $GetInventory = json_decode($req_players);
-        
 
-        foreach (json_decode($GetInventory->response->itemdef_json) as $response){
+    /**
+     * Iteminfo object. 
+     *
+     * 
+     * @return iteminfo
+     */
+    public function iteminfo() {
+        $array = array();
+        $req_players = file_get_contents("https://partner.steam-api.com/IInventoryService/GetItemDefs/v1?key=" . $this->key . "&steamid=" . $this->steamid . "&appid=" . $this->game);
+        $GetInventory = json_decode($req_players);
+
+
+        foreach (json_decode($GetInventory->response->itemdef_json) as $response) {
             array_push($array, new \justinback\steam\iteminfo($this->key, $this->game, $this->steamid, $response));
         }
         $iteminfo = array_filter($array, function($oItem) {
-                    return $oItem->itemdefid == $this->itemdefid;
-            });
+            return $oItem->itemdefid == $this->itemdefid;
+        });
         return $iteminfo;
     }
-    
-    
+
 }

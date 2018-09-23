@@ -34,20 +34,6 @@ class player {
     private $steamid = null;
 
     /**
-     * The Community Name of the User
-     * @since 1.0.6
-     * Added because why not heh?
-     */
-    public $personaname = null;
-
-    /**
-     * The Real Name of the User
-     * @since 1.0.6
-     * Added because why not heh?
-     */
-    public $realname = null;
-
-    /**
      * Construction of the variables steamid, key and game
      *
      *
@@ -61,9 +47,6 @@ class player {
         $this->set_key($sApiKey);
         $this->set_game((int) $iGame);
         $this->set_steamid($sSteamid);
-
-        $this->personaname = $this->GetPersonaName();
-        $this->realname = $this->GetRealName();
     }
 
     /**
@@ -116,6 +99,60 @@ class player {
         foreach ($oGetPersonaName->response->players as $oPlayer) {
             return $oPlayer->personaname;
         }
+    }
+
+    /**
+     * Get the ban overview of the user
+     *
+     *
+     *
+     * @return array
+     */
+    public function GetPlayerBans() {
+        $fgcGetPlayerBans = file_get_contents("https://api.steampowered.com/ISteamUser/GetPlayerBans/v1?key=" . $this->key . "&steamids=" . $this->steamid);
+        $oGetPlayerBans = json_decode($fgcGetPlayerBans);
+
+        return $oGetPlayerBans->players;
+    }
+
+    /**
+     * Get the friendlist overview of the user
+     *
+     *
+     *
+     * @return player array
+     */
+    public function GetFriendList() {
+        $fgcGetFriendList = file_get_contents("https://api.steampowered.com/ISteamUser/GetFriendList/v1?key=" . $this->key . "&steamid=" . $this->steamid);
+        $oGetFriendList = json_decode($fgcGetFriendList);
+
+        $aUsers = array();
+
+        foreach ($oGetFriendList->friendslist->friends as $aFriends) {
+            array_push($aUsers, new \justinback\steam\player($this->key, $this->game, $aFriends->steamid));   
+        }
+        
+        return $aUsers;
+    }
+
+    /**
+     * Get the group overview of the user
+     *
+     *
+     *
+     * @return group array
+     */
+    public function GetUserGroupList() {
+        $fgcGetUserGroupList = file_get_contents("https://api.steampowered.com/ISteamUser/GetUserGroupList/v1?key=" . $this->key . "&steamid=" . $this->steamid);
+        $oGetUserGroupList = json_decode($fgcGetUserGroupList);
+
+        $aGroups = array();
+
+        foreach ($oGetUserGroupList->response->groups as $oGroup) {
+            array_push($aGroups, new \justinback\steam\group($this->key, $this->game, $this->steamid, $oGroup->gid));   
+        }
+        
+        return $aGroups;
     }
 
     /**

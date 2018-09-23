@@ -6,7 +6,7 @@
 
 ###### Version
 
-[![VERSION](https://img.shields.io/badge/Version-pb1.0.7-green.svg)](VERSION.md)
+[![VERSION](https://img.shields.io/badge/Version-pb1.0.8-green.svg)](VERSION.md)
 
 ###### Compability
 

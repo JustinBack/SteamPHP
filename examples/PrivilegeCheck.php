@@ -32,7 +32,11 @@ $IsValveEmployee = in_array(4, array_column($steam->player()->GetUserGroupList()
  */
 $IsCommunityModerator = in_array(28361337, array_column($steam->player()->GetUserGroupList(), 'gid'));
 
-echo "User: "; var_dump($steam->player()->GetPersonaName());
-echo "Is Steamworks Developer: "; var_dump($IsDeveloper);
-echo "Is Valve Employee: "; var_dump($IsValveEmployee);
-echo "Is Community Moderator: "; var_dump($IsCommunityModerator);
+echo "User: ";
+var_dump($steam->player()->GetPersonaName());
+echo "Is Steamworks Developer: ";
+var_dump($IsDeveloper);
+echo "Is Valve Employee: ";
+var_dump($IsValveEmployee);
+echo "Is Community Moderator: ";
+var_dump($IsCommunityModerator);

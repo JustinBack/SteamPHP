@@ -129,9 +129,9 @@ class player {
         $aUsers = array();
 
         foreach ($oGetFriendList->friendslist->friends as $aFriends) {
-            array_push($aUsers, new \justinback\steam\player($this->key, $this->game, $aFriends->steamid));   
+            array_push($aUsers, new \justinback\steam\player($this->key, $this->game, $aFriends->steamid));
         }
-        
+
         return $aUsers;
     }
 
@@ -149,9 +149,9 @@ class player {
         $aGroups = array();
 
         foreach ($oGetUserGroupList->response->groups as $oGroup) {
-            array_push($aGroups, new \justinback\steam\group($this->key, $this->game, $this->steamid, $oGroup->gid));   
+            array_push($aGroups, new \justinback\steam\group($this->key, $this->game, $this->steamid, $oGroup->gid));
         }
-        
+
         return $aGroups;
     }
 

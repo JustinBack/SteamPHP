@@ -101,7 +101,7 @@ class group {
      * @return string
      */
     public function GetGroupName() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/".$this->gid."/memberslistxml?xml=1");
+        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
         $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupDetails->groupName);
@@ -115,7 +115,7 @@ class group {
      * @return string
      */
     public function GetGroupURL() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/".$this->gid."/memberslistxml?xml=1");
+        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
         $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupDetails->groupURL);
@@ -129,7 +129,7 @@ class group {
      * @return string
      */
     public function GetGroupHeadline() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/".$this->gid."/memberslistxml?xml=1");
+        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
         $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupDetails->headline);
@@ -143,7 +143,7 @@ class group {
      * @return string
      */
     public function GetGroupSummary() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/".$this->gid."/memberslistxml?xml=1");
+        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
         $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupDetails->summary);
@@ -157,7 +157,7 @@ class group {
      * @return string
      */
     public function GetGroupID64() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/".$this->gid."/memberslistxml?xml=1");
+        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
         $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupID64);
@@ -171,15 +171,15 @@ class group {
      * @return object
      */
     public function GetGroupAvatar() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/".$this->gid."/memberslistxml?xml=1");
+        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
         $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
 
         $oAvatars = new \stdClass();
-        
+
         $oAvatars->icon = current($oGetGroupName->groupDetails->avatarIcon);
         $oAvatars->medium = current($oGetGroupName->groupDetails->avatarMedium);
         $oAvatars->full = current($oGetGroupName->groupDetails->avatarFull);
-        
+
         return $oAvatars;
     }
 
@@ -191,15 +191,15 @@ class group {
      * @return player array
      */
     public function GetGroupMembers() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/".$this->gid."/memberslistxml?xml=1");
+        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
         $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
 
         $aMembers = array();
-        foreach($oGetGroupName->members->steamID64 as $oMember){
+        foreach ($oGetGroupName->members->steamID64 as $oMember) {
             array_push($aMembers, new \justinback\steam\player($this->key, $this->game, current($oMember)));
         }
-        
-        
+
+
         return $aMembers;
     }
 
@@ -212,17 +212,18 @@ class group {
      * @return object
      */
     public function GetGroupStats() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/".$this->gid."/memberslistxml?xml=1");
+        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
         $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
 
         $oMembers = new \stdClass();
         $aMembers = array();
-        
+
         $oMembers->Total = current($oGetGroupName->groupDetails->memberCount);
         $oMembers->InChat = current($oGetGroupName->groupDetails->membersInChat);
         $oMembers->InGame = current($oGetGroupName->groupDetails->membersInGame);
         $oMembers->Online = current($oGetGroupName->groupDetails->membersOnline);
-        
+
         return $oMembers;
     }
+
 }

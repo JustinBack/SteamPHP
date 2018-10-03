@@ -37,7 +37,7 @@ class group {
      * GlobalID of the group
      *
      */
-    private $gid = null;
+    public $gid = null;
 
     /**
      * Construction of the variables steamid, key and game

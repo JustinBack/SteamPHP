@@ -41,6 +41,12 @@ class transactions {
     public $agreementid = null;
 
     /**
+     * Transaction ID
+     *
+     */
+    public $transid = null;
+
+    /**
      * OrderID of transaction
      *
      */
@@ -62,11 +68,9 @@ class transactions {
      *
      * @return void
      */
-    public function __construct($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null, $iAgreementID = null, $iOrderID = null) {
+    public function __construct($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null) {
         $this->set_key($sApiKey);
         $this->set_game((int) $iGame);
-        $this->agreementid = $iAgreementID;
-        $this->orderid = $iOrderID;
         $this->set_steamid($sSteamid);
         if ($bTesting) {
             $this->interface = "ISteamMicroTxnSandbox";
@@ -116,7 +120,7 @@ class transactions {
      *
      * @param string $sNextProcessDate Date that next recurring payment should be initiated. Format is YYYYMMDD. Date can only be adjusted forward indicating you want to add time to the subscription. If the date exceeds the end date of the subscription, the end date will be extended.
      * 
-     * @return object
+     * @return boolean object
      */
     public function AdjustAgreement($sNextProcessDate) {
         $aOptions = array(
@@ -132,7 +136,11 @@ class transactions {
         $oAdjustAgreement = json_decode($fgcAdjustAgreement);
 
 
-        return $fgcAdjustAgreement;
+        if ($oAdjustAgreement->response->result == "OK") {
+            return true;
+        }
+
+        return $oAdjustAgreement->response->error;
     }
 
     /**
@@ -140,7 +148,7 @@ class transactions {
      *
      *
      * 
-     * @return object
+     * @return boolean object
      */
     public function CancelAgreement() {
         $aOptions = array(
@@ -155,7 +163,40 @@ class transactions {
         $oCancelAgreement = json_decode($fgcCancelAgreement);
 
 
-        return $oCancelAgreement;
+        if ($oCancelAgreement->response->result == "OK") {
+            return true;
+        }
+
+        return $oCancelAgreement->response->error;
+        
+    }
+
+    /**
+     * Tells Steam to refund a user for a purchase. Refunds can only be made for the full value of the original order.
+     *
+     *
+     * 
+     * @return boolean object
+     */
+    public function RefundTxn() {
+        $aOptions = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $this->orderid))
+            )
+        );
+        $cContext = stream_context_create($aOptions);
+        $fgcRefundTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/RefundTxn/v2/", false, $cContext);
+        $oRefundTxn = json_decode($fgcRefundTxn);
+
+
+        if ($oRefundTxn->response->result == "OK") {
+            return true;
+        }
+
+        return $oRefundTxn->response->error;
+        
     }
 
     /**
@@ -204,11 +245,34 @@ class transactions {
             )
         );
         $cContext = stream_context_create($aOptions);
-        $fgcQueryTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/QueryTxn/v2/?" . http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "agreementid" => $this->agreementid, "orderid" => $this->orderid)), false, $cContext);
+        $fgcQueryTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/QueryTxn/v2/?" . http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "transid" => $this->transid, "orderid" => $this->orderid)), false, $cContext);
         $oQueryTxn = json_decode($fgcQueryTxn);
 
 
         return $oQueryTxn->response->params;
+    }
+
+    /**
+     * Get detailed information of all recurring billing agreements (subscriptions) for a user.
+     *
+     *
+     * 
+     * @return object
+     */
+    public function GetUserAgreementInfo() {
+        $aOptions = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'GET',
+                'ignore_errors' => true,
+            )
+        );
+        $cContext = stream_context_create($aOptions);
+        $fgcGetUserAgreementInfo = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/GetUserAgreementInfo/v1/?" . http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid)), false, $cContext);
+        $oGetUserAgreementInfo = json_decode($fgcGetUserAgreementInfo);
+
+
+        return $oGetUserAgreementInfo->response->params;
     }
 
     /**
@@ -248,12 +312,43 @@ class transactions {
         $oInitTxn = json_decode($fgcInitTxn);
 
         if ($oInitTxn->response->result == "OK") {
-            $this->agreementid = $oInitTxn->response->params->transid;
+            $this->transid = $oInitTxn->response->params->transid;
             $this->orderid = $oInitTxn->response->params->orderid;
             return $this;
         }
 
         return $oInitTxn->response->error;
+    }
+
+    /**
+     * Initiate a recurring payment (subscription) for the user.
+     * A successful response means that Steam will initiate a billing cycle for the user. It does not mean that the actual billing cycle was completed successfully. Use the GetReport or GetUserAgreementInfo APIs to check actual billing status.
+     * 
+     * @param integer $iAmount Total cost (in cents). This value corresponds to an initial one-time amount to be immediately charged to a user.
+     * @param string $sCurrency ISO 4217 currency code. See <a href="https://partner.steamgames.com/doc/store/pricing/currencies">Supported Currencies</a> for proper format of each currency.
+     * @return on success: transactions, on failure: error object
+     */
+    public function ProcessAgreement($sCurrency, $iAmount) {
+        $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
+
+        $aOptions = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'ignore_errors' => true,
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "currency" => $sCurrency,"amount" => $iAmount, "orderid" => $this->orderid, "agreementid" => $this->agreementid))));
+        $cContext = stream_context_create($aOptions);
+        $fgcProcessAgreement = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/ProcessAgreement/v1/", false, $cContext);
+        $oProcessAgreement = json_decode($fgcProcessAgreement);
+
+        if ($oProcessAgreement->response->result == "OK") {
+            $this->transid = $oProcessAgreement->response->params->transid;
+            $this->agreementid = $oProcessAgreement->response->params->agreementid;
+            $this->orderid = $oProcessAgreement->response->params->orderid;
+            return $this;
+        }
+
+        return $oProcessAgreement->response->error;
     }
 
 }

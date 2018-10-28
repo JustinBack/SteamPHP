@@ -27,20 +27,36 @@ $Transaction = $steam->transactions(true);
 /*
  * Check if the user has a pending purchase here!
  */
-if (isset($_SESSION["SteamPHP_AgreementID_TXNtest"])) {
+if (isset($_SESSION["SteamPHP_TransactionID_TXNtest"])) {
 
 
     /*
      * We set the order id and the agreement id / transaction id here from the session!
      */
-    $Transaction->agreementid = $_SESSION["SteamPHP_AgreementID_TXNtest"];
+    $Transaction->transid = $_SESSION["SteamPHP_TransactionID_TXNtest"];
     $Transaction->orderid = $_SESSION["SteamPHP_OrderID_TXNtest"];
+    $Transaction->agreementid = $_SESSION["SteamPHP_AgreementID_TXNtest"];
 
 
     /*
      * We will check if the Transaction has been approved or not!
      */
     $Order = $Transaction->QueryTxn();
+
+    
+
+    if ($Order->status == "Failed") {
+        unset($_SESSION["SteamPHP_TransactionID_TXNtest"]);
+        unset($_SESSION["SteamPHP_OrderID_TXNtest"]);
+        unset($_SESSION["SteamPHP_AgreementID_TXNtest"]);
+        die("Sorry! The user has has aborted the transaction!<br>The Status of the Order is: " . $Order->status);
+    }
+    if ($Order->status == "Succeeded") {
+        unset($_SESSION["SteamPHP_TransactionID_TXNtest"]);
+        unset($_SESSION["SteamPHP_OrderID_TXNtest"]);
+        unset($_SESSION["SteamPHP_AgreementID_TXNtest"]);
+        die("Yay! " . $Order->status);
+    }
 
 
 
@@ -59,9 +75,11 @@ if (isset($_SESSION["SteamPHP_AgreementID_TXNtest"])) {
      *  Here we will check if the item has been purchased or not.
      */
     if ($Order) {
-        unset($_SESSION["SteamPHP_AgreementID_TXNtest"]);
+        unset($_SESSION["SteamPHP_TransactionID_TXNtest"]);
         unset($_SESSION["SteamPHP_OrderID_TXNtest"]);
+        unset($_SESSION["SteamPHP_AgreementID_TXNtest"]);
         echo "Wohoo! Thanks for purchasing this item! You'll find it in the game soon!";
+
 
         /*
          *  Your own code implementation could be here, however as this is only a test, theres nothing here now.
@@ -77,6 +95,7 @@ if (isset($_SESSION["SteamPHP_AgreementID_TXNtest"])) {
         echo "Oh no! An error has occurred trying to process your payment!";
     }
 
+    echo "Nothing to do!";
     return;
 }
 
@@ -96,22 +115,19 @@ $sUserSession = "client"; // We want to authorize it using the overlay.
  * Here we initialize the transaction!
  */
 $Txn = $Transaction->InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession);
-
-
 /*
  * If no error occurred, proceed.
  */
 if (!isset($Txn->errorcode)) {
 
-    // Authorizazion URL for web sessions look like this: https://store.steampowered.com/checkout/approvetxn/AGREEMENT_ID/?returnurl=
+    // Authorizazion URL for web sessions look like this: https://store.steampowered.com/checkout/approvetxn/1663411099664123274/?returnurl=
     // However we use the client so its not necessary here.
-    
-    
+
     /*
      * Set the session for verification
      */
-    $_SESSION["SteamPHP_AgreementID_TXNtest"] = $Transaction->agreementid;
-    $_SESSION["SteamPHP_OrderID_TXNtest"] = $Transaction->orderid;
+    $_SESSION["SteamPHP_TransactionID_TXNtest"] = $Txn->transid;
+    $_SESSION["SteamPHP_OrderID_TXNtest"] = $Txn->orderid;
 
     echo "Ok great! Authorize the Transaction in the client and refresh the page to see the result of the microtransaction! Everything is saved in a session now. <br>";
 

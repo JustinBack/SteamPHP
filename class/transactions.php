@@ -230,7 +230,7 @@ class transactions {
      * @param string $sUserSession (Optional) Session where user will authorize the transaction. Valid options are "client" or "web". If this parameter is not supplied, the interface will be assumed to be through a currently logged in Steam client session.
      * @param string $sIpAddress (Optional) IP address of user in string format (xxx.xxx.xxx.xxx). Only required if $sUserSession is set to web.
      * 
-     * @return boolean, on failure: object
+     * @return on success: transactions, on failure: error object
      */
     public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = "") {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
@@ -250,7 +250,7 @@ class transactions {
         if ($oInitTxn->response->result == "OK") {
             $this->agreementid = $oInitTxn->response->params->transid;
             $this->orderid = $oInitTxn->response->params->orderid;
-            return true;
+            return $this;
         }
 
         return $oInitTxn->response->error;

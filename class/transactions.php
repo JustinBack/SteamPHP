@@ -327,6 +327,7 @@ class transactions {
      * @param integer $iAmount Total cost (in cents). This value corresponds to an initial one-time amount to be immediately charged to a user.
      * @param string $sCurrency ISO 4217 currency code. See <a href="https://partner.steamgames.com/doc/store/pricing/currencies">Supported Currencies</a> for proper format of each currency.
      * @return on success: transactions, on failure: error object
+     * @todo I have no clue how this works as the documentation is missing A LOT
      */
     public function ProcessAgreement($sCurrency, $iAmount) {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
@@ -336,7 +337,7 @@ class transactions {
                 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method' => 'POST',
                 'ignore_errors' => true,
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "currency" => $sCurrency,"amount" => $iAmount, "orderid" => $this->orderid, "agreementid" => $this->agreementid))));
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "currency" => $sCurrency,"amount" => $iAmount, "orderid" => $iOrderID, "agreementid" => $this->agreementid))));
         $cContext = stream_context_create($aOptions);
         $fgcProcessAgreement = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/ProcessAgreement/v1/", false, $cContext);
         $oProcessAgreement = json_decode($fgcProcessAgreement);

@@ -131,12 +131,12 @@
 		
 
 				<b>Author:</b>
-				Justin Back <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;">j&#x62;&#x40;&#x6a;&#x75;&#115;&#116;&#105;n&#x62;&#x61;&#x63;&#x6b;&#46;&#99;&#111;&#109;</a><br>
+				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
 				<b>Since:</b>
 				pb1.0.0a<br>
 				<b>Todo:</b>
 				Basically Everything<br>
-			<b>Located at</b> <a href="source-class-justinback.steam.transactions.html#10-354" title="Go to source code">class/transactions.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.transactions.html#10-364" title="Go to source code">class/transactions.php</a>
 		<br>
 	</div>
 
@@ -156,7 +156,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#61-80" title="Go to source code">__construct</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#66-85" title="Go to source code">__construct</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -196,7 +196,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_AdjustAgreement">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#118-144" title="Go to source code">AdjustAgreement</a>( <span>string <var>$sNextProcessDate</var></span> )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#123-149" title="Go to source code">AdjustAgreement</a>( <span>string <var>$sNextProcessDate</var></span> )</code>
 
 			<div class="description short">
 				<p>Add time to the payment schedule of an agreement with billing type "steam".</p>
@@ -234,7 +234,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_CancelAgreement">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#146-172" title="Go to source code">CancelAgreement</a>( )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#151-177" title="Go to source code">CancelAgreement</a>( )</code>
 
 			<div class="description short">
 				<p>Cancels a recurring billing agreement (subscription).</p>
@@ -267,7 +267,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_RefundTxn">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#174-200" title="Go to source code">RefundTxn</a>( )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#179-205" title="Go to source code">RefundTxn</a>( )</code>
 
 			<div class="description short">
 				<p>Tells Steam to refund a user for a purchase. Refunds can only be made for the full value of the original order.</p>
@@ -300,7 +300,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_FinalizeTxn">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#202-230" title="Go to source code">FinalizeTxn</a>( )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#207-235" title="Go to source code">FinalizeTxn</a>( )</code>
 
 			<div class="description short">
 				<p>Completes a purchase that was started by the InitTxn API.</p>
@@ -336,7 +336,7 @@ A successful response to this command means payment has been completed and you c
 
 			<td class="name"><div>
 			<a class="anchor" href="#_QueryTxn">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#232-253" title="Go to source code">QueryTxn</a>( )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#237-258" title="Go to source code">QueryTxn</a>( )</code>
 
 			<div class="description short">
 				<p>Query the status of an order that was previously created with InitTxn.</p>
@@ -369,7 +369,7 @@ A successful response to this command means payment has been completed and you c
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetUserAgreementInfo">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#255-276" title="Go to source code">GetUserAgreementInfo</a>( )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#260-281" title="Go to source code">GetUserAgreementInfo</a>( )</code>
 
 			<div class="description short">
 				<p>Get detailed information of all recurring billing agreements (subscriptions) for a user.</p>
@@ -395,14 +395,14 @@ A successful response to this command means payment has been completed and you c
 
 			<td class="attributes"><code>
 				 public 
-				on
+				<code><a href="class-justinback.steam.transactions.html">justinback\steam\transactions</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_InitTxn">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#278-321" title="Go to source code">InitTxn</a>( <span>integer <var>$iItemCount</var></span>, <span>string <var>$sLanguage</var></span>, <span>string <var>$sCurrency</var></span>, <span>integer <var>$iItemID</var></span>, <span>integer <var>$iQuantity</var></span>, <span>integer <var>$iAmount</var></span>, <span>string <var>$sDescription</var></span>, <span>string <var>$sUserSession</var> = <span class="php-quote">&quot;client&quot;</span></span>, <span>string <var>$sIpAddress</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#283-334" title="Go to source code">InitTxn</a>( <span>integer <var>$iItemCount</var></span>, <span>string <var>$sLanguage</var></span>, <span>string <var>$sCurrency</var></span>, <span>integer <var>$iItemID</var></span>, <span>integer <var>$iQuantity</var></span>, <span>integer <var>$iAmount</var></span>, <span>string <var>$sDescription</var></span>, <span>string <var>$sUserSession</var> = <span class="php-quote">&quot;client&quot;</span></span>, <span>string <var>$sIpAddress</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>string <var>$sBillingType</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>string <var>$sStartDate</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>string <var>$sEndDate</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>string <var>$sPeriod</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>integer <var>$iRecurringAmount</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>integer <var>$iFrequency</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 			<div class="description short">
 				<p>Creates a new purchase. Send the order information along with the Steam ID to seed the transaction on Steam.</p>
@@ -438,11 +438,23 @@ If you do not wish to price each transaction in the local user's currency, Steam
 						<dd>(Optional) Session where user will authorize the transaction. Valid options are "client" or "web". If this parameter is not supplied, the interface will be assumed to be through a currently logged in Steam client session.</dd>
 						<dt><var>$sIpAddress</var></dt>
 						<dd>(Optional) IP address of user in string format (xxx.xxx.xxx.xxx). Only required if $sUserSession is set to web.</dd>
+						<dt><var>$sBillingType</var></dt>
+						<dd>(Optional) The recurring billing type. "steam", "game" etc.</dd>
+						<dt><var>$sStartDate</var></dt>
+						<dd>(Optional) The Non UNIX Timestamp when the recurring payment starts</dd>
+						<dt><var>$sEndDate</var></dt>
+						<dd>(Optional) The Non UNIX Time Stamp when the recurring payment ends</dd>
+						<dt><var>$sPeriod</var></dt>
+						<dd>(Optional) The period for recurring billing, e.g "month", "year", "week" and "day"</dd>
+						<dt><var>$iRecurringAmount</var></dt>
+						<dd>(Optional) The recurring billing amount in cents see $iAmount</dd>
+						<dt><var>$iFrequency</var></dt>
+						<dd>(Optional) The frequency for recurring billing in specified $sPeriod</dd>
 					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
-						on<br>success: transactions, on failure: error object
+						<code><a href="class-justinback.steam.transactions.html">justinback\steam\transactions</a></code><br>On Success returns the transactions class|On Failure returns an object with the error message
 					</div>
 
 
@@ -455,14 +467,14 @@ If you do not wish to price each transaction in the local user's currency, Steam
 
 			<td class="attributes"><code>
 				 public 
-				on
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ProcessAgreement">#</a>
-			<code><a href="source-class-justinback.steam.transactions.html#323-352" title="Go to source code">ProcessAgreement</a>( <span>integer <var>$sCurrency</var></span>, <span>string <var>$iAmount</var></span> )</code>
+			<code><a href="source-class-justinback.steam.transactions.html#336-362" title="Go to source code">ProcessAgreement</a>( <span>integer <var>$iAmount</var></span>, <span>string <var>$sCurrency</var></span> )</code>
 
 			<div class="description short">
 				<p>Initiate a recurring payment (subscription) for the user.
@@ -476,15 +488,15 @@ A successful response means that Steam will initiate a billing cycle for the use
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$sCurrency</var></dt>
-						<dd>$iAmount Total cost (in cents). This value corresponds to an initial one-time amount to be immediately charged to a user.</dd>
 						<dt><var>$iAmount</var></dt>
-						<dd>$sCurrency ISO 4217 currency code. See <a href="https://partner.steamgames.com/doc/store/pricing/currencies">Supported Currencies</a> for proper format of each currency.</dd>
+						<dd>Total cost (in cents). This value corresponds to an initial one-time amount to be immediately charged to a user.</dd>
+						<dt><var>$sCurrency</var></dt>
+						<dd>ISO 4217 currency code. See <a href="https://partner.steamgames.com/doc/store/pricing/currencies">Supported Currencies</a> for proper format of each currency.</dd>
 					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
-						on<br>success: transactions, on failure: error object
+						boolean<br>On Success returns the transactions class|On Failure returns an object with the error message
 					</div>
 
 
@@ -580,6 +592,31 @@ A successful response means that Steam will initiate a billing cycle for the use
 			<td class="value">
 				<div>
 					<a href="#$orderid" class="anchor">#</a>
+					<code><span class="php-keyword1">null</span></code>
+				</div>
+			</td>
+		</tr>
+		<tr data-order="steamurl" id="$steamurl">
+			<td class="attributes"><code>
+				public  
+				
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-justinback.steam.transactions.html#55-58" title="Go to source code"><var>$steamurl</var></a>
+
+				<div class="description short">
+					<p>The Purchase URL</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>The Purchase URL</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$steamurl" class="anchor">#</a>
 					<code><span class="php-keyword1">null</span></code>
 				</div>
 			</td>

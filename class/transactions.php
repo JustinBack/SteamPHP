@@ -51,6 +51,11 @@ class transactions {
      *
      */
     public $orderid = null;
+    
+    /**
+     * The Purchase URL
+     */
+    public $steamurl = null;
 
     /**
      * Sandbox or Production environment
@@ -272,7 +277,7 @@ class transactions {
         $oGetUserAgreementInfo = json_decode($fgcGetUserAgreementInfo);
 
 
-        return $oGetUserAgreementInfo->response->params;
+        return $oGetUserAgreementInfo->response->params->agreements;
     }
 
     /**
@@ -293,10 +298,17 @@ class transactions {
      * @param string $sDescription Description of item
      * @param string $sUserSession (Optional) Session where user will authorize the transaction. Valid options are "client" or "web". If this parameter is not supplied, the interface will be assumed to be through a currently logged in Steam client session.
      * @param string $sIpAddress (Optional) IP address of user in string format (xxx.xxx.xxx.xxx). Only required if $sUserSession is set to web.
+     * @param string $sBillingType (Optional) The recurring billing type. "steam", "game" etc.
+     * @param string $sStartDate (Optional) The Non UNIX Timestamp when the recurring payment starts
+     * @param string $sEndDate (Optional) The Non UNIX Time Stamp when the recurring payment ends
+     * @param string $sPeriod (Optional) The period for recurring billing, e.g "month", "year", "week" and "day"
+     * @param integer $iRecurringAmount (Optional) The recurring billing amount in cents see $iAmount
+     * @param integer $iFrequency (Optional) The frequency for recurring billing in specified $sPeriod
      * 
-     * @return on success: transactions, on failure: error object
+     * 
+     * @return transactions On Success returns the transactions class|On Failure returns an object with the error message
      */
-    public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = "") {
+    public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = "", $sBillingType = "", $sStartDate = "", $sEndDate = "", $sPeriod = "", $iRecurringAmount = "", $iFrequency = "") {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
 
         $aOptions = array(
@@ -304,7 +316,7 @@ class transactions {
                 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method' => 'POST',
                 'ignore_errors' => true,
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "itemcount" => $iItemCount, "language" => $sLanguage, "currency" => $sCurrency, "itemid[0]" => $iItemID, "qty[0]" => $iQuantity, "amount[0]" => $iAmount, "description[0]" => $sDescription, "usersession" => $sUserSession, "ipaddress" => $sIpAddress))
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "itemcount" => $iItemCount, "language" => $sLanguage, "currency" => $sCurrency, "itemid[0]" => $iItemID, "qty[0]" => $iQuantity, "amount[0]" => $iAmount, "description[0]" => $sDescription, "usersession" => $sUserSession, "ipaddress" => $sIpAddress, "startdate[0]" => $sStartDate, "enddate[0]" => $sEndDate, "period[0]" => $sPeriod, "frequency[0]" => $iFrequency, "recurringamt[0]" => $iRecurringAmount, "billingtype[0]" => $sBillingType))
             )
         );
         $cContext = stream_context_create($aOptions);
@@ -314,6 +326,7 @@ class transactions {
         if ($oInitTxn->response->result == "OK") {
             $this->transid = $oInitTxn->response->params->transid;
             $this->orderid = $oInitTxn->response->params->orderid;
+            $this->steamurl = $oInitTxn->response->params->steamurl;
             return $this;
         }
 
@@ -326,12 +339,11 @@ class transactions {
      * 
      * @param integer $iAmount Total cost (in cents). This value corresponds to an initial one-time amount to be immediately charged to a user.
      * @param string $sCurrency ISO 4217 currency code. See <a href="https://partner.steamgames.com/doc/store/pricing/currencies">Supported Currencies</a> for proper format of each currency.
-     * @return on success: transactions, on failure: error object
-     * @todo I have no clue how this works as the documentation is missing A LOT
+     * @return boolean On Success returns the transactions class|On Failure returns an object with the error message
      */
-    public function ProcessAgreement($sCurrency, $iAmount) {
+    public function ProcessAgreement($iAmount, $sCurrency) {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
-
+        
         $aOptions = array(
             'http' => array(
                 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -343,10 +355,7 @@ class transactions {
         $oProcessAgreement = json_decode($fgcProcessAgreement);
 
         if ($oProcessAgreement->response->result == "OK") {
-            $this->transid = $oProcessAgreement->response->params->transid;
-            $this->agreementid = $oProcessAgreement->response->params->agreementid;
-            $this->orderid = $oProcessAgreement->response->params->orderid;
-            return $this;
+            return true;
         }
 
         return $oProcessAgreement->response->error;

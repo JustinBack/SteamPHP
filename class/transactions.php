@@ -305,7 +305,7 @@ class transactions {
      * 
      * @return transactions On Success returns the transactions class|On Failure returns an object with the error message
      */
-    public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = "", $sBillingType = "", $sStartDate = "", $sEndDate = "", $sPeriod = "", $iRecurringAmount = "", $iFrequency = "") {
+    public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = null, $sBillingType = null, $sStartDate = null, $sEndDate = null, $sPeriod = null, $iRecurringAmount = null, $iFrequency = null) {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
 
         $aOptions = array(
@@ -316,17 +316,7 @@ class transactions {
                 'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "itemcount" => $iItemCount, "language" => $sLanguage, "currency" => $sCurrency, "itemid[0]" => $iItemID, "qty[0]" => $iQuantity, "amount[0]" => $iAmount, "description[0]" => $sDescription, "usersession" => $sUserSession, "ipaddress" => $sIpAddress, "startdate[0]" => $sStartDate, "enddate[0]" => $sEndDate, "period[0]" => $sPeriod, "frequency[0]" => $iFrequency, "recurringamt[0]" => $iRecurringAmount, "billingtype[0]" => $sBillingType))
             )
         );
-        if ($sBillingType == "") {
 
-            $aOptions = array(
-                'http' => array(
-                    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method' => 'POST',
-                    'ignore_errors' => true,
-                    'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "itemcount" => $iItemCount, "language" => $sLanguage, "currency" => $sCurrency, "itemid[0]" => $iItemID, "qty[0]" => $iQuantity, "amount[0]" => $iAmount, "description[0]" => $sDescription, "usersession" => $sUserSession, "ipaddress" => $sIpAddress))
-                )
-            );
-        }
         $cContext = stream_context_create($aOptions);
         $fgcInitTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/InitTxn/v3/", false, $cContext);
         $oInitTxn = json_decode($fgcInitTxn);

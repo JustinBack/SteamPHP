@@ -11,7 +11,6 @@ namespace justinback\steam;
  * Steam Microtransaction managing
  *
  * @since pb1.0.0a
- * @todo Basically Everything
  * @author Justin Back <jb@justinback.com>
  */
 class transactions {
@@ -51,7 +50,7 @@ class transactions {
      *
      */
     public $orderid = null;
-    
+
     /**
      * The Purchase URL
      */
@@ -173,7 +172,6 @@ class transactions {
         }
 
         return $oCancelAgreement->response->error;
-        
     }
 
     /**
@@ -201,7 +199,6 @@ class transactions {
         }
 
         return $oRefundTxn->response->error;
-        
     }
 
     /**
@@ -319,6 +316,17 @@ class transactions {
                 'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "itemcount" => $iItemCount, "language" => $sLanguage, "currency" => $sCurrency, "itemid[0]" => $iItemID, "qty[0]" => $iQuantity, "amount[0]" => $iAmount, "description[0]" => $sDescription, "usersession" => $sUserSession, "ipaddress" => $sIpAddress, "startdate[0]" => $sStartDate, "enddate[0]" => $sEndDate, "period[0]" => $sPeriod, "frequency[0]" => $iFrequency, "recurringamt[0]" => $iRecurringAmount, "billingtype[0]" => $sBillingType))
             )
         );
+        if ($sBillingType == "") {
+
+            $aOptions = array(
+                'http' => array(
+                    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method' => 'POST',
+                    'ignore_errors' => true,
+                    'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "itemcount" => $iItemCount, "language" => $sLanguage, "currency" => $sCurrency, "itemid[0]" => $iItemID, "qty[0]" => $iQuantity, "amount[0]" => $iAmount, "description[0]" => $sDescription, "usersession" => $sUserSession, "ipaddress" => $sIpAddress))
+                )
+            );
+        }
         $cContext = stream_context_create($aOptions);
         $fgcInitTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/InitTxn/v3/", false, $cContext);
         $oInitTxn = json_decode($fgcInitTxn);
@@ -343,13 +351,13 @@ class transactions {
      */
     public function ProcessAgreement($iAmount, $sCurrency) {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
-        
+
         $aOptions = array(
             'http' => array(
                 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method' => 'POST',
                 'ignore_errors' => true,
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "currency" => $sCurrency,"amount" => $iAmount, "orderid" => $iOrderID, "agreementid" => $this->agreementid))));
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "currency" => $sCurrency, "amount" => $iAmount, "orderid" => $iOrderID, "agreementid" => $this->agreementid))));
         $cContext = stream_context_create($aOptions);
         $fgcProcessAgreement = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/ProcessAgreement/v1/", false, $cContext);
         $oProcessAgreement = json_decode($fgcProcessAgreement);

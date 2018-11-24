@@ -1,7 +1,7 @@
 # SteamPHP
 
 <p align="center">
-  <img src="https://github.com/JustinBack/SteamPHP/blob/dev/docs/resources/steamphp.png?raw=true" alt="Justin Back Logo"/>
+  <img width="64" src="https://cdn.justinback.com/f/d/i0vZraLlYkUbJ3IlvWRZa9h3a1PskAkC6HM6x6fIMaWfLfG1iM/K0cWNmHfhO3LpHygsb0usQwvacN87RuCu7v3YU6LLogo2.svg" alt="Justin Back Logo"/>
 </p>
 
 ###### Version
@@ -19,7 +19,7 @@
 
 ###### Support
 
-Use this site for questions, code requests or support in general: https://qa.justinback.com/ask?cat=5
+You can message me on steam or contact me via email: justinback@support.justinback.com (A ticket will be created and a confirmation mail will be sent)
 
 ###### Info
 

@@ -63,6 +63,12 @@ class transactions {
     private $interface = null;
 
     /**
+     * Sandbox or Production environment
+     *
+     */
+    private $testing = null;
+
+    /**
      * Construction of the variables steamid, key and game
      *
      * @param string $bTesting Sandbox or Production environment? 
@@ -76,6 +82,7 @@ class transactions {
         $this->set_key($sApiKey);
         $this->set_game((int) $iGame);
         $this->set_steamid($sSteamid);
+        $this->testing = $bTesting;
         if ($bTesting) {
             $this->interface = "ISteamMicroTxnSandbox";
         } else {
@@ -357,6 +364,54 @@ class transactions {
         }
 
         return $oProcessAgreement->response->error;
+    }
+
+    /**
+     * Steam offers transaction reports that can be downloaded for reconciliation purposes. These reports show detailed information about each transaction that affects the settlement of funds into your accounts.
+     *
+     *
+     * @param string $sTime Report type (One of: "GAMESALES", "STEAMSTORESALES", "SETTLEMENT")
+     * @param integer $iMaxResults Maximum number of results to return in report. (Up to 1000)
+     * @param string $sType Start time of the report. (RFC 3339 UTC formatted like: 2010-01-01T00:00:00Z)
+     * @param boolean $bRawOutput Return new classes with transaction, player and item management or a raw object
+     * @return object[]|\transactions[]|\player[]
+     */
+    public function GetReport($sTime, $iMaxResults = 1000, $sType = "GAMESALES", $bRawOutput = false) {
+        $aOptions = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'GET',
+                'ignore_errors' => true,
+            )
+        );
+        $cContext = stream_context_create($aOptions);
+        $fgcGetReport = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/GetReport/v4/?" . http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "time" => $sTime, "maxresults" => $iMaxResults, "type" => $sType)), false, $cContext);
+        $oGetReport = json_decode($fgcGetReport);
+
+
+        if ($bRawOutput) {
+            return $oGetReport->response->params;
+        }
+        $Array = array();
+        foreach ($oGetReport->response->params->orders as $Key => $Order) {
+
+            $Object = new \stdClass();
+
+            $Transaction = new \justinback\steam\transactions($this->testing, $this->key, $this->game, $Order->steamid);
+            $Transaction->agreementid = $Order->agreementid;
+            $Transaction->orderid = $Order->orderid;
+            $Transaction->transid = $Order->transid;
+
+
+            $Object->Player = new \justinback\steam\player($this->key, $this->game, $Order->steamid);
+            $Object->Transaction = $Transaction;
+            $Object->Items = $Order->items;
+
+
+
+            $Array[$Key] = $Object;
+        }
+        return $Array;
     }
 
 }

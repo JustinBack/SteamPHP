@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+
+<!-- see http://www.phpunit.de/wiki/Documentation -->
+<phpunit bootstrap="steamTest.php"
+         colors="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="true">
+</phpunit>
+
+<phpunit colors="false" />

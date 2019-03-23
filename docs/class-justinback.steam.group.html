@@ -69,9 +69,18 @@
 							<ul>
 					<li class="active">
 						<a href="namespace-justinback.steam.html">
-							steam						</a>
+							steam<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-justinback.steam.exceptions.html">
+							exceptions						</a>
 							</li>
-								</ul></li>
+								</ul></li></ul></li>
+					<li>
+						<a href="namespace-PHP.html">
+							PHP						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -82,7 +91,6 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
-				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li class="active"><a href="class-justinback.steam.group.html">group</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
@@ -94,6 +102,8 @@
 				<li><a href="class-justinback.steam.store.html">store</a></li>
 				<li><a href="class-justinback.steam.transactions.html">transactions</a></li>
 				<li><a href="class-justinback.steam.ugc.html">ugc</a></li>
+				<li><a href="class-justinback.steam.userauth.html">userauth</a></li>
+				<li><a href="class-justinback.steam.utils.html">utils</a></li>
 			</ul>
 
 
@@ -133,7 +143,7 @@ Get group name, avatar and members!</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.group.html#10-229" title="Go to source code">class/group.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.group.html#10-385" title="Go to source code">class/group.php</a>
 		<br>
 	</div>
 
@@ -153,26 +163,24 @@ Get group name, avatar and members!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.group.html#42-58" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sGid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.group.html#36-50" title="Go to source code">__construct</a>( <span>string <var>$sGid</var></span>, <span>string <var>$sAPIKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sAppID</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				<p>Construction of the variables steamid, key and game</p>
+				<p>Construction of the variables</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Construction of the variables steamid, key and game</p>
+				<p>Construction of the variables</p>
 
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$sApiKey</var></dt>
-						<dd>Steamworks Developer API Key</dd>
-						<dt><var>$iGame</var></dt>
-						<dd>Your Appid</dd>
-						<dt><var>$sSteamid</var></dt>
-						<dd>The SteamID of the user</dd>
 						<dt><var>$sGid</var></dt>
 						<dd>The GlobalID of the group</dd>
+						<dt><var>$sAPIKey</var></dt>
+						<dd>[optional] The APIKey from steamworks</dd>
+						<dt><var>$sAppID</var></dt>
+						<dd>[optional] The AppID of your app</dd>
 					</dl></div>
 
 
@@ -193,7 +201,7 @@ Get group name, avatar and members!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetGroupName">#</a>
-			<code><a href="source-class-justinback.steam.group.html#96-108" title="Go to source code">GetGroupName</a>( )</code>
+			<code><a href="source-class-justinback.steam.group.html#52-87" title="Go to source code">GetGroupName</a>( )</code>
 
 			<div class="description short">
 				<p>Get the name of the group</p>
@@ -206,9 +214,14 @@ Get group name, avatar and members!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						string
+						string<br>the group name
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the group global id is not valid as a parameter
+					</div>
 
 
 
@@ -226,7 +239,7 @@ Get group name, avatar and members!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetGroupURL">#</a>
-			<code><a href="source-class-justinback.steam.group.html#110-122" title="Go to source code">GetGroupURL</a>( )</code>
+			<code><a href="source-class-justinback.steam.group.html#89-123" title="Go to source code">GetGroupURL</a>( )</code>
 
 			<div class="description short">
 				<p>Get the Custom URL of the group</p>
@@ -242,6 +255,11 @@ Get group name, avatar and members!</p>
 						string
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the group global id is not valid as a parameter
+					</div>
 
 
 
@@ -259,7 +277,7 @@ Get group name, avatar and members!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetGroupHeadline">#</a>
-			<code><a href="source-class-justinback.steam.group.html#124-136" title="Go to source code">GetGroupHeadline</a>( )</code>
+			<code><a href="source-class-justinback.steam.group.html#125-159" title="Go to source code">GetGroupHeadline</a>( )</code>
 
 			<div class="description short">
 				<p>Get the Headline of the group</p>
@@ -275,6 +293,11 @@ Get group name, avatar and members!</p>
 						string
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the group global id is not valid as a parameter
+					</div>
 
 
 
@@ -292,7 +315,7 @@ Get group name, avatar and members!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetGroupSummary">#</a>
-			<code><a href="source-class-justinback.steam.group.html#138-150" title="Go to source code">GetGroupSummary</a>( )</code>
+			<code><a href="source-class-justinback.steam.group.html#161-195" title="Go to source code">GetGroupSummary</a>( )</code>
 
 			<div class="description short">
 				<p>Get the summary of the group</p>
@@ -308,6 +331,11 @@ Get group name, avatar and members!</p>
 						string
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the group global id is not valid as a parameter
+					</div>
 
 
 
@@ -325,7 +353,7 @@ Get group name, avatar and members!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetGroupID64">#</a>
-			<code><a href="source-class-justinback.steam.group.html#152-164" title="Go to source code">GetGroupID64</a>( )</code>
+			<code><a href="source-class-justinback.steam.group.html#197-231" title="Go to source code">GetGroupID64</a>( )</code>
 
 			<div class="description short">
 				<p>Get the group id 64 of the group</p>
@@ -341,13 +369,18 @@ Get group name, avatar and members!</p>
 						string
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the group global id is not valid as a parameter
+					</div>
 
 
 
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="GetGroupAvatar" id="_GetGroupAvatar">
+		<tr data-order="GetGroupAvatars" id="_GetGroupAvatars">
 
 			<td class="attributes"><code>
 				 public 
@@ -357,8 +390,8 @@ Get group name, avatar and members!</p>
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_GetGroupAvatar">#</a>
-			<code><a href="source-class-justinback.steam.group.html#166-184" title="Go to source code">GetGroupAvatar</a>( )</code>
+			<a class="anchor" href="#_GetGroupAvatars">#</a>
+			<code><a href="source-class-justinback.steam.group.html#233-283" title="Go to source code">GetGroupAvatars</a>( )</code>
 
 			<div class="description short">
 				<p>Get the avatars of the group</p>
@@ -371,9 +404,21 @@ Get group name, avatar and members!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						object
+						object<br><pre>object(stdClass)<span class="php-comment">#6 (3) {</span>
+  [<span class="php-quote">&quot;icon&quot;</span>]=&gt;
+  string(<span class="php-num">116</span>) <span class="php-quote">&quot;https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/71/7184a353cd6a120017d14f72c30f9bffb4103f31.jpg&quot;</span>
+  [<span class="php-quote">&quot;medium&quot;</span>]=&gt;
+  string(<span class="php-num">123</span>) <span class="php-quote">&quot;https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/71/7184a353cd6a120017d14f72c30f9bffb4103f31_medium.jpg&quot;</span>
+  [<span class="php-quote">&quot;full&quot;</span>]=&gt;
+  string(<span class="php-num">121</span>) <span class="php-quote">&quot;https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/71/7184a353cd6a120017d14f72c30f9bffb4103f31_full.jpg&quot;</span>
+}</pre>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the group global id is not valid as a parameter
+					</div>
 
 
 
@@ -391,7 +436,7 @@ Get group name, avatar and members!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetGroupMembers">#</a>
-			<code><a href="source-class-justinback.steam.group.html#186-204" title="Go to source code">GetGroupMembers</a>( )</code>
+			<code><a href="source-class-justinback.steam.group.html#285-325" title="Go to source code">GetGroupMembers</a>( )</code>
 
 			<div class="description short">
 				<p>Get the members of the group</p>
@@ -407,6 +452,11 @@ Get group name, avatar and members!</p>
 						<code><a href="class-justinback.steam.player.html">justinback\steam\player</a></code><br>array
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the group global id is not valid as a parameter
+					</div>
 
 
 
@@ -424,7 +474,7 @@ Get group name, avatar and members!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetGroupStats">#</a>
-			<code><a href="source-class-justinback.steam.group.html#206-227" title="Go to source code">GetGroupStats</a>( )</code>
+			<code><a href="source-class-justinback.steam.group.html#327-383" title="Go to source code">GetGroupStats</a>( )</code>
 
 			<div class="description short">
 				<p>Get the member statistics of the group</p>
@@ -437,9 +487,23 @@ Get group name, avatar and members!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						object
+						object<br><pre>object(stdClass)<span class="php-comment">#6 (4) {</span>
+  [<span class="php-quote">&quot;Total&quot;</span>]=&gt;
+  string(<span class="php-num">5</span>) <span class="php-quote">&quot;23024&quot;</span>
+  [<span class="php-quote">&quot;InChat&quot;</span>]=&gt;
+  string(<span class="php-num">4</span>) <span class="php-quote">&quot;1020&quot;</span>
+  [<span class="php-quote">&quot;InGame&quot;</span>]=&gt;
+  string(<span class="php-num">3</span>) <span class="php-quote">&quot;314&quot;</span>
+  [<span class="php-quote">&quot;Online&quot;</span>]=&gt;
+  string(<span class="php-num">4</span>) <span class="php-quote">&quot;4856&quot;</span>
+}</pre>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the group global id is not valid as a parameter
+					</div>
 
 
 
@@ -469,7 +533,7 @@ Get group name, avatar and members!</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-justinback.steam.group.html#36-40" title="Go to source code"><var>$gid</var></a>
+					<a href="source-class-justinback.steam.group.html#18-22" title="Go to source code"><var>$gid</var></a>
 
 				<div class="description short">
 					<p>GlobalID of the group</p>

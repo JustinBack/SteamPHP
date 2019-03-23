@@ -69,9 +69,18 @@
 							<ul>
 					<li class="active">
 						<a href="namespace-justinback.steam.html">
-							steam						</a>
+							steam<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-justinback.steam.exceptions.html">
+							exceptions						</a>
 							</li>
-								</ul></li>
+								</ul></li></ul></li>
+					<li>
+						<a href="namespace-PHP.html">
+							PHP						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -82,7 +91,6 @@
 				<li class="active"><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
-				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.group.html">group</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
@@ -94,6 +102,8 @@
 				<li><a href="class-justinback.steam.store.html">store</a></li>
 				<li><a href="class-justinback.steam.transactions.html">transactions</a></li>
 				<li><a href="class-justinback.steam.ugc.html">ugc</a></li>
+				<li><a href="class-justinback.steam.userauth.html">userauth</a></li>
+				<li><a href="class-justinback.steam.utils.html">utils</a></li>
 			</ul>
 
 
@@ -132,11 +142,7 @@
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-				<b>Todo:</b>
-				UnlockAchievement();<br>
-				<b>Todo:</b>
-				LockAchievement();<br>
-			<b>Located at</b> <a href="source-class-justinback.steam.achievements.html#10-229" title="Go to source code">class/achievements.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.achievements.html#10-507" title="Go to source code">class/achievements.php</a>
 		<br>
 	</div>
 
@@ -156,7 +162,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.achievements.html#38-57" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.achievements.html#36-55" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -198,7 +204,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetPlayerAchievements">#</a>
-			<code><a href="source-class-justinback.steam.achievements.html#95-121" title="Go to source code">GetPlayerAchievements</a>( )</code>
+			<code><a href="source-class-justinback.steam.achievements.html#93-174" title="Go to source code">GetPlayerAchievements</a>( )</code>
 
 			<div class="description short">
 				<p>Retrieve unlocked achievements by the player</p>
@@ -211,10 +217,41 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						array
+						array<br>Multidimensional array with objects containing apiname (string), achieved (int), unlocktime (int)
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the steam id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
+					<h4>Link</h4>
+					<div class="list">
+							<a href="https://partner.steamgames.com/doc/webapi/ISteamUserStats#GetPlayerAchievements">&lt;code&gt;
+array(2) {
+  [3]=&gt;
+  object(stdClass)#9 (3) {
+    [&quot;apiname&quot;]=&gt;
+    string(20) &quot;ACT_1_BOOK_COLLECTOR&quot;
+    [&quot;achieved&quot;]=&gt;
+    int(0)
+    [&quot;unlocktime&quot;]=&gt;
+    int(0)
+  }
+  [4]=&gt;
+  object(stdClass)#10 (3) {
+    [&quot;apiname&quot;]=&gt;
+    string(19) &quot;ACT_1_TOY_COLLECTOR&quot;
+    [&quot;achieved&quot;]=&gt;
+    int(0)
+    [&quot;unlocktime&quot;]=&gt;
+    int(0)
+  }
+}
+&lt;/code&gt;</a><br>
+					</div>
 					<h4>Example</h4>
 					<div class="list">
 							<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
@@ -236,7 +273,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetPlayerAchievementsLocked">#</a>
-			<code><a href="source-class-justinback.steam.achievements.html#123-146" title="Go to source code">GetPlayerAchievementsLocked</a>( )</code>
+			<code><a href="source-class-justinback.steam.achievements.html#176-248" title="Go to source code">GetPlayerAchievementsLocked</a>( )</code>
 
 			<div class="description short">
 				<p>Return only locked achievements by the player</p>
@@ -249,7 +286,28 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						array
+						array<br><p>Same Multidimensional array as GetPlayerAchievements().</p>
+
+<pre><span class="php-keyword1">array</span>(<span class="php-num">2</span>) {
+  [<span class="php-num">3</span>]=&gt;
+  object(stdClass)<span class="php-comment">#9 (3) {</span>
+    [<span class="php-quote">&quot;apiname&quot;</span>]=&gt;
+    string(<span class="php-num">20</span>) <span class="php-quote">&quot;ACT_1_BOOK_COLLECTOR&quot;</span>
+    [<span class="php-quote">&quot;achieved&quot;</span>]=&gt;
+    int(<span class="php-num">0</span>)
+    [<span class="php-quote">&quot;unlocktime&quot;</span>]=&gt;
+    int(<span class="php-num">0</span>)
+  }
+  [<span class="php-num">4</span>]=&gt;
+  object(stdClass)<span class="php-comment">#10 (3) {</span>
+    [<span class="php-quote">&quot;apiname&quot;</span>]=&gt;
+    string(<span class="php-num">19</span>) <span class="php-quote">&quot;ACT_1_TOY_COLLECTOR&quot;</span>
+    [<span class="php-quote">&quot;achieved&quot;</span>]=&gt;
+    int(<span class="php-num">0</span>)
+    [<span class="php-quote">&quot;unlocktime&quot;</span>]=&gt;
+    int(<span class="php-num">0</span>)
+  }
+}</pre>
 					</div>
 
 
@@ -274,14 +332,14 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetAchievementDetails">#</a>
-			<code><a href="source-class-justinback.steam.achievements.html#148-171" title="Go to source code">GetAchievementDetails</a>( <span>string <var>$sApiname</var></span> )</code>
+			<code><a href="source-class-justinback.steam.achievements.html#250-324" title="Go to source code">GetAchievementDetails</a>( <span>justinback\steam\string <var>$sApiname</var></span> )</code>
 
 			<div class="description short">
-				<p>Setting SteamID from the construct</p>
+				<p>Get infos about a certain achievement</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Setting SteamID from the construct</p>
+				<p>Get infos about a certain achievement</p>
 
 
 					<h4>Parameters</h4>
@@ -292,14 +350,135 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						object
+						object<br><p>The details of an achievement in an object.</p>
+
+<pre>object(stdClass)<span class="php-comment">#6 (7) {</span>
+  [<span class="php-quote">&quot;name&quot;</span>]=&gt;
+  string(<span class="php-num">16</span>) <span class="php-quote">&quot;ACT_1_LOCKED_OUT&quot;</span>
+  [<span class="php-quote">&quot;defaultvalue&quot;</span>]=&gt;
+  int(<span class="php-num">0</span>)
+  [<span class="php-quote">&quot;displayName&quot;</span>]=&gt;
+  string(<span class="php-num">10</span>) <span class="php-quote">&quot;Locked Out&quot;</span>
+  [<span class="php-quote">&quot;hidden&quot;</span>]=&gt;
+  int(<span class="php-num">0</span>)
+  [<span class="php-quote">&quot;description&quot;</span>]=&gt;
+  string(<span class="php-num">18</span>) <span class="php-quote">&quot;That's not good...&quot;</span>
+  [<span class="php-quote">&quot;icon&quot;</span>]=&gt;
+  string(<span class="php-num">117</span>) <span class="php-quote">&quot;https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/650580/1d52a3c57e72e3f2d06ca987225ab1d990a441d3.jpg&quot;</span>
+  [<span class="php-quote">&quot;icongray&quot;</span>]=&gt;
+  string(<span class="php-num">117</span>) <span class="php-quote">&quot;https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/650580/c54a539174e1e8c57f61810acb0934f7c7a8b8ec.jpg&quot;</span>
+}</pre>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the api name is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 					<h4>Example</h4>
 					<div class="list">
 							<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
-<span class="php-var">$object</span> = <span class="php-var">$achievements</span>-&gt;GetAchievementDetails();</pre><br>
+<span class="php-var">$object</span> = <span class="php-var">$achievements</span>-&gt;GetAchievementDetails(<span class="php-quote">&quot;ACT_1_LOCKED_OUT&quot;</span>);</pre><br>
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="LockAchievement" id="_LockAchievement">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_LockAchievement">#</a>
+			<code><a href="source-class-justinback.steam.achievements.html#326-389" title="Go to source code">LockAchievement</a>( <span>string <var>$sApiname</var></span> )</code>
+
+			<div class="description short">
+				<p>Lock an achievement (Remove) for the specified SteamID. The Achievement must be set to "Official GS" for it to work.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Lock an achievement (Remove) for the specified SteamID. The Achievement must be set to "Official GS" for it to work.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sApiname</var></dt>
+						<dd>APIName of the achievement (not visible name)</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean<br>TRUE if the achievement has been locked otherwise FALSE
+					</div>
+
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the steam id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
+
+					<h4>Example</h4>
+					<div class="list">
+							<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
+<span class="php-var">$locked</span> = <span class="php-var">$achievements</span>-&gt;LockAchievement(<span class="php-quote">&quot;WALK_100_STEPS&quot;</span>);</pre><br>
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="UnlockAchievement" id="_UnlockAchievement">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_UnlockAchievement">#</a>
+			<code><a href="source-class-justinback.steam.achievements.html#391-454" title="Go to source code">UnlockAchievement</a>( <span>string <var>$sApiname</var></span> )</code>
+
+			<div class="description short">
+				<p>Unlock an achievement for the specified SteamID. The Achievement must be set to "Official GS" for it to work.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Unlock an achievement for the specified SteamID. The Achievement must be set to "Official GS" for it to work.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sApiname</var></dt>
+						<dd>APIName of the achievement (not visible name)</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean<br>TRUE if the achievement has been unlocked otherwise FALSE
+					</div>
+
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the steam id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
+
+					<h4>Example</h4>
+					<div class="list">
+							<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
+<span class="php-var">$locked</span> = <span class="php-var">$achievements</span>-&gt;UnlockAchievement(<span class="php-quote">&quot;WALK_100_STEPS&quot;</span>);</pre><br>
 					</div>
 
 
@@ -317,7 +496,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_HasPlayerUnlockedAchievement">#</a>
-			<code><a href="source-class-justinback.steam.achievements.html#183-205" title="Go to source code">HasPlayerUnlockedAchievement</a>( <span>string <var>$sApiname</var></span> )</code>
+			<code><a href="source-class-justinback.steam.achievements.html#456-483" title="Go to source code">HasPlayerUnlockedAchievement</a>( <span>string <var>$sApiname</var></span> )</code>
 
 			<div class="description short">
 				<p>Check if player has unlocked the specified achievement</p>
@@ -335,14 +514,20 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						boolean
+						boolean<br>TRUE if the player has unlocked the achievement otherwise FALSE
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the steam id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 					<h4>Example</h4>
 					<div class="list">
 							<pre><span class="php-var">$achievements</span> = <span class="php-var">$steam</span>-&gt;game()-&gt;achievements();
-<span class="php-var">$bool</span> = <span class="php-var">$achievements</span>-&gt;HasPlayerUnlockedAchievement();</pre><br>
+<span class="php-var">$bool</span> = <span class="php-var">$achievements</span>-&gt;HasPlayerUnlockedAchievement(<span class="php-quote">&quot;ACT_1_LOCKED_OUT&quot;</span>);</pre><br>
 					</div>
 
 
@@ -360,14 +545,14 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_game">#</a>
-			<code><a href="source-class-justinback.steam.achievements.html#207-227" title="Go to source code">game</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.achievements.html#485-505" title="Go to source code">game</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				<p>game object.</p>
+				<p>The game class for more functions regarding the game itself.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>game object.</p>
+				<p>The game class for more functions regarding the game itself.</p>
 
 
 					<h4>Parameters</h4>
@@ -382,7 +567,7 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-justinback.steam.game.html">justinback\steam\game</a></code>
+						<code><a href="class-justinback.steam.game.html">justinback\steam\game</a></code><br>The game class for more functions regarding the game itself
 					</div>
 
 

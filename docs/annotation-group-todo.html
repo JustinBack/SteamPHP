@@ -66,9 +66,18 @@
 							<ul>
 					<li>
 						<a href="namespace-justinback.steam.html">
-							steam						</a>
+							steam<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-justinback.steam.exceptions.html">
+							exceptions						</a>
 							</li>
-								</ul></li>
+								</ul></li></ul></li>
+					<li>
+						<a href="namespace-PHP.html">
+							PHP						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -79,7 +88,6 @@
 				<li><a href="class-justinback.steam.achievements.html">justinback\steam\achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">justinback\steam\anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">justinback\steam\game</a></li>
-				<li><a href="class-justinback.steam.gameserver.html">justinback\steam\gameserver</a></li>
 				<li><a href="class-justinback.steam.group.html">justinback\steam\group</a></li>
 				<li><a href="class-justinback.steam.inventory.html">justinback\steam\inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">justinback\steam\item</a></li>
@@ -91,10 +99,24 @@
 				<li><a href="class-justinback.steam.store.html">justinback\steam\store</a></li>
 				<li><a href="class-justinback.steam.transactions.html">justinback\steam\transactions</a></li>
 				<li><a href="class-justinback.steam.ugc.html">justinback\steam\ugc</a></li>
+				<li><a href="class-justinback.steam.userauth.html">justinback\steam\userauth</a></li>
+				<li><a href="class-justinback.steam.utils.html">justinback\steam\utils</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Throwable.html">Throwable</a></li>
 			</ul>
 
 
-
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-Exception.html">Exception</a></li>
+				<li><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></li>
+				<li><a href="class-justinback.steam.exceptions.SteamIDInvalidException.html">justinback\steam\exceptions\SteamIDInvalidException</a></li>
+				<li><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></li>
+				<li><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></li>
+			</ul>
 
 
 		</div>
@@ -108,24 +130,6 @@
 <div id="content">
 	<h1>Todo</h1>
 
-			<div class="panel panel-default">
-                <div class="panel-heading"><h2>Classes summary</h2></div>
-				<table class="summary table table-bordered table-striped" id="classes">
-	<tr>
-		<td class="name"><a href="class-justinback.steam.achievements.html">justinback\steam\achievements</a></td>
-		<td>
-					UnlockAchievement();<br>
-					LockAchievement();<br>
-		</td>
-	</tr>
-	<tr>
-		<td class="name"><a href="class-justinback.steam.gameserver.html">justinback\steam\gameserver</a></td>
-		<td>
-					Everything, API currently has error. Waiting for fix<br>
-		</td>
-	</tr>
-				</table>
-			</div>
 
 
 
@@ -159,6 +163,20 @@
 						<td class="name"><code><a href="class-justinback.steam.ugc.html#_QueryFiles">QueryFiles()</a></code></td>
 						<td>
 										Finish this method. Need response from valve<br>
+						</td>
+					</tr>
+					<tr>
+						<td class="name"><a href="class-justinback.steam.userauth.html">justinback\steam\userauth</a></td>
+						<td class="name"><code><a href="class-justinback.steam.userauth.html#_AuthenticateUser">AuthenticateUser()</a></code></td>
+						<td>
+										This method is not done yet.<br>
+						</td>
+					</tr>
+					<tr>
+						<td class="name"><a href="class-justinback.steam.userauth.html">justinback\steam\userauth</a></td>
+						<td class="name"><code><a href="class-justinback.steam.userauth.html#_AuthenticateUserTicket">AuthenticateUserTicket()</a></code></td>
+						<td>
+										Decode JSON, I have no Idea what the Steam API returns for now. Please decode it manually!<br>
 						</td>
 					</tr>
 				</table>

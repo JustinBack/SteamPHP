@@ -33,6 +33,12 @@ class manager {
     private $steamid = null;
 
     /**
+     * Our Utils class in a handy variable!
+     * @var utils
+     */
+    private $Utils = null;
+
+    /**
      * Construction of the variables steamid, key and game
      *
      *
@@ -43,6 +49,13 @@ class manager {
      * @return void
      */
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null) {
+
+        $this->Utils = new utils();
+
+        if (!$this->Utils->IsValidSteamID($sSteamid)) {
+            throw new exceptions\SteamException("The SteamID provided is invalid, it must be a Steam64 ID!");
+        }
+
         $this->set_key($sApiKey);
         $this->set_game((int) $iGame);
         $this->set_steamid($sSteamid);
@@ -176,7 +189,7 @@ class manager {
     /**
      * Transaction object.
      *
-     * @param string $bTesting Sandbox or Production environment?
+     * @param bool $bTesting Sandbox or Production environment?
      * @param string $sApiKey (optional) set a different apikey than the construct
      * @param string $iGame (optional) set a different appid than the construct
      * @param string $sSteamid (optional) set a different steamid than the construct
@@ -194,6 +207,19 @@ class manager {
             $sSteamid = $this->steamid;
         }
         return new \justinback\steam\transactions($bTesting, $sApiKey, $iGame, $sSteamid);
+    }
+
+    /**
+     * Group object.
+     *
+     * @param string $sGID Steam Community global id (gid). typically in https://steamcommunity.com/gid/<GID>
+     * @param string $sAPIKey [optional] Your API Key
+     * @param string $sGame [optional] Your App ID
+     * 
+     * @return group
+     */
+    public function group($sGID, $sAPIKey, $sGame) {
+        return new \justinback\steam\group($sGID, $sAPIKey, $sGame);
     }
 
 }

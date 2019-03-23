@@ -69,9 +69,18 @@
 							<ul>
 					<li class="active">
 						<a href="namespace-justinback.steam.html">
-							steam						</a>
+							steam<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-justinback.steam.exceptions.html">
+							exceptions						</a>
 							</li>
-								</ul></li>
+								</ul></li></ul></li>
+					<li>
+						<a href="namespace-PHP.html">
+							PHP						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -82,7 +91,6 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li class="active"><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
-				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.group.html">group</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
@@ -94,6 +102,8 @@
 				<li><a href="class-justinback.steam.store.html">store</a></li>
 				<li><a href="class-justinback.steam.transactions.html">transactions</a></li>
 				<li><a href="class-justinback.steam.ugc.html">ugc</a></li>
+				<li><a href="class-justinback.steam.userauth.html">userauth</a></li>
+				<li><a href="class-justinback.steam.utils.html">utils</a></li>
 			</ul>
 
 
@@ -133,7 +143,7 @@ Ban, unban and report players.</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.anticheat.html#10-139" title="Go to source code">class/anticheat.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.anticheat.html#10-174" title="Go to source code">class/anticheat.php</a>
 		<br>
 	</div>
 
@@ -182,6 +192,40 @@ Ban, unban and report players.</p>
 			</div>
 			</div></td>
 		</tr>
+		<tr data-order="set_reportid" id="_set_reportid">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_set_reportid">#</a>
+			<code><a href="source-class-justinback.steam.anticheat.html#96-106" title="Go to source code">set_reportid</a>( <span>string <var>$reportid</var></span> )</code>
+
+			<div class="description short">
+				<p>Setting ReportID</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Setting ReportID</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$reportid</var></dt>
+						<dd>The Report ID</dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
 		<tr data-order="RequestPlayerGameBan" id="_RequestPlayerGameBan">
 
 			<td class="attributes"><code>
@@ -193,7 +237,7 @@ Ban, unban and report players.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_RequestPlayerGameBan">#</a>
-			<code><a href="source-class-justinback.steam.anticheat.html#108-137" title="Go to source code">RequestPlayerGameBan</a>( <span>string <var>$sCheatDescription</var></span>, <span>integer <var>$iDuration</var></span>, <span>boolean <var>$bDelayBan</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-justinback.steam.anticheat.html#108-172" title="Go to source code">RequestPlayerGameBan</a>( <span>string <var>$sCheatDescription</var></span>, <span>integer <var>$iDuration</var></span>, <span>boolean <var>$bDelayBan</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Requests a game ban on a specific player.</p>
@@ -217,10 +261,20 @@ Ban, unban and report players.</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						boolean
+						boolean<br>TRUE if the player has successfully been banned otherwise FALSE
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the steam id, report id, or duration is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
+					<h4>Link</h4>
+					<div class="list">
+							<a href="https://partner.steamgames.com/doc/webapi/ICheatReportingService#RequestPlayerGameBan">https://partner.steamgames.com/doc/webapi/ICheatReportingService#RequestPlayerGameBan</a><br>
+					</div>
 
 
 			</div>

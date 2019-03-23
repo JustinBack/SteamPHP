@@ -6,7 +6,8 @@
     },
     "autoload": {
         "psr-4": {
-            "justinback\\steam\\": "class/"
+            "justinback\\steam\\": "class/",
+            "justinback\\steam\\exceptions\\": "class/exceptions"
         }
     }
 }

@@ -106,7 +106,7 @@ class player {
      *
      *
      *
-     * @return array
+     * @return array Multidimensional array containing SteamId (string), CommunityBanned (bool), VACBanned (int), NumberOfVACBans (int), DaysSinceLastBan (int), NumberOfGameBans (int), bans (array), EconomyBan (string) fields.
      */
     public function GetPlayerBans() {
         $fgcGetPlayerBans = file_get_contents("https://api.steampowered.com/ISteamUser/GetPlayerBans/v1?key=" . $this->key . "&steamids=" . $this->steamid);
@@ -116,11 +116,25 @@ class player {
     }
 
     /**
+     * Returns the Steam Level of a user
+     *
+     *
+     *
+     * @return int|null The Steam Level of the user on success and NULL on failure
+     */
+    public function GetSteamLevel() {
+        $fgcGetSteamLevel = file_get_contents("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1?key=" . $this->key . "&steamid=" . $this->steamid);
+        $oGetSteamLevel = json_decode($fgcGetSteamLevel);
+
+        return $oGetSteamLevel->response->player_level;
+    }
+
+    /**
      * Get the friendlist overview of the user
      *
      *
      *
-     * @return player array
+     * @return player An array containing a player object with information about the friends. Each friend has its own object.
      */
     public function GetFriendList() {
         $fgcGetFriendList = file_get_contents("https://api.steampowered.com/ISteamUser/GetFriendList/v1?key=" . $this->key . "&steamid=" . $this->steamid);
@@ -149,42 +163,21 @@ class player {
         $aGroups = array();
 
         foreach ($oGetUserGroupList->response->groups as $oGroup) {
-            array_push($aGroups, new \justinback\steam\group($this->key, $this->game, $this->steamid, $oGroup->gid));
+            array_push($aGroups, new \justinback\steam\group($oGroup->gid, $this->key, $this->game));
         }
 
         return $aGroups;
     }
 
     /**
-     * Get the SteamID's in an object (steamID, steamID64, steamID32, steamAccountID)
+     * This function has been moved to the \justinback\steam\utils class!
      *
-     * @link https://secure.php.net/manual/en/bc.setup.php Requires BCMath!
-     * @see <a href="https://developer.valvesoftware.com/wiki/SteamID">SteamID Valve Wiki</a>
+     * @deprecated
+     * @see utils
      * 
-     * @return object
      */
     public function GetSteamIDs() {
-
-        $iUniverse = ($this->steamid >> 56) & 0xFF;
-        $iBAccountID = 0;
-        $iHAccountID = 0;
-
-        $oSteamIDs = new \stdClass();
-
-
-        if (((substr($this->steamid, 7) - 7960265728) % 2) == 0) {
-            $iHAccountID = ((substr($this->steamid, 7) - 7960265728) / 2);
-        } else {
-            $iBAccountID = 1;
-            $iHAccountID = (((substr($this->steamid, 7) - 7960265728) - 1) / 2);
-        }
-        $oSteamIDs->steamID = "STEAM_$iUniverse:$iBAccountID:$iHAccountID";
-        $oSteamIDs->steamID64 = $this->steamid;
-        $oSteamIDs->steamAccountID = (substr($oSteamIDs->steamID64, 7) - 7960265728);
-        $oSteamIDs->steamID32 = "[U:1:$oSteamIDs->steamAccountID]";
-
-
-        return $oSteamIDs;
+        
     }
 
     /**
@@ -411,6 +404,28 @@ class player {
             $sSteamid = $this->steamid;
         }
         return new \justinback\steam\transactions($bTesting, $sApiKey, $iGame, $sSteamid);
+    }
+
+    /**
+     * User Authentication object.
+     *
+     * @param string $sApiKey (optional) set a different apikey than the construct
+     * @param string $iGame (optional) set a different appid than the construct
+     * @param string $sSteamid (optional) set a different steamid than the construct
+     * 
+     * @return userauth
+     */
+    public function auth($sApiKey = null, $iGame = null, $sSteamid = null) {
+        if ($sApiKey === null) {
+            $sApiKey = $this->key;
+        }
+        if ($iGame === null) {
+            $iGame = $this->game;
+        }
+        if ($sSteamid === null) {
+            $sSteamid = $this->steamid;
+        }
+        return new \justinback\steam\userauth($sApiKey, $iGame, $sSteamid);
     }
 
 }

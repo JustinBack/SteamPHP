@@ -69,9 +69,18 @@
 							<ul>
 					<li class="active">
 						<a href="namespace-justinback.steam.html">
-							steam						</a>
+							steam<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-justinback.steam.exceptions.html">
+							exceptions						</a>
 							</li>
-								</ul></li>
+								</ul></li></ul></li>
+					<li>
+						<a href="namespace-PHP.html">
+							PHP						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -82,7 +91,6 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
-				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.group.html">group</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
@@ -94,6 +102,8 @@
 				<li><a href="class-justinback.steam.store.html">store</a></li>
 				<li><a href="class-justinback.steam.transactions.html">transactions</a></li>
 				<li><a href="class-justinback.steam.ugc.html">ugc</a></li>
+				<li><a href="class-justinback.steam.userauth.html">userauth</a></li>
+				<li><a href="class-justinback.steam.utils.html">utils</a></li>
 			</ul>
 
 
@@ -132,7 +142,7 @@
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.manager.html#10-199" title="Go to source code">class/manager.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.manager.html#10-225" title="Go to source code">class/manager.php</a>
 		<br>
 	</div>
 
@@ -152,7 +162,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#35-49" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#41-62" title="Go to source code">__construct</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Construction of the variables steamid, key and game</p>
@@ -190,7 +200,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_player">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#87-107" title="Go to source code">player</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#100-120" title="Go to source code">player</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>player object.</p>
@@ -232,7 +242,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_game">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#109-129" title="Go to source code">game</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#122-142" title="Go to source code">game</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Game object.</p>
@@ -274,7 +284,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ugc">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#131-152" title="Go to source code">ugc</a>( <span>string <var>$sPublishedFileId</var></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#144-165" title="Go to source code">ugc</a>( <span>string <var>$sPublishedFileId</var></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>UGC object.</p>
@@ -318,7 +328,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_store">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#154-174" title="Go to source code">store</a>( <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#167-187" title="Go to source code">store</a>( <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>store object.</p>
@@ -356,7 +366,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_transactions">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#176-197" title="Go to source code">transactions</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#189-210" title="Go to source code">transactions</a>( <span>boolean <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Transaction object.</p>
@@ -381,6 +391,48 @@
 					<h4>Returns</h4>
 					<div class="list">
 						<code><a href="class-justinback.steam.transactions.html">justinback\steam\transactions</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="group" id="_group">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-justinback.steam.group.html">justinback\steam\group</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_group">#</a>
+			<code><a href="source-class-justinback.steam.manager.html#212-223" title="Go to source code">group</a>( <span>string <var>$sGID</var></span>, <span>string <var>$sAPIKey</var></span>, <span>string <var>$sGame</var></span> )</code>
+
+			<div class="description short">
+				<p>Group object.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Group object.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sGID</var></dt>
+						<dd>Steam Community global id (gid). typically in https://steamcommunity.com/gid/<GID></dd>
+						<dt><var>$sAPIKey</var></dt>
+						<dd>[optional] Your API Key</dd>
+						<dt><var>$sGame</var></dt>
+						<dd>[optional] Your App ID</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.group.html">justinback\steam\group</a></code>
 					</div>
 
 

@@ -9,6 +9,7 @@
 
 namespace justinback\steam;
 
+
 /**
  * Steam class, nothing else
  *
@@ -31,13 +32,16 @@ class steam {
      *
      */
     public static function bootstrap() {
-        spl_autoload_register(function ($class) {
-            $file = __DIR__ . "/class/" . substr($class, 17) . ".php";
-            if (file_exists($file)) {
-                require $file;
-                return true;
+        spl_autoload_register(function (String $class) {
+            $sourcePath = __DIR__ . DIRECTORY_SEPARATOR . 'class';
+            $replaceRootPath = str_replace('justinback\steam', $sourcePath, $class);
+            $replaceDirectorySeparator = str_replace('\\', DIRECTORY_SEPARATOR, $replaceRootPath);
+            $filePath = $replaceDirectorySeparator . '.php';
+            if (file_exists($filePath)) {
+                require($filePath);
+            }else{
+                throw new \Exception("$class has not been found! Looked in: $filePath");
             }
-            return false;
         });
     }
 

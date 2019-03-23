@@ -16,93 +16,72 @@ namespace justinback\steam;
 class group {
 
     /**
-     * Steamworks API Key
-     *
-     */
-    private $key = null;
-
-    /**
-     * Steamworks App ID
-     *
-     */
-    private $game = null;
-
-    /**
-     * SteamID of user
-     *
-     */
-    private $steamid = null;
-
-    /**
      * GlobalID of the group
      *
      */
     public $gid = null;
 
     /**
-     * Construction of the variables steamid, key and game
+     * APIKey from steamworks
+     *
+     */
+    private $key = null;
+
+    /**
+     * App ID of your app
+     *
+     */
+    private $appid = null;
+
+    /**
+     * Construction of the variables
      *
      *
-     * @param string $sApiKey Steamworks Developer API Key
-     * @param string $iGame Your Appid
-     * @param string $sSteamid The SteamID of the user 
      * @param string $sGid The GlobalID of the group
+     * @param string $sAPIKey [optional] The APIKey from steamworks
+     * @param string $sAppID [optional] The AppID of your app
      *
      * @return void
      */
-    public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sGid = null) {
-        $this->set_key($sApiKey);
-        $this->set_game((int) $iGame);
-        $this->set_steamid($sSteamid);
+    public function __construct($sGid, $sAPIKey = null, $sAppID = null) {
         $this->gid = $sGid;
-    }
-
-    /**
-     * Setting API Key from the construct
-     *
-     *
-     * @param string $sApiKey Steamworks Developer API Key
-     *
-     * @return void
-     */
-    private function set_key($sApiKey) {
-        $this->key = $sApiKey;
-    }
-
-    /**
-     * Setting AppID from the construct
-     *
-     *
-     * @param string $iGame Your AppID
-     *
-     * @return void
-     */
-    private function set_game($iGame) {
-        $this->game = $iGame;
-    }
-
-    /**
-     * Setting SteamID from the construct
-     *
-     *
-     * @param string $sSteamid The Players SteamID
-     *
-     * @return void
-     */
-    private function set_steamid($sSteamid) {
-        $this->steamid = $sSteamid;
+        $this->appid = $sAppID;
+        $this->key = $sAPIKey;
     }
 
     /**
      * Get the name of the group
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
      *
-     *
-     * @return string
+     * @return string the group name
      */
     public function GetGroupName() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
-        $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = curl_exec($ch);
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The Group Global ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupDetails->groupName);
     }
@@ -110,13 +89,35 @@ class group {
     /**
      * Get the Custom URL of the group
      *
-     *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
      *
      * @return string
      */
     public function GetGroupURL() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
-        $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = curl_exec($ch);
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The Group Global ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupDetails->groupURL);
     }
@@ -124,13 +125,35 @@ class group {
     /**
      * Get the Headline of the group
      *
-     *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
      *
      * @return string
      */
     public function GetGroupHeadline() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
-        $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = curl_exec($ch);
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The Group Global ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupDetails->headline);
     }
@@ -138,13 +161,35 @@ class group {
     /**
      * Get the summary of the group
      *
-     *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
      *
      * @return string
      */
     public function GetGroupSummary() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
-        $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = curl_exec($ch);
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The Group Global ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupDetails->summary);
     }
@@ -152,13 +197,35 @@ class group {
     /**
      * Get the group id 64 of the group
      *
-     *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
      *
      * @return string
      */
     public function GetGroupID64() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
-        $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = curl_exec($ch);
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The Group Global ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         return current($oGetGroupName->groupID64);
     }
@@ -166,13 +233,45 @@ class group {
     /**
      * Get the avatars of the group
      *
-     *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
      *
      * @return object
+     * <code>
+     * object(stdClass)#6 (3) {
+     *   ["icon"]=>
+     *   string(116) "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/71/7184a353cd6a120017d14f72c30f9bffb4103f31.jpg"
+     *   ["medium"]=>
+     *   string(123) "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/71/7184a353cd6a120017d14f72c30f9bffb4103f31_medium.jpg"
+     *   ["full"]=>
+     *   string(121) "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/71/7184a353cd6a120017d14f72c30f9bffb4103f31_full.jpg"
+     * }
+     * </code>
      */
-    public function GetGroupAvatar() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
-        $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
+    public function GetGroupAvatars() {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = curl_exec($ch);
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The Group Global ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         $oAvatars = new \stdClass();
 
@@ -186,17 +285,39 @@ class group {
     /**
      * Get the members of the group
      *
-     *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
      * 
      * @return player array
      */
     public function GetGroupMembers() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
-        $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = curl_exec($ch);
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The Group Global ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         $aMembers = array();
         foreach ($oGetGroupName->members->steamID64 as $oMember) {
-            array_push($aMembers, new \justinback\steam\player($this->key, $this->game, current($oMember)));
+            array_push($aMembers, new \justinback\steam\player($this->key, $this->appid, current($oMember)));
         }
 
 
@@ -207,13 +328,48 @@ class group {
      * Get the member statistics of the group
      *
      *
-     *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
+     * 
      * 
      * @return object
+     * <code>
+     * object(stdClass)#6 (4) {
+     *   ["Total"]=>
+     *   string(5) "23024"
+     *   ["InChat"]=>
+     *   string(4) "1020"
+     *   ["InGame"]=>
+     *   string(3) "314"
+     *   ["Online"]=>
+     *   string(4) "4856"
+     * }
+     * </code>
      */
     public function GetGroupStats() {
-        $fgcGetGroupName = file_get_contents("https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
-        $oGetGroupName = simplexml_load_string($fgcGetGroupName, null, LIBXML_NOCDATA);
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = curl_exec($ch);
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The Group Global ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         $oMembers = new \stdClass();
         $aMembers = array();

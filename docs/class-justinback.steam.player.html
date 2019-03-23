@@ -69,9 +69,18 @@
 							<ul>
 					<li class="active">
 						<a href="namespace-justinback.steam.html">
-							steam						</a>
+							steam<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-justinback.steam.exceptions.html">
+							exceptions						</a>
 							</li>
-								</ul></li>
+								</ul></li></ul></li>
+					<li>
+						<a href="namespace-PHP.html">
+							PHP						</a>
+							</li>
 			</ul>
 		</div>
 
@@ -82,7 +91,6 @@
 				<li><a href="class-justinback.steam.achievements.html">achievements</a></li>
 				<li><a href="class-justinback.steam.anticheat.html">anticheat</a></li>
 				<li><a href="class-justinback.steam.game.html">game</a></li>
-				<li><a href="class-justinback.steam.gameserver.html">gameserver</a></li>
 				<li><a href="class-justinback.steam.group.html">group</a></li>
 				<li><a href="class-justinback.steam.inventory.html">inventory</a></li>
 				<li><a href="class-justinback.steam.item.html">item</a></li>
@@ -94,6 +102,8 @@
 				<li><a href="class-justinback.steam.store.html">store</a></li>
 				<li><a href="class-justinback.steam.transactions.html">transactions</a></li>
 				<li><a href="class-justinback.steam.ugc.html">ugc</a></li>
+				<li><a href="class-justinback.steam.userauth.html">userauth</a></li>
+				<li><a href="class-justinback.steam.utils.html">utils</a></li>
 			</ul>
 
 
@@ -133,7 +143,7 @@ Get Player name, avatar and report cheating!</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.player.html#10-416" title="Go to source code">class/player.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.player.html#10-431" title="Go to source code">class/player.php</a>
 		<br>
 	</div>
 
@@ -237,7 +247,40 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						array
+						array<br>Multidimensional array containing SteamId (string), CommunityBanned (bool), VACBanned (int), NumberOfVACBans (int), DaysSinceLastBan (int), NumberOfGameBans (int), bans (array), EconomyBan (string) fields.
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="GetSteamLevel" id="_GetSteamLevel">
+
+			<td class="attributes"><code>
+				 public 
+				integer|null
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_GetSteamLevel">#</a>
+			<code><a href="source-class-justinback.steam.player.html#118-130" title="Go to source code">GetSteamLevel</a>( )</code>
+
+			<div class="description short">
+				<p>Returns the Steam Level of a user</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Returns the Steam Level of a user</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						integer|null<br>The Steam Level of the user on success and NULL on failure
 					</div>
 
 
@@ -257,7 +300,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetFriendList">#</a>
-			<code><a href="source-class-justinback.steam.player.html#118-136" title="Go to source code">GetFriendList</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#132-150" title="Go to source code">GetFriendList</a>( )</code>
 
 			<div class="description short">
 				<p>Get the friendlist overview of the user</p>
@@ -270,7 +313,7 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-justinback.steam.player.html">justinback\steam\player</a></code><br>array
+						<code><a href="class-justinback.steam.player.html">justinback\steam\player</a></code><br>An array containing a player object with information about the friends. Each friend has its own object.
 					</div>
 
 
@@ -290,7 +333,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetUserGroupList">#</a>
-			<code><a href="source-class-justinback.steam.player.html#138-156" title="Go to source code">GetUserGroupList</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#152-170" title="Go to source code">GetUserGroupList</a>( )</code>
 
 			<div class="description short">
 				<p>Get the group overview of the user</p>
@@ -316,37 +359,32 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="attributes"><code>
 				 public 
-				object
+				
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetSteamIDs">#</a>
-			<code><a href="source-class-justinback.steam.player.html#158-188" title="Go to source code">GetSteamIDs</a>( )</code>
+			<code class="deprecated"><a href="source-class-justinback.steam.player.html#172-181" title="Go to source code">GetSteamIDs</a>( )</code>
 
 			<div class="description short">
-				<p>Get the SteamID's in an object (steamID, steamID64, steamID32, steamAccountID)</p>
+				<p>This function has been moved to the \justinback\steam\utils class!</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Get the SteamID's in an object (steamID, steamID64, steamID32, steamAccountID)</p>
+				<p>This function has been moved to the \justinback\steam\utils class!</p>
 
-
-
-					<h4>Returns</h4>
+					<h4>Deprecated</h4>
 					<div class="list">
-						object
 					</div>
+
+
 
 
 					<h4>See</h4>
 					<div class="list">
-							<a href="https://developer.valvesoftware.com/wiki/SteamID">SteamID Valve Wiki</a><br>
-					</div>
-					<h4>Link</h4>
-					<div class="list">
-							<a href="https://secure.php.net/manual/en/bc.setup.php">Requires BCMath!</a><br>
+							<code><a href="class-justinback.steam.utils.html">justinback\steam\utils</a></code><br>
 					</div>
 
 
@@ -364,7 +402,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetAvatar">#</a>
-			<code><a href="source-class-justinback.steam.player.html#190-208" title="Go to source code">GetAvatar</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#183-201" title="Go to source code">GetAvatar</a>( )</code>
 
 			<div class="description short">
 				<p>Get the Avatar in an object (small, medium, full)</p>
@@ -397,7 +435,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetRealName">#</a>
-			<code><a href="source-class-justinback.steam.player.html#210-224" title="Go to source code">GetRealName</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#203-217" title="Go to source code">GetRealName</a>( )</code>
 
 			<div class="description short">
 				<p>Get the Realname from the user</p>
@@ -430,7 +468,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ReportPlayerCheating">#</a>
-			<code><a href="source-class-justinback.steam.player.html#226-258" title="Go to source code">ReportPlayerCheating</a>( <span>string <var>$sSteamidreporter</var> = <span class="php-num">0</span></span>, <span>string <var>$sAppData</var> = <span class="php-num">0</span></span>, <span>boolean <var>$bHeuristic</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bDetection</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bPlayerReport</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bNoReportId</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$iGamemode</var> = <span class="php-num">0</span></span>, <span>integer <var>$iSuspicionStartTime</var> = <span class="php-num">0</span></span>, <span>integer <var>$iSeverity</var> = <span class="php-num">0</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#219-251" title="Go to source code">ReportPlayerCheating</a>( <span>string <var>$sSteamidreporter</var> = <span class="php-num">0</span></span>, <span>string <var>$sAppData</var> = <span class="php-num">0</span></span>, <span>boolean <var>$bHeuristic</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bDetection</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bPlayerReport</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bNoReportId</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$iGamemode</var> = <span class="php-num">0</span></span>, <span>integer <var>$iSuspicionStartTime</var> = <span class="php-num">0</span></span>, <span>integer <var>$iSeverity</var> = <span class="php-num">0</span></span> )</code>
 
 			<div class="description short">
 				<p>ReportPlayerCheating is designed to gather community reports of cheating, where one player reports another player within the game.</p>
@@ -486,7 +524,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ReportAbuse">#</a>
-			<code><a href="source-class-justinback.steam.player.html#260-292" title="Go to source code">ReportAbuse</a>( <span>string <var>$sSteamidreporter</var></span>, <span>integer <var>$iAbuseType</var></span>, <span>integer <var>$iContentType</var></span>, <span>string <var>$sDescription</var></span>, <span>string <var>$sGid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#253-285" title="Go to source code">ReportAbuse</a>( <span>string <var>$sSteamidreporter</var></span>, <span>integer <var>$iAbuseType</var></span>, <span>integer <var>$iContentType</var></span>, <span>string <var>$sDescription</var></span>, <span>string <var>$sGid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Allows publishers to report users who are behaving badly on their community hub.</p>
@@ -532,7 +570,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_RemovePlayerGameBan">#</a>
-			<code><a href="source-class-justinback.steam.player.html#294-319" title="Go to source code">RemovePlayerGameBan</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#287-312" title="Go to source code">RemovePlayerGameBan</a>( )</code>
 
 			<div class="description short">
 				<p>Remove a game ban on a player.</p>
@@ -567,7 +605,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_EnumerateUserPublishedFiles">#</a>
-			<code><a href="source-class-justinback.steam.player.html#321-347" title="Go to source code">EnumerateUserPublishedFiles</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#314-340" title="Go to source code">EnumerateUserPublishedFiles</a>( )</code>
 
 			<div class="description short">
 				<p>List all files by user as array (Only IDs)</p>
@@ -600,7 +638,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_achievements">#</a>
-			<code><a href="source-class-justinback.steam.player.html#349-369" title="Go to source code">achievements</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#342-362" title="Go to source code">achievements</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>achievements object.</p>
@@ -642,7 +680,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_inventory">#</a>
-			<code><a href="source-class-justinback.steam.player.html#371-391" title="Go to source code">inventory</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#364-384" title="Go to source code">inventory</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>inventory object.</p>
@@ -684,7 +722,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_transactions">#</a>
-			<code><a href="source-class-justinback.steam.player.html#393-414" title="Go to source code">transactions</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#386-407" title="Go to source code">transactions</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Transaction object.</p>
@@ -709,6 +747,48 @@ Get Player name, avatar and report cheating!</p>
 					<h4>Returns</h4>
 					<div class="list">
 						<code><a href="class-justinback.steam.transactions.html">justinback\steam\transactions</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="auth" id="_auth">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-justinback.steam.userauth.html">justinback\steam\userauth</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_auth">#</a>
+			<code><a href="source-class-justinback.steam.player.html#409-429" title="Go to source code">auth</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+
+			<div class="description short">
+				<p>User Authentication object.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>User Authentication object.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$sApiKey</var></dt>
+						<dd>(optional) set a different apikey than the construct</dd>
+						<dt><var>$iGame</var></dt>
+						<dd>(optional) set a different appid than the construct</dd>
+						<dt><var>$sSteamid</var></dt>
+						<dd>(optional) set a different steamid than the construct</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.userauth.html">justinback\steam\userauth</a></code>
 					</div>
 
 

@@ -14,7 +14,7 @@ php:
   - 7.1
   
 script: 
-  - phpunit --coverage-text
+  - phpunit --configuration phpunit.xml --coverage-text
   
   
 # Customize when the notification emails are sent.

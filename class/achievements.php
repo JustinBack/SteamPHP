@@ -131,6 +131,8 @@ class achievements {
      */
     public function GetPlayerAchievements() {
 
+        // Travis thinks here is a parameter? Excuse me, what the fuck
+        
         // Here is some curl stuff
 
         $ch = curl_init();

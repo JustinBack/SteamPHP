@@ -1,7 +1,7 @@
 # SteamPHP
 
 <p align="center">
-  <img width="64" src="https://cdn.justinback.com/f/d/i0vZraLlYkUbJ3IlvWRZa9h3a1PskAkC6HM6x6fIMaWfLfG1iM/K0cWNmHfhO3LpHygsb0usQwvacN87RuCu7v3YU6LLogo2.svg" alt="Justin Back Logo"/>
+  <img width="256" src="https://cdn.pixelcatproductions.net/f/p/d56e6fb34b1f49a683fbfb25f93f43d0bb297eee95875d524b25bf05ee99c6df43f7432b6a06387ad130071359d64deb938e/JustinReneBack2Black.png" alt="Justin Back Logo"/>
 </p>
 
 ###### Version

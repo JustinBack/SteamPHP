@@ -283,7 +283,7 @@ class achievements {
      * }
      * </code>
      */
-    public function GetAchievementDetails(string $sApiname) {
+    public function GetAchievementDetails($sApiname) {
 
         $ch = curl_init();
 

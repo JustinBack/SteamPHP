@@ -10,8 +10,6 @@ namespace justinback\steam;
 /**
  * Manage Steam Achievements.
  * 
- * @todo UnlockAchievement();
- * @todo LockAchievement();
  *
  * @author Justin Back <jb@justinback.com>
  */
@@ -170,15 +168,73 @@ class achievements {
         }
     }
 
-    /* public function UnlockAchievement($apiname){
-      $req_achievement = file_get_contents("https://api.steampowered.com/ISteamUserStats/SetUserStatsForGame/v1?key=".$this->key."&appid=".(int)$this->game);
-      $availableGameStats = json_decode($req_achievement);
-      foreach($availableGameStats->game->availableGameStats->achievements as $achievement){
-      if($achievement->name == $apiname){
-      return $achievement;
-      }
-      }
-      } */
+    /*
+     * Lock an achievement (Remove) for the specified SteamID. The Achievement must be set to "Official GS" for it to work.
+     * 
+     * @param string $sApiname APIName of the achievement (not visible name)
+     * 
+     * @example
+     * <code>
+     * $achievements = $steam->game()->achievements();
+     * $locked = $achievements->LockAchievement("WALK_100_STEPS");
+     * </code> 
+     * 
+     * @return boolean
+     */
+    public function LockAchievement($sApiname) {
+        $aOptions = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'ignore_errors' => true,
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'steamid' => $this->steamid, 'count' => 1, 'name[0]' => $sApiname, 'value[0]' => 1))
+            ),
+        );
+        $cContext = stream_context_create($aOptions);
+        $fgcLockAchievement = file_get_contents("https://partner.steam-api.com/ISteamUserStats/SetUserStatsForGame/v1/", false, $cContext);
+        $oLockAchievement = json_decode($fgcLockAchievement);
+
+        if($oLockAchievement->response->result === 1){
+            return true;
+        }
+
+        return false;
+        
+    }
+
+    /*
+     * Unlock an achievement for the specified SteamID. The Achievement must be set to "Official GS" for it to work.
+     * 
+     * @param string $sApiname APIName of the achievement (not visible name)
+     * 
+     * @example
+     * <code>
+     * $achievements = $steam->game()->achievements();
+     * $unlocked = $achievements->UnlockAchievement("WALK_100_STEPS");
+     * </code> 
+     * 
+     * @return boolean
+     */
+    public function UnlockAchievement($sApiname) {
+        $aOptions = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'ignore_errors' => true,
+                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'steamid' => $this->steamid, 'count' => 1, 'name[0]' => $sApiname, 'value[0]' => 0))
+            ),
+        );
+        $cContext = stream_context_create($aOptions);
+        $fgcUnlockAchievement = file_get_contents("https://partner.steam-api.com/ISteamUserStats/SetUserStatsForGame/v1/", false, $cContext);
+        $oUnlockAchievement = json_decode($fgcUnlockAchievement);
+
+        if($oUnlockAchievement->response->result === 1){
+            return true;
+        }
+
+        return false;
+        
+    }
 
     /**
      * Check if player has unlocked the specified achievement

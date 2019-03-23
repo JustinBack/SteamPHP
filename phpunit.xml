@@ -2,7 +2,7 @@
 
 
 <!-- see http://www.phpunit.de/wiki/Documentation -->
-<phpunit bootstrap="steamTest.php"
+<phpunit bootstrap="tests/steamTest.php"
          colors="false"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"

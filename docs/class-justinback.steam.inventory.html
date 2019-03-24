@@ -143,7 +143,7 @@ AddItems etc.</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.inventory.html#10-288" title="Go to source code">class/inventory.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.inventory.html#10-566" title="Go to source code">class/inventory.php</a>
 		<br>
 	</div>
 
@@ -201,7 +201,7 @@ AddItems etc.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_AddItem">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#88-119" title="Go to source code">AddItem</a>( <span>string <var>$sItemDefId</var></span>, <span>string <var>$sItemPropsJson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$bNotify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#88-156" title="Go to source code">AddItem</a>( <span>string <var>$sItemDefId</var></span>, <span>string <var>$sItemPropsJson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$bNotify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>AddItem is used to add new items directly in a user's inventory. For each itemdef, an instance of that type is created and added to the target account.
@@ -226,9 +226,9 @@ If the original request fails on the server, replaying the same request ID will 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
 						<dt><var>$sItemDefId</var></dt>
-						<dd>List of the itemdefid's to grant</dd>
+						<dd>Item definition ID to grant</dd>
 						<dt><var>$sItemPropsJson</var></dt>
-						<dd>No description provided.</dd>
+						<dd>No description provided. (Valve: Unused!)</dd>
 						<dt><var>$bNotify</var></dt>
 						<dd>Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.</dd>
 						<dt><var>$sRequestId</var></dt>
@@ -237,9 +237,15 @@ If the original request fails on the server, replaying the same request ID will 
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
+						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>The item object containing info about the item
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -257,7 +263,7 @@ If the original request fails on the server, replaying the same request ID will 
 
 			<td class="name"><div>
 			<a class="anchor" href="#_AddPromoItem">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#121-147" title="Go to source code">AddPromoItem</a>( <span>string <var>$sItemDefId</var></span>, <span>string <var>$sItemPropsJson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$bNotify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#158-220" title="Go to source code">AddPromoItem</a>( <span>string <var>$sItemDefId</var></span>, <span>string <var>$sItemPropsJson</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$bNotify</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Adds a promo item to a user's inventory</p>
@@ -284,11 +290,13 @@ If the original request fails on the server, replaying the same request ID will 
 						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
 					</div>
 
-
-					<h4>Todo</h4>
+					<h4>Throws</h4>
 					<div class="list">
-							NOT TESTED YET<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
 					</div>
+
 
 
 			</div>
@@ -305,7 +313,7 @@ If the original request fails on the server, replaying the same request ID will 
 
 			<td class="name"><div>
 			<a class="anchor" href="#_Consolidate">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#149-174" title="Go to source code">Consolidate</a>( <span>array <var>$aItemDefId</var></span>, <span>boolean <var>$bForce</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#222-290" title="Go to source code">Consolidate</a>( <span>array <var>$aItemDefId</var></span>, <span>boolean <var>$bForce</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Consolidate items of the given type within an user's inventory.
@@ -322,14 +330,20 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 						<dt><var>$aItemDefId</var></dt>
 						<dd>No description provided</dd>
 						<dt><var>$bForce</var></dt>
-						<dd>Unix timestamp of the request. An error will be returned if the items have been modified since this request time. Must be specified in the input_json parameter.</dd>
+						<dd>The Consolidate action ignores any item with an active market or trade restriction, unless 'force' is set to true.</dd>
 					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>array
+						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>An array of the stacked items
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -340,14 +354,14 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 
 			<td class="attributes"><code>
 				 public 
-				array
+				<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ModifyItems">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#176-213" title="Go to source code">ModifyItems</a>( <span>string <var>$sInputJson</var></span>, <span>integer <var>$iTimestamp</var> = <span class="php-num">0</span></span> )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#292-369" title="Go to source code">ModifyItems</a>( <span>string <var>$sInputJson</var></span>, <span>integer <var>$iTimestamp</var> = <span class="php-num">0</span></span> )</code>
 
 			<div class="description short">
 				<p>Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call.</p>
@@ -362,29 +376,31 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 						<dt><var>$sInputJson</var></dt>
 						<dd>No description provided</dd>
 						<dt><var>$iTimestamp</var></dt>
-						<dd><p>Unix timestamp of the request. An error will be returned if the items have been modified since this request time.</p>
-
-<p>Example InputJson</p>
-
-<p>array(
-        array(
-            'itemid' => "1955010841396664607",
-            'property_name' => "My_Property_Name",
-            'property_value_string' => "Hello test test!"
-        )
-    )</p></dd>
+						<dd>Unix timestamp of the request. An error will be returned if the items have been modified since this request time.</dd>
 					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
-						array
+						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>Returns an array of modified items
 					</div>
 
-
-					<h4>Todo</h4>
+					<h4>Throws</h4>
 					<div class="list">
-							This Method is broken as of 7/13/2018<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br><p>if the app id or api key is not valid as a parameter</p>
+
+<p>Example InputJson</p>
+
+<pre><span class="php-keyword1">array</span>(
+        <span class="php-keyword1">array</span>(
+            <span class="php-quote">'itemid'</span> =&gt; <span class="php-quote">&quot;1955010841396664607&quot;</span>,
+            <span class="php-quote">'property_name'</span> =&gt; <span class="php-quote">&quot;My_Property_Name&quot;</span>,
+            <span class="php-quote">'property_value_string'</span> =&gt; <span class="php-quote">&quot;Hello test test!&quot;</span>
+        )
+    )</pre>
 					</div>
+
 
 
 			</div>
@@ -401,7 +417,7 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ExchangeItem">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#215-251" title="Go to source code">ExchangeItem</a>( <span>array <var>$aMaterialsItemId</var></span>, <span>array <var>$aMaterialsQuantity</var></span>, <span>string <var>$sOutputItemDefId</var></span> )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#371-448" title="Go to source code">ExchangeItem</a>( <span>array <var>$aMaterialsItemId</var></span>, <span>array <var>$aMaterialsQuantity</var></span>, <span>string <var>$sOutputItemDefId</var></span> )</code>
 
 			<div class="description short">
 				<p>ExchangeItem is used for crafting - converting items using a predefined recipe. A successful exchange destroys the set of items required by the crafting recipe, and adds a new instance of the target itemdef to the player's inventory.</p>
@@ -434,6 +450,12 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>array
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -451,7 +473,7 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetInventory">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#253-268" title="Go to source code">GetInventory</a>( )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#450-506" title="Go to source code">GetInventory</a>( )</code>
 
 			<div class="description short">
 				<p>GetInventory is used to retrieve a user's inventory</p>
@@ -467,6 +489,11 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>array
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -484,7 +511,7 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetItemDefs">#</a>
-			<code><a href="source-class-justinback.steam.inventory.html#270-286" title="Go to source code">GetItemDefs</a>( )</code>
+			<code><a href="source-class-justinback.steam.inventory.html#508-564" title="Go to source code">GetItemDefs</a>( )</code>
 
 			<div class="description short">
 				<p>GetItemDefs is used to retrieve the itemdefs for a given application.</p>
@@ -500,6 +527,11 @@ Whenever items are combined into a stack, the resulting stack takes the market a
 						<code><a href="class-justinback.steam.iteminfo.html">justinback\steam\iteminfo</a></code><br>array
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 

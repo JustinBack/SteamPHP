@@ -142,7 +142,7 @@
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.manager.html#10-225" title="Go to source code">class/manager.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.manager.html#10-258" title="Go to source code">class/manager.php</a>
 		<br>
 	</div>
 
@@ -328,14 +328,14 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_store">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#167-187" title="Go to source code">store</a>( <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#167-220" title="Go to source code">store</a>( <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
-				<p>store object.</p>
+				<p>Get current info about the Store Page of your app.</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>store object.</p>
+				<p>Get current info about the Store Page of your app.</p>
 
 
 					<h4>Parameters</h4>
@@ -346,9 +346,15 @@
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-justinback.steam.store.html">justinback\steam\store</a></code>
+						<code><a href="class-justinback.steam.store.html">justinback\steam\store</a></code><br>Store Object containing a lot of info through the big picture API
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -366,7 +372,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_transactions">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#189-210" title="Go to source code">transactions</a>( <span>boolean <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#222-243" title="Go to source code">transactions</a>( <span>boolean <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Transaction object.</p>
@@ -410,7 +416,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_group">#</a>
-			<code><a href="source-class-justinback.steam.manager.html#212-223" title="Go to source code">group</a>( <span>string <var>$sGID</var></span>, <span>string <var>$sAPIKey</var></span>, <span>string <var>$sGame</var></span> )</code>
+			<code><a href="source-class-justinback.steam.manager.html#245-256" title="Go to source code">group</a>( <span>string <var>$sGID</var></span>, <span>string <var>$sAPIKey</var></span>, <span>string <var>$sGame</var></span> )</code>
 
 			<div class="description short">
 				<p>Group object.</p>

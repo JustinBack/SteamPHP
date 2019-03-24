@@ -143,7 +143,7 @@ Delete, Add, Reset and Set Scores!</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.leaderboards.html#10-256" title="Go to source code">class/leaderboards.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.leaderboards.html#10-519" title="Go to source code">class/leaderboards.php</a>
 		<br>
 	</div>
 
@@ -201,7 +201,7 @@ Delete, Add, Reset and Set Scores!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_DeleteLeaderboard">#</a>
-			<code><a href="source-class-justinback.steam.leaderboards.html#88-112" title="Go to source code">DeleteLeaderboard</a>( <span>string <var>$sName</var></span> )</code>
+			<code><a href="source-class-justinback.steam.leaderboards.html#88-140" title="Go to source code">DeleteLeaderboard</a>( <span>string <var>$sName</var></span> )</code>
 
 			<div class="description short">
 				<p>Delete a leaderboard from your App</p>
@@ -222,6 +222,12 @@ Delete, Add, Reset and Set Scores!</p>
 						boolean
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -239,7 +245,7 @@ Delete, Add, Reset and Set Scores!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_FindOrCreateLeaderboard">#</a>
-			<code><a href="source-class-justinback.steam.leaderboards.html#114-140" title="Go to source code">FindOrCreateLeaderboard</a>( <span>string <var>$sName</var></span>, <span>string <var>$sSortMethod</var> = <span class="php-quote">&quot;Ascending&quot;</span></span>, <span>string <var>$sDisplayType</var> = <span class="php-quote">&quot;Numeric&quot;</span></span>, <span>boolean <var>$bCreateIfNotFound</var> = <span class="php-keyword1">true</span></span>, <span>boolean <var>$bOnlyTrustedWrites</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bOnlyFriendsReads</var> = <span class="php-keyword1">false</span></span> )</code>
+			<code><a href="source-class-justinback.steam.leaderboards.html#142-221" title="Go to source code">FindOrCreateLeaderboard</a>( <span>string <var>$sName</var></span>, <span>string <var>$sSortMethod</var> = <span class="php-quote">&quot;Ascending&quot;</span></span>, <span>string <var>$sDisplayType</var> = <span class="php-quote">&quot;Numeric&quot;</span></span>, <span>boolean <var>$bCreateIfNotFound</var> = <span class="php-keyword1">true</span></span>, <span>boolean <var>$bOnlyTrustedWrites</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bOnlyFriendsReads</var> = <span class="php-keyword1">false</span></span> )</code>
 
 			<div class="description short">
 				<p>Create a leaderboard for your App</p>
@@ -267,9 +273,33 @@ Delete, Add, Reset and Set Scores!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						object
+						object<br><pre>object(stdClass)<span class="php-comment">#4 (2) {</span>
+  [<span class="php-quote">&quot;result&quot;</span>]=&gt;
+  int(<span class="php-num">1</span>)
+  [<span class="php-quote">&quot;test&quot;</span>]=&gt;
+  object(stdClass)<span class="php-comment">#6 (6) {</span>
+    [<span class="php-quote">&quot;leaderBoardID&quot;</span>]=&gt;
+    int(<span class="php-num">3337451</span>)
+    [<span class="php-quote">&quot;leaderBoardEntries&quot;</span>]=&gt;
+    int(<span class="php-num">0</span>)
+    [<span class="php-quote">&quot;leaderBoardSortMethod&quot;</span>]=&gt;
+    string(<span class="php-num">9</span>) <span class="php-quote">&quot;Ascending&quot;</span>
+    [<span class="php-quote">&quot;leaderBoardDisplayType&quot;</span>]=&gt;
+    string(<span class="php-num">7</span>) <span class="php-quote">&quot;Numeric&quot;</span>
+    [<span class="php-quote">&quot;onlytrustedwrites&quot;</span>]=&gt;
+    bool(<span class="php-keyword1">false</span>)
+    [<span class="php-quote">&quot;onlyfriendsreads&quot;</span>]=&gt;
+    bool(<span class="php-keyword1">false</span>)
+  }
+}</pre>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -287,7 +317,7 @@ Delete, Add, Reset and Set Scores!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ResetLeaderboard">#</a>
-			<code><a href="source-class-justinback.steam.leaderboards.html#142-166" title="Go to source code">ResetLeaderboard</a>( <span>string <var>$sLeaderboardId</var></span> )</code>
+			<code><a href="source-class-justinback.steam.leaderboards.html#223-275" title="Go to source code">ResetLeaderboard</a>( <span>string <var>$sLeaderboardId</var></span> )</code>
 
 			<div class="description short">
 				<p>Reset a leaderboard for your App</p>
@@ -308,6 +338,12 @@ Delete, Add, Reset and Set Scores!</p>
 						boolean
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -325,7 +361,7 @@ Delete, Add, Reset and Set Scores!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_SetLeaderboardScore">#</a>
-			<code><a href="source-class-justinback.steam.leaderboards.html#168-197" title="Go to source code">SetLeaderboardScore</a>( <span>string <var>$sLeaderboardId</var></span>, <span>string <var>$sScore</var></span>, <span>string <var>$sScoreMethod</var></span>, <span>rawbytes <var>$rDetails</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.leaderboards.html#277-346" title="Go to source code">SetLeaderboardScore</a>( <span>string <var>$sLeaderboardId</var></span>, <span>string <var>$sScore</var></span>, <span>string <var>$sScoreMethod</var></span>, <span>rawbytes <var>$rDetails</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Set a score for your leaderboard for your App</p>
@@ -345,15 +381,30 @@ Delete, Add, Reset and Set Scores!</p>
 						<dd>update method to use. Can be "KeepBest" or "ForceUpdate"</dd>
 						<dt><var>$rDetails</var></dt>
 						<dd>(optional) game-specific details for how the score was earned. Up to 256 bytes.</dd>
-						<dt><var>$sSteamid</var></dt>
-						<dd>(optional) steamID to set the score for</dd>
 					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
-						object
+						object<br><pre>object(stdClass)<span class="php-comment">#4 (5) {</span>
+  [<span class="php-quote">&quot;result&quot;</span>]=&gt;
+  int(<span class="php-num">1</span>)
+  [<span class="php-quote">&quot;leaderboard_entry_count&quot;</span>]=&gt;
+  int(<span class="php-num">1</span>)
+  [<span class="php-quote">&quot;score_changed&quot;</span>]=&gt;
+  bool(<span class="php-keyword1">true</span>)
+  [<span class="php-quote">&quot;global_rank_previous&quot;</span>]=&gt;
+  int(<span class="php-num">0</span>)
+  [<span class="php-quote">&quot;global_rank_new&quot;</span>]=&gt;
+  int(<span class="php-num">1</span>)
+}</pre>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -371,22 +422,46 @@ Delete, Add, Reset and Set Scores!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetLeaderboardsForGame">#</a>
-			<code><a href="source-class-justinback.steam.leaderboards.html#199-210" title="Go to source code">GetLeaderboardsForGame</a>( )</code>
+			<code><a href="source-class-justinback.steam.leaderboards.html#348-417" title="Go to source code">GetLeaderboardsForGame</a>( )</code>
 
 			<div class="description short">
-				<p>Get all leaderboards from your App</p>
+				<p>Get all leaderboards from your App. Result is cached!</p>
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Get all leaderboards from your App</p>
+				<p>Get all leaderboards from your App. Result is cached!</p>
 
 
 
 					<h4>Returns</h4>
 					<div class="list">
-						object
+						object<br><pre><span class="php-keyword1">array</span>(<span class="php-num">1</span>) {
+  [<span class="php-num">0</span>]=&gt;
+  object(stdClass)<span class="php-comment">#6 (7) {</span>
+    [<span class="php-quote">&quot;id&quot;</span>]=&gt;
+    int(<span class="php-num">3337465</span>)
+    [<span class="php-quote">&quot;name&quot;</span>]=&gt;
+    string(<span class="php-num">4</span>) <span class="php-quote">&quot;test&quot;</span>
+    [<span class="php-quote">&quot;entries&quot;</span>]=&gt;
+    int(<span class="php-num">1</span>)
+    [<span class="php-quote">&quot;sortmethod&quot;</span>]=&gt;
+    string(<span class="php-num">9</span>) <span class="php-quote">&quot;Ascending&quot;</span>
+    [<span class="php-quote">&quot;displaytype&quot;</span>]=&gt;
+    string(<span class="php-num">7</span>) <span class="php-quote">&quot;Numeric&quot;</span>
+    [<span class="php-quote">&quot;onlytrustedwrites&quot;</span>]=&gt;
+    bool(<span class="php-keyword1">false</span>)
+    [<span class="php-quote">&quot;onlyfriendsreads&quot;</span>]=&gt;
+    bool(<span class="php-keyword1">false</span>)
+  }
+}</pre>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -404,7 +479,7 @@ Delete, Add, Reset and Set Scores!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetLeaderboardEntries">#</a>
-			<code><a href="source-class-justinback.steam.leaderboards.html#212-232" title="Go to source code">GetLeaderboardEntries</a>( <span>integer <var>$sLeaderboardId</var></span>, <span>string <var>$sDataRequest</var></span>, <span>integer <var>$iRangeStart</var></span>, <span>integer <var>$iRangeEnd</var></span>, <span>boolean <var>$sSteamid</var> = <span class="php-keyword1">true</span></span> )</code>
+			<code><a href="source-class-justinback.steam.leaderboards.html#419-495" title="Go to source code">GetLeaderboardEntries</a>( <span>integer <var>$sLeaderboardId</var></span>, <span>string <var>$sDataRequest</var></span>, <span>integer <var>$iRangeStart</var></span>, <span>integer <var>$iRangeEnd</var></span>, <span>boolean <var>$bSteamid</var> = <span class="php-keyword1">true</span></span> )</code>
 
 			<div class="description short">
 				<p>Get all leaderboard entries from your App</p>
@@ -424,7 +499,7 @@ Delete, Add, Reset and Set Scores!</p>
 						<dd>range start or 0</dd>
 						<dt><var>$iRangeEnd</var></dt>
 						<dd>range end or max LB entries</dd>
-						<dt><var>$sSteamid</var></dt>
+						<dt><var>$bSteamid</var></dt>
 						<dd>Use SteamID to lookup or not</dd>
 					</dl></div>
 
@@ -433,6 +508,12 @@ Delete, Add, Reset and Set Scores!</p>
 						array
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -450,7 +531,7 @@ Delete, Add, Reset and Set Scores!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_game">#</a>
-			<code><a href="source-class-justinback.steam.leaderboards.html#234-254" title="Go to source code">game</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.leaderboards.html#497-517" title="Go to source code">game</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Game object.</p>

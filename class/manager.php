@@ -165,25 +165,58 @@ class manager {
     }
 
     /**
-     * store object.
+     * Get current info about the Store Page of your app.
      *
      * @param string $iGame (optional) set a different appid than the construct
      * 
-     * @return store
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
+     * @return store Store Object containing a lot of info through the big picture API
      */
     public function store($iGame = null) {
         if ($iGame === null) {
             $iGame = $this->game;
         }
 
-        $fgcStore = file_get_contents("https://store.steampowered.com/api/appdetails?appids=" . (int) $iGame);
-        $oStore = json_decode($fgcStore);
-        $oStoreInfo = $oStore->$iGame->data;
+        $ch = curl_init();
 
-        if ($oStore->$iGame->success) {
-            return new \justinback\steam\store($iGame, $oStoreInfo->name, $oStoreInfo->type, $oStoreInfo->required_age, $oStoreInfo->is_free, $oStoreInfo->detailed_description, $oStoreInfo->about_the_game, $oStoreInfo->short_description, $oStoreInfo->developers, $oStoreInfo->publishers, $oStoreInfo->dlc);
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            //"key" => $this->key,
+            "appids" => $this->game,
+                // This can vary from request to request, sometimes its steamid or steamids or even an array.
+                //"steamid" => $this->steamid,
+                // Custom Queries below here.
+        ));
+        curl_setopt($ch, CURLOPT_URL, "https://store.steampowered.com/api/appdetails?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 404) {
+                throw new exceptions\SteamRequestParameterException("The App ID entered is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
         }
-        return false;
+
+
+        $oStore = $CURLResponse->$iGame->data;
+
+
+        if ($CURLResponse->$iGame->success) {
+            return new \justinback\steam\store($iGame, $oStore->name, $oStore->type, $oStore->required_age, $oStore->is_free, $oStore->detailed_description, $oStore->about_the_game, $oStore->short_description, $oStore->developers, $oStore->publishers, $oStore->dlc);
+        }
+        throw new exceptions\SteamRequestParameterException("The App ID entered is invalid!");
     }
 
     /**

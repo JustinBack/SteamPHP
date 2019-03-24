@@ -144,7 +144,7 @@ See \justinback\steam\inventory</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.item.html#10-330" title="Go to source code">class/item.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.item.html#10-410" title="Go to source code">class/item.php</a>
 		<br>
 	</div>
 
@@ -218,7 +218,7 @@ See \justinback\steam\inventory</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ConsumeItem">#</a>
-			<code><a href="source-class-justinback.steam.item.html#249-271" title="Go to source code">ConsumeItem</a>( <span>string <var>$iQuantity</var></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.item.html#249-305" title="Go to source code">ConsumeItem</a>( <span>string <var>$iQuantity</var></span>, <span>string <var>$sRequestId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Marks an item as wholly or partially consumed. This action cannot be reversed.</p>
@@ -241,6 +241,12 @@ See \justinback\steam\inventory</p>
 						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -258,7 +264,7 @@ See \justinback\steam\inventory</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ModifyItem">#</a>
-			<code><a href="source-class-justinback.steam.item.html#273-307" title="Go to source code">ModifyItem</a>( <span>string <var>$sPropertyName</var></span>, <span>string <var>$sPropertyValue</var></span>, <span>boolean <var>$bRemoveProperty</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sPropertyValueType</var> = <span class="php-quote">&quot;property_value_string&quot;</span></span>, <span>integer <var>$iTimestamp</var> = <span class="php-num">0</span></span> )</code>
+			<code><a href="source-class-justinback.steam.item.html#307-387" title="Go to source code">ModifyItem</a>( <span>string <var>$sPropertyName</var></span>, <span>string <var>$sPropertyValue</var></span>, <span>boolean <var>$bRemoveProperty</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sPropertyValueType</var> = <span class="php-quote">&quot;property_value_string&quot;</span></span>, <span>integer <var>$iTimestamp</var> = <span class="php-num">0</span></span> )</code>
 
 			<div class="description short">
 				<p>Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call.</p>
@@ -287,11 +293,13 @@ See \justinback\steam\inventory</p>
 						<code><a href="class-justinback.steam.item.html">justinback\steam\item</a></code><br>array
 					</div>
 
-
-					<h4>Todo</h4>
+					<h4>Throws</h4>
 					<div class="list">
-							This Method is broken as of 7/13/2018<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
 					</div>
+
 
 
 			</div>
@@ -308,7 +316,7 @@ See \justinback\steam\inventory</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_iteminfo">#</a>
-			<code><a href="source-class-justinback.steam.item.html#309-328" title="Go to source code">iteminfo</a>( )</code>
+			<code><a href="source-class-justinback.steam.item.html#389-408" title="Go to source code">iteminfo</a>( )</code>
 
 			<div class="description short">
 				<p>Iteminfo object.</p>
@@ -324,6 +332,12 @@ See \justinback\steam\inventory</p>
 						<code><a href="class-justinback.steam.iteminfo.html">justinback\steam\iteminfo</a></code>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if a parameter is not valid<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 

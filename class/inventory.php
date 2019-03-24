@@ -94,34 +94,74 @@ class inventory {
      * If the request is replayed, the response will include current state for the items that were affected by the original request, without making new changes.
      * If the original request fails on the server, replaying the same request ID will re-attempt the work rather than reporting the prior error result.
      *
-     * @param string $sItemDefId List of the itemdefid's to grant
-     * @param string $sItemPropsJson No description provided.
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
+     * 
+     * @param string $sItemDefId Item definition ID to grant
+     * @param string $sItemPropsJson No description provided. (Valve: Unused!)
      * @param bool $bNotify Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.
      * @param string $sRequestId Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
      * 
-     * @return item
+     * @return item The item object containing info about the item
      */
     public function AddItem($sItemDefId, $sItemPropsJson = null, $bNotify = false, $sRequestId = null) {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'steamid' => $this->steamid, 'itemdefid[0]' => $sItemDefId, 'itempropsjson' => $sItemPropsJson, 'notify' => $bNotify, 'requestid' => $sRequestId))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcAddItem = file_get_contents("https://partner.steam-api.com/IInventoryService/AddItem/v1/", false, $cContext);
-        $oAddItem = json_decode(json_decode($fgcAddItem)->response->item_json);
+
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            'itemdefid[0]' => $sItemDefId,
+            'itempropsjson' => $sItemPropsJson,
+            'notify' => $bNotify,
+            'requestid' => $sRequestId,
+        ));
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/AddItem/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("One of the parameters supplied is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+        $oAddItem = json_decode($CURLResponse->response->item_json);
 
         foreach ($oAddItem as $oResponse) {
+            if (isset($oResponse->error)) {
+                throw new exceptions\SteamRequestParameterException("A supplied itemdefid is invalid. " . $oResponse->error);
+            }
+
             return new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
         }
+        throw new exceptions\SteamRequestParameterException("The Itemdefid is invalid!");
     }
 
     /**
      * Adds a promo item to a user's inventory 
      *
-     * @todo NOT TESTED YET
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
      * @param string $sItemDefId List of the itemdefid's to grant
      * @param string $sItemPropsJson No description provided.
      * @param bool $bNotify Optional, default 0. Set to 1 to indicate the user is not in-game and should see a Steam notification.
@@ -130,59 +170,137 @@ class inventory {
      * @return item
      */
     public function AddPromoItem($sItemDefId, $sItemPropsJson = null, $bNotify = false, $sRequestId = null) {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'steamid' => $this->steamid, 'itemdefid[0]' => $sItemDefId, 'itempropsjson' => $sItemPropsJson, 'notify' => $bNotify, 'requestid' => $sRequestId))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcAddPromoItem = file_get_contents("https://partner.steam-api.com/IInventoryService/AddPromoItem/v1/", false, $cContext);
-        $oAddPromoItem = json_decode(json_decode($fgcAddPromoItem)->response->item_json);
+        $ch = curl_init();
 
-        foreach ($oAddPromoItem as $oResponse) {
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            'itemdefid[0]' => $sItemDefId,
+            'itempropsjson' => $sItemPropsJson,
+            'notify' => $bNotify,
+            'requestid' => $sRequestId,
+        ));
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/AddPromoItem/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("One of the parameters supplied is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        $oAddItem = json_decode($CURLResponse->response->item_json);
+
+        foreach ($oAddItem as $oResponse) {
+
+            if (isset($oResponse->error)) {
+                throw new exceptions\SteamRequestParameterException("A supplied itemdefid is invalid. " . $oResponse->error);
+            }
+
             return new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
         }
+        throw new exceptions\SteamRequestParameterException("The Itemdefid is invalid!");
     }
 
     /**
      * Consolidate items of the given type within an user's inventory.
      * Whenever items are combined into a stack, the resulting stack takes the market and trade restriction values of the most-restricted item. The Consolidate action ignores any item with an active market or trade restriction, unless 'force' is set to true. 
      *
+     * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
+     * 
      * @param array $aItemDefId No description provided
-     * @param bool $bForce Unix timestamp of the request. An error will be returned if the items have been modified since this request time. Must be specified in the input_json parameter.
+     * @param bool $bForce The Consolidate action ignores any item with an active market or trade restriction, unless 'force' is set to true.
      *
-     * @return item array
+     * @return item An array of the stacked items
      */
     public function Consolidate($aItemDefId, $bForce = false) {
         $aArray = array();
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'steamid' => $this->steamid, 'itemdefid' => $aItemDefId, 'force' => $bForce))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcConsolidate = file_get_contents("https://partner.steam-api.com/IInventoryService/Consolidate/v1/", false, $cContext);
 
-        foreach (json_decode(json_decode($fgcConsolidate)->response->item_json) as $oResponse) {
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            'itemdefid' => $aItemDefId,
+            'force' => $bForce,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/Consolidate/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("One of the parameters supplied is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        foreach (json_decode($CURLResponse->response->item_json) as $oResponse) {
+
+            if (isset($oResponse->error)) {
+                throw new exceptions\SteamRequestParameterException("A supplied itemdefid is invalid. " . $oResponse->error);
+            }
+
             array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp));
         }
+
+        if (count($aArray) === 0) {
+            throw new exceptions\SteamException("A supplied itemdefid is invalid, the user does not have a non stacked item in the inventory!");
+        }
+
         return $aArray;
     }
 
     /**
      * Modify the dynamic properties on items for the given user. This call is rate-limited per user and currently only 100 items can be modified in one call. 
      *
-     * @todo This Method is broken as of 7/13/2018
      * @param string $sInputJson No description provided
      * @param int $iTimestamp Unix timestamp of the request. An error will be returned if the items have been modified since this request time.
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      * 
      * Example InputJson
-     * 
+     * <code>
      * array(
      * 		array(
      * 			'itemid' => "1955010841396664607",
@@ -190,25 +308,63 @@ class inventory {
      * 			'property_value_string' => "Hello test test!"
      * 		)
      * 	)
-     * 
-     * @return array
+     * </code>
+     * @return item Returns an array of modified items
      */
     public function ModifyItems($sInputJson, $iTimestamp = 0) {
         $aArray = array();
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'input_json' => json_encode(array("steamid" => $this->steamid, "timestamp" => $iTimestamp, "updates" => $sInputJson))))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcModifyItems = file_get_contents("https://partner.steam-api.com/IInventoryService/ModifyItems/v1/", false, $cContext);
-        $oModifyItems = json_decode($fgcModifyItems);
 
-        foreach (json_decode($oModifyItems->response->item_json) as $oResponse) {
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            'input_json' => json_encode(array(
+                "steamid" => $this->steamid,
+                "timestamp" => $iTimestamp,
+                "updates" => $sInputJson
+        ))));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/ModifyItems/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("One of the parameters supplied is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        foreach (json_decode($CURLResponse->response->item_json) as $oResponse) {
+
+            if (isset($oResponse->error)) {
+                throw new exceptions\SteamRequestParameterException("A supplied itemid is invalid. " . $oResponse->error);
+            }
+
             array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
         }
+
+        if (count($aArray) === 0) {
+            throw new exceptions\SteamException("A supplied itemid is invalid, the user does not have the item in the inventory!");
+        }
+
         return $aArray;
     }
 
@@ -223,6 +379,9 @@ class inventory {
      *
      * If successful, this call returns an encoded JSON blob that lists the items that were changed by this call - the consumed items and the newly created one.
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      *
      * @param array $aMaterialsItemId The unique ID an item in the player's inventory to be converted to the target item type
      * @param array $aMaterialsQuantity The quantity of the matching item that should be used in this recipe. This array must be the same length as $aMaterialsItemId.
@@ -233,19 +392,57 @@ class inventory {
      */
     public function ExchangeItem($aMaterialsItemId, $aMaterialsQuantity, $sOutputItemDefId) {
         $aArray = array();
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'steamid' => $this->steamid, 'materialsitemid' => $aMaterialsItemId, "materialsquantity" => $aMaterialsQuantity, "outputitemdefid" => $sOutputItemDefId))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcExchangeItem = file_get_contents("https://partner.steam-api.com/IInventoryService/ExchangeItem/v1/", false, $cContext);
-        $oExchangeItem = json_decode($fgcExchangeItem);
 
-        foreach (json_decode($oExchangeItem->response->item_json) as $oResponse) {
+
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            'materialsitemid' => $aMaterialsItemId,
+            "materialsquantity" => $aMaterialsQuantity,
+            "outputitemdefid" => $sOutputItemDefId,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/ExchangeItem/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("One of the parameters supplied is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        foreach (json_decode($CURLResponse->response->item_json) as $oResponse) {
+
+            if (isset($oResponse->error)) {
+                throw new exceptions\SteamRequestParameterException("A supplied itemid is invalid. " . $oResponse->error);
+            }
+
+
             array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
+        }
+
+        if (count($aArray) === 0) {
+            throw new exceptions\SteamException("A supplied itemid is invalid, the user does not have the item in the inventory!");
         }
         return $aArray;
     }
@@ -253,17 +450,58 @@ class inventory {
     /**
      * GetInventory is used to retrieve a user's inventory 
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      * 
      * @return item array
      */
     public function GetInventory() {
         $aArray = array();
-        $fgcGetInventory = file_get_contents("https://partner.steam-api.com/IInventoryService/GetInventory/v1?key=" . $this->key . "&steamid=" . $this->steamid . "&appid=" . $this->game);
-        $oGetInventory = json_decode($fgcGetInventory);
 
-        foreach (json_decode($oGetInventory->response->item_json) as $oResponse) {
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/GetInventory/v1/?". $CURLParameters);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($ch, CURLOPT_POST, 1);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamException("Steam ID is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        foreach (json_decode($CURLResponse->response->item_json) as $oResponse) {
+
+
+
             array_push($aArray, new \justinback\steam\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
         }
+        
+        if (count($aArray) === 0) {
+            throw new exceptions\SteamException("The inventory is empty!");
+        }
+        
         return $aArray;
     }
 
@@ -271,17 +509,57 @@ class inventory {
      * GetItemDefs is used to retrieve the itemdefs for a given application. 
      *
      * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
      * @return iteminfo array
      */
     public function GetItemDefs() {
         $aArray = array();
-        $fgcGetItemDefs = file_get_contents("https://partner.steam-api.com/IInventoryService/GetItemDefs/v1?key=" . $this->key . "&steamid=" . $this->steamid . "&appid=" . $this->game);
-        $oGetInventory = json_decode($fgcGetItemDefs);
+        
+        
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            //"steamid" => $this->steamid,
+            // Custom Queries below here.
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/GetItemDefs/v1/?". $CURLParameters);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($ch, CURLOPT_POST, 1);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
 
-        foreach (json_decode($oGetInventory->response->itemdef_json) as $oResponse) {
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamException("Steam ID is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+       
+
+
+        foreach (json_decode($CURLResponse->response->itemdef_json) as $oResponse) {
             array_push($aArray, new \justinback\steam\iteminfo($this->key, $this->game, $this->steamid, $oResponse));
         }
+        
+        if (count($aArray) === 0) {
+            throw new exceptions\SteamException("No item definitions defined!");
+        }
+        
         return $aArray;
     }
 

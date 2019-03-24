@@ -88,24 +88,52 @@ class leaderboards {
     /**
      * Delete a leaderboard from your App
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      *
      * @param string $sName name of the leaderboard to delete
      *
      * @return bool
      */
     public function DeleteLeaderboard($sName) {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'name' => $sName))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcDeleteLeaderboard = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/DeleteLeaderboard/v1/", false, $cContext);
-        $oDeleteLeaderboard = json_decode($fgcDeleteLeaderboard);
 
-        if ($oDeleteLeaderboard->result->result != 1) {
+
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            //"steamid" => $this->steamid,
+            // Custom Queries below here.
+            'name' => $sName,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/DeleteLeaderboard/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("Leaderboard name is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if ($CURLResponse->result->result != 1) {
             return false;
         }
         return true;
@@ -115,6 +143,10 @@ class leaderboards {
      * Create a leaderboard for your App
      *
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
      * @param string $sName name of the leaderboard to create
      * @param string $sSortMethod sort method to use for this leaderboard (defaults to Ascending)
      * @param string $sDisplayType display type for this leaderboard (defaults to Numeric)
@@ -123,43 +155,120 @@ class leaderboards {
      * @param bool $bOnlyFriendsReads if this is true the leaderboard scores can only be read for friends by clients, scores can always be read by publisher. Defaults to false.
      *
      * @return object
+     * <code>
+     * object(stdClass)#4 (2) {
+     *   ["result"]=>
+     *   int(1)
+     *   ["test"]=>
+     *   object(stdClass)#6 (6) {
+     *     ["leaderBoardID"]=>
+     *     int(3337451)
+     *     ["leaderBoardEntries"]=>
+     *     int(0)
+     *     ["leaderBoardSortMethod"]=>
+     *     string(9) "Ascending"
+     *     ["leaderBoardDisplayType"]=>
+     *     string(7) "Numeric"
+     *     ["onlytrustedwrites"]=>
+     *     bool(false)
+     *     ["onlyfriendsreads"]=>
+     *     bool(false)
+     *   }
+     * }
+     * </code>
      */
     public function FindOrCreateLeaderboard($sName, $sSortMethod = "Ascending", $sDisplayType = "Numeric", $bCreateIfNotFound = true, $bOnlyTrustedWrites = false, $bOnlyFriendsReads = false) {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'name' => $sName, 'sortmethod' => $sSortMethod, 'displaytype' => $sDisplayType, 'createifnotfound' => $bCreateIfNotFound, 'onlytrustedwrites' => $bOnlyTrustedWrites, 'onlyfriendsreads' => $bOnlyFriendsReads))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcFindOrCreateLeaderboard = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/FindOrCreateLeaderboard/v2/", false, $cContext);
-        $oFindOrCreateLeaderboard = json_decode($fgcFindOrCreateLeaderboard);
 
-        return $oFindOrCreateLeaderboard->result;
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            //"steamid" => $this->steamid,
+            // Custom Queries below here.
+            'name' => $sName,
+            'sortmethod' => $sSortMethod,
+            'displaytype' => $sDisplayType,
+            'createifnotfound' => $bCreateIfNotFound,
+            'onlytrustedwrites' => $bOnlyTrustedWrites,
+            'onlyfriendsreads' => $bOnlyFriendsReads,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/FindOrCreateLeaderboard/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("A parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        return $CURLResponse->result;
     }
 
     /**
      * Reset a leaderboard for your App
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      *
      * @param string $sLeaderboardId numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
      * 
      * @return bool
      */
     public function ResetLeaderboard($sLeaderboardId) {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'leaderboardid' => $sLeaderboardId))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcResetLeaderboard = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/ResetLeaderboard/v1/", false, $cContext);
-        $oResetLeaderboard = json_decode($fgcResetLeaderboard);
 
-        if ($oResetLeaderboard->result->result != 1) {
+
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            //"steamid" => $this->steamid,
+            // Custom Queries below here.
+            'leaderboardid' => $sLeaderboardId
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/ResetLeaderboard/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Leaderboard ID is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if ($CURLResponse->result->result != 1) {
             return false;
         }
         return true;
@@ -168,67 +277,221 @@ class leaderboards {
     /**
      * Set a score for your leaderboard for your App
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      *
      * @param string $sLeaderboardId numeric ID of the target leaderboard. Can be retrieved from GetLeaderboardsForGame
      * @param string $sScore the score to set for this user
      * @param string $sScoreMethod update method to use. Can be "KeepBest" or "ForceUpdate"
      * @param rawbytes $rDetails (optional) game-specific details for how the score was earned. Up to 256 bytes.
-     * @param string $sSteamid (optional) steamID to set the score for 
      * 
      * @return object
+     * <code>
+     * object(stdClass)#4 (5) {
+     *   ["result"]=>
+     *   int(1)
+     *   ["leaderboard_entry_count"]=>
+     *   int(1)
+     *   ["score_changed"]=>
+     *   bool(true)
+     *   ["global_rank_previous"]=>
+     *   int(0)
+     *   ["global_rank_new"]=>
+     *   int(1)
+     * }
+     * </code>
      */
-    public function SetLeaderboardScore($sLeaderboardId, $sScore, $sScoreMethod, $rDetails = null, $sSteamid = null) {
-        if ($sSteamid == null) {
-            $sSteamid = $this->steamid;
+    public function SetLeaderboardScore($sLeaderboardId, $sScore, $sScoreMethod, $rDetails = null) {
+
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            'leaderboardid' => $sLeaderboardId,
+            'score' => $sScore,
+            'scoremethod' => $sScoreMethod,
+            'details' => $rDetails
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/SetLeaderboardScore/v1/");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Leaderboard ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
         }
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'leaderboardid' => $sLeaderboardId, 'steamid' => $sSteamid, 'score' => $sScore, 'scoremethod' => $sScoreMethod, 'details' => $rDetails))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcSetLeaderboardScore = file_get_contents("https://partner.steam-api.com/ISteamLeaderboards/SetLeaderboardScore/v1/", false, $cContext);
-        $oSetLeaderboardScore = json_decode($fgcSetLeaderboardScore);
 
 
-        return $oSetLeaderboardScore->result;
+        return $CURLResponse->result;
     }
 
     /**
-     * Get all leaderboards from your App
+     * Get all leaderboards from your App. Result is cached!
      *
-     *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      * 
      * @return object
+     * <code>
+     * array(1) {
+     *   [0]=>
+     *   object(stdClass)#6 (7) {
+     *     ["id"]=>
+     *     int(3337465)
+     *     ["name"]=>
+     *     string(4) "test"
+     *     ["entries"]=>
+     *     int(1)
+     *     ["sortmethod"]=>
+     *     string(9) "Ascending"
+     *     ["displaytype"]=>
+     *     string(7) "Numeric"
+     *     ["onlytrustedwrites"]=>
+     *     bool(false)
+     *     ["onlyfriendsreads"]=>
+     *     bool(false)
+     *   }
+     * }
+     * </code>
      */
     public function GetLeaderboardsForGame() {
-        $fgcGetLeaderboardsForGame = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardsForGame/v2?key=" . $this->key . "&appid=" . (int) $this->game . "&" . time());
-        $oGetLeaderboardsForGame = json_decode($fgcGetLeaderboardsForGame);
-        return $oGetLeaderboardsForGame->response->leaderboards;
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+                // This can vary from request to request, sometimes its steamid or steamids or even an array.
+                //"steamid" => $this->steamid,
+                // Custom Queries below here.
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/GetLeaderboardsForGame/v2/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($ch, CURLOPT_POST, 1);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The App ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if (count($CURLResponse->response->leaderboards) === 0) {
+            throw new exceptions\SteamException("Your app doesn't have any leaderboards");
+        }
+
+        return $CURLResponse->response->leaderboards;
     }
 
     /**
      * Get all leaderboard entries from your App
      *
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      *
      * @param int $sLeaderboardId ID of the leaderboard to view
      * @param string $sDataRequest type of request: RequestGlobal, RequestAroundUser, RequestFriends
      * @param int $iRangeStart range start or 0
      * @param int $iRangeEnd range end or max LB entries
-     * @param bool $sSteamid Use SteamID to lookup or not
+     * @param bool $bSteamid Use SteamID to lookup or not
      * 
      * 
      * @return array
      */
-    public function GetLeaderboardEntries($sLeaderboardId, $sDataRequest, $iRangeStart, $iRangeEnd, $sSteamid = true) {
-        $fgcGetLeaderboardEntries = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=" . $this->key . "&appid=" . (int) $this->game . "&" . time() . "&leaderboardid=" . $sLeaderboardId . "&datarequest=" . $sDataRequest . "&rangestart=" . $iRangeStart . "&rangeend=" . $iRangeEnd);
-        if ($sSteamid) {
-            $fgcGetLeaderboardEntries = file_get_contents("https://api.steampowered.com/ISteamLeaderboards/GetLeaderboardEntries/v1?key=" . $this->key . "&appid=" . (int) $this->game . "&" . time() . "&leaderboardid=" . $sLeaderboardId . "&datarequest=" . $sDataRequest . "&rangestart=" . $iRangeStart . "&rangeend=" . $iRangeEnd . "&steamid=" . $this->steamid);
+    public function GetLeaderboardEntries($sLeaderboardId, $sDataRequest, $iRangeStart, $iRangeEnd, $bSteamid = true) {
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            //"steamid" => $this->steamid,
+            // Custom Queries below here.
+            "leaderboardid" => $sLeaderboardId,
+            "datarequest" => $sDataRequest,
+            "rangestart" => $iRangeStart,
+            "rangeend" => $iRangeEnd,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/GetLeaderboardEntries/v1/?" . $CURLParameters);
+
+        if ($bSteamid) {
+            $CURLParameters = http_build_query(array(
+                // Our default parameters!
+                "key" => $this->key,
+                "appid" => $this->game,
+                // This can vary from request to request, sometimes its steamid or steamids or even an array.
+                //"steamid" => $this->steamid,
+                // Custom Queries below here.
+                "leaderboardid" => $sLeaderboardId,
+                "datarequest" => $sDataRequest,
+                "rangestart" => $iRangeStart,
+                "rangeend" => $iRangeEnd,
+                "steamid" => $this->steamid,
+            ));
         }
-        $oGetLeaderboardEntries = json_decode($fgcGetLeaderboardEntries);
-        return $oGetLeaderboardEntries->leaderboardEntryInformation->leaderboardEntries;
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($ch, CURLOPT_POST, 1);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Leaderboard ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if (count($CURLResponse->leaderboardEntryInformation->leaderboardEntries) === 0) {
+            throw new exceptions\SteamException("Your app doesn't have any leaderboard entries");
+        }
+
+
+        return $CURLResponse->leaderboardEntryInformation->leaderboardEntries;
     }
 
     /**

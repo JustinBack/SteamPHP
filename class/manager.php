@@ -46,6 +46,8 @@ class manager {
      * @param string $iGame Your Appid
      * @param string $sSteamid The SteamID of the user 
      *
+     * @throws exceptions\SteamIDInvalidException if steam ID is invalid
+     * 
      * @return void
      */
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null) {
@@ -53,7 +55,7 @@ class manager {
         $this->Utils = new utils();
 
         if (!$this->Utils->IsValidSteamID($sSteamid)) {
-            throw new exceptions\SteamException("The SteamID provided is invalid, it must be a Steam64 ID!");
+            throw new exceptions\SteamIDInvalidException("The SteamID provided is invalid, it must be a Steam64 ID!");
         }
 
         $this->set_key($sApiKey);

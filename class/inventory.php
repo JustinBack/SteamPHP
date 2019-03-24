@@ -451,7 +451,9 @@ class inventory {
      * GetInventory is used to retrieve a user's inventory 
      *
      * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
      * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      * 
      * @return item array
      */
@@ -499,7 +501,7 @@ class inventory {
         }
         
         if (count($aArray) === 0) {
-            throw new exceptions\SteamException("The inventory is empty!");
+            throw new exceptions\SteamEmptyException("The inventory is empty!");
         }
         
         return $aArray;
@@ -510,7 +512,9 @@ class inventory {
      *
      * 
      * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
      * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      * 
      * @return iteminfo array
      */
@@ -557,7 +561,7 @@ class inventory {
         }
         
         if (count($aArray) === 0) {
-            throw new exceptions\SteamException("No item definitions defined!");
+            throw new exceptions\SteamEmptyException("No item definitions defined!");
         }
         
         return $aArray;

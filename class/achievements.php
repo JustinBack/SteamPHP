@@ -104,6 +104,7 @@ class achievements {
      * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
      * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
      * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      * @return \array Multidimensional array with objects containing apiname (string), achieved (int), unlocktime (int)
      * @link https://partner.steamgames.com/doc/webapi/ISteamUserStats#GetPlayerAchievements
      * <code>
@@ -172,7 +173,7 @@ class achievements {
             });
             return $aAchievements;
         }
-        throw new exceptions\SteamRequestException("An error has ocurred, must be something on valves end!");
+        throw new exceptions\SteamEmptyException("This user has no unlocked achievements!");
     }
 
     /**
@@ -183,6 +184,10 @@ class achievements {
      * $achievements = $steam->game()->achievements();
      * $array = $achievements->GetPlayerAchievementsLocked();
      * </code> 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      *
      * @return array Same Multidimensional array as GetPlayerAchievements().
      * 
@@ -246,7 +251,7 @@ class achievements {
             });
             return $aAchievements;
         }
-        return false;
+        throw new exceptions\SteamEmptyException("This user has no locked achievements!");
     }
 
     /**
@@ -371,7 +376,7 @@ class achievements {
 
         if ($CURLResponseCode != 200) {
             if ($CURLResponseCode == 400) {
-                throw new exceptions\SteamRequestParameterException("The Steam ID entered is invalid!");
+                throw new exceptions\SteamRequestParameterException("The API Name entered is invalid!");
             }
             if ($CURLResponseCode == 401) {
                 throw new exceptions\SteamException("App ID or API Key is invalid.");
@@ -387,7 +392,7 @@ class achievements {
         if(isset($CURLResponse->response->error)){
             throw new exceptions\SteamRequestParameterException($CURLResponse->response->error);
         }
-        return false;
+        throw new exceptions\SteamRequestParameterException("The API Name entered is invalid");
     }
 
     /**
@@ -436,7 +441,7 @@ class achievements {
 
         if ($CURLResponseCode != 200) {
             if ($CURLResponseCode == 400) {
-                throw new exceptions\SteamRequestParameterException("The Steam ID entered is invalid!");
+                throw new exceptions\SteamRequestParameterException("The API Name entered is invalid!");
             }
             if ($CURLResponseCode == 401) {
                 throw new exceptions\SteamException("App ID or API Key is invalid.");
@@ -452,7 +457,7 @@ class achievements {
         if(isset($CURLResponse->response->error)){
             throw new exceptions\SteamRequestParameterException($CURLResponse->response->error);
         }
-        return false;
+        throw new exceptions\SteamEmptyException("The API Name entered is invalid!");
     }
 
     /**

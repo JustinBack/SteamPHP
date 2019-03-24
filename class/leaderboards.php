@@ -349,8 +349,9 @@ class leaderboards {
      * Get all leaderboards from your App. Result is cached!
      *
      * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
-     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
      * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      * 
      * @return object
      * <code>
@@ -410,7 +411,7 @@ class leaderboards {
         }
 
         if (count($CURLResponse->response->leaderboards) === 0) {
-            throw new exceptions\SteamException("Your app doesn't have any leaderboards");
+            throw new exceptions\SteamEmptyException("Your app doesn't have any leaderboards");
         }
 
         return $CURLResponse->response->leaderboards;
@@ -420,8 +421,9 @@ class leaderboards {
      * Get all leaderboard entries from your App
      *
      * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
-     * @throws exceptions\SteamRequestParameterException if a parameter is not valid
+     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
      * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      *
      * @param int $sLeaderboardId ID of the leaderboard to view
      * @param string $sDataRequest type of request: RequestGlobal, RequestAroundUser, RequestFriends
@@ -487,7 +489,7 @@ class leaderboards {
         }
 
         if (count($CURLResponse->leaderboardEntryInformation->leaderboardEntries) === 0) {
-            throw new exceptions\SteamException("Your app doesn't have any leaderboard entries");
+            throw new exceptions\SteamEmptyException("Your app doesn't have any leaderboard entries");
         }
 
 

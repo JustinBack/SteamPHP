@@ -129,29 +129,58 @@ class transactions {
     /**
      * Add time to the payment schedule of an agreement with billing type "steam".
      *
+     * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
      * @param string $sNextProcessDate Date that next recurring payment should be initiated. Format is YYYYMMDD. Date can only be adjusted forward indicating you want to add time to the subscription. If the date exceeds the end date of the subscription, the end date will be extended.
      * 
-     * @return boolean object
+     * @return bool TRUE on success otherwise exceptions\SteamRequestException
      */
     public function AdjustAgreement($sNextProcessDate) {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'ignore_errors' => true,
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, 'nextprocessdate' => $sNextProcessDate, "steamid" => $this->steamid, "agreementid" => $this->agreementid))
-            ),
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcAdjustAgreement = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/AdjustAgreement/v1/", false, $cContext);
-        $oAdjustAgreement = json_decode($fgcAdjustAgreement);
 
 
-        if ($oAdjustAgreement->response->result == "OK") {
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            'nextprocessdate' => $sNextProcessDate,
+            "agreementid" => $this->agreementid,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/AdjustAgreement/v1/");
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Agreement ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if ($CURLResponse->response->result == "OK") {
             return true;
         }
 
-        return $oAdjustAgreement->response->error;
+        throw new exceptions\SteamRequestException($CURLResponse->response->error);
     }
 
     /**
@@ -159,26 +188,54 @@ class transactions {
      *
      *
      * 
-     * @return boolean object
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
+     * @return boolean TRUE on success otherwise exceptions\SteamRequestException
      */
     public function CancelAgreement() {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "agreementid" => $this->agreementid))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcCancelAgreement = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/CancelAgreement/v1/", false, $cContext);
-        $oCancelAgreement = json_decode($fgcCancelAgreement);
 
 
-        if ($oCancelAgreement->response->result == "OK") {
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            "agreementid" => $this->agreementid,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/CancelAgreement/v1/");
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Agreement ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if ($CURLResponse->response->result == "OK") {
             return true;
         }
 
-        return $oCancelAgreement->response->error;
+        throw new exceptions\SteamRequestException($CURLResponse->response->error);
     }
 
     /**
@@ -186,26 +243,53 @@ class transactions {
      *
      *
      * 
-     * @return boolean object
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
+     * @return boolean TRUE on success otherwise exceptions/SteamRequestException
      */
     public function RefundTxn() {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $this->orderid))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcRefundTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/RefundTxn/v2/", false, $cContext);
-        $oRefundTxn = json_decode($fgcRefundTxn);
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            "orderid" => $this->orderid,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/RefundTxn/v2/");
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
 
-        if ($oRefundTxn->response->result == "OK") {
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Order ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if ($CURLResponse->response->result == "OK") {
             return true;
         }
 
-        return $oRefundTxn->response->error;
+        throw new exceptions\SteamRequestException($CURLResponse->response->error);
     }
 
     /**
@@ -215,27 +299,54 @@ class transactions {
      * A successful response to this command means payment has been completed and you can safely grant items to the user. In the event of a timeout or some other communication error, use either the QueryTxn or GetReport APIs to get status on the transaction.
      *
      *
+     * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      *
      * 
      * @return boolean
      */
     public function FinalizeTxn() {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $this->orderid))
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcFinalizeTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/FinalizeTxn/v2/", false, $cContext);
-        $oFinalizeTxn = json_decode($fgcFinalizeTxn);
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            "orderid" => $this->orderid,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/FinalizeTxn/v2/");
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
 
-        if ($oFinalizeTxn->response->result == "OK") {
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Order ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if ($CURLResponse->response->result == "OK") {
             return true;
         }
-        return false;
+
+        throw new exceptions\SteamRequestException($CURLResponse->response->error);
     }
 
     /**
@@ -243,22 +354,52 @@ class transactions {
      *
      *
      * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
      * @return object
      */
     public function QueryTxn() {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'GET',
-                'ignore_errors' => true,
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcQueryTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/QueryTxn/v2/?" . http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "transid" => $this->transid, "orderid" => $this->orderid)), false, $cContext);
-        $oQueryTxn = json_decode($fgcQueryTxn);
 
 
-        return $oQueryTxn->response->params;
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            //"steamid" => $this->steamid,
+            // Custom Queries below here.
+            "transid" => $this->transid,
+            "orderid" => $this->orderid,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/QueryTxn/v2/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($ch, CURLOPT_POST, 1);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Order ID, Transaction ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        return $CURLResponse->response->params;
     }
 
     /**
@@ -266,22 +407,50 @@ class transactions {
      *
      *
      * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
      * @return object
      */
     public function GetUserAgreementInfo() {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'GET',
-                'ignore_errors' => true,
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcGetUserAgreementInfo = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/GetUserAgreementInfo/v1/?" . http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid)), false, $cContext);
-        $oGetUserAgreementInfo = json_decode($fgcGetUserAgreementInfo);
 
 
-        return $oGetUserAgreementInfo->response->params->agreements;
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+                // Custom Queries below here.
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/GetUserAgreementInfo/v1/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($ch, CURLOPT_POST, 1);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("The Steam ID or another parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        return $CURLResponse->response->params->agreements;
     }
 
     /**
@@ -292,6 +461,11 @@ class transactions {
      * If you do not wish to price each transaction in the local user's currency, Steam can convert any purchase to the local user's wallet currency automatically based on current exchange rate. For example, if you pass <b>currency</b> as "USD" and <b>amount</b> as "999", a user in Russia will be charged in Rubles at the current exchange rate for $9.99, which would be about 614.90 pуб as of this writing.
      * 
      * Note: If the parameter $sUserSession is set to "web" append the parameter "returnurl=URL_HERE" to the authorization url!
+     * 
+     * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      * 
      * @param integer $iItemCount Number of items in cart.
      * @param string $sLanguage ISO 639-1 language code of the item descriptions.
@@ -310,90 +484,192 @@ class transactions {
      * @param integer $iFrequency (Optional) The frequency for recurring billing in specified $sPeriod
      * 
      * 
-     * @return transactions On Success returns the transactions class|On Failure returns an object with the error message
+     * @return transactions TRUE on success otherwise exceptions\SteamRequestException
      */
     public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = null, $sBillingType = null, $sStartDate = null, $sEndDate = null, $sPeriod = null, $iRecurringAmount = null, $iFrequency = null) {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
 
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'ignore_errors' => true,
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "itemcount" => $iItemCount, "language" => $sLanguage, "currency" => $sCurrency, "itemid[0]" => $iItemID, "qty[0]" => $iQuantity, "amount[0]" => $iAmount, "description[0]" => $sDescription, "usersession" => $sUserSession, "ipaddress" => $sIpAddress, "startdate[0]" => $sStartDate, "enddate[0]" => $sEndDate, "period[0]" => $sPeriod, "frequency[0]" => $iFrequency, "recurringamt[0]" => $iRecurringAmount, "billingtype[0]" => $sBillingType))
-            )
-        );
 
-        $cContext = stream_context_create($aOptions);
-        $fgcInitTxn = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/InitTxn/v3/", false, $cContext);
-        $oInitTxn = json_decode($fgcInitTxn);
+        $ch = curl_init();
 
-        if ($oInitTxn->response->result == "OK") {
-            $this->transid = $oInitTxn->response->params->transid;
-            $this->orderid = $oInitTxn->response->params->orderid;
-            $this->steamurl = $oInitTxn->response->params->steamurl;
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            "orderid" => $iOrderID,
+            "itemcount" => $iItemCount,
+            "language" => $sLanguage,
+            "currency" => $sCurrency,
+            "itemid[0]" => $iItemID,
+            "qty[0]" => $iQuantity,
+            "amount[0]" => $iAmount,
+            "description[0]" => $sDescription,
+            "usersession" => $sUserSession,
+            "ipaddress" => $sIpAddress,
+            "startdate[0]" => $sStartDate,
+            "enddate[0]" => $sEndDate,
+            "period[0]" => $sPeriod,
+            "frequency[0]" => $iFrequency,
+            "recurringamt[0]" => $iRecurringAmount,
+            "billingtype[0]" => $sBillingType,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/InitTxn/v3/");
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("A parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        if ($CURLResponse->response->result == "OK") {
+            $this->transid = $CURLResponse->response->params->transid;
+            $this->orderid = $CURLResponse->response->params->orderid;
+            $this->steamurl = $CURLResponse->response->params->steamurl;
             return $this;
         }
 
-        return $oInitTxn->response->error;
+        throw new exceptions\SteamRequestException($CURLResponse->response->error);
     }
 
     /**
      * Initiate a recurring payment (subscription) for the user.
      * A successful response means that Steam will initiate a billing cycle for the user. It does not mean that the actual billing cycle was completed successfully. Use the GetReport or GetUserAgreementInfo APIs to check actual billing status.
      * 
+     * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * 
      * @param integer $iAmount Total cost (in cents). This value corresponds to an initial one-time amount to be immediately charged to a user.
      * @param string $sCurrency ISO 4217 currency code. See <a href="https://partner.steamgames.com/doc/store/pricing/currencies">Supported Currencies</a> for proper format of each currency.
-     * @return boolean On Success returns the transactions class|On Failure returns an object with the error message
+     * @return boolean TRUE on success otherwise exceptions\SteamRequestException
      */
     public function ProcessAgreement($iAmount, $sCurrency) {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
 
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'ignore_errors' => true,
-                'content' => http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "orderid" => $iOrderID, "currency" => $sCurrency, "amount" => $iAmount, "orderid" => $iOrderID, "agreementid" => $this->agreementid))));
-        $cContext = stream_context_create($aOptions);
-        $fgcProcessAgreement = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/ProcessAgreement/v1/", false, $cContext);
-        $oProcessAgreement = json_decode($fgcProcessAgreement);
 
-        if ($oProcessAgreement->response->result == "OK") {
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            "orderid" => $iOrderID,
+            "currency" => $sCurrency,
+            "amount" => $iAmount,
+            "agreementid" => $this->agreementid,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/ProcessAgreement/v1/");
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("A parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+
+        if ($CURLResponse->response->result == "OK") {
             return true;
         }
 
-        return $oProcessAgreement->response->error;
+        throw new exceptions\SteamRequestException($CURLResponse->response->error);
     }
 
     /**
      * Steam offers transaction reports that can be downloaded for reconciliation purposes. These reports show detailed information about each transaction that affects the settlement of funds into your accounts.
      *
+     * 
+     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      *
      * @param string $sTime Report type (One of: "GAMESALES", "STEAMSTORESALES", "SETTLEMENT")
      * @param integer $iMaxResults Maximum number of results to return in report. (Up to 1000)
      * @param string $sType Start time of the report. (RFC 3339 UTC formatted like: 2010-01-01T00:00:00Z)
      * @param boolean $bRawOutput Return new classes with transaction, player and item management or a raw object
-     * @return object[]|\transactions[]|\player[]
+     * @return object|transactions|player
      */
     public function GetReport($sTime, $iMaxResults = 1000, $sType = "GAMESALES", $bRawOutput = false) {
-        $aOptions = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'GET',
-                'ignore_errors' => true,
-            )
-        );
-        $cContext = stream_context_create($aOptions);
-        $fgcGetReport = file_get_contents("https://partner.steam-api.com/" . $this->interface . "/GetReport/v4/?" . http_build_query(array('key' => $this->key, 'appid' => (int) $this->game, "steamid" => $this->steamid, "time" => $sTime, "maxresults" => $iMaxResults, "type" => $sType)), false, $cContext);
-        $oGetReport = json_decode($fgcGetReport);
+
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+            // Custom Queries below here.
+            "time" => $sTime,
+            "maxresults" => $iMaxResults,
+            "type" => $sType,
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/GetReport/v4/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($ch, CURLOPT_POST, 1);
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new exceptions\SteamRequestParameterException("A parameter is invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
 
 
         if ($bRawOutput) {
-            return $oGetReport->response->params;
+            return $CURLResponse->response->params;
         }
         $Array = array();
-        foreach ($oGetReport->response->params->orders as $Key => $Order) {
+        foreach ($CURLResponse->response->params->orders as $Key => $Order) {
 
             $Object = new \stdClass();
 

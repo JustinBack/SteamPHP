@@ -143,7 +143,7 @@ Get Player name, avatar and report cheating!</p>
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.player.html#10-431" title="Go to source code">class/player.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.player.html#10-827" title="Go to source code">class/player.php</a>
 		<br>
 	</div>
 
@@ -201,7 +201,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetPersonaName">#</a>
-			<code><a href="source-class-justinback.steam.player.html#88-102" title="Go to source code">GetPersonaName</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#88-138" title="Go to source code">GetPersonaName</a>( )</code>
 
 			<div class="description short">
 				<p>Get the Community name of the user</p>
@@ -217,6 +217,12 @@ Get Player name, avatar and report cheating!</p>
 						string
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -234,7 +240,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetPlayerBans">#</a>
-			<code><a href="source-class-justinback.steam.player.html#104-116" title="Go to source code">GetPlayerBans</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#140-211" title="Go to source code">GetPlayerBans</a>( )</code>
 
 			<div class="description short">
 				<p>Get the ban overview of the user</p>
@@ -247,9 +253,39 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						array<br>Multidimensional array containing SteamId (string), CommunityBanned (bool), VACBanned (int), NumberOfVACBans (int), DaysSinceLastBan (int), NumberOfGameBans (int), bans (array), EconomyBan (string) fields.
+						array<br><p>Multidimensional array containing SteamId (string), CommunityBanned (bool), VACBanned (int), NumberOfVACBans (int), DaysSinceLastBan (int), NumberOfGameBans (int), bans (array), EconomyBan (string) fields.</p>
+
+<pre><span class="php-keyword1">array</span>(<span class="php-num">1</span>) {
+  [<span class="php-num">0</span>]=&gt;
+  object(stdClass)<span class="php-comment">#5 (8) {</span>
+    [<span class="php-quote">&quot;SteamId&quot;</span>]=&gt;
+    string(<span class="php-num">17</span>) <span class="php-quote">&quot;76561198147337306&quot;</span>
+    [<span class="php-quote">&quot;CommunityBanned&quot;</span>]=&gt;
+    bool(<span class="php-keyword1">false</span>)
+    [<span class="php-quote">&quot;VACBanned&quot;</span>]=&gt;
+    bool(<span class="php-keyword1">true</span>)
+    [<span class="php-quote">&quot;NumberOfVACBans&quot;</span>]=&gt;
+    int(<span class="php-num">1</span>)
+    [<span class="php-quote">&quot;DaysSinceLastBan&quot;</span>]=&gt;
+    int(<span class="php-num">1303</span>)
+    [<span class="php-quote">&quot;NumberOfGameBans&quot;</span>]=&gt;
+    int(<span class="php-num">0</span>)
+    [<span class="php-quote">&quot;bans&quot;</span>]=&gt;
+    <span class="php-keyword1">array</span>(<span class="php-num">0</span>) {
+    }
+    [<span class="php-quote">&quot;EconomyBan&quot;</span>]=&gt;
+    string(<span class="php-num">4</span>) <span class="php-quote">&quot;none&quot;</span>
+  }
+}</pre>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the steam id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code><br>if the request returns nothing and the result is empty.
+					</div>
 
 
 
@@ -260,14 +296,14 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="attributes"><code>
 				 public 
-				integer|null
+				integer
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetSteamLevel">#</a>
-			<code><a href="source-class-justinback.steam.player.html#118-130" title="Go to source code">GetSteamLevel</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#213-258" title="Go to source code">GetSteamLevel</a>( )</code>
 
 			<div class="description short">
 				<p>Returns the Steam Level of a user</p>
@@ -280,9 +316,15 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						integer|null<br>The Steam Level of the user on success and NULL on failure
+						integer<br>The Steam Level of the user
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -300,7 +342,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetFriendList">#</a>
-			<code><a href="source-class-justinback.steam.player.html#132-150" title="Go to source code">GetFriendList</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#260-314" title="Go to source code">GetFriendList</a>( )</code>
 
 			<div class="description short">
 				<p>Get the friendlist overview of the user</p>
@@ -316,6 +358,13 @@ Get Player name, avatar and report cheating!</p>
 						<code><a href="class-justinback.steam.player.html">justinback\steam\player</a></code><br>An array containing a player object with information about the friends. Each friend has its own object.
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the steam id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code><br>if the request returns nothing and the result is empty.
+					</div>
 
 
 
@@ -333,7 +382,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetUserGroupList">#</a>
-			<code><a href="source-class-justinback.steam.player.html#152-170" title="Go to source code">GetUserGroupList</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#316-370" title="Go to source code">GetUserGroupList</a>( )</code>
 
 			<div class="description short">
 				<p>Get the group overview of the user</p>
@@ -349,6 +398,13 @@ Get Player name, avatar and report cheating!</p>
 						<code><a href="class-justinback.steam.group.html">justinback\steam\group</a></code><br>array
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code><br>if the request returns nothing and the result is empty.
+					</div>
 
 
 
@@ -366,7 +422,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetSteamIDs">#</a>
-			<code class="deprecated"><a href="source-class-justinback.steam.player.html#172-181" title="Go to source code">GetSteamIDs</a>( )</code>
+			<code class="deprecated"><a href="source-class-justinback.steam.player.html#372-382" title="Go to source code">GetSteamIDs</a>( )</code>
 
 			<div class="description short">
 				<p>This function has been moved to the \justinback\steam\utils class!</p>
@@ -381,6 +437,10 @@ Get Player name, avatar and report cheating!</p>
 
 
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.JBDeprecatedException.html">justinback\steam\exceptions\JBDeprecatedException</a></code><br>This function is deprecated
+					</div>
 
 					<h4>See</h4>
 					<div class="list">
@@ -402,7 +462,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetAvatar">#</a>
-			<code><a href="source-class-justinback.steam.player.html#183-201" title="Go to source code">GetAvatar</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#384-437" title="Go to source code">GetAvatar</a>( )</code>
 
 			<div class="description short">
 				<p>Get the Avatar in an object (small, medium, full)</p>
@@ -418,6 +478,12 @@ Get Player name, avatar and report cheating!</p>
 						object
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -435,7 +501,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetRealName">#</a>
-			<code><a href="source-class-justinback.steam.player.html#203-217" title="Go to source code">GetRealName</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#439-486" title="Go to source code">GetRealName</a>( )</code>
 
 			<div class="description short">
 				<p>Get the Realname from the user</p>
@@ -451,6 +517,12 @@ Get Player name, avatar and report cheating!</p>
 						string
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -468,7 +540,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ReportPlayerCheating">#</a>
-			<code><a href="source-class-justinback.steam.player.html#219-251" title="Go to source code">ReportPlayerCheating</a>( <span>string <var>$sSteamidreporter</var> = <span class="php-num">0</span></span>, <span>string <var>$sAppData</var> = <span class="php-num">0</span></span>, <span>boolean <var>$bHeuristic</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bDetection</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bPlayerReport</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bNoReportId</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$iGamemode</var> = <span class="php-num">0</span></span>, <span>integer <var>$iSuspicionStartTime</var> = <span class="php-num">0</span></span>, <span>integer <var>$iSeverity</var> = <span class="php-num">0</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#488-554" title="Go to source code">ReportPlayerCheating</a>( <span>string <var>$sSteamidreporter</var> = <span class="php-num">0</span></span>, <span>string <var>$sAppData</var> = <span class="php-num">0</span></span>, <span>boolean <var>$bHeuristic</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bDetection</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bPlayerReport</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$bNoReportId</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$iGamemode</var> = <span class="php-num">0</span></span>, <span>integer <var>$iSuspicionStartTime</var> = <span class="php-num">0</span></span>, <span>integer <var>$iSeverity</var> = <span class="php-num">0</span></span> )</code>
 
 			<div class="description short">
 				<p>ReportPlayerCheating is designed to gather community reports of cheating, where one player reports another player within the game.</p>
@@ -507,6 +579,12 @@ Get Player name, avatar and report cheating!</p>
 						<code><a href="class-justinback.steam.anticheat.html">justinback\steam\anticheat</a></code>
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
 
 
@@ -517,14 +595,14 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="attributes"><code>
 				 public 
-				object
+				boolean
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_ReportAbuse">#</a>
-			<code><a href="source-class-justinback.steam.player.html#253-285" title="Go to source code">ReportAbuse</a>( <span>string <var>$sSteamidreporter</var></span>, <span>integer <var>$iAbuseType</var></span>, <span>integer <var>$iContentType</var></span>, <span>string <var>$sDescription</var></span>, <span>string <var>$sGid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#556-620" title="Go to source code">ReportAbuse</a>( <span>string <var>$sSteamidreporter</var></span>, <span>integer <var>$iAbuseType</var></span>, <span>integer <var>$iContentType</var></span>, <span>string <var>$sDescription</var></span>, <span>string <var>$sGid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Allows publishers to report users who are behaving badly on their community hub.</p>
@@ -550,9 +628,16 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						object
+						boolean
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code><br>if the request returns nothing and the result is empty.
+					</div>
 
 
 
@@ -563,14 +648,14 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="attributes"><code>
 				 public 
-				boolean
+				boolean|<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code>
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_RemovePlayerGameBan">#</a>
-			<code><a href="source-class-justinback.steam.player.html#287-312" title="Go to source code">RemovePlayerGameBan</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#622-675" title="Go to source code">RemovePlayerGameBan</a>( )</code>
 
 			<div class="description short">
 				<p>Remove a game ban on a player.</p>
@@ -585,9 +670,16 @@ Get Player name, avatar and report cheating!</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						boolean
+						boolean|<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code><br>TRUE on unban otherwise exceptions\SteamEmptyException
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code><br>if the request returns nothing and the result is empty.
+					</div>
 
 
 
@@ -605,7 +697,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_EnumerateUserPublishedFiles">#</a>
-			<code><a href="source-class-justinback.steam.player.html#314-340" title="Go to source code">EnumerateUserPublishedFiles</a>( )</code>
+			<code><a href="source-class-justinback.steam.player.html#677-734" title="Go to source code">EnumerateUserPublishedFiles</a>( )</code>
 
 			<div class="description short">
 				<p>List all files by user as array (Only IDs)</p>
@@ -621,6 +713,13 @@ Get Player name, avatar and report cheating!</p>
 						<code><a href="class-justinback.steam.ugc.html">justinback\steam\ugc</a></code><br>array
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code><br>if the request returns nothing and the result is empty.
+					</div>
 
 
 
@@ -638,7 +737,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_achievements">#</a>
-			<code><a href="source-class-justinback.steam.player.html#342-362" title="Go to source code">achievements</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#736-758" title="Go to source code">achievements</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>achievements object.</p>
@@ -680,7 +779,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_inventory">#</a>
-			<code><a href="source-class-justinback.steam.player.html#364-384" title="Go to source code">inventory</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#760-780" title="Go to source code">inventory</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>inventory object.</p>
@@ -722,7 +821,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_transactions">#</a>
-			<code><a href="source-class-justinback.steam.player.html#386-407" title="Go to source code">transactions</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#782-803" title="Go to source code">transactions</a>( <span>string <var>$bTesting</var> = <span class="php-keyword1">false</span></span>, <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Transaction object.</p>
@@ -766,7 +865,7 @@ Get Player name, avatar and report cheating!</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_auth">#</a>
-			<code><a href="source-class-justinback.steam.player.html#409-429" title="Go to source code">auth</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.player.html#805-825" title="Go to source code">auth</a>( <span>string <var>$sApiKey</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$iGame</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>User Authentication object.</p>

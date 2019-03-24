@@ -286,7 +286,9 @@ class group {
      * Get the members of the group
      *
      * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
-     * @throws exceptions\SteamRequestParameterException if the group global id is not valid as a parameter
+     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
+     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
+     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      * 
      * @return player array
      */
@@ -320,6 +322,9 @@ class group {
             array_push($aMembers, new \justinback\steam\player($this->key, $this->appid, current($oMember)));
         }
 
+        if(count($aMembers) === 1){
+            throw new exceptions\SteamEmptyException("This group has no members besides the creator!");
+        }
 
         return $aMembers;
     }

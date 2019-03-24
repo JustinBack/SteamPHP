@@ -290,11 +290,14 @@ class ugc {
      * @return object
      */
     public function QueryFiles() {
+        
+        throw new exceptions\JBDeprecatedException("This function is deprecated and unusable.");
+        
         // I have no idea which parameters should be present... Leaving as is for now
-        $fgcQueryFiles = file_get_contents("https://api.steampowered.com/IPublishedFileService/QueryFiles/v1?key=" . $this->key . "&steamid=" . $this->steamid);
-        $oQueryFiles = json_decode($fgcQueryFiles);
+        //$fgcQueryFiles = file_get_contents("https://api.steampowered.com/IPublishedFileService/QueryFiles/v1?key=" . $this->key . "&steamid=" . $this->steamid);
+        //$oQueryFiles = json_decode($fgcQueryFiles);
 
-        return $oQueryFiles->response;
+        //return $oQueryFiles->response;
     }
 
     /**

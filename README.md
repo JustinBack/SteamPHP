@@ -23,7 +23,7 @@ SteamPHP now supports fully compatible exceptions! Error handling is better than
 
 ###### Support
 
-You can message me on steam or contact me via email: justinback@support.justinback.com (A ticket will be created and a confirmation mail will be sent)
+SteamPHP has its own dedicated forum now! Login with GitHub and help others or get support! https://forums.pixelcatproductions.net/c/libraries/steamphp
 
 ###### Info
 

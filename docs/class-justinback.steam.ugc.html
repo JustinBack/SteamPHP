@@ -102,7 +102,6 @@
 				<li><a href="class-justinback.steam.store.html">store</a></li>
 				<li><a href="class-justinback.steam.transactions.html">transactions</a></li>
 				<li class="active"><a href="class-justinback.steam.ugc.html">ugc</a></li>
-				<li><a href="class-justinback.steam.userauth.html">userauth</a></li>
 				<li><a href="class-justinback.steam.utils.html">utils</a></li>
 			</ul>
 
@@ -142,7 +141,7 @@
 
 				<b>Author:</b>
 				Justin Back <a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m">&#106;&#x62;&#64;&#x6a;u&#115;&#x74;&#105;&#x6e;&#98;&#x61;&#x63;&#107;&#x2e;&#99;&#x6f;m</a><br>
-			<b>Located at</b> <a href="source-class-justinback.steam.ugc.html#10-331" title="Go to source code">class/ugc.php</a>
+			<b>Located at</b> <a href="source-class-justinback.steam.ugc.html#10-542" title="Go to source code">class/ugc.php</a>
 		<br>
 	</div>
 
@@ -202,7 +201,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UpdateBanStatus">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#107-134" title="Go to source code">UpdateBanStatus</a>( <span>boolean <var>$bBanned</var></span>, <span>string <var>$sReason</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#107-165" title="Go to source code">UpdateBanStatus</a>( <span>boolean <var>$bBanned</var></span>, <span>string <var>$sReason</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Update Ban Status of a UGC</p>
@@ -227,7 +226,17 @@
 						boolean
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
+					<h4>Todo</h4>
+					<div class="list">
+							Return an error, right now it only returns true and doesnt listen to the API.<br>
+					</div>
 
 
 			</div>
@@ -244,7 +253,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UpdateIncompatibleStatus">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#136-163" title="Go to source code">UpdateIncompatibleStatus</a>( <span>boolean <var>$bIncompatible</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#167-222" title="Go to source code">UpdateIncompatibleStatus</a>( <span>boolean <var>$bIncompatible</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Updates the incompatible status on the published file. "Incompatible" items are hidden from community hubs and user profiles, but can still be accessed by a direct link.</p>
@@ -267,7 +276,17 @@
 						boolean
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
+					<h4>Todo</h4>
+					<div class="list">
+							Return an error, right now it only returns true and doesnt listen to the API.<br>
+					</div>
 
 
 			</div>
@@ -284,7 +303,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UpdateTags">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#165-193" title="Go to source code">UpdateTags</a>( <span>array <var>$aAddTags</var></span>, <span>array <var>$aRemoveTags</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#224-283" title="Go to source code">UpdateTags</a>( <span>array <var>$aAddTags</var></span>, <span>array <var>$aRemoveTags</var></span>, <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Updates tags on the published file</p>
@@ -309,7 +328,17 @@
 						boolean
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
+					<h4>Todo</h4>
+					<div class="list">
+							Return an error, right now it only returns true and doesnt listen to the API.<br>
+					</div>
 
 
 			</div>
@@ -326,7 +355,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_GetPublishedFileDetails">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#195-221" title="Go to source code">GetPublishedFileDetails</a>( <span>string <var>$sPublishedFileIds</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#285-346" title="Go to source code">GetPublishedFileDetails</a>( <span>string <var>$sPublishedFileIds</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Get File Info</p>
@@ -347,6 +376,13 @@
 						object
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamEmptyException.html">justinback\steam\exceptions\SteamEmptyException</a></code><br>if the request returns no results
+					</div>
 
 
 
@@ -364,7 +400,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_SubscribePublishedFile">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#223-252" title="Go to source code">SubscribePublishedFile</a>( <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#348-407" title="Go to source code">SubscribePublishedFile</a>( <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Subscribe to the published file as the user</p>
@@ -387,7 +423,17 @@
 						boolean
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
+					<h4>Todo</h4>
+					<div class="list">
+							Return an error, right now it only returns true and doesnt listen to the API.<br>
+					</div>
 
 
 			</div>
@@ -404,7 +450,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_UnsubscribePublishedFile">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#254-283" title="Go to source code">UnsubscribePublishedFile</a>( <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#409-468" title="Go to source code">UnsubscribePublishedFile</a>( <span>string <var>$sPublishedFileId</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$sSteamid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Unsubscribe from the published file as the user</p>
@@ -427,7 +473,17 @@
 						boolean
 					</div>
 
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-justinback.steam.exceptions.SteamRequestException.html">justinback\steam\exceptions\SteamRequestException</a></code><br>if the servers are down, or the web request failed<br>
+						<code><a href="class-justinback.steam.exceptions.SteamRequestParameterException.html">justinback\steam\exceptions\SteamRequestParameterException</a></code><br>if the app id is not valid as a parameter<br>
+						<code><a href="class-justinback.steam.exceptions.SteamException.html">justinback\steam\exceptions\SteamException</a></code><br>if the app id or api key is not valid as a parameter
+					</div>
 
+					<h4>Todo</h4>
+					<div class="list">
+							Return an error, right now it only returns true and doesnt listen to the API.<br>
+					</div>
 
 
 			</div>
@@ -444,7 +500,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_QueryFiles">#</a>
-			<code class="deprecated"><a href="source-class-justinback.steam.ugc.html#285-301" title="Go to source code">QueryFiles</a>( )</code>
+			<code class="deprecated"><a href="source-class-justinback.steam.ugc.html#470-485" title="Go to source code">QueryFiles</a>( )</code>
 
 			<div class="description short">
 				<p>Performs a search query for published files</p>
@@ -484,7 +540,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_player">#</a>
-			<code><a href="source-class-justinback.steam.ugc.html#303-329" title="Go to source code">player</a>( <span>string <var>$sPublishedFileIds</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-justinback.steam.ugc.html#487-540" title="Go to source code">player</a>( <span>string <var>$sPublishedFileIds</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Get Creator by UGC</p>

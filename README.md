@@ -4,9 +4,14 @@
   <img width="256" src="https://cdn.pixelcatproductions.net/f/p/d56e6fb34b1f49a683fbfb25f93f43d0bb297eee95875d524b25bf05ee99c6df43f7432b6a06387ad130071359d64deb938e/JustinReneBack2Black.png" alt="Justin Back Logo"/>
 </p>
 
+
+###### NEW
+
+SteamPHP now supports fully compatible exceptions! Error handling is better than ever. This includes a major rewrite of this library so don't update if you don't handle errors now properly else your application will break!
+
 ###### Version
 
-[![VERSION](https://img.shields.io/badge/Version-1.1.0-green.svg)](VERSION.md)
+[![VERSION](https://img.shields.io/badge/Version-1.2.0-green.svg)](VERSION.md)
 
 ###### Compability
 
@@ -14,7 +19,6 @@
 ![PHP5.5](https://php-eye.com/badge/justinback/steam-php/php55.svg)
 ![PHP5.6](https://php-eye.com/badge/justinback/steam-php/php56.svg)
 ![PHP7.0](https://php-eye.com/badge/justinback/steam-php/php70.svg)
-![PHP7.1](https://php-eye.com/badge/justinback/steam-php/php71.svg)
 
 
 ###### Support

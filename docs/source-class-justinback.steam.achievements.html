@@ -237,7 +237,7 @@
 </span></span><span id="102" class="l"><span class="php-comment">     * $array = $achievements-&gt;GetPlayerAchievements();
 </span></span><span id="103" class="l"><span class="php-comment">     * &lt;/code&gt; 
 </span></span><span id="104" class="l"><span class="php-comment">     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
-</span></span><span id="105" class="l"><span class="php-comment">     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
+</span></span><span id="105" class="l"><span class="php-comment">     * @throws exceptions\SteamIDInvalidException if the steam id is not valid as a parameter
 </span></span><span id="106" class="l"><span class="php-comment">     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
 </span></span><span id="107" class="l"><span class="php-comment">     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
 </span></span><span id="108" class="l"><span class="php-comment">     * @return \array Multidimensional array with objects containing apiname (string), achieved (int), unlocktime (int)
@@ -292,7 +292,7 @@
 </span><span id="157" class="l">
 </span><span id="158" class="l">        <span class="php-keyword1">if</span> (<span class="php-var">$CURLResponseCode</span> != <span class="php-num">200</span>) {
 </span><span id="159" class="l">            <span class="php-keyword1">if</span> (<span class="php-var">$CURLResponseCode</span> == <span class="php-num">400</span>) {
-</span><span id="160" class="l">                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> exceptions\SteamRequestParameterException(<span class="php-quote">&quot;The SteamID is invalid!&quot;</span>);
+</span><span id="160" class="l">                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> exceptions\SteamIDInvalidException(<span class="php-quote">&quot;The SteamID is invalid!&quot;</span>);
 </span><span id="161" class="l">            }
 </span><span id="162" class="l">            <span class="php-keyword1">if</span> (<span class="php-var">$CURLResponseCode</span> == <span class="php-num">401</span>) {
 </span><span id="163" class="l">                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> exceptions\SteamException(<span class="php-quote">&quot;App ID or API Key is invalid.&quot;</span>);
@@ -320,7 +320,7 @@
 </span></span><span id="185" class="l"><span class="php-comment">     * $array = $achievements-&gt;GetPlayerAchievementsLocked();
 </span></span><span id="186" class="l"><span class="php-comment">     * &lt;/code&gt; 
 </span></span><span id="187" class="l"><span class="php-comment">     * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
-</span></span><span id="188" class="l"><span class="php-comment">     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
+</span></span><span id="188" class="l"><span class="php-comment">     * @throws exceptions\SteamIDInvalidException if the steam id is not valid as a parameter
 </span></span><span id="189" class="l"><span class="php-comment">     * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
 </span></span><span id="190" class="l"><span class="php-comment">     * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
 </span></span><span id="191" class="l"><span class="php-comment">     *
@@ -372,7 +372,7 @@
 </span><span id="237" class="l">
 </span><span id="238" class="l">        <span class="php-keyword1">if</span> (<span class="php-var">$CURLResponseCode</span> != <span class="php-num">200</span>) {
 </span><span id="239" class="l">            <span class="php-keyword1">if</span> (<span class="php-var">$CURLResponseCode</span> == <span class="php-num">400</span>) {
-</span><span id="240" class="l">                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> exceptions\SteamRequestParameterException(<span class="php-quote">&quot;The SteamID is invalid!&quot;</span>);
+</span><span id="240" class="l">                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> exceptions\SteamIDInvalidException(<span class="php-quote">&quot;The SteamID is invalid!&quot;</span>);
 </span><span id="241" class="l">            }
 </span><span id="242" class="l">            <span class="php-keyword1">if</span> (<span class="php-var">$CURLResponseCode</span> == <span class="php-num">401</span>) {
 </span><span id="243" class="l">                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> exceptions\SteamException(<span class="php-quote">&quot;App ID or API Key is invalid.&quot;</span>);

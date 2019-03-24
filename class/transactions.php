@@ -180,7 +180,7 @@ class transactions {
             return true;
         }
 
-        throw new exceptions\SteamRequestException($CURLResponse->response->error);
+        throw new exceptions\SteamRequestException(json_encode($CURLResponse->response->error));
     }
 
     /**
@@ -235,7 +235,7 @@ class transactions {
             return true;
         }
 
-        throw new exceptions\SteamRequestException($CURLResponse->response->error);
+        throw new exceptions\SteamRequestException(json_encode($CURLResponse->response->error));
     }
 
     /**
@@ -289,7 +289,7 @@ class transactions {
             return true;
         }
 
-        throw new exceptions\SteamRequestException($CURLResponse->response->error);
+        throw new exceptions\SteamRequestException(json_encode($CURLResponse->response->error));
     }
 
     /**
@@ -346,7 +346,7 @@ class transactions {
             return true;
         }
 
-        throw new exceptions\SteamRequestException($CURLResponse->response->error);
+        throw new exceptions\SteamRequestException(json_encode($CURLResponse->response->error));
     }
 
     /**
@@ -546,7 +546,7 @@ class transactions {
             return $this;
         }
 
-        throw new exceptions\SteamRequestException($CURLResponse->response->error);
+        throw new exceptions\SteamRequestException(json_encode($CURLResponse->response->error));
     }
 
     /**
@@ -608,7 +608,7 @@ class transactions {
             return true;
         }
 
-        throw new exceptions\SteamRequestException($CURLResponse->response->error);
+        throw new exceptions\SteamRequestException(json_encode($CURLResponse->response->error));
     }
 
     /**

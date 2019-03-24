@@ -102,7 +102,7 @@ class achievements {
      * $array = $achievements->GetPlayerAchievements();
      * </code> 
      * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
-     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
+     * @throws exceptions\SteamIDInvalidException if the steam id is not valid as a parameter
      * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      * @return \array Multidimensional array with objects containing apiname (string), achieved (int), unlocktime (int)
@@ -157,7 +157,7 @@ class achievements {
 
         if ($CURLResponseCode != 200) {
             if ($CURLResponseCode == 400) {
-                throw new exceptions\SteamRequestParameterException("The SteamID is invalid!");
+                throw new exceptions\SteamIDInvalidException("The SteamID is invalid!");
             }
             if ($CURLResponseCode == 401) {
                 throw new exceptions\SteamException("App ID or API Key is invalid.");
@@ -185,7 +185,7 @@ class achievements {
      * $array = $achievements->GetPlayerAchievementsLocked();
      * </code> 
      * @throws exceptions\SteamRequestException if the servers are down, or the web request failed
-     * @throws exceptions\SteamRequestParameterException if the steam id is not valid as a parameter
+     * @throws exceptions\SteamIDInvalidException if the steam id is not valid as a parameter
      * @throws exceptions\SteamException if the app id or api key is not valid as a parameter
      * @throws exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      *
@@ -237,7 +237,7 @@ class achievements {
 
         if ($CURLResponseCode != 200) {
             if ($CURLResponseCode == 400) {
-                throw new exceptions\SteamRequestParameterException("The SteamID is invalid!");
+                throw new exceptions\SteamIDInvalidException("The SteamID is invalid!");
             }
             if ($CURLResponseCode == 401) {
                 throw new exceptions\SteamException("App ID or API Key is invalid.");

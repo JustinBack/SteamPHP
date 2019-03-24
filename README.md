@@ -11,7 +11,7 @@ SteamPHP now supports fully compatible exceptions! Error handling is better than
 
 ###### Version
 
-[![VERSION](https://img.shields.io/badge/Version-1.2.0-green.svg)](VERSION.md)
+[![VERSION](https://img.shields.io/badge/Version-1.2.1-green.svg)](VERSION.md)
 
 ###### Compability
 

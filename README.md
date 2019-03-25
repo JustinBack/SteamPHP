@@ -68,23 +68,8 @@ $steam  = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 ## Examples
 
 
-#### Deleting Leaderboards
-
-```php
-$steam->game()->leaderboards()->DeleteLeaderboard("lbname");
-
-```
-
-
-
-
-#### Getting Steam Community Name
-
-```php
-
-$steam->player()->GetPersonaName();
-
-```
+#### Examples are in the `examples/` directory or at our forums!
+https://forums.pixelcatproductions.net/tags/c/libraries/steamphp/tutorial
 
 
 

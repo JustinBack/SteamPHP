@@ -482,13 +482,15 @@ class transactions {
      * @param string $sPeriod (Optional) The period for recurring billing, e.g "month", "year", "week" and "day"
      * @param integer $iRecurringAmount (Optional) The recurring billing amount in cents see $iAmount
      * @param integer $iFrequency (Optional) The frequency for recurring billing in specified $sPeriod
+     * @param integer $iOrderID (Optional) Custom order id, leave empty for an automated generation by SteamPHP
      * 
      * 
      * @return transactions TRUE on success otherwise exceptions\SteamRequestException
      */
-    public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = null, $sBillingType = null, $sStartDate = null, $sEndDate = null, $sPeriod = null, $iRecurringAmount = null, $iFrequency = null) {
-        $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
-
+    public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = null, $sBillingType = null, $sStartDate = null, $sEndDate = null, $sPeriod = null, $iRecurringAmount = null, $iFrequency = null, $iOrderID = null) {
+        if ($iOrderID == null) {
+            $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
+        }
 
         $ch = curl_init();
 

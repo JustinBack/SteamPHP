@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2019, Justin Back <jb@justinback.com>
+ * Copyright (c) 2019, Justin Back <jback@pixelcatproductions.net>
  * All rights reserved.
  */
 

@@ -136,7 +136,7 @@
 	<pre class="code"><code><span id="1" class="l"><span class="xlang">&lt;?php</span>
 </span><span id="2" class="l">
 </span><span id="3" class="l"><span class="php-comment">/**
-</span></span><span id="4" class="l"><span class="php-comment"> * Copyright (c) 2018, Justin Back &lt;jb@justinback.com&gt;
+</span></span><span id="4" class="l"><span class="php-comment"> * Copyright (c) 2018, Justin Back &lt;jback@pixelcatproductions.net&gt;
 </span></span><span id="5" class="l"><span class="php-comment"> * All rights reserved.
 </span></span><span id="6" class="l"><span class="php-comment"> */</span>
 </span><span id="7" class="l">
@@ -146,7 +146,7 @@
 </span></span><span id="11" class="l"><span class="php-comment"> * Steam Microtransaction managing
 </span></span><span id="12" class="l"><span class="php-comment"> *
 </span></span><span id="13" class="l"><span class="php-comment"> * @since pb1.0.0a
-</span></span><span id="14" class="l"><span class="php-comment"> * @author Justin Back &lt;jb@justinback.com&gt;
+</span></span><span id="14" class="l"><span class="php-comment"> * @author Justin Back &lt;jback@pixelcatproductions.net&gt;
 </span></span><span id="15" class="l"><span class="php-comment"> */</span>
 </span><span id="16" class="l"><span class="php-keyword1">class</span> transactions {
 </span><span id="17" class="l">
@@ -612,8 +612,8 @@
 </span></span><span id="477" class="l"><span class="php-comment">     * @param string $sUserSession (Optional) Session where user will authorize the transaction. Valid options are &quot;client&quot; or &quot;web&quot;. If this parameter is not supplied, the interface will be assumed to be through a currently logged in Steam client session.
 </span></span><span id="478" class="l"><span class="php-comment">     * @param string $sIpAddress (Optional) IP address of user in string format (xxx.xxx.xxx.xxx). Only required if $sUserSession is set to web.
 </span></span><span id="479" class="l"><span class="php-comment">     * @param string $sBillingType (Optional) The recurring billing type. &quot;steam&quot;, &quot;game&quot; etc.
-</span></span><span id="480" class="l"><span class="php-comment">     * @param string $sStartDate (Optional) The Non UNIX Timestamp when the recurring payment starts
-</span></span><span id="481" class="l"><span class="php-comment">     * @param string $sEndDate (Optional) The Non UNIX Time Stamp when the recurring payment ends
+</span></span><span id="480" class="l"><span class="php-comment">     * @param string $sStartDate (Optional) The Non UNIX Timestamp when the recurring payment starts in format YYYYMMDD
+</span></span><span id="481" class="l"><span class="php-comment">     * @param string $sEndDate (Optional) The Non UNIX Time Stamp when the recurring payment ends in format YYYYMMDD
 </span></span><span id="482" class="l"><span class="php-comment">     * @param string $sPeriod (Optional) The period for recurring billing, e.g &quot;month&quot;, &quot;year&quot;, &quot;week&quot; and &quot;day&quot;
 </span></span><span id="483" class="l"><span class="php-comment">     * @param integer $iRecurringAmount (Optional) The recurring billing amount in cents see $iAmount
 </span></span><span id="484" class="l"><span class="php-comment">     * @param integer $iFrequency (Optional) The frequency for recurring billing in specified $sPeriod

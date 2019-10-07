@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2018, Justin Back <jb@justinback.com>
+ * Copyright (c) 2018, Justin Back <jback@pixelcatproductions.net>
  * All rights reserved.
  */
 
@@ -11,7 +11,7 @@ namespace justinback\steam;
  * Steam player managing.
  * Get Player name, avatar and report cheating!
  *
- * @author Justin Back <jb@justinback.com>
+ * @author Justin Back <jback@pixelcatproductions.net>
  */
 class player {
 

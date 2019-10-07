@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2018, Justin Back <jb@justinback.com>
+ * Copyright (c) 2018, Justin Back <jback@pixelcatproductions.net>
  * All rights reserved.
  */
 
@@ -10,7 +10,7 @@ namespace justinback\steam;
 /**
  * Steam User Generated Content (UGC / Workshop) managing
  *
- * @author Justin Back <jb@justinback.com>
+ * @author Justin Back <jback@pixelcatproductions.net>
  */
 class ugc {
 

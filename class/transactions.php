@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2018, Justin Back <jb@justinback.com>
+ * Copyright (c) 2018, Justin Back <jback@pixelcatproductions.net>
  * All rights reserved.
  */
 
@@ -11,7 +11,7 @@ namespace justinback\steam;
  * Steam Microtransaction managing
  *
  * @since pb1.0.0a
- * @author Justin Back <jb@justinback.com>
+ * @author Justin Back <jback@pixelcatproductions.net>
  */
 class transactions {
 
@@ -477,8 +477,8 @@ class transactions {
      * @param string $sUserSession (Optional) Session where user will authorize the transaction. Valid options are "client" or "web". If this parameter is not supplied, the interface will be assumed to be through a currently logged in Steam client session.
      * @param string $sIpAddress (Optional) IP address of user in string format (xxx.xxx.xxx.xxx). Only required if $sUserSession is set to web.
      * @param string $sBillingType (Optional) The recurring billing type. "steam", "game" etc.
-     * @param string $sStartDate (Optional) The Non UNIX Timestamp when the recurring payment starts
-     * @param string $sEndDate (Optional) The Non UNIX Time Stamp when the recurring payment ends
+     * @param string $sStartDate (Optional) The Non UNIX Timestamp when the recurring payment starts in format YYYYMMDD
+     * @param string $sEndDate (Optional) The Non UNIX Time Stamp when the recurring payment ends in format YYYYMMDD
      * @param string $sPeriod (Optional) The period for recurring billing, e.g "month", "year", "week" and "day"
      * @param integer $iRecurringAmount (Optional) The recurring billing amount in cents see $iAmount
      * @param integer $iFrequency (Optional) The frequency for recurring billing in specified $sPeriod

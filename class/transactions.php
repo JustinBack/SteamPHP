@@ -544,7 +544,9 @@ class transactions {
         if ($CURLResponse->response->result == "OK") {
             $this->transid = $CURLResponse->response->params->transid;
             $this->orderid = $CURLResponse->response->params->orderid;
-            $this->steamurl = $CURLResponse->response->params->steamurl;
+            if(isset($CURLResponse->response->params->steamurl)) {
+                $this->steamurl = $CURLResponse->response->params->steamurl;
+            }
             return $this;
         }
 

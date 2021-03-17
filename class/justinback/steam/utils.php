@@ -14,19 +14,18 @@ namespace justinback\steam;
  */
 class utils {
 
-    
     /**
      * Check if a Steam64ID is valid
      * @param string $sSteamID Steam64ID to check
      * @return boolean TRUE if the SteamID is correct otherwise FALSE
      */
     public function IsValidSteamID(string $sSteamID) {
-        if(strlen($sSteamID) == 17){
+        if (strlen($sSteamID) == 17) {
             return true;
         }
         return false;
     }
-    
+
     /**
      * Get the SteamID's in an object (steamID, steamID64, steamID32, steamAccountID)
      *

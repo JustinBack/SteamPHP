@@ -3,7 +3,7 @@
 /**
  * @package DoNotDocument
  */
-require_once("steam.php");
+require_once("../steam.php");
 
 
 $sApiKey = "00000"; // STEAMWORKS WEB API KEY
@@ -12,7 +12,7 @@ $sSteamid = null; // STEAMID
 
 
 
-$steam = new justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
+$steam = new \justinback\steam\manager($sApiKey, $iAppID, $sSteamid);
 try {
     $item = $steam->player()->inventory()->AddItem("10", null, true);
 

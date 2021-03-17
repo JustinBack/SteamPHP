@@ -7,7 +7,7 @@
  * All rights reserved.
  */
 
-namespace justinback\steam;
+namespace justinback;
 
 
 /**
@@ -15,8 +15,10 @@ namespace justinback\steam;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class steam {
+class steamphp {
 
+    public const STEAM_PHP_VERSION = "2.0.0";
+    
     /**
      * This is my autoloader. 
      * There are many like it, but this one is mine. 
@@ -32,19 +34,18 @@ class steam {
      *
      */
     public static function bootstrap() {
-        spl_autoload_register(function (String $class) {
-            $sourcePath = __DIR__ . DIRECTORY_SEPARATOR . 'class';
-            $replaceRootPath = str_replace('justinback\steam', $sourcePath, $class);
-            $replaceDirectorySeparator = str_replace('\\', DIRECTORY_SEPARATOR, $replaceRootPath);
-            $filePath = $replaceDirectorySeparator . '.php';
-            if (file_exists($filePath)) {
-                require($filePath);
-            }else{
-                throw new \Exception("$class has not been found! Looked in: $filePath");
+        spl_autoload_register(function ($class) {
+            $file = __DIR__ . "/class/" . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+
+
+            if (file_exists($file)) {
+                require $file;
+                return true;
             }
+            return false;
         });
     }
 
 }
 
-steam::bootstrap();
+steamphp::bootstrap();

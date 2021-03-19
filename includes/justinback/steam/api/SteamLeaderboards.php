@@ -13,7 +13,7 @@ namespace justinback\steam\api;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class SteamLeaderboards {
+class SteamLeaderboards implements \justinback\steam\interfaces\ISteamLeaderboards {
 
     /**
      * Steamworks API Key
@@ -145,7 +145,7 @@ class SteamLeaderboards {
      * }
      * </code>
      */
-    public function FindOrCreateLeaderboard($sName, $sSortMethod = "Ascending", $sDisplayType = "Numeric", $bCreateIfNotFound = true, $bOnlyTrustedWrites = false, $bOnlyFriendsReads = false) {
+    public function FindOrCreateLeaderboard($sName, $sSortMethod = "Ascending", $sDisplayType = "Numeric", $bCreateIfNotFound = true, $bOnlyTrustedWrites = false, $bOnlyFriendsReads = false): object {
 
         $ch = curl_init();
 
@@ -203,7 +203,7 @@ class SteamLeaderboards {
      * 
      * @return bool
      */
-    public function ResetLeaderboard($sLeaderboardId) {
+    public function ResetLeaderboard($sLeaderboardId): bool {
 
 
 
@@ -277,7 +277,7 @@ class SteamLeaderboards {
      * }
      * </code>
      */
-    public function SetLeaderboardScore($sLeaderboardId, $sScore, $sScoreMethod, $rDetails = null) {
+    public function SetLeaderboardScore($sLeaderboardId, $sScore, $sScoreMethod, $rDetails = null): object {
 
 
         $ch = curl_init();
@@ -355,7 +355,7 @@ class SteamLeaderboards {
      * }
      * </code>
      */
-    public function GetLeaderboardsForGame() {
+    public function GetLeaderboardsForGame(): object {
 
         $ch = curl_init();
 
@@ -417,7 +417,7 @@ class SteamLeaderboards {
      * 
      * @return array
      */
-    public function GetLeaderboardEntries($sLeaderboardId, $sDataRequest, $iRangeStart, $iRangeEnd, $bSteamid = true) {
+    public function GetLeaderboardEntries($sLeaderboardId, $sDataRequest, $iRangeStart, $iRangeEnd, $bSteamid = true): array {
 
         $ch = curl_init();
 
@@ -491,7 +491,7 @@ class SteamLeaderboards {
      * 
      * @return game
      */
-    public function CSteamApp($sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CSteamApp($sApiKey = null, $iGame = null, $sSteamid = null): SteamApp {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }

@@ -562,7 +562,7 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
 
 
         foreach (json_decode($CURLResponse->response->itemdef_json) as $oResponse) {
-            array_push($aArray, new \justinback\steam\api\iteminfo($this->key, $this->game, $this->steamid, $oResponse));
+            array_push($aArray, new \justinback\steam\api\InventoryItemInfo($this->key, $this->game, $this->steamid, $oResponse));
         }
 
         if (count($aArray) === 0) {

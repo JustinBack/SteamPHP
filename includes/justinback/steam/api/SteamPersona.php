@@ -7,15 +7,13 @@
 
 namespace justinback\steam\api;
 
-use justinback\Hook;
-
 /**
  * Steam player managing.
  * Get Player name, avatar and report cheating!
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class SteamPersona {
+class SteamPersona implements \justinback\steam\interfaces\ISteamPersona {
 
     /**
      * Steamworks API Key
@@ -60,7 +58,7 @@ class SteamPersona {
      *
      * @return string
      */
-    public function GetPersonaName() {
+    public function GetPersonaName(): string {
 
         $ch = curl_init();
 
@@ -145,7 +143,7 @@ class SteamPersona {
      * </code>
      * 
      */
-    public function GetPlayerBans() {
+    public function GetPlayerBans(): array {
 
         $ch = curl_init();
 
@@ -198,7 +196,7 @@ class SteamPersona {
      *
      * @return int The Steam Level of the user
      */
-    public function GetSteamLevel() {
+    public function GetSteamLevel(): int {
 
         $ch = curl_init();
 
@@ -251,7 +249,7 @@ class SteamPersona {
      *
      * @return player An array containing a player object with information about the friends. Each friend has its own object.
      */
-    public function GetFriendList() {
+    public function GetFriendList(): array {
 
 
         $ch = curl_init();
@@ -314,7 +312,7 @@ class SteamPersona {
      *
      * @return group array
      */
-    public function GetUserGroupList() {
+    public function GetUserGroupList(): array {
 
 
 
@@ -375,7 +373,7 @@ class SteamPersona {
      *
      * @return object
      */
-    public function GetAvatar() {
+    public function GetAvatar(): object {
         $oObject = new \stdClass();
 
 
@@ -436,7 +434,7 @@ class SteamPersona {
      *
      * @return string
      */
-    public function GetRealName() {
+    public function GetRealName(): string {
 
         $ch = curl_init();
 
@@ -498,7 +496,7 @@ class SteamPersona {
      * 
      * @return bool
      */
-    public function ReportAbuse($sSteamidreporter, $iAbuseType, $iContentType, $sDescription, $sGid = null) {
+    public function ReportAbuse($sSteamidreporter, $iAbuseType, $iContentType, $sDescription, $sGid = null): bool {
 
         $ch = curl_init();
 
@@ -562,7 +560,7 @@ class SteamPersona {
      * 
      * @return achievements
      */
-    public function CAchievements($sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CAchievements($sApiKey = null, $iGame = null, $sSteamid = null): Achievements {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -584,7 +582,7 @@ class SteamPersona {
      * 
      * @return inventory
      */
-    public function CUserInventory($sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CUserInventory($sApiKey = null, $iGame = null, $sSteamid = null): UserInventory {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -607,7 +605,7 @@ class SteamPersona {
      * 
      * @return transactions
      */
-    public function CSteamMicrotransactions($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CSteamMicrotransactions($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null): SteamMicrotransactions {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -630,7 +628,7 @@ class SteamPersona {
      * 
      * @return transactions
      */
-    public function CAntiCheat($sReportID = null, $sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CAntiCheat($sReportID = null, $sApiKey = null, $iGame = null, $sSteamid = null): AntiCheat {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }

@@ -14,7 +14,7 @@ namespace justinback\steam\api;
  * 
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class SteamInventoryItem {
+class SteamInventoryItem implements \justinback\steam\interfaces\ISteamInventoryItem {
 
     /**
      * Steamworks API Key
@@ -124,9 +124,9 @@ class SteamInventoryItem {
      * @param string $iQuantity Quantity of the item
      * @param string $sRequestId Optional, default 0. Clients may provide a unique identifier for a request to perform at most once execution. When a requestid is resubmitted, it will not cause the work to be performed again; the response message will be the current state of items affected by the original successful execution.
      * 
-     * @return item
+     * @return SteamInventoryItem
      */
-    public function ConsumeItem($iQuantity, $sRequestId = null) {
+    public function ConsumeItem($iQuantity, $sRequestId = null): SteamInventoryItem {
 
 
         $ch = curl_init();
@@ -189,7 +189,7 @@ class SteamInventoryItem {
      * 
      * @return item array
      */
-    public function ModifyItem($sPropertyName, $sPropertyValue, $bRemoveProperty = false, $sPropertyValueType = "property_value_string", $iTimestamp = 0) {
+    public function ModifyItem($sPropertyName, $sPropertyValue, $bRemoveProperty = false, $sPropertyValueType = "property_value_string", $iTimestamp = 0): SteamInventoryItem {
         if ($iTimestamp == 0) {
             $iTimestamp = time();
         }
@@ -261,10 +261,10 @@ class SteamInventoryItem {
      * @throws \justinback\steam\exceptions\SteamRequestParameterException if a parameter is not valid
      * @throws \justinback\steam\exceptions\SteamException if the app id or api key is not valid as a parameter
      *  
-     * @return iteminfo
+     * @return InventoryItemInfo
      */
-    public function iteminfo() {
-        $Inventory = new inventory($this->key, $this->game, $this->steamid);
+    public function GetItemInfo(): InventoryItemInfo {
+        $Inventory = new UserInventory($this->key, $this->game, $this->steamid);
 
 
         $array = $Inventory->GetItemDefs();

@@ -114,7 +114,7 @@ class SteamUGC {
      * 
      * @return ugc array
      */
-    public function EnumerateUserPublishedFiles() {
+    public function EnumerateUserPublishedFiles(): array {
 
 
         $ch = curl_init();
@@ -369,7 +369,7 @@ class SteamUGC {
      * 
      * @return object
      */
-    public function GetPublishedFileDetails($sPublishedFileIds = null) {
+    public function GetPublishedFileDetails($sPublishedFileIds = null): object {
         if ($sPublishedFileIds == null) {
             $sPublishedFileIds = $this->fileid;
         }
@@ -562,7 +562,7 @@ class SteamUGC {
      * 
      * @return player
      */
-    public function GetSteamPersona($sPublishedFileIds = null) {
+    public function GetSteamPersona($sPublishedFileIds = null): SteamPersona {
         if ($sPublishedFileIds == null) {
             $sPublishedFileIds = $this->fileid;
         }

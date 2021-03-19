@@ -37,7 +37,7 @@ trait Hook {
      * @param string $channel The hook to listen on
      * @param function|string $func The function to send the response to
      */
-    public static function on($channel, $func) {
+    public static function on($channel, $func): void {
         if (!isset($GLOBALS['hook'][$channel])) {
 
             $GLOBALS['hook'][$channel] = array();
@@ -52,7 +52,7 @@ trait Hook {
      * @param string $channel The channel to broadcast too
      * @param any ...$parameters Parameters to attach to the broadcast
      */
-    private function send($channel, ...$parameters) {
+    private function send($channel, ...$parameters): int {
         if (isset($GLOBALS['hook'][$channel])) {
             foreach ($GLOBALS['hook'][$channel] as $func) {
                 $GLOBALS['hook'][$channel]["parameters"] = $parameters;

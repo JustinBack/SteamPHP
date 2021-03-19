@@ -23,5 +23,5 @@ interface IAchievements {
 
     public function HasPlayerUnlockedAchievement($sApiname);
 
-    public function game($sApiKey = null, $iGame = null, $sSteamid = null);
+    public function CSteamApp($sApiKey = null, $iGame = null, $sSteamid = null);
 }

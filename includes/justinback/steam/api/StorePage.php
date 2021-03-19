@@ -14,7 +14,7 @@ namespace justinback\steam\api;
  * 
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class StorePage {
+class StorePage implements \justinback\steam\interfaces\IStorePage {
 
     /**
      * Steamworks App ID

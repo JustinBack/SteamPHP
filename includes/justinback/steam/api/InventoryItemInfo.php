@@ -14,7 +14,7 @@ namespace justinback\steam\api;
  * 
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class InventoryItemInfo {
+class InventoryItemInfo implements \justinback\steam\interfaces\IInventoryItemInfo {
 
     /**
      * Steamworks API Key
@@ -208,9 +208,9 @@ class InventoryItemInfo {
      * @return void
      */
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $oItemobject = null) {
-        $this->set_key($sApiKey);
-        $this->set_game((int) $iGame);
-        $this->set_steamid($sSteamid);
+        $this->key = $sApiKey;
+        $this->game = (int) $iGame;
+        $this->steamid = $sSteamid;
         $this->commodity = $oItemobject->commodity;
         $this->date_created = $oItemobject->date_created;
         $this->description = $oItemobject->description;
@@ -238,42 +238,6 @@ class InventoryItemInfo {
         $this->tradable = $oItemobject->tradable;
         $this->type = $oItemobject->type;
         $this->workshopid = $oItemobject->workshopid;
-    }
-
-    /**
-     * Setting API Key from the construct
-     *
-     *
-     * @param string $sApiKey Steamworks Developer API Key
-     *
-     * @return void
-     */
-    private function set_key($sApiKey) {
-        $this->key = $sApiKey;
-    }
-
-    /**
-     * Setting AppID from the construct
-     *
-     *
-     * @param string $iGame Your AppID
-     *
-     * @return void
-     */
-    private function set_game($iGame) {
-        $this->game = $iGame;
-    }
-
-    /**
-     * Setting SteamID from the construct
-     *
-     *
-     * @param string $sSteamid The Players SteamID
-     *
-     * @return void
-     */
-    private function set_steamid($sSteamid) {
-        $this->steamid = $sSteamid;
     }
 
 }

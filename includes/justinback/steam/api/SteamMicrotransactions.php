@@ -118,7 +118,11 @@ class SteamMicrotransactions {
             "agreementid" => $this->agreementid,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/AdjustAgreement/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "AdjustAgreement",
+                        "v1"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -173,7 +177,11 @@ class SteamMicrotransactions {
             "agreementid" => $this->agreementid,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/CancelAgreement/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "CancelAgreement",
+                        "v1"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -227,7 +235,11 @@ class SteamMicrotransactions {
             "orderid" => $this->orderid,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/RefundTxn/v2/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "RefundTxn",
+                        "v2"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -284,7 +296,11 @@ class SteamMicrotransactions {
             "orderid" => $this->orderid,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/FinalizeTxn/v2/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "FinalizeTxn",
+                        "v2"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -340,7 +356,12 @@ class SteamMicrotransactions {
             "orderid" => $this->orderid,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/QueryTxn/v2/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "QueryTxn",
+                        "v2",
+                        $CURLParameters));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //curl_setopt($ch, CURLOPT_POST, 1);
@@ -391,7 +412,12 @@ class SteamMicrotransactions {
                 // Custom Queries below here.
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/GetUserAgreementInfo/v1/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "GetUserAgreementInfo",
+                        "v1",
+                        $CURLParameters));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //curl_setopt($ch, CURLOPT_POST, 1);
@@ -483,7 +509,11 @@ class SteamMicrotransactions {
             "billingtype[0]" => $sBillingType,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/InitTxn/v3/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "InitTxn",
+                        "v3"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -549,7 +579,11 @@ class SteamMicrotransactions {
             "agreementid" => $this->agreementid,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/ProcessAgreement/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "ProcessAgreement",
+                        "v1"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -610,7 +644,12 @@ class SteamMicrotransactions {
             "type" => $sType,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/" . $this->interface . "/GetReport/v4/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        $this->interface,
+                        "GetReport",
+                        "v4",
+                        $CURLParameters));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //curl_setopt($ch, CURLOPT_POST, 1);

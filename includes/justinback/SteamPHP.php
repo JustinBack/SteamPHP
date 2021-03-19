@@ -63,7 +63,7 @@ class SteamPHP {
 
     public static function bootstrap() {
         spl_autoload_register(function ($class) {
-            $file = __DIR__ . "/../includes/" . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+            $file = __DIR__ . "/../../includes/" . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
 
 
             if (file_exists($file)) {

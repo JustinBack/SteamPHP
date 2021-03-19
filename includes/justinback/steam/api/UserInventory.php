@@ -46,44 +46,8 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
      * @return void
      */
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null) {
-        $this->set_key($sApiKey);
-        $this->set_game((int) $iGame);
-        $this->set_steamid($sSteamid);
-    }
-
-    /**
-     * Setting API Key from the construct
-     *
-     *
-     * @param string $sApiKey Steamworks Developer API Key
-     *
-     * @return void
-     */
-    private function set_key($sApiKey) {
         $this->key = $sApiKey;
-    }
-
-    /**
-     * Setting AppID from the construct
-     *
-     *
-     * @param string $iGame Your AppID
-     *
-     * @return void
-     */
-    private function set_game($iGame) {
-        $this->game = $iGame;
-    }
-
-    /**
-     * Setting SteamID from the construct
-     *
-     *
-     * @param string $sSteamid The Players SteamID
-     *
-     * @return void
-     */
-    private function set_steamid($sSteamid) {
+        $this->game = (int) $iGame;
         $this->steamid = $sSteamid;
     }
 
@@ -126,6 +90,13 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
             'notify' => $bNotify,
             'requestid' => $sRequestId,
         ));
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_INVENTORYSERVICE,
+                        "AddItem",
+                        "v1"));
+
         \curl_setopt($ch, \CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/AddItem/v1/");
         \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
         \curl_setopt($ch, \CURLOPT_POST, 1);
@@ -187,7 +158,12 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
             'notify' => $bNotify,
             'requestid' => $sRequestId,
         ));
-        \curl_setopt($ch, \CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/AddPromoItem/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_INVENTORYSERVICE,
+                        "AddPromoItem",
+                        "v1"));
+
         \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
         \curl_setopt($ch, \CURLOPT_POST, 1);
         \curl_setopt($ch, \CURLOPT_POSTFIELDS, $CURLParameters);
@@ -254,7 +230,12 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
             'force' => $bForce,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/Consolidate/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_INVENTORYSERVICE,
+                        "Consolidate",
+                        "v1"));
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -332,8 +313,12 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
                 "timestamp" => $iTimestamp,
                 "updates" => $sInputJson
         ))));
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_INVENTORYSERVICE,
+                        "ModifyItems",
+                        "v1"));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/ModifyItems/v1/");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -412,7 +397,12 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
             "outputitemdefid" => $sOutputItemDefId,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/ExchangeItem/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_INVENTORYSERVICE,
+                        "ExchangeItem",
+                        "v1"));
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -475,7 +465,13 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
                 // Custom Queries below here.
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/GetInventory/v1/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_INVENTORYSERVICE,
+                        "GetInventory",
+                        "v1",
+                        $CURLParameters));
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //curl_setopt($ch, CURLOPT_POST, 1);
         //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -536,7 +532,13 @@ class UserInventory implements \justinback\steam\interfaces\IUserInventory {
                 // Custom Queries below here.
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IInventoryService/GetItemDefs/v1/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_INVENTORYSERVICE,
+                        "GetItemDefs",
+                        "v1",
+                        $CURLParameters));
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //curl_setopt($ch, CURLOPT_POST, 1);
         //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);

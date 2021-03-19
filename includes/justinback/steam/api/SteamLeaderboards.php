@@ -76,7 +76,11 @@ class SteamLeaderboards {
             'name' => $sName,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/DeleteLeaderboard/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMLEADERBOARDS,
+                        "DeleteLeaderboard",
+                        "v1"));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -160,7 +164,11 @@ class SteamLeaderboards {
             'onlyfriendsreads' => $bOnlyFriendsReads,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/FindOrCreateLeaderboard/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMLEADERBOARDS,
+                        "FindOrCreateLeaderboard",
+                        "v1"));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -210,8 +218,11 @@ class SteamLeaderboards {
             // Custom Queries below here.
             'leaderboardid' => $sLeaderboardId
         ));
-
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/ResetLeaderboard/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMLEADERBOARDS,
+                        "ResetLeaderboard",
+                        "v1"));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -283,8 +294,12 @@ class SteamLeaderboards {
             'scoremethod' => $sScoreMethod,
             'details' => $rDetails
         ));
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMLEADERBOARDS,
+                        "SetLeaderboardScore",
+                        "v1"));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/SetLeaderboardScore/v1/");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -352,8 +367,12 @@ class SteamLeaderboards {
                 //"steamid" => $this->steamid,
                 // Custom Queries below here.
         ));
-
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/GetLeaderboardsForGame/v2/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMLEADERBOARDS,
+                        "GetLeaderboardsForGame",
+                        "v2",
+                        $CURLParameters));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //curl_setopt($ch, CURLOPT_POST, 1);
         //curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
@@ -414,8 +433,11 @@ class SteamLeaderboards {
             "rangestart" => $iRangeStart,
             "rangeend" => $iRangeEnd,
         ));
-
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamLeaderboards/GetLeaderboardEntries/v1/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMLEADERBOARDS,
+                        "GetLeaderboardEntries",
+                        "v1", $CURLParameters));
 
         if ($bSteamid) {
             $CURLParameters = http_build_query(array(

@@ -46,44 +46,8 @@ class SteamPersona {
      * @return void
      */
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null) {
-        $this->set_key($sApiKey);
-        $this->set_game((int) $iGame);
-        $this->set_steamid($sSteamid);
-    }
-
-    /**
-     * Setting API Key from the construct
-     *
-     *
-     * @param string $sApiKey Steamworks Developer API Key
-     *
-     * @return void
-     */
-    private function set_key($sApiKey) {
         $this->key = $sApiKey;
-    }
-
-    /**
-     * Setting AppID from the construct
-     *
-     *
-     * @param string $iGame Your AppID
-     *
-     * @return void
-     */
-    private function set_game($iGame) {
-        $this->game = $iGame;
-    }
-
-    /**
-     * Setting SteamID from the construct
-     *
-     *
-     * @param string $sSteamid The Players SteamID
-     *
-     * @return void
-     */
-    private function set_steamid($sSteamid) {
+        $this->game = (int) $iGame;
         $this->steamid = $sSteamid;
     }
 
@@ -108,7 +72,14 @@ class SteamPersona {
             "steamids" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMUSER,
+                        "GetPlayerSummaries",
+                        "v2",
+                        $CURLParameters));
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -186,7 +157,13 @@ class SteamPersona {
             "steamids" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMUSER,
+                        "GetPlayerBans",
+                        "v1",
+                        $CURLParameters));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -233,7 +210,12 @@ class SteamPersona {
             "steamid" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMUSER,
+                        "GetSteamLevel",
+                        "v1",
+                        $CURLParameters));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -282,7 +264,14 @@ class SteamPersona {
             "steamid" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ISteamUser/GetFriendList/v1/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMUSER,
+                        "GetFriendList",
+                        "v1",
+                        $CURLParameters));
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -339,7 +328,13 @@ class SteamPersona {
             "steamid" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ISteamUser/GetUserGroupList/v1/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMUSER,
+                        "GetUserGroupList",
+                        "v1",
+                        $CURLParameters));
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -372,18 +367,6 @@ class SteamPersona {
     }
 
     /**
-     * This function has been moved to the \justinback\steam\utils class!
-     *
-     * @throws \justinback\steam\exceptions\JBDeprecatedException This function is deprecated
-     * @deprecated
-     * @see utils
-     * 
-     */
-    public function GetSteamIDs() {
-        throw new \justinback\steam\exceptions\JBDeprecatedException("This function has been deprecated! Use \justinback\steam\utils\ConvertSteamID() instead!");
-    }
-
-    /**
      * Get the Avatar in an object (small, medium, full)
      *
      * @throws \justinback\steam\exceptions\SteamRequestException if the servers are down, or the web request failed
@@ -406,7 +389,13 @@ class SteamPersona {
             "steamids" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMUSER,
+                        "GetPlayerSummaries",
+                        "v2",
+                        $CURLParameters));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -459,7 +448,12 @@ class SteamPersona {
             "steamids" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?" . $CURLParameters);
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMUSER,
+                        "GetPlayerSummaries",
+                        "v2",
+                        $CURLParameters));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -485,74 +479,6 @@ class SteamPersona {
             return $oPlayer->realname;
         }
         throw new \justinback\steam\exceptions\SteamRequestParameterException("The Steam ID entered is invalid!");
-    }
-
-    /**
-     * ReportPlayerCheating is designed to gather community reports of cheating, where one player reports another player within the game.
-     *
-     * It is intended for unreliable data from peers in the game ( semi-trusted sources ). The back-end that reports the data should ensure that both parties are authenticated, but the data in itself is treated as hearsay. Optional parameters may be used to encode the type of cheating that is suspected or additional evidence ( an identifier pointing to the match/demo for further review )
-     *
-     * @throws \justinback\steam\exceptions\SteamRequestException if the servers are down, or the web request failed
-     * @throws \justinback\steam\exceptions\SteamRequestParameterException if the app id is not valid as a parameter
-     * @throws \justinback\steam\exceptions\SteamException if the app id or api key is not valid as a parameter
-     * 
-     * @param string $sSteamidreporter (Optional) The Steam ID of the user or game server who is reporting the cheating.
-     * @param string $sAppData (Optional) App specific data about the type of cheating set by developer. (ex 1 = Aimbot, 2 = Wallhack, 3 = Griefing)
-     * @param bool $bHeuristic (Optional) Extra information about the source of the cheating - was it a heuristic.
-     * @param bool $bDetection (Optional) Extra information about the source of the cheating - was it a detection.
-     * @param bool $bPlayerReport (Optional) Extra information about the source of the cheating - was it a player report.
-     * @param bool $bNoReportId (Optional) Don't return reportid. This should only be passed if you don't intend to issue a ban based on this report.
-     * @param int $iGamemode (Optional) Extra information about state of game - was it a specific type of game play or game mode. (0 = generic)
-     * @param int $iSuspicionStartTime (Optional) Extra information indicating how far back the game thinks is interesting for this user. Unix epoch time (time since Jan 1st, 1970).
-     * @param int $iSeverity (Optional) Level of severity of bad action being reported. Scale set by developer.
-     * 
-     * 
-     * @return anticheat
-     */
-    public function ReportPlayerCheating($sSteamidreporter = 0, $sAppData = 0, $bHeuristic = false, $bDetection = false, $bPlayerReport = false, $bNoReportId = false, $iGamemode = 0, $iSuspicionStartTime = 0, $iSeverity = 0) {
-        $ch = curl_init();
-
-        $CURLParameters = http_build_query(array(
-            // Our default parameters!
-            "key" => $this->key,
-            "appid" => $this->game,
-            // This can vary from request to request, sometimes its steamid or steamids or even an array.
-            "steamid" => $this->steamid,
-            // Custom Queries below here.
-            'steamidreporter' => $sSteamidreporter,
-            'appdata' => $sAppData,
-            'heuristic' => $bHeuristic,
-            'detection' => $bDetection,
-            'playerreport' => $bPlayerReport,
-            'noreportid' => $bNoReportId,
-            'gamemode' => $iGamemode,
-            'suspicionstarttime' => $iSuspicionStartTime,
-            'severity' => $iSeverity,
-        ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ICheatReportingService/ReportPlayerCheating/v1/");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
-
-        $CURLResponse = json_decode(curl_exec($ch));
-        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-
-        // Error handling improved!
-
-        if ($CURLResponseCode != 200) {
-            if ($CURLResponseCode == 400) {
-                throw new \justinback\steam\exceptions\SteamRequestParameterException("The parameters are invalid!");
-            }
-            if ($CURLResponseCode == 401) {
-                throw new \justinback\steam\exceptions\SteamException("App ID or API Key is invalid.");
-            }
-            throw new \justinback\steam\exceptions\SteamRequestException("$CURLResponseCode Request Error.");
-        }
-
-        return new \justinback\steam\api\anticheat($CURLResponse->response->reportid, $this->key, $this->game, $this->steamid);
     }
 
     /**
@@ -590,7 +516,12 @@ class SteamPersona {
             'description' => $sDescription,
             'gid' => $sGid,
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamCommunity/ReportAbuse/v1/");
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMCOMMUNITY,
+                        "ReportAbuse",
+                        "v1"));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -621,120 +552,6 @@ class SteamPersona {
     }
 
     /**
-     * Remove a game ban on a player.
-     *
-     * This is used if a Game ban is determined to be a false positive.
-     *
-     * 
-     * @throws \justinback\steam\exceptions\SteamRequestException if the servers are down, or the web request failed
-     * @throws \justinback\steam\exceptions\SteamRequestParameterException if the app id is not valid as a parameter
-     * @throws \justinback\steam\exceptions\SteamException if the app id or api key is not valid as a parameter
-     * @throws \justinback\steam\exceptions\SteamEmptyException if the request returns nothing and the result is empty.
-     * 
-     * @return bool|\justinback\steam\exceptions\SteamEmptyException TRUE on unban otherwise \justinback\steam\exceptions\SteamEmptyException
-     */
-    public function RemovePlayerGameBan() {
-
-
-        $ch = curl_init();
-
-        $CURLParameters = http_build_query(array(
-            // Our default parameters!
-            "key" => $this->key,
-            "appid" => $this->game,
-            // This can vary from request to request, sometimes its steamid or steamids or even an array.
-            "steamid" => $this->steamid,
-                // Custom Queries below here.
-        ));
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ICheatReportingService/RemovePlayerGameBan/v1/");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
-
-        $CURLResponse = json_decode(curl_exec($ch));
-        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-
-        // Error handling improved!
-
-        if ($CURLResponseCode != 200) {
-            if ($CURLResponseCode == 400) {
-                throw new \justinback\steam\exceptions\SteamRequestParameterException("The parameters are invalid!");
-            }
-            if ($CURLResponseCode == 401) {
-                throw new \justinback\steam\exceptions\SteamException("App ID or API Key is invalid.");
-            }
-            throw new \justinback\steam\exceptions\SteamRequestException("$CURLResponseCode Request Error.");
-        }
-
-        if (count($CURLResponse->response) == 0) {
-            throw new \justinback\steam\exceptions\SteamEmptyException("This player is not banned!");
-        }
-        return true;
-    }
-
-    /**
-     * List all files by user as array (Only IDs)
-     *
-     * @throws \justinback\steam\exceptions\SteamRequestException if the servers are down, or the web request failed
-     * @throws \justinback\steam\exceptions\SteamRequestParameterException if the app id is not valid as a parameter
-     * @throws \justinback\steam\exceptions\SteamException if the app id or api key is not valid as a parameter
-     * @throws \justinback\steam\exceptions\SteamEmptyException if the request returns nothing and the result is empty.
-     * 
-     * @return ugc array
-     */
-    public function EnumerateUserPublishedFiles() {
-
-
-        $ch = curl_init();
-
-        $CURLParameters = http_build_query(array(
-            // Our default parameters!
-            "key" => $this->key,
-            "appid" => $this->game,
-            // This can vary from request to request, sometimes its steamid or steamids or even an array.
-            "steamid" => $this->steamid,
-                // Custom Queries below here.
-        ));
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamRemoteStorage/EnumerateUserPublishedFiles/v1/");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
-
-        $CURLResponse = json_decode(curl_exec($ch));
-        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-
-        // Error handling improved!
-
-        if ($CURLResponseCode != 200) {
-            if ($CURLResponseCode == 400) {
-                throw new \justinback\steam\exceptions\SteamRequestParameterException("The parameters are invalid!");
-            }
-            if ($CURLResponseCode == 401) {
-                throw new \justinback\steam\exceptions\SteamException("App ID or API Key is invalid.");
-            }
-            throw new \justinback\steam\exceptions\SteamRequestException("$CURLResponseCode Request Error.");
-        }
-
-        $aList = array();
-
-        foreach ($CURLResponse->response->files as $oFile) {
-            array_push($aList, new \justinback\steam\api\ugc($oFile->publishedfileid, $this->key, $this->game, $this->steamid));
-        }
-
-        if (count($aList) == 0) {
-            throw new \justinback\steam\exceptions\SteamEmptyException("This player has no UGC!");
-        }
-
-        return $aList;
-    }
-
-    /**
      * achievements object.
      *
      * 
@@ -745,7 +562,7 @@ class SteamPersona {
      * 
      * @return achievements
      */
-    public function achievements($sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CAchievements($sApiKey = null, $iGame = null, $sSteamid = null) {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -755,7 +572,7 @@ class SteamPersona {
         if ($sSteamid === null) {
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\achievements($sApiKey, $iGame, $sSteamid);
+        return new \justinback\steam\Achievements($sApiKey, $iGame, $sSteamid);
     }
 
     /**
@@ -767,7 +584,7 @@ class SteamPersona {
      * 
      * @return inventory
      */
-    public function inventory($sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CUserInventory($sApiKey = null, $iGame = null, $sSteamid = null) {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -777,7 +594,7 @@ class SteamPersona {
         if ($sSteamid === null) {
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\api\inventory($sApiKey, $iGame, $sSteamid);
+        return new \justinback\steam\api\UserInventory($sApiKey, $iGame, $sSteamid);
     }
 
     /**
@@ -790,7 +607,7 @@ class SteamPersona {
      * 
      * @return transactions
      */
-    public function transactions($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CSteamMicrotransactions($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null) {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -800,19 +617,20 @@ class SteamPersona {
         if ($sSteamid === null) {
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\api\transactions($bTesting, $sApiKey, $iGame, $sSteamid);
+        return new \justinback\steam\api\SteamMicrotransactions($bTesting, $sApiKey, $iGame, $sSteamid);
     }
 
     /**
-     * User Authentication object.
+     * AntiCheat object.
      *
+     * @param string $sReportID (optional) The Report ID
      * @param string $sApiKey (optional) set a different apikey than the construct
      * @param string $iGame (optional) set a different appid than the construct
      * @param string $sSteamid (optional) set a different steamid than the construct
      * 
-     * @return userauth
+     * @return transactions
      */
-    public function auth($sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CAntiCheat($sReportID = null, $sApiKey = null, $iGame = null, $sSteamid = null) {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -822,7 +640,7 @@ class SteamPersona {
         if ($sSteamid === null) {
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\api\userauth($sApiKey, $iGame, $sSteamid);
+        return new \justinback\steam\api\AntiCheat($sReportID, $sApiKey, $iGame, $sSteamid);
     }
 
 }

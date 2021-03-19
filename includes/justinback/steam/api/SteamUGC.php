@@ -105,6 +105,70 @@ class SteamUGC {
     }
 
     /**
+     * List all files by user as array (Only IDs)
+     *
+     * @throws \justinback\steam\exceptions\SteamRequestException if the servers are down, or the web request failed
+     * @throws \justinback\steam\exceptions\SteamRequestParameterException if the app id is not valid as a parameter
+     * @throws \justinback\steam\exceptions\SteamException if the app id or api key is not valid as a parameter
+     * @throws \justinback\steam\exceptions\SteamEmptyException if the request returns nothing and the result is empty.
+     * 
+     * @return ugc array
+     */
+    public function EnumerateUserPublishedFiles() {
+
+
+        $ch = curl_init();
+
+        $CURLParameters = http_build_query(array(
+            // Our default parameters!
+            "key" => $this->key,
+            "appid" => $this->game,
+            // This can vary from request to request, sometimes its steamid or steamids or even an array.
+            "steamid" => $this->steamid,
+                // Custom Queries below here.
+        ));
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMREMOTESTORAGE,
+                        "EnumerateUserPublishedFiles",
+                        "v1"));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $CURLParameters);
+
+        $CURLResponse = json_decode(curl_exec($ch));
+        $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+
+        // Error handling improved!
+
+        if ($CURLResponseCode != 200) {
+            if ($CURLResponseCode == 400) {
+                throw new \justinback\steam\exceptions\SteamRequestParameterException("The parameters are invalid!");
+            }
+            if ($CURLResponseCode == 401) {
+                throw new \justinback\steam\exceptions\SteamException("App ID or API Key is invalid.");
+            }
+            throw new \justinback\steam\exceptions\SteamRequestException("$CURLResponseCode Request Error.");
+        }
+
+        $aList = array();
+
+        foreach ($CURLResponse->response->files as $oFile) {
+            array_push($aList, new \justinback\steam\api\ugc($oFile->publishedfileid, $this->key, $this->game, $this->steamid));
+        }
+
+        if (count($aList) == 0) {
+            throw new \justinback\steam\exceptions\SteamEmptyException("This player has no UGC!");
+        }
+
+        return $aList;
+    }
+
+    /**
      * Update Ban Status of a UGC
      *
      * @throws \justinback\steam\exceptions\SteamRequestException if the servers are down, or the web request failed
@@ -138,7 +202,11 @@ class SteamUGC {
             'reason' => $sReason
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IPublishedFileService/UpdateBanStatus/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        true,
+                        \justinback\SteamPHP::PUBLIC_INTERFACE_PUBLISHEDFILESERVICE,
+                        "UpdateBanStatus",
+                        "v1"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -195,7 +263,12 @@ class SteamUGC {
             'incompatible' => $bIncompatible,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IPublishedFileService/UpdateIncompatibleStatus/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        true,
+                        \justinback\SteamPHP::PUBLIC_INTERFACE_PUBLISHEDFILESERVICE,
+                        "UpdateIncompatibleStatus",
+                        "v1"));
+
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -316,7 +389,13 @@ class SteamUGC {
             "itemcount" => 1
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/");
+
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMREMOTESTORAGE,
+                        "GetPublishedFileDetails",
+                        "v1"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -379,7 +458,11 @@ class SteamUGC {
             'publishedfileid' => $sPublishedFileId,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IPublishedFileService/SubscribePublishedFile/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        true,
+                        \justinback\SteamPHP::PUBLIC_INTERFACE_PUBLISHEDFILESERVICE,
+                        "SubscribePublishedFile",
+                        "v1"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -440,7 +523,11 @@ class SteamUGC {
             'publishedfileid' => $sPublishedFileId,
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/IPublishedFileService/UnsubscribePublishedFile/v1/");
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        true,
+                        \justinback\SteamPHP::PUBLIC_INTERFACE_PUBLISHEDFILESERVICE,
+                        "UnsubscribePublishedFile",
+                        "v1"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -468,23 +555,6 @@ class SteamUGC {
     }
 
     /**
-     * Performs a search query for published files
-     *
-     * @todo Finish this method. Need response from valve
-     * @deprecated
-     * @return object
-     */
-    public function QueryFiles() {
-        return false;
-        //throw new \justinback\steam\exceptions\JBDeprecatedException("This function is deprecated and unusable.");
-
-        // I have no idea which parameters should be present... Leaving as is for now
-        //$fgcQueryFiles = file_get_contents("https://api.steampowered.com/IPublishedFileService/QueryFiles/v1?key=" . $this->key . "&steamid=" . $this->steamid);
-        //$oQueryFiles = json_decode($fgcQueryFiles);
-        //return $oQueryFiles->response;
-    }
-
-    /**
      * Get Creator by UGC
      *
      *
@@ -492,7 +562,7 @@ class SteamUGC {
      * 
      * @return player
      */
-    public function player($sPublishedFileIds = null) {
+    public function GetSteamPersona($sPublishedFileIds = null) {
         if ($sPublishedFileIds == null) {
             $sPublishedFileIds = $this->fileid;
         }
@@ -511,7 +581,12 @@ class SteamUGC {
             "itemcount" => 1
         ));
 
-        curl_setopt($ch, CURLOPT_URL, "https://partner.steam-api.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/");
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMREMOTESTORAGE,
+                        "GetPublishedFileDetails",
+                        "v1"));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -534,7 +609,7 @@ class SteamUGC {
         }
 
         foreach ($CURLResponse->response->publishedfiledetails as $oUgc) {
-            return new \justinback\steam\api\player($this->key, $this->game, $oUgc->creator);
+            return new \justinback\steam\api\SteamPersona($this->key, $this->game, $oUgc->creator);
         }
         throw new \justinback\steam\exceptions\SteamEmptyException("I haven't found this file or this player!");
     }

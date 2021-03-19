@@ -13,7 +13,7 @@ namespace justinback\steam\api;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class game implements \justinback\steam\interfaces\IGame {
+class SteamApp implements \justinback\steam\interfaces\ISteamApp {
 
     /**
      * Steamworks API Key
@@ -44,44 +44,8 @@ class game implements \justinback\steam\interfaces\IGame {
      * @return void
      */
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null) {
-        $this->set_key($sApiKey);
-        $this->set_game((int) $iGame);
-        $this->set_steamid($sSteamid);
-    }
-
-    /**
-     * Setting API Key from the construct
-     *
-     *
-     * @param string $sApiKey Steamworks Developer API Key
-     *
-     * @return void
-     */
-    private function set_key($sApiKey) {
         $this->key = $sApiKey;
-    }
-
-    /**
-     * Setting AppID from the construct
-     *
-     *
-     * @param string $iGame Your AppID
-     *
-     * @return void
-     */
-    private function set_game($iGame) {
-        $this->game = $iGame;
-    }
-
-    /**
-     * Setting SteamID from the construct
-     *
-     *
-     * @param string $sSteamid The Players SteamID
-     *
-     * @return void
-     */
-    private function set_steamid($sSteamid) {
+        $this->game = (int) $iGame;
         $this->steamid = $sSteamid;
     }
 
@@ -107,7 +71,12 @@ class game implements \justinback\steam\interfaces\IGame {
             "steamid" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ISteamUser/GetPublisherAppOwnership/v2/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        false,
+                        \justinback\SteamPHP::PARTNER_INTERFACE_STEAMUSER,
+                        "GetPublisherAppOwnership",
+                        "v2", $CURLParameters));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -155,7 +124,13 @@ class game implements \justinback\steam\interfaces\IGame {
                 //"steamid" => $this->steamid,
                 // Custom Queries below here.
         ));
-        curl_setopt($ch, CURLOPT_URL, "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?" . $CURLParameters);
+
+        curl_setopt($ch, CURLOPT_URL, \justinback\steam\Utils::ConstructApiUris(
+                        true,
+                        \justinback\SteamPHP::PUBLIC_INTERFACE_STEAMUSERSTATS,
+                        "GetNumberOfCurrentPlayers",
+                        "v1", $CURLParameters));
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $CURLResponse = json_decode(curl_exec($ch));
         $CURLResponseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -187,7 +162,7 @@ class game implements \justinback\steam\interfaces\IGame {
      * 
      * @return achievements
      */
-    public function achievements($sApiKey = null, $iGame = null, $sSteamid = null): \justinback\steam\api\achievements {
+    public function CAchievements($sApiKey = null, $iGame = null, $sSteamid = null): \justinback\steam\api\Achievements {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -197,7 +172,7 @@ class game implements \justinback\steam\interfaces\IGame {
         if ($sSteamid === null) {
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\api\achievements($sApiKey, $iGame, $sSteamid);
+        return new \justinback\steam\api\Achievements($sApiKey, $iGame, $sSteamid);
     }
 
     /**
@@ -209,7 +184,7 @@ class game implements \justinback\steam\interfaces\IGame {
      * 
      * @return leaderboards
      */
-    public function leaderboards($sApiKey = null, $iGame = null, $sSteamid = null): \justinback\steam\api\leaderboards {
+    public function CLeaderboards($sApiKey = null, $iGame = null, $sSteamid = null): \justinback\steam\api\SteamLeaderboards {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -219,7 +194,7 @@ class game implements \justinback\steam\interfaces\IGame {
         if ($sSteamid === null) {
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\api\leaderboards($sApiKey, $iGame, $sSteamid);
+        return new \justinback\steam\api\SteamLeaderboards($sApiKey, $iGame, $sSteamid);
     }
 
     /**
@@ -232,7 +207,7 @@ class game implements \justinback\steam\interfaces\IGame {
      * 
      * @return ugc
      */
-    public function ugc($sPublishedFileId, $sApiKey = null, $iGame = null, $sSteamid = null): \justinback\steam\api\ugc {
+    public function CSteamUGC($sPublishedFileId, $sApiKey = null, $iGame = null, $sSteamid = null): \justinback\steam\api\SteamUGC {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -242,7 +217,7 @@ class game implements \justinback\steam\interfaces\IGame {
         if ($sSteamid === null) {
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\api\ugc($sPublishedFileId, $sApiKey, $iGame, $sSteamid);
+        return new \justinback\steam\api\SteamUGC($sPublishedFileId, $sApiKey, $iGame, $sSteamid);
     }
 
     /**
@@ -256,7 +231,7 @@ class game implements \justinback\steam\interfaces\IGame {
      * 
      * @return store Store Object containing a lot of info through the big picture API
      */
-    public function store($iGame = null): \justinback\steam\api\store {
+    public function CStorePage($iGame = null): \justinback\steam\api\StorePage {
         if ($iGame === null) {
             $iGame = $this->game;
         }
@@ -295,7 +270,7 @@ class game implements \justinback\steam\interfaces\IGame {
 
 
         if ($CURLResponse->$iGame->success) {
-            return new \justinback\steam\api\store($iGame, $oStore->name, $oStore->type, $oStore->required_age, $oStore->is_free, $oStore->detailed_description, $oStore->about_the_game, $oStore->short_description, $oStore->developers, $oStore->publishers, $oStore->dlc);
+            return new \justinback\steam\api\StorePage($iGame, $oStore->name, $oStore->type, $oStore->required_age, $oStore->is_free, $oStore->detailed_description, $oStore->about_the_game, $oStore->short_description, $oStore->developers, $oStore->publishers, $oStore->dlc);
         }
         throw new \justinback\steam\exceptions\SteamRequestParameterException("The App ID entered is invalid!");
     }

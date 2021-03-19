@@ -14,7 +14,7 @@ namespace justinback\steam\api;
  * 
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class item {
+class SteamInventoryItem {
 
     /**
      * Steamworks API Key
@@ -101,149 +101,17 @@ class item {
      * @return void
      */
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null, $sItemId = null, $iQuantity = null, $sItemDefId = null, $sAcquired = null, $sState = null, $sOrigin = null, $sStateChangedTimestamp = null, $aDynamicProps = array()) {
-        $this->set_key($sApiKey);
-        $this->set_game((int) $iGame);
-        $this->set_steamid($sSteamid);
-        $this->set_itemid($sItemId);
-        $this->set_quantity($iQuantity);
-        $this->set_itemdefid($sItemDefId);
-        $this->set_acquired($sAcquired);
-        $this->set_state($sState);
-        $this->set_origin($sOrigin);
-        $this->set_state_changed_timestamp($sStateChangedTimestamp);
-        $this->set_dynamic_props($aDynamicProps);
-    }
-
-    /**
-     * Setting API Key from the construct
-     *
-     *
-     * @param string $sApiKey Steamworks Developer API Key
-     *
-     * @return void
-     */
-    private function set_key($sApiKey) {
         $this->key = $sApiKey;
-    }
-
-    /**
-     * Setting AppID from the construct
-     *
-     *
-     * @param string $iGame Your AppID
-     *
-     * @return void
-     */
-    private function set_game($iGame) {
-        $this->game = $iGame;
-    }
-
-    /**
-     * Setting Dynamic Props from the construct
-     *
-     *
-     * @param string $aDynamicProps The Dynamic props as an array
-     *
-     * @return void
-     */
-    private function set_dynamic_props($aDynamicProps) {
-        $this->dynamic_props = $aDynamicProps;
-    }
-
-    /**
-     * Setting SteamID from the construct
-     *
-     *
-     * @param string $sSteamid The Players SteamID
-     *
-     * @return void
-     */
-    private function set_steamid($sSteamid) {
+        $this->game = (int) $iGame;
         $this->steamid = $sSteamid;
-    }
-
-    /**
-     * Setting ItemID from the construct
-     *
-     *
-     * @param string $sItemId The Item ID
-     *
-     * @return void
-     */
-    private function set_itemid($sItemId) {
         $this->itemid = $sItemId;
-    }
-
-    /**
-     * Setting Quantity from the construct
-     *
-     *
-     * @param string $iQuantity The Item Quantity
-     *
-     * @return void
-     */
-    private function set_quantity($iQuantity) {
         $this->quantity = $iQuantity;
-    }
-
-    /**
-     * Setting ItemDefID from the construct
-     *
-     *
-     * @param string $sItemDefId The Item Defintion ID
-     *
-     * @return void
-     */
-    private function set_itemdefid($sItemDefId) {
         $this->itemdefid = $sItemDefId;
-    }
-
-    /**
-     * Setting acquired from the construct
-     *
-     *
-     * @param string $sAcquired The creation date of the item 
-     *   
-     * @return void
-     */
-    private function set_acquired($sAcquired) {
         $this->acquired = $sAcquired;
-    }
-
-    /**
-     * Setting state from the construct
-     *
-     *
-     * @param string $sState The state of the item 
-     *   
-     * @return void
-     */
-    private function set_state($sState) {
         $this->state = $sState;
-    }
-
-    /**
-     * Setting origin from the construct
-     *
-     *
-     * @param string $sOrigin The origin of the item 
-     *   
-     * @return void
-     */
-    private function set_origin($sOrigin) {
         $this->origin = $sOrigin;
-    }
-
-    /**
-     * Setting state_changed_timestamp from the construct
-     *
-     *
-     * @param string $sStateChangedTimestamp The change timestamp of the item 
-     *   
-     * @return void
-     */
-    private function set_state_changed_timestamp($sStateChangedTimestamp) {
         $this->state_changed_timestamp = $sStateChangedTimestamp;
+        $this->dynamic_props = $aDynamicProps;
     }
 
     /**
@@ -299,7 +167,7 @@ class item {
 
         $oConsumeItem = json_decode($CURLResponse->response->item_json);
         foreach ($oConsumeItem as $oResponse) {
-            return new \justinback\steam\api\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
+            return new \justinback\steam\api\SteamInventoryItem($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp);
         }
         throw new \justinback\steam\exceptions\SteamRequestParameterException("The item or Steam ID supplied is invalid!");
     }
@@ -376,7 +244,7 @@ class item {
             if (isset($oResponse->error)) {
                 throw new \justinback\steam\exceptions\SteamRequestParameterException("A supplied itemid is invalid. " . $oResponse->error);
             }
-            array_push($aArray, new \justinback\steam\api\item($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
+            array_push($aArray, new \justinback\steam\api\SteamInventoryItem($this->key, $this->game, $this->steamid, $oResponse->itemid, $oResponse->quantity, $oResponse->itemdefid, $oResponse->acquired, $oResponse->state, $oResponse->origin, $oResponse->state_changed_timestamp, $oResponse->dynamic_props));
         }
 
         if (count($aArray) === 0) {
@@ -396,7 +264,6 @@ class item {
      * @return iteminfo
      */
     public function iteminfo() {
-        $array = array();
         $Inventory = new inventory($this->key, $this->game, $this->steamid);
 
 

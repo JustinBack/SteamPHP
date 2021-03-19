@@ -12,7 +12,7 @@ namespace justinback\steam\api;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class ugc {
+class SteamUGC {
 
     /**
      * Steamworks API Key

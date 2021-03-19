@@ -15,7 +15,7 @@ use justinback\Hook;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class player {
+class SteamPersona {
 
     /**
      * Steamworks API Key

@@ -14,7 +14,7 @@ namespace justinback\steam\api;
  * 
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class iteminfo {
+class InventoryItemInfo {
 
     /**
      * Steamworks API Key

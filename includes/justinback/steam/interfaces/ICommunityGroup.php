@@ -7,7 +7,7 @@
 
 namespace justinback\steam\interfaces;
 
-interface IGroup {
+interface ICommunityGroup {
 
     public function __construct($sGid, $sAPIKey = null, $sAppID = null);
 

@@ -13,7 +13,7 @@ namespace justinback\steam\api;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class leaderboards {
+class SteamLeaderboards {
 
     /**
      * Steamworks API Key
@@ -44,44 +44,8 @@ class leaderboards {
      * @return void
      */
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null) {
-        $this->set_key($sApiKey);
-        $this->set_game((int) $iGame);
-        $this->set_steamid($sSteamid);
-    }
-
-    /**
-     * Setting API Key from the construct
-     *
-     *
-     * @param string $sApiKey Steamworks Developer API Key
-     *
-     * @return void
-     */
-    private function set_key($sApiKey) {
         $this->key = $sApiKey;
-    }
-
-    /**
-     * Setting AppID from the construct
-     *
-     *
-     * @param string $iGame Your AppID
-     *
-     * @return void
-     */
-    private function set_game($iGame) {
-        $this->game = $iGame;
-    }
-
-    /**
-     * Setting SteamID from the construct
-     *
-     *
-     * @param string $sSteamid The Players SteamID
-     *
-     * @return void
-     */
-    private function set_steamid($sSteamid) {
+        $this->game = (int) $iGame;
         $this->steamid = $sSteamid;
     }
 
@@ -96,7 +60,7 @@ class leaderboards {
      *
      * @return bool
      */
-    public function DeleteLeaderboard($sName) {
+    public function DeleteLeaderboard(string $sName): bool {
 
 
 
@@ -505,7 +469,7 @@ class leaderboards {
      * 
      * @return game
      */
-    public function game($sApiKey = null, $iGame = null, $sSteamid = null) {
+    public function CSteamApp($sApiKey = null, $iGame = null, $sSteamid = null) {
         if ($sApiKey === null) {
             $sApiKey = $this->key;
         }
@@ -515,7 +479,7 @@ class leaderboards {
         if ($sSteamid === null) {
             $sSteamid = $this->steamid;
         }
-        return new \justinback\steam\api\game($sApiKey, $iGame, $sSteamid);
+        return new \justinback\steam\api\SteamApp($sApiKey, $iGame, $sSteamid);
     }
 
 }

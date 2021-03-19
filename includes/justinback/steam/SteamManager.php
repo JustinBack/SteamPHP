@@ -12,7 +12,7 @@ namespace justinback\steam;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class manager {
+class SteamManager {
 
     /**
      * Steamworks API Key

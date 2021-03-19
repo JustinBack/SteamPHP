@@ -13,7 +13,7 @@ namespace justinback\steam\api;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class inventory implements \justinback\steam\interfaces\IInventory {
+class UserInventory implements \justinback\steam\interfaces\IUserInventory {
 
     use \justinback\steam\Hook;
 

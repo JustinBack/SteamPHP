@@ -13,7 +13,7 @@ namespace justinback\steam\api;
  *
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class group implements \justinback\steam\interfaces\IGroup {
+class CommunityGroup implements \justinback\steam\interfaces\ICommunityGroup {
 
     /**
      * GlobalID of the group
@@ -377,7 +377,6 @@ class group implements \justinback\steam\interfaces\IGroup {
         $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
         $oMembers = new \stdClass();
-        $aMembers = array();
 
         $oMembers->Total = current($oGetGroupName->groupDetails->memberCount);
         $oMembers->InChat = current($oGetGroupName->groupDetails->membersInChat);

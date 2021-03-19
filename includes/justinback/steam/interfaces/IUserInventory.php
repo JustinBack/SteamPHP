@@ -7,7 +7,7 @@
 
 namespace justinback\steam\interfaces;
 
-interface IInventory {
+interface IUserInventory {
 
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null);
 

@@ -13,7 +13,7 @@ namespace justinback\steam\api;
  * @since pb1.0.0a
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class transactions {
+class SteamMicrotransactions {
 
     /**
      * Steamworks API Key
@@ -79,51 +79,15 @@ class transactions {
      * @return void
      */
     public function __construct($bTesting = false, $sApiKey = null, $iGame = null, $sSteamid = null) {
-        $this->set_key($sApiKey);
-        $this->set_game((int) $iGame);
-        $this->set_steamid($sSteamid);
+        $this->key = $sApiKey;
+        $this->game = (int) $iGame;
+        $this->steamid = $sSteamid;
         $this->testing = $bTesting;
         if ($bTesting) {
-            $this->interface = "ISteamMicroTxnSandbox";
+            $this->interface = \justinback\SteamPHP::PARTNER_INTERFACE_STEAMMICROTXNSANDBOX;
         } else {
-            $this->interface = "ISteamMicroTxn";
+            $this->interface = \justinback\SteamPHP::PARTNER_INTERFACE_STEAMMICROTXN;
         }
-    }
-
-    /**
-     * Setting API Key from the construct
-     *
-     *
-     * @param string $sApiKey Steamworks Developer API Key
-     *
-     * @return void
-     */
-    private function set_key($sApiKey) {
-        $this->key = $sApiKey;
-    }
-
-    /**
-     * Setting AppID from the construct
-     *
-     *
-     * @param string $iGame Your AppID
-     *
-     * @return void
-     */
-    private function set_game($iGame) {
-        $this->game = $iGame;
-    }
-
-    /**
-     * Setting SteamID from the construct
-     *
-     *
-     * @param string $sSteamid The Players SteamID
-     *
-     * @return void
-     */
-    private function set_steamid($sSteamid) {
-        $this->steamid = $sSteamid;
     }
 
     /**
@@ -544,7 +508,7 @@ class transactions {
         if ($CURLResponse->response->result == "OK") {
             $this->transid = $CURLResponse->response->params->transid;
             $this->orderid = $CURLResponse->response->params->orderid;
-            if(isset($CURLResponse->response->params->steamurl)) {
+            if (isset($CURLResponse->response->params->steamurl)) {
                 $this->steamurl = $CURLResponse->response->params->steamurl;
             }
             return $this;

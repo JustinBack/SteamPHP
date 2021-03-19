@@ -13,7 +13,7 @@ namespace justinback\steam\api;
  * @since pb1.0.0a
  * @author Justin Back <jback@pixelcatproductions.net>
  */
-class SteamMicrotransactions {
+class SteamMicrotransactions implements \justinback\steam\interfaces\ISteamMicrotransactions {
 
     /**
      * Steamworks API Key
@@ -102,7 +102,7 @@ class SteamMicrotransactions {
      * 
      * @return bool TRUE on success otherwise \justinback\steam\exceptions\SteamRequestException
      */
-    public function AdjustAgreement($sNextProcessDate) {
+    public function AdjustAgreement($sNextProcessDate): bool {
 
 
         $ch = curl_init();
@@ -162,7 +162,7 @@ class SteamMicrotransactions {
      * 
      * @return boolean TRUE on success otherwise \justinback\steam\exceptions\SteamRequestException
      */
-    public function CancelAgreement() {
+    public function CancelAgreement(): bool {
 
 
         $ch = curl_init();
@@ -221,7 +221,7 @@ class SteamMicrotransactions {
      * 
      * @return boolean TRUE on success otherwise exceptions/SteamRequestException
      */
-    public function RefundTxn() {
+    public function RefundTxn(): bool {
 
         $ch = curl_init();
 
@@ -283,7 +283,7 @@ class SteamMicrotransactions {
      * 
      * @return boolean
      */
-    public function FinalizeTxn() {
+    public function FinalizeTxn(): bool {
         $ch = curl_init();
 
         $CURLParameters = http_build_query(array(
@@ -340,7 +340,7 @@ class SteamMicrotransactions {
      * 
      * @return object
      */
-    public function QueryTxn() {
+    public function QueryTxn(): object {
 
 
         $ch = curl_init();
@@ -398,7 +398,7 @@ class SteamMicrotransactions {
      * 
      * @return object
      */
-    public function GetUserAgreementInfo() {
+    public function GetUserAgreementInfo(): object {
 
 
         $ch = curl_init();
@@ -477,7 +477,7 @@ class SteamMicrotransactions {
      * 
      * @return transactions TRUE on success otherwise \justinback\steam\exceptions\SteamRequestException
      */
-    public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = null, $sBillingType = null, $sStartDate = null, $sEndDate = null, $sPeriod = null, $iRecurringAmount = null, $iFrequency = null, $iOrderID = null) {
+    public function InitTxn($iItemCount, $sLanguage, $sCurrency, $iItemID, $iQuantity, $iAmount, $sDescription, $sUserSession = "client", $sIpAddress = null, $sBillingType = null, $sStartDate = null, $sEndDate = null, $sPeriod = null, $iRecurringAmount = null, $iFrequency = null, $iOrderID = null): SteamMicrotransactions {
         if ($iOrderID == null) {
             $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
         }
@@ -560,7 +560,7 @@ class SteamMicrotransactions {
      * @param string $sCurrency ISO 4217 currency code. See <a href="https://partner.steamgames.com/doc/store/pricing/currencies">Supported Currencies</a> for proper format of each currency.
      * @return boolean TRUE on success otherwise \justinback\steam\exceptions\SteamRequestException
      */
-    public function ProcessAgreement($iAmount, $sCurrency) {
+    public function ProcessAgreement($iAmount, $sCurrency): bool {
         $iOrderID = sprintf("%016d", mt_rand(1, str_pad("", 16, "9")));
 
 
@@ -627,7 +627,7 @@ class SteamMicrotransactions {
      * @param boolean $bRawOutput Return new classes with transaction, player and item management or a raw object
      * @return object|transactions|player
      */
-    public function GetReport($sTime, $iMaxResults = 1000, $sType = "GAMESALES", $bRawOutput = false) {
+    public function GetReport($sTime, $iMaxResults = 1000, $sType = "GAMESALES", $bRawOutput = false): object {
 
 
         $ch = curl_init();

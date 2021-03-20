@@ -7,7 +7,7 @@
 
 namespace justinback\steam\models;
 
-class MAchievementDetail {
+final class MAchievementDetail extends \stdClass {
 
     public string $name;
     public int $defaultValue;

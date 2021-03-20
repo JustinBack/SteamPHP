@@ -11,17 +11,17 @@ interface IAchievements {
 
     public function __construct($sApiKey = null, $iGame = null, $sSteamid = null);
 
-    public function GetPlayerAchievements();
+    public function GetPlayerAchievements(): \justinback\steam\models\MPlayerAchievementCollection;
 
-    public function GetPlayerAchievementsLocked();
+    public function GetPlayerAchievementsLocked(): \justinback\steam\models\MPlayerAchievementCollection;
 
-    public function GetAchievementDetails($sApiname);
+    public function GetAchievementDetails($sApiname): \justinback\steam\models\MAchievementDetail;
 
-    public function LockAchievement($sApiname);
+    public function LockAchievement($sApiname): bool;
 
-    public function UnlockAchievement($sApiname);
+    public function UnlockAchievement($sApiname): bool;
 
-    public function HasPlayerUnlockedAchievement($sApiname);
+    public function HasPlayerUnlockedAchievement($sApiname): bool;
 
-    public function CSteamApp($sApiKey = null, $iGame = null, $sSteamid = null);
+    public function CSteamApp($sApiKey = null, $iGame = null, $sSteamid = null): \justinback\steam\api\SteamApp;
 }

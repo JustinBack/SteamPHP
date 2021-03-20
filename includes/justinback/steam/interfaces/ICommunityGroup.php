@@ -21,9 +21,9 @@ interface ICommunityGroup {
 
     public function GetGroupID64(): string;
 
-    public function GetGroupAvatars(): object;
+    public function GetGroupAvatars(): \justinback\steam\models\MGroupAvatar;
 
-    public function GetGroupMembers(): array;
+    public function GetGroupMembers(): \justinback\steam\models\MSteamPersonaCollection;
 
-    public function GetGroupStats(): object;
+    public function GetGroupStats(): \justinback\steam\models\MGroupStats;
 }

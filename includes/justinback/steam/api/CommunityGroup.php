@@ -248,7 +248,7 @@ class CommunityGroup implements \justinback\steam\interfaces\ICommunityGroup {
      * }
      * </code>
      */
-    public function GetGroupAvatars(): object {
+    public function GetGroupAvatars(): \justinback\steam\models\MGroupAvatar {
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
@@ -273,11 +273,11 @@ class CommunityGroup implements \justinback\steam\interfaces\ICommunityGroup {
 
         $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
-        $oAvatars = new \stdClass();
+        $oAvatars = new \justinback\steam\models\MGroupAvatar(
+                current($oGetGroupName->groupDetails->avatarIcon),
+                current($oGetGroupName->groupDetails->avatarMedium),
+                current($oGetGroupName->groupDetails->avatarFull));
 
-        $oAvatars->icon = current($oGetGroupName->groupDetails->avatarIcon);
-        $oAvatars->medium = current($oGetGroupName->groupDetails->avatarMedium);
-        $oAvatars->full = current($oGetGroupName->groupDetails->avatarFull);
 
         return $oAvatars;
     }
@@ -290,9 +290,9 @@ class CommunityGroup implements \justinback\steam\interfaces\ICommunityGroup {
      * @throws \justinback\steam\exceptions\SteamException if the app id or api key is not valid as a parameter
      * @throws \justinback\steam\exceptions\SteamEmptyException if the request returns nothing and the result is empty.
      * 
-     * @return player array
+     * @return \justinback\steam\models\MSteamPersonaCollection
      */
-    public function GetGroupMembers(): array {
+    public function GetGroupMembers(): \justinback\steam\models\MSteamPersonaCollection {
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
@@ -317,9 +317,9 @@ class CommunityGroup implements \justinback\steam\interfaces\ICommunityGroup {
 
         $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
-        $aMembers = array();
+        $aMembers = new \justinback\steam\models\MSteamPersonaCollection(SteamPersona::class);
         foreach ($oGetGroupName->members->steamID64 as $oMember) {
-            array_push($aMembers, new \justinback\steam\player($this->key, $this->appid, current($oMember)));
+            $aMembers->append(new \justinback\steam\api\SteamPersona($this->key, $this->appid, current($oMember)));
         }
 
         if (count($aMembers) === 1) {
@@ -351,7 +351,7 @@ class CommunityGroup implements \justinback\steam\interfaces\ICommunityGroup {
      * }
      * </code>
      */
-    public function GetGroupStats(): object {
+    public function GetGroupStats(): \justinback\steam\models\MGroupStats {
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://steamcommunity.com/gid/" . $this->gid . "/memberslistxml?xml=1");
@@ -376,12 +376,10 @@ class CommunityGroup implements \justinback\steam\interfaces\ICommunityGroup {
 
         $oGetGroupName = simplexml_load_string($CURLResponse, null, LIBXML_NOCDATA);
 
-        $oMembers = new \stdClass();
-
-        $oMembers->Total = current($oGetGroupName->groupDetails->memberCount);
-        $oMembers->InChat = current($oGetGroupName->groupDetails->membersInChat);
-        $oMembers->InGame = current($oGetGroupName->groupDetails->membersInGame);
-        $oMembers->Online = current($oGetGroupName->groupDetails->membersOnline);
+        $oMembers = new \justinback\steam\models\MGroupStats(current($oGetGroupName->groupDetails->memberCount),
+                current($oGetGroupName->groupDetails->membersInChat),
+                current($oGetGroupName->groupDetails->membersInGame),
+                current($oGetGroupName->groupDetails->membersOnline));
 
         return $oMembers;
     }
